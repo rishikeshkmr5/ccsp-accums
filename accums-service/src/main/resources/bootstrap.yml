@@ -1,0 +1,3 @@
+server:
+  contextPath: /accums-service
+  port: 8585
