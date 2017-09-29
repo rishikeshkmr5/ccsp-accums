@@ -20,11 +20,20 @@ import javassist.NotFoundException;
 @RestController
 public class AccumsController {
 	
+	/**
+	 * Logger for AccumsController 
+	 */
 	private static Logger log = Logger.getLogger(AccumsController.class);
+
 
 	@Autowired
 	private LedgerHeaderService ledgerHeaderService;
  	
+	/**
+	 * Fetches all the ledgerHeaders 
+	 * @return LedgerHeaders
+	 * @throws NotFoundException
+	 */
 	@RequestMapping(path = UIConstants.LEDGER_HEADER, method = RequestMethod.GET, produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public List<LedgerHeaderDTO> getLedgerHeader() throws NotFoundException{
@@ -32,10 +41,14 @@ public class AccumsController {
 		return ledgerHeaderService.getAllLedgerHeader();
 	}
 	
+	/**
+	 * Persist the received LedgerHeader Details
+	 * @param ledgerHeaderDTO
+	 */
 	@RequestMapping(path = UIConstants.LEDGER_HEADER, method = RequestMethod.POST, consumes = "application/json; charset=utf-8")
 	@ResponseBody
 	public void setLedgerHeader(@RequestBody LedgerHeaderDTO ledgerHeaderDTO){
 		log.info("Set LedgerHeader details");
-		ledgerHeaderService.setAdministrativePlan(ledgerHeaderDTO);
+		ledgerHeaderService.setLedgerHeader(ledgerHeaderDTO);
 	}	
 }

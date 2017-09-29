@@ -18,17 +18,28 @@ import javassist.NotFoundException;
 public class LedgerHeaderImpl implements LedgerHeaderService{
 
 	
+	/**
+	 * Autowiring repository layer
+	 */
 	@Resource
 	private LedgerHeaderRepository ledgerHeaderRepository;
 
+	/**
+	 * @see com.ccsp.accums.service.LedgerHeaderService#setAdministrativePlan(com.ccsp.accums.ledger.dto.LedgerHeaderDTO)
+	 * Persist the ledgerHeader in database
+	 */
 	@Override
-	public void setAdministrativePlan(LedgerHeaderDTO ledgerHeaderDTO) {
+	public void setLedgerHeader(LedgerHeaderDTO ledgerHeaderDTO) {
 		LedgerHeader ledgerHeader = LedgerHeaderMapper.INSTANCE.toLedgerHeaderEntity(ledgerHeaderDTO);
 		if(ledgerHeader != null){
 			ledgerHeaderRepository.saveAndFlush(ledgerHeader);
 		}		
 	}
 
+	/**
+	 * @see com.ccsp.accums.service.LedgerHeaderService#getAllLedgerHeader()
+	 * Get all ledgerHeader from database
+	 */
 	@Override
 	public List<LedgerHeaderDTO> getAllLedgerHeader() throws NotFoundException {
 		List<LedgerHeader> ledgerHeaders=ledgerHeaderRepository.findAll();

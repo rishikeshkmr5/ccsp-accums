@@ -14,6 +14,9 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
         org.springframework.boot.actuate.autoconfigure.ManagementWebSecurityAutoConfiguration.class})
 public class AccumsApplication {
 
+	/**
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		SpringApplication.run(AccumsApplication.class, args);
 	}
