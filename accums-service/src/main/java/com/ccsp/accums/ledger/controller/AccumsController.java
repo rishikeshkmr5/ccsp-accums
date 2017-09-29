@@ -1,6 +1,6 @@
 package com.ccsp.accums.ledger.controller;
 
-import java.util.Date;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,22 +27,9 @@ public class AccumsController {
  	
 	@RequestMapping(path = UIConstants.LEDGER_HEADER, method = RequestMethod.GET, produces = "application/json; charset=utf-8")
 	@ResponseBody
-	public LedgerHeaderDTO getLedgerHeader() throws NotFoundException{
+	public List<LedgerHeaderDTO> getLedgerHeader() throws NotFoundException{
 		log.info("Get all members accums details");
-		LedgerHeaderDTO ledgerHeader = new LedgerHeaderDTO();
-		ledgerHeader.setAllowedAmount(1000.50);
-		ledgerHeader.setClaimLine(1l);
-		ledgerHeader.setDateTimeProcessed(new Date());
-		ledgerHeader.setDateOfService(new Date());
-		ledgerHeader.setLedgerId(1l);
-		ledgerHeader.setMember("A0001");
-		ledgerHeader.setNetwork("INB");
-		ledgerHeader.setNetworkTier("PPO");
-		ledgerHeader.setPlanId(1l);
-		ledgerHeader.setServiceId(10000l);
-		ledgerHeader.setserviceName("Specialist Office Visit");
-		ledgerHeader.setSubscriber("A0001");
-		return ledgerHeader;
+		return ledgerHeaderService.getAllLedgerHeader();
 	}
 	
 	@RequestMapping(path = UIConstants.LEDGER_HEADER, method = RequestMethod.POST, consumes = "application/json; charset=utf-8")
