@@ -3,6 +3,7 @@ package com.ccsp.accums.ledger.controller;
 import java.util.Date;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ccsp.accums.ledger.dto.LedgerHeaderDTO;
+import com.ccsp.accums.service.LedgerHeaderService;
 import com.ccsp.common.utils.UIConstants;
 
 import javassist.NotFoundException;
@@ -20,7 +22,9 @@ public class AccumsController {
 	
 	private static Logger log = Logger.getLogger(AccumsController.class);
 
-	
+	@Autowired
+	private LedgerHeaderService ledgerHeaderService;
+ 	
 	@RequestMapping(path = UIConstants.LEDGER_HEADER, method = RequestMethod.GET, produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public LedgerHeaderDTO getLedgerHeader() throws NotFoundException{
@@ -28,7 +32,7 @@ public class AccumsController {
 		LedgerHeaderDTO ledgerHeader = new LedgerHeaderDTO();
 		ledgerHeader.setAllowedAmount(1000.50);
 		ledgerHeader.setClaimLine(1l);
-		ledgerHeader.setDataTimeProcessed(new Date());
+		ledgerHeader.setDateTimeProcessed(new Date());
 		ledgerHeader.setDateOfService(new Date());
 		ledgerHeader.setLedgerId(1l);
 		ledgerHeader.setMember("A0001");
@@ -45,5 +49,6 @@ public class AccumsController {
 	@ResponseBody
 	public void setLedgerHeader(@RequestBody LedgerHeaderDTO ledgerHeaderDTO){
 		log.info("Set LedgerHeader details");
+		ledgerHeaderService.setAdministrativePlan(ledgerHeaderDTO);
 	}	
 }

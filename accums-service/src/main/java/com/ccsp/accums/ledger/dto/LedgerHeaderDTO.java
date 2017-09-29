@@ -9,7 +9,7 @@ public class LedgerHeaderDTO {
 	private Long serviceId;
 	private String serviceName;
 	private Date dateOfService;
-	private Date dataTimeProcessed;
+	private Date dateTimeProcessed;
 	private String network;
 	private String networkTier;
 	private Long planId;
@@ -46,11 +46,12 @@ public class LedgerHeaderDTO {
 	public void setDateOfService(Date dateOfService) {
 		this.dateOfService = dateOfService;
 	}
-	public Date getDataTimeProcessed() {
-		return dataTimeProcessed;
+	
+	public Date getDateTimeProcessed() {
+		return dateTimeProcessed;
 	}
-	public void setDataTimeProcessed(Date dataTimeProcessed) {
-		this.dataTimeProcessed = dataTimeProcessed;
+	public void setDateTimeProcessed(Date dateTimeProcessed) {
+		this.dateTimeProcessed = dateTimeProcessed;
 	}
 	public String getNetwork() {
 		return network;
