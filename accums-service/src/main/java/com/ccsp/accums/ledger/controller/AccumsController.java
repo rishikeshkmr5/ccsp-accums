@@ -17,6 +17,10 @@ import com.ccsp.common.utils.UIConstants;
 import javassist.NotFoundException;
 
 
+/**
+ * @author nnarayanaperumaln
+ *
+ */
 @RestController
 public class AccumsController {
 	
@@ -47,8 +51,8 @@ public class AccumsController {
 	 */
 	@RequestMapping(path = UIConstants.LEDGER_HEADER, method = RequestMethod.POST, consumes = "application/json; charset=utf-8")
 	@ResponseBody
-	public void setLedgerHeader(@RequestBody LedgerHeaderDTO ledgerHeaderDTO){
-		log.info("Set LedgerHeader details");
+	public void createLedgerHeader(@RequestBody LedgerHeaderDTO ledgerHeaderDTO){
+		log.info("Create LedgerHeader details");
 		ledgerHeaderService.setLedgerHeader(ledgerHeaderDTO);
 	}	
 }
