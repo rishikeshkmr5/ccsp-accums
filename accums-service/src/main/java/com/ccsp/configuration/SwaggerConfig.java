@@ -2,7 +2,6 @@ package com.ccsp.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 
 import com.ccsp.AccumsApplication;
 import com.ccsp.common.AbstractSwaggerConfig;
