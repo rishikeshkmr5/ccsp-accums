@@ -19,6 +19,10 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2; 
 
 
+/**
+ * @author nnarayanaperumaln
+ *
+ */
 @Configuration
 @EnableSwagger2
 //@Profile("!"+ProfileConstants.SPRING_PROFILE_PRODUCTION) 
@@ -61,8 +65,6 @@ public abstract class AbstractSwaggerConfig implements EnvironmentAware  {
     
     /**
      * API Info as it appears on the swagger-ui page. 
-     */ 
-    /**
      * @return ApiInfo 
      */
     public ApiInfo apiInfo() { 
