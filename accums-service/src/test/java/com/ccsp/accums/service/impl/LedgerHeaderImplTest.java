@@ -30,28 +30,48 @@ import com.ccsp.accums.mapper.LedgerHeaderMapper;
 
 import javassist.NotFoundException;
 
+/**
+ * @author nnarayanaperumaln
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 public class LedgerHeaderImplTest {
 
 	@InjectMocks
-	private LedgerHeaderImpl serviceImpl;
+	private AccumsLedgerHeaderServiceImpl serviceImpl;
 	
+	/**
+	 * Mock the repository
+	 */
 	@Mock
 	private LedgerHeaderRepository ledgerHeaderRepository;
 	
+	/**
+	 * Mock the Mapper
+	 */
 	@Mock
 	private LedgerHeaderMapper ledgerHeaderMapper;
 	
+	/**
+	 * @throws NoSuchFieldException
+	 * @throws SecurityException
+	 * @throws Exception
+	 */
 	@Test
 	public void testSetLedgerHeader() throws NoSuchFieldException, SecurityException, Exception {
 		setFinalStatic(LedgerHeaderMapper.class.getField("INSTANCE"), ledgerHeaderMapper);
 		LedgerHeader ledgerHeader = new LedgerHeader();
 		LedgerHeaderDTO ledgerHeaderDTO = new LedgerHeaderDTO();
 		when(ledgerHeaderMapper.toLedgerHeaderEntity(ledgerHeaderDTO)).thenReturn(ledgerHeader);
-		serviceImpl.setLedgerHeader(ledgerHeaderDTO);
+		serviceImpl.create(ledgerHeaderDTO);
 		verify(ledgerHeaderRepository, times(1)).saveAndFlush(ledgerHeader);		
 	}
 	
+	/**
+	 * @throws NoSuchFieldException
+	 * @throws SecurityException
+	 * @throws Exception
+	 */
 	@Test
 	public void testGetAllLedgerHeaders() throws NoSuchFieldException, SecurityException, Exception {
 		List<LedgerHeader> ledgerHeaders = new ArrayList<>();
@@ -60,18 +80,26 @@ public class LedgerHeaderImplTest {
 		when(ledgerHeaderRepository.findAll()).thenReturn(ledgerHeaders);
 		when(ledgerHeaderMapper.toLedgerHeaderList(ledgerHeaders)).thenReturn(ledgerHeaderDTOList);
 		setFinalStatic(LedgerHeaderMapper.class.getField("INSTANCE"), ledgerHeaderMapper);
-		List<LedgerHeaderDTO> actual = serviceImpl.getAllLedgerHeader();
+		List<LedgerHeaderDTO> actual = serviceImpl.readAll();
 		Assert.assertEquals(ledgerHeaderDTOList, actual);
 	}
 	
+	/**
+	 * @throws NotFoundException
+	 */
 	@Test(expected = NotFoundException.class)
 	public void testGetAllLedgerHeadersThrowsException() throws NotFoundException
 	{
 		List<LedgerHeader> ledgerHeaders = new ArrayList<>();
 		when(ledgerHeaderRepository.findAll()).thenReturn(ledgerHeaders);
-		serviceImpl.getAllLedgerHeader();
+		serviceImpl.readAll();
 	}
 	
+	/**
+	 * @param field
+	 * @param newValue
+	 * @throws Exception
+	 */
 	static void setFinalStatic(Field field, Object newValue) throws Exception {
 	    field.setAccessible(true);
 

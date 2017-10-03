@@ -8,15 +8,40 @@ import java.util.List;
 
 import com.ccsp.common.dto.ICommonDTO;
 
+import javassist.NotFoundException;
+
 /**
  * @author nnarayanaperumaln
  *
  */
 public interface ICommonService {
 
-	<T extends ICommonDTO> T create(T dto);
+	/**
+	 * @param dto
+	 * @return
+	 */
+	<T extends ICommonDTO> T create(T dto);	
+	
+	/**
+	 * @param dto
+	 * @return
+	 */
 	<T extends ICommonDTO> T update(T dto);
+	
+	/**
+	 * @param dto
+	 */
 	<T extends ICommonDTO> void delete(T dto);
+	
+	/**
+	 * @param id
+	 * @return
+	 */
 	<T extends ICommonDTO> T read(BigDecimal id);	
-	<T extends ICommonDTO> List<T> readAll();
+	
+	/**
+	 * @return
+	 * @throws NotFoundException
+	 */
+	<T extends ICommonDTO> List<T> readAll() throws NotFoundException;
 }

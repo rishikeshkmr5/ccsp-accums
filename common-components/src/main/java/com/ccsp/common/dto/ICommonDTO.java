@@ -9,6 +9,5 @@ import java.io.Serializable;
  * @author nnarayanaperumaln
  *
  */
-public interface ICommonDTO extends Serializable {
-	
+public interface ICommonDTO extends Serializable {	
 }

@@ -19,21 +19,35 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
 
 import com.ccsp.accums.ledger.dto.LedgerHeaderDTO;
-import com.ccsp.accums.service.LedgerHeaderService;
+import com.ccsp.accums.service.IAccumsLedgerHeaderService;
 
 import javassist.NotFoundException;
 
 
+/**
+ * @author nnarayanaperumaln
+ *
+ */
+/**
+ * @author nnarayanaperumaln
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 public class AccumsControllerTest {
 	public static int i = 10;
 
 	@InjectMocks
-	private AccumsController accumsController;
+	private AccumsLedgerHeaderController accumsController;
 	
+	/**
+	 * Mock the Service layer
+	 */
 	@Mock
-	private LedgerHeaderService ledgerHeaderService;
+	private IAccumsLedgerHeaderService ledgerHeaderService;
 	
+	/**
+	 * @throws NotFoundException
+	 */
 	@Test
 	public void testGetLedgerHeader() throws NotFoundException {
 		List<LedgerHeaderDTO> ledgerHeaderDTOList = new ArrayList<>();
@@ -42,10 +56,13 @@ public class AccumsControllerTest {
 		Assert.assertEquals(actual, ledgerHeaderDTOList);
 	}
 	
+	/**
+	 * Test the ledgerHeader creation
+	 */
 	@Test
 	public void testSetLedgerHeader() {
 		LedgerHeaderDTO ledgerHeaderDTO = new LedgerHeaderDTO();
 		accumsController.createLedgerHeader(ledgerHeaderDTO);
-		verify(ledgerHeaderService, times(1)).setLedgerHeader(ledgerHeaderDTO);
+		verify(ledgerHeaderService, times(1)).create(ledgerHeaderDTO);
 	}
 }
