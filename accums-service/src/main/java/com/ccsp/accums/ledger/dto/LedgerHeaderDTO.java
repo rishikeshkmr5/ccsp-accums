@@ -2,8 +2,18 @@ package com.ccsp.accums.ledger.dto;
 
 import java.util.Date;
 
-public class LedgerHeaderDTO {
+import com.ccsp.common.dto.ICommonDTO;
 
+/**
+ * @author nnarayanaperumaln
+ *
+ */
+public class LedgerHeaderDTO implements ICommonDTO{
+
+	/**
+	 * serialVersion id
+	 */
+	private static final long serialVersionUID = 1L;
 	private Long ledgerId;
 	private Long claimLine;
 	private Long serviceId;

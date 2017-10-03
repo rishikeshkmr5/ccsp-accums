@@ -11,6 +11,10 @@ import springfox.documentation.swagger.web.UiConfiguration;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
+/**
+ * @author nnarayanaperumaln
+ *
+ */
 @Configuration
 @EnableSwagger2
 //@Profile("!"+ProfileConstants.SPRING_PROFILE_PRODUCTION) 

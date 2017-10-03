@@ -10,6 +10,10 @@ import org.mapstruct.factory.Mappers;
 import com.ccsp.accums.ledger.dto.LedgerHeaderDTO;
 import com.ccsp.accums.ledger.entity.LedgerHeader;
 
+/**
+ * @author vaibhav
+ *
+ */
 @Mapper
 public abstract class LedgerHeaderMapper {
 
