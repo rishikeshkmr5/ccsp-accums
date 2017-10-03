@@ -1,20 +1,14 @@
 package com.ccsp.accums.service.impl;
 
-import java.math.BigDecimal;
 import java.util.List;
-
 import javax.annotation.Resource;
-
 import org.springframework.stereotype.Component;
-
 import com.ccsp.accums.ledger.dto.LedgerHeaderDTO;
 import com.ccsp.accums.ledger.entity.LedgerHeader;
 import com.ccsp.accums.ledger.repository.LedgerHeaderRepository;
 import com.ccsp.accums.mapper.LedgerHeaderMapper;
-import com.ccsp.accums.service.IAccumsLedgerHeaderService;
 import com.ccsp.common.dto.ICommonDTO;
 import com.ccsp.common.service.impl.CommonServiceImpl;
-
 import javassist.NotFoundException;
 
 /**

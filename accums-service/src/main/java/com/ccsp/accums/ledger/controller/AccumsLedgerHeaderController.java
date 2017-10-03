@@ -1,7 +1,6 @@
 package com.ccsp.accums.ledger.controller;
 
 import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,11 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.ccsp.accums.ledger.dto.LedgerHeaderDTO;
-import com.ccsp.accums.service.IAccumsLedgerHeaderService;
+import com.ccsp.accums.service.impl.AccumsLedgerHeaderServiceImpl;
 import com.ccsp.common.utils.UIConstants;
-
 import javassist.NotFoundException;
 
 
@@ -31,7 +28,7 @@ public class AccumsLedgerHeaderController{
 
 
 	@Autowired
-	private IAccumsLedgerHeaderService ledgerHeaderService;
+	private AccumsLedgerHeaderServiceImpl ledgerHeaderService;
  	
 	/**
 	 * Fetches all the ledgerHeaders 
