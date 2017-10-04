@@ -55,7 +55,7 @@ public class AccumsLedgerHeaderServiceImpl extends CommonServiceImpl{
 		
 		/**check if there are any ledgerHeaders in backend **/
 		if(ledgerHeaders == null || ledgerHeaders.size() == 0) {
-			throw new NotFoundException("Resource Not Found");
+			throw new NotFoundException("There are no Ledger Headers");
 		}
 		
 		return (List<T>) LedgerHeaderMapper.INSTANCE.toLedgerHeaderList(ledgerHeaders);
