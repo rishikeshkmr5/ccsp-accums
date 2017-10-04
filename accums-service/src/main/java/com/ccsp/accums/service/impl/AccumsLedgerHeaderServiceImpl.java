@@ -1,64 +1,44 @@
 package com.ccsp.accums.service.impl;
 
-import java.util.List;
 import javax.annotation.Resource;
+
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
+
 import com.ccsp.accums.ledger.dto.LedgerHeaderDTO;
 import com.ccsp.accums.ledger.entity.LedgerHeader;
 import com.ccsp.accums.ledger.repository.LedgerHeaderRepository;
 import com.ccsp.accums.mapper.LedgerHeaderMapper;
-import com.ccsp.common.dto.ICommonDTO;
+import com.ccsp.common.mapper.IBaseMapper;
 import com.ccsp.common.service.impl.CommonServiceImpl;
-import javassist.NotFoundException;
 
 /**
  * @author nnarayanaperumaln
  *
  */
 @Component
-public class AccumsLedgerHeaderServiceImpl extends CommonServiceImpl{
-
-	
+public class AccumsLedgerHeaderServiceImpl extends CommonServiceImpl {
 	/**
 	 * Autowiring repository layer
 	 */
 	@Resource
 	private LedgerHeaderRepository ledgerHeaderRepository;
 
-	
-
-	/* (non-Javadoc)
-	 * @see com.ccsp.common.service.impl.CommonServiceImpl#create(com.ccsp.common.dto.ICommonDTO)
+	/**
+	 * @see com.ccsp.common.service.impl.CommonServiceImpl#getJPARepository()
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T extends ICommonDTO> T create(T dto) {
-		LedgerHeaderDTO ledgerHeaderDTO = (LedgerHeaderDTO)dto;
-		LedgerHeader result = null;
-		LedgerHeader ledgerHeader = LedgerHeaderMapper.INSTANCE.toLedgerHeaderEntity(ledgerHeaderDTO);
-		if(ledgerHeader != null){
-			result = ledgerHeaderRepository.saveAndFlush(ledgerHeader);
-		}
-		LedgerHeaderDTO resultDTO = LedgerHeaderMapper.INSTANCE.toLedgerHeaderDTO(result);
-		return (T) resultDTO;
+	public JpaRepository<LedgerHeader, Long> getJPARepository() {
+		return ledgerHeaderRepository;
 	}
 
-
-
 	/* (non-Javadoc)
-	 * @see com.ccsp.common.service.impl.CommonServiceImpl#readAll()
+	 * @see com.ccsp.common.service.impl.CommonServiceImpl#getMapper()
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T extends ICommonDTO> List<T> readAll() throws NotFoundException {
-		List<LedgerHeader> ledgerHeaders=ledgerHeaderRepository.findAll();
-		
-		/**check if there are any ledgerHeaders in backend **/
-		if(ledgerHeaders == null || ledgerHeaders.size() == 0) {
-			throw new NotFoundException("There are no Ledger Headers");
-		}
-		
-		return (List<T>) LedgerHeaderMapper.INSTANCE.toLedgerHeaderList(ledgerHeaders);
+	public IBaseMapper<LedgerHeader, LedgerHeaderDTO> getMapper() {
+		return LedgerHeaderMapper.INSTANCE;
 	}	
-	
 }

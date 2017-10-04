@@ -56,7 +56,7 @@ public class LedgerHeaderImplTest {
 		setFinalStatic(LedgerHeaderMapper.class.getField("INSTANCE"), ledgerHeaderMapper);
 		LedgerHeader ledgerHeader = new LedgerHeader();
 		LedgerHeaderDTO ledgerHeaderDTO = new LedgerHeaderDTO();
-		when(ledgerHeaderMapper.toLedgerHeaderEntity(ledgerHeaderDTO)).thenReturn(ledgerHeader);
+		when(ledgerHeaderMapper.convertToEntity(ledgerHeaderDTO)).thenReturn(ledgerHeader);
 		serviceImpl.create(ledgerHeaderDTO);
 		verify(ledgerHeaderRepository, times(1)).saveAndFlush(ledgerHeader);		
 	}
@@ -72,7 +72,7 @@ public class LedgerHeaderImplTest {
 		ledgerHeaders.add(new LedgerHeader());
 		List<LedgerHeaderDTO> ledgerHeaderDTOList = new ArrayList<>();
 		when(ledgerHeaderRepository.findAll()).thenReturn(ledgerHeaders);
-		when(ledgerHeaderMapper.toLedgerHeaderList(ledgerHeaders)).thenReturn(ledgerHeaderDTOList);
+		when(ledgerHeaderMapper.convertToDTOList(ledgerHeaders)).thenReturn(ledgerHeaderDTOList);
 		setFinalStatic(LedgerHeaderMapper.class.getField("INSTANCE"), ledgerHeaderMapper);
 		List<LedgerHeaderDTO> actual = serviceImpl.readAll();
 		Assert.assertEquals(ledgerHeaderDTOList, actual);

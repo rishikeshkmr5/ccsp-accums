@@ -21,13 +21,10 @@ import javassist.NotFoundException;
  */
 @RestController
 public class AccumsLedgerHeaderController{
-
-	
 	/**
 	 * Logger for AccumsController 
 	 */
 	private static Logger log = Logger.getLogger(AccumsLedgerHeaderController.class);
-
 
 	@Autowired
 	private AccumsLedgerHeaderServiceImpl ledgerHeaderService;
