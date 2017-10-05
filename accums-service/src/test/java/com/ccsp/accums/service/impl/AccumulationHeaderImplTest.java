@@ -17,34 +17,34 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.ccsp.accums.ledger.dto.LedgerHeaderDTO;
-import com.ccsp.accums.ledger.entity.LedgerHeader;
-import com.ccsp.accums.ledger.repository.LedgerHeaderRepository;
-import com.ccsp.accums.mapper.LedgerHeaderMapper;
+import com.ccsp.accums.ledger.dto.AccumulationHeaderDTO;
+import com.ccsp.accums.ledger.entity.AccumulationHeader;
+import com.ccsp.accums.ledger.repository.AccumulationHeaderRepository;
+import com.ccsp.accums.mapper.AccumulationHeaderMapper;
 
 import javassist.NotFoundException;
 
 /**
- * @author nnarayanaperumaln
+ * @author Vaibhav
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-public class LedgerHeaderImplTest {
+public class AccumulationHeaderImplTest {
 
 	@InjectMocks
-	private AccumsLedgerHeaderServiceImpl serviceImpl;
+	private AccumulationHeaderServiceImpl serviceImpl;
 	
 	/**
 	 * Mock the repository
 	 */
 	@Mock
-	private LedgerHeaderRepository ledgerHeaderRepository;
+	private AccumulationHeaderRepository ledgerHeaderRepository;
 	
 	/**
 	 * Mock the Mapper
 	 */
 	@Mock
-	private LedgerHeaderMapper ledgerHeaderMapper;
+	private AccumulationHeaderMapper ledgerHeaderMapper;
 	
 	/**
 	 * @throws NoSuchFieldException
@@ -53,11 +53,11 @@ public class LedgerHeaderImplTest {
 	 */
 	@Test
 	public void testSetLedgerHeader() throws NoSuchFieldException, SecurityException, Exception {
-		setFinalStatic(LedgerHeaderMapper.class.getField("INSTANCE"), ledgerHeaderMapper);
-		LedgerHeader ledgerHeader = new LedgerHeader();
-		LedgerHeaderDTO ledgerHeaderDTO = new LedgerHeaderDTO();
-		when(ledgerHeaderMapper.convertToEntity(ledgerHeaderDTO)).thenReturn(ledgerHeader);
-		serviceImpl.create(ledgerHeaderDTO);
+		setFinalStatic(AccumulationHeaderMapper.class.getField("INSTANCE"), ledgerHeaderMapper);
+		AccumulationHeader ledgerHeader = new AccumulationHeader();
+		AccumulationHeaderDTO AccumulationHeaderDTO = new AccumulationHeaderDTO();
+		when(ledgerHeaderMapper.convertToEntity(AccumulationHeaderDTO)).thenReturn(ledgerHeader);
+		serviceImpl.create(AccumulationHeaderDTO);
 		verify(ledgerHeaderRepository, times(1)).saveAndFlush(ledgerHeader);		
 	}
 	
@@ -68,14 +68,14 @@ public class LedgerHeaderImplTest {
 	 */
 	@Test
 	public void testGetAllLedgerHeaders() throws NoSuchFieldException, SecurityException, Exception {
-		List<LedgerHeader> ledgerHeaders = new ArrayList<>();
-		ledgerHeaders.add(new LedgerHeader());
-		List<LedgerHeaderDTO> ledgerHeaderDTOList = new ArrayList<>();
+		List<AccumulationHeader> ledgerHeaders = new ArrayList<>();
+		ledgerHeaders.add(new AccumulationHeader());
+		List<AccumulationHeaderDTO> AccumulationHeaderDTOList = new ArrayList<>();
 		when(ledgerHeaderRepository.findAll()).thenReturn(ledgerHeaders);
-		when(ledgerHeaderMapper.convertToDTOList(ledgerHeaders)).thenReturn(ledgerHeaderDTOList);
-		setFinalStatic(LedgerHeaderMapper.class.getField("INSTANCE"), ledgerHeaderMapper);
-		List<LedgerHeaderDTO> actual = serviceImpl.readAll();
-		Assert.assertEquals(ledgerHeaderDTOList, actual);
+		when(ledgerHeaderMapper.convertToDTOList(ledgerHeaders)).thenReturn(AccumulationHeaderDTOList);
+		setFinalStatic(AccumulationHeaderMapper.class.getField("INSTANCE"), ledgerHeaderMapper);
+		List<AccumulationHeaderDTO> actual = serviceImpl.readAll();
+		Assert.assertEquals(AccumulationHeaderDTOList, actual);
 	}
 	
 	/**
@@ -84,7 +84,7 @@ public class LedgerHeaderImplTest {
 	@Test(expected = NotFoundException.class)
 	public void testGetAllLedgerHeadersThrowsException() throws NotFoundException
 	{
-		List<LedgerHeader> ledgerHeaders = new ArrayList<>();
+		List<AccumulationHeader> ledgerHeaders = new ArrayList<>();
 		when(ledgerHeaderRepository.findAll()).thenReturn(ledgerHeaders);
 		serviceImpl.readAll();
 	}

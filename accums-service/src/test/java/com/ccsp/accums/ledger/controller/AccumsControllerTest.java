@@ -1,25 +1,21 @@
 package com.ccsp.accums.ledger.controller;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.web.client.RestTemplate;
 
-import com.ccsp.accums.ledger.dto.LedgerHeaderDTO;
-import com.ccsp.accums.service.impl.AccumsLedgerHeaderServiceImpl;
+import com.ccsp.accums.ledger.dto.AccumulationHeaderDTO;
+import com.ccsp.accums.service.impl.AccumulationHeaderServiceImpl;
 import com.ccsp.common.dto.ICommonDTO;
 
 import javassist.NotFoundException;
@@ -44,7 +40,7 @@ public class AccumsControllerTest {
 	 * Mock the Service layer
 	 */
 	@Mock
-	private AccumsLedgerHeaderServiceImpl ledgerHeaderService;
+	private AccumulationHeaderServiceImpl ledgerHeaderService;
 	
 	/**
 	 * @throws NotFoundException
@@ -53,7 +49,7 @@ public class AccumsControllerTest {
 	public void testGetLedgerHeader() throws NotFoundException {
 		List<ICommonDTO> ledgerHeaderDTOList = new ArrayList<>();
 		when(ledgerHeaderService.readAll()).thenReturn(ledgerHeaderDTOList);
-		List<LedgerHeaderDTO> actual = accumsController.getLedgerHeader();
+		List<AccumulationHeaderDTO> actual = accumsController.getLedgerHeader();
 		Assert.assertEquals(actual, ledgerHeaderDTOList);
 	}
 	
@@ -62,7 +58,7 @@ public class AccumsControllerTest {
 	 */
 	@Test
 	public void testSetLedgerHeader() {
-		LedgerHeaderDTO ledgerHeaderDTO = new LedgerHeaderDTO();
+		AccumulationHeaderDTO ledgerHeaderDTO = new AccumulationHeaderDTO();
 		accumsController.createLedgerHeader(ledgerHeaderDTO);
 		verify(ledgerHeaderService, times(1)).create(ledgerHeaderDTO);
 	}

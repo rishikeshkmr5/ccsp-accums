@@ -30,8 +30,18 @@
 		<sonar.host.url>http://localhost:9000</sonar.host.url>
 		<org.mapstruct.version>1.1.0.Final</org.mapstruct.version>
 	</properties>
-
+	<repositories>
+        <repository>
+            <id>com.ibm.db2.jcc</id>
+            <url>https://artifacts.alfresco.com/nexus/content/repositories/public/</url>
+        </repository>
+    </repositories>
 	<dependencies>
+	<dependency>
+            <groupId>com.ibm.db2.jcc</groupId>
+            <artifactId>db2jcc4</artifactId>
+            <version>10.1</version>
+        </dependency>
 		<dependency>
 			<groupId>com.org</groupId>
 			<artifactId>common-components</artifactId>

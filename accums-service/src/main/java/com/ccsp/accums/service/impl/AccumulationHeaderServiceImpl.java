@@ -5,32 +5,32 @@ import javax.annotation.Resource;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
-import com.ccsp.accums.ledger.dto.LedgerHeaderDTO;
-import com.ccsp.accums.ledger.entity.LedgerHeader;
-import com.ccsp.accums.ledger.repository.LedgerHeaderRepository;
-import com.ccsp.accums.mapper.LedgerHeaderMapper;
+import com.ccsp.accums.ledger.dto.AccumulationHeaderDTO;
+import com.ccsp.accums.ledger.entity.AccumulationHeader;
+import com.ccsp.accums.ledger.repository.AccumulationHeaderRepository;
+import com.ccsp.accums.mapper.AccumulationHeaderMapper;
 import com.ccsp.common.mapper.IBaseMapper;
 import com.ccsp.common.service.impl.CommonServiceImpl;
 
 /**
- * @author nnarayanaperumaln
+ * @author Vaibhav
  *
  */
 @Component
-public class AccumsLedgerHeaderServiceImpl extends CommonServiceImpl {
+public class AccumulationHeaderServiceImpl extends CommonServiceImpl {
 	/**
 	 * Autowiring repository layer
 	 */
 	@Resource
-	private LedgerHeaderRepository ledgerHeaderRepository;
+	private AccumulationHeaderRepository accumulationHeaderRepository;
 
 	/**
 	 * @see com.ccsp.common.service.impl.CommonServiceImpl#getJPARepository()
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public JpaRepository<LedgerHeader, Long> getJPARepository() {
-		return ledgerHeaderRepository;
+	public JpaRepository<AccumulationHeader, Long> getJPARepository() {
+		return accumulationHeaderRepository;
 	}
 
 	/* (non-Javadoc)
@@ -38,7 +38,7 @@ public class AccumsLedgerHeaderServiceImpl extends CommonServiceImpl {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public IBaseMapper<LedgerHeader, LedgerHeaderDTO> getMapper() {
-		return LedgerHeaderMapper.INSTANCE;
+	public IBaseMapper<AccumulationHeader, AccumulationHeaderDTO> getMapper() {
+		return AccumulationHeaderMapper.INSTANCE;
 	}	
 }
