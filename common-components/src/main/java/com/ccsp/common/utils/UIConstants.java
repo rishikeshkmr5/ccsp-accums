@@ -20,5 +20,10 @@ public class UIConstants {
 	public static final String LEDGER_HEADER = "/ledgerheader";
 	public static final String ACCUMS_ENTRY = "/accumsentry";
 	public static final String ACCUMS_ENTRY_PERIOD = "/accumsentryperiod";
+	
+	/**
+	 * Accumulation Summary URI
+	 */
+	public static final String ACCUMULATION_SUMMARY = "/accumulationsummary";
 		
 }

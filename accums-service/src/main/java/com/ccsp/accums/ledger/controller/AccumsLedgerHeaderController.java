@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ccsp.accums.ledger.dto.AccumsEntryDTO;
 import com.ccsp.accums.ledger.dto.AccumsEntryPeriodDTO;
 import com.ccsp.accums.ledger.dto.AccumulationHeaderDTO;
+import com.ccsp.accums.ledger.dto.AccumulationSummaryDTO;
 import com.ccsp.accums.service.impl.AccumsLedgerEntryServiceImpl;
 import com.ccsp.accums.service.impl.AccumsLedgerServicePeriodImpl;
 import com.ccsp.accums.service.impl.AccumulationHeaderServiceImpl;
+import com.ccsp.accums.service.impl.AccumulationSummaryServiceImpl;
 import com.ccsp.common.utils.UIConstants;
 
 import javassist.NotFoundException;
@@ -34,15 +36,15 @@ public class AccumsLedgerHeaderController{
 	 */
 	private static Logger log = Logger.getLogger(AccumsLedgerHeaderController.class);
 
-	/*@Autowired
-	private AccumsLedgerHeaderServiceImpl ledgerHeaderService;*/
-	
 	@Autowired
 	private AccumulationHeaderServiceImpl accumulationHeaderService;
 	@Autowired
 	private AccumsLedgerEntryServiceImpl ledgerEntryService;
 	@Autowired
 	private AccumsLedgerServicePeriodImpl ledgerEntryServicePeriod;
+	
+	@Autowired
+	private AccumulationSummaryServiceImpl accumulationSummaryService;
  	
 	/**
 	 * Fetches all the ledgerHeaders 
@@ -106,5 +108,29 @@ public class AccumsLedgerHeaderController{
 	public List<AccumsEntryDTO> getLedgerEntryPeriod() throws NotFoundException{
 		log.info("Get LedgerEntryPeriod details");
 		return ledgerEntryServicePeriod.readAll();
+	}
+	
+	/**
+	 * Fetches all the accumulation summary
+	 * @return
+	 * @throws NotFoundException
+	 */
+	@RequestMapping(path = UIConstants.ACCUMULATION_SUMMARY, method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public List<AccumulationSummaryDTO> getAccumulationSummary() throws NotFoundException{
+		log.info("Get all members accums summary details");
+		return accumulationSummaryService.readAll();
+	}
+	
+	/**
+	 * Persist the received accumulation summary Details
+	 * @param accumulationSummaryDTO
+	 * @return
+	 */
+	@RequestMapping(path = UIConstants.ACCUMULATION_SUMMARY, method = RequestMethod.POST, consumes = "application/json; charset=utf-8")
+	@ResponseBody
+	public AccumulationSummaryDTO createAccumulationSummary(@RequestBody AccumulationSummaryDTO accumulationSummaryDTO){
+		log.info("Create AccumulationSummary details");
+		return accumulationSummaryService.create(accumulationSummaryDTO);
 	}
 }
