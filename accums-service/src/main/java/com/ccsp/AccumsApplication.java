@@ -3,6 +3,8 @@ package com.ccsp;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -21,7 +23,7 @@ import com.ccsp.common.aspect.LoggingAspect;
 @EnableAutoConfiguration(exclude = {
         org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration.class,
         org.springframework.boot.actuate.autoconfigure.ManagementWebSecurityAutoConfiguration.class})
-public class AccumsApplication {
+public class AccumsApplication extends SpringBootServletInitializer {
 
 	/**
 	 * @param args
@@ -34,4 +36,8 @@ public class AccumsApplication {
 	public LoggingAspect getAspect() {
 		return new LoggingAspect();
 	}
+	
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(AccumsApplication.class);
+    }
 }
