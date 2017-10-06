@@ -13,7 +13,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "ACCUMLN_HDR")
+@Table(name = "ACCUMLN_HDR", schema="ccsp")
 public class AccumulationHeader  implements java.io.Serializable {
 
 	/**
