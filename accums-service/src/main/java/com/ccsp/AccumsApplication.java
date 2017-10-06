@@ -3,13 +3,18 @@ package com.ccsp;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+
+import com.ccsp.common.aspect.LoggingAspect;
 
 /**
  * @author nnarayanaperumaln
  *
  */
+@EnableAspectJAutoProxy
 @SpringBootApplication
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @ComponentScan
@@ -23,5 +28,10 @@ public class AccumsApplication {
 	 */
 	public static void main(String[] args) {
 		SpringApplication.run(AccumsApplication.class, args);
+	}
+	
+	@Bean
+	public LoggingAspect getAspect() {
+		return new LoggingAspect();
 	}
 }

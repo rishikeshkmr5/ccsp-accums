@@ -18,5 +18,7 @@ public class UIConstants {
 	 * LEDGER HEADER URI
 	 */
 	public static final String LEDGER_HEADER = "/ledgerheader";
+	public static final String ACCUMS_ENTRY = "/accumsentry";
+	public static final String ACCUMS_ENTRY_PERIOD = "/accumsentryperiod";
 		
 }
