@@ -6,7 +6,7 @@
 	<groupId>com.org</groupId>
 	<artifactId>accums-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>accums-service</name>
 	<description>CCSP Accums project</description>
@@ -340,7 +340,7 @@
 						<resource>
 							<targetPath>/</targetPath>
 							<directory>${project.build.directory}</directory>
-							<include>${project.build.finalName}.jar</include>
+							<include>${project.build.finalName}.war</include>
 						</resource>
 					</resources>
 				</configuration>
