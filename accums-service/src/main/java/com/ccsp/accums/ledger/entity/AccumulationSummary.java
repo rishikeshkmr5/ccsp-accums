@@ -13,7 +13,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "ACCUMLN_SUM", schema="ccsp")
+@Table(name = "ACCUMLN_SUM")
 public class AccumulationSummary  implements java.io.Serializable {
 
 	/**
