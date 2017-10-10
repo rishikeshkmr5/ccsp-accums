@@ -1,5 +1,6 @@
 package com.ccsp.accums.ledger.entity;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -24,6 +25,10 @@ public class AccumsEntry  implements java.io.Serializable {
 	@Id
 	@Column(name = "LEDGER_LINE_ID", unique = true, nullable = false)
 	private Long ledgerLineId;
+	
+	@ManyToOne(cascade={CascadeType.ALL})
+	@JoinColumn(name="Link_To_Primary")
+	private AccumsEntry accumsEntry;
 	
 	@ManyToOne(cascade = CascadeType.ALL, targetEntity = AccumulationHeader.class, fetch = FetchType.EAGER)
 	@JoinColumn(name="LEDGER_ID",referencedColumnName="LEDGER_ID")
@@ -217,4 +222,12 @@ public class AccumsEntry  implements java.io.Serializable {
 	public void setServiceDate(Date serviceDate) {
 		this.serviceDate = serviceDate;
 	}
+	public AccumsEntry getAccumsEntry() {
+		return accumsEntry;
+	}
+	public void setAccumsEntry(AccumsEntry accumsEntry) {
+		this.accumsEntry = accumsEntry;
+	}
+	
+	
 }

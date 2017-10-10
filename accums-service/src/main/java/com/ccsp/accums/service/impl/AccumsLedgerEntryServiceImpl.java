@@ -2,7 +2,9 @@ package com.ccsp.accums.service.impl;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -57,11 +59,19 @@ public class AccumsLedgerEntryServiceImpl extends CommonServiceImpl  {
 	public <T extends ICommonDTO> T create(T dto) {
 		
 		AccumsEntryDTO accumsEntryDTO = (AccumsEntryDTO) dto;
-		AccumulationHeader ledger= ledgerHeaderRepository.findOne(accumsEntryDTO.getAccumHeaderId());
-		
 		AccumsEntry accumsEntry = getMapper().convertToEntity(accumsEntryDTO);
 		
+		AccumulationHeader ledger= ledgerHeaderRepository.findOne(accumsEntryDTO.getAccumHeaderId());
+		
+		
+		
 		accumsEntry.setLedgerHeader(ledger);
+		
+		if(accumsEntryDTO.getLinkToPrimary() != null) {
+			AccumsEntry linkAccums = accumsEntryRepository.findOne(accumsEntryDTO.getLinkToPrimary());
+			accumsEntry.setAccumsEntry(linkAccums);
+		}
+		
 		
 		if(accumsEntry != null){
 			accumsEntry = getJPARepository().saveAndFlush(accumsEntry);

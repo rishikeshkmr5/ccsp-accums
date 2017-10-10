@@ -18,6 +18,7 @@ public class AccumsEntryDTO implements ICommonDTO{
 	private double snapshotSummmary;
 	private String UOM;
 	private Date serviceDate;
+	private Long linkToPrimary;
 	/**
 	 * 
 	 * @return
@@ -172,5 +173,12 @@ public class AccumsEntryDTO implements ICommonDTO{
 	public void setServiceDate(Date serviceDate) {
 		this.serviceDate = serviceDate;
 	}
+	public Long getLinkToPrimary() {
+		return linkToPrimary;
+	}
+	public void setLinkToPrimary(Long linkToPrimary) {
+		this.linkToPrimary = linkToPrimary;
+	}
+	
 	
 }
