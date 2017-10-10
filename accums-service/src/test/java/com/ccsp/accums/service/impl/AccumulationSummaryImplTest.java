@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -28,6 +29,7 @@ import javassist.NotFoundException;
  * @author Vaibhav
  *
  */
+@Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
 public class AccumulationSummaryImplTest {
 

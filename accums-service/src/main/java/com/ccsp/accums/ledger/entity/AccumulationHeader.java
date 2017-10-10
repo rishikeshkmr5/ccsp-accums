@@ -38,7 +38,7 @@ public class AccumulationHeader  implements java.io.Serializable {
 	@Column(name = "SERVICE_ID", nullable = true)
 	private Integer serviceID;
 	
-	@Column(name = "SERVICE", nullable = true, length=50)
+	@Column(name = "SERVICE", nullable = true)
 	private String service;
 	
 	@Column(name = "DT_OF_SERVICE", nullable = true)
@@ -47,31 +47,31 @@ public class AccumulationHeader  implements java.io.Serializable {
 	@Column(name = "DT_TIME_PROCESSED", nullable = true)
 	private Date dateTimeProcessed;
 	
-	@Column(name = "NETWORK", nullable = true, length=3)
+	@Column(name = "NETWORK", nullable = true)
 	private String network;
 	
-	@Column(name = "NETWORK_TIER", nullable = true, length=10)
+	@Column(name = "NETWORK_TIER", nullable = true)
 	private String networkTier;
 	
 	@Column(name = "PLAN_ID", nullable = true)
 	private Integer planID;
 	
-	@Column(name = "ALLOWED_AMOUNT", nullable = true, precision=12, scale=3)
+	@Column(name = "ALLOWED_AMOUNT", nullable = true)
 	private Double allowedAmount;
 	
-	@Column(name = "MEMBER_ID", nullable = true, length=16)
+	@Column(name = "MEMBER_ID", nullable = true)
 	private String memberID;
 	
 	@Column(name = "PATIENT_ID", nullable = true)
 	private Integer patientID;
 	
-	@Column(name = "SUBSCRIBER_ID", nullable = true, length=16)
+	@Column(name = "SUBSCRIBER_ID", nullable = true)
 	private String subscriberID;
 	
-	@Column(name = "UNIT_OF_MEASURE", nullable = true, length=10)
+	@Column(name = "UNIT_OF_MEASURE", nullable = true)
 	private String unitOfMeasure;
 	
-	@Column(name = "ACCUMULATOR_TYPE", nullable = true, length=25)
+	@Column(name = "ACCUMULATOR_TYPE", nullable = true)
 	private String accumulatorType;
 
 	/**

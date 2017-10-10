@@ -2,8 +2,6 @@ package com.ccsp.accums.ledger.dto;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-
 import com.ccsp.common.dto.ICommonDTO;
 
 /**
@@ -11,219 +9,240 @@ import com.ccsp.common.dto.ICommonDTO;
  * DTO class for Accumulation Header
  *
  */
+/**
+ * @author vamehta
+ *
+ */
 public class AccumulationSummaryDTO  implements ICommonDTO {
 
 	/**
 	 * serialization
 	 */
-	private static final long serialVersionUID = 1;
+	private static final long serialVersionUID = 1L;
 
-	private Integer summaryID;
+	private Long summaryID;
 	
-	private Integer memberMID;
+	private Long ledgerHeaderID;
 	
-	private Integer subscriberMID;
+	private String subscriberID;
 	
-	private Date benefitPeriodStartDate;
+	private String memberID;
 	
-	private Date benefitPeriodEndDate;
+	private String planID;
 	
-	private Integer accumulationTypeID;
+	private String accumKey;
 	
-	private Double balanceAmount;
+	private String accumName;
 	
-	private Character inNetworkIndicator;
+	private String accumType;
 	
-	private Integer benefitTierID;
+	private Double amount;
 	
-	private String familyTierCode;
+	private String network;
 	
-	private Short csrVariantID;
+	private String unitOfMeasure;
 	
-	private Date lastUpdateTimestamp;
+	private Double maxAmount;
 	
-	private Date createTimestamp;
+	private Integer maxVisit;
+	
+	private Date effectiveDt;
 
 	/**
 	 * @return
 	 */
-	public Integer getSummaryID() {
+	public Long getSummaryID() {
 		return summaryID;
 	}
 
 	/**
 	 * @param summaryID
 	 */
-	public void setSummaryID(Integer summaryID) {
+	public void setSummaryID(Long summaryID) {
 		this.summaryID = summaryID;
 	}
-	
-	/**
-	 * @return
-	 */
-	public Integer getMemberMID() {
-		return memberMID;
-	}
-
-	/**
-	 * @param memberMID
-	 */
-	public void setMemberMID(Integer memberMID) {
-		this.memberMID = memberMID;
-	}
 
 	/**
 	 * @return
 	 */
-	public Integer getSubscriberMID() {
-		return subscriberMID;
+	public String getSubscriberID() {
+		return subscriberID;
 	}
 
 	/**
-	 * @param subscriberMID
+	 * @param subscriberID
 	 */
-	public void setSubscriberMID(Integer subscriberMID) {
-		this.subscriberMID = subscriberMID;
+	public void setSubscriberID(String subscriberID) {
+		this.subscriberID = subscriberID;
 	}
 
 	/**
 	 * @return
 	 */
-	public Date getBenefitPeriodStartDate() {
-		return benefitPeriodStartDate;
+	public String getMemberID() {
+		return memberID;
 	}
 
 	/**
-	 * @param benefitPeriodStartDate
+	 * @param memberID
 	 */
-	public void setBenefitPeriodStartDate(Date benefitPeriodStartDate) {
-		this.benefitPeriodStartDate = benefitPeriodStartDate;
-	}
-
-	/**
-	 * @return
-	 */
-	public Date getBenefitPeriodEndDate() {
-		return benefitPeriodEndDate;
-	}
-
-	/**
-	 * @param benefitPeriodEndDate
-	 */
-	public void setBenefitPeriodEndDate(Date benefitPeriodEndDate) {
-		this.benefitPeriodEndDate = benefitPeriodEndDate;
+	public void setMemberID(String memberID) {
+		this.memberID = memberID;
 	}
 
 	/**
 	 * @return
 	 */
-	public Integer getAccumulationTypeID() {
-		return accumulationTypeID;
+	public String getPlanID() {
+		return planID;
 	}
 
 	/**
-	 * @param accumulationTypeID
+	 * @param planID
 	 */
-	public void setAccumulationTypeID(Integer accumulationTypeID) {
-		this.accumulationTypeID = accumulationTypeID;
-	}
-
-	/**
-	 * @return
-	 */
-	public Double getBalanceAmount() {
-		return balanceAmount;
-	}
-
-	/**
-	 * @param balanceAmount
-	 */
-	public void setBalanceAmount(Double balanceAmount) {
-		this.balanceAmount = balanceAmount;
+	public void setPlanID(String planID) {
+		this.planID = planID;
 	}
 
 	/**
 	 * @return
 	 */
-	public Character getInNetworkIndicator() {
-		return inNetworkIndicator;
+	public String getAccumKey() {
+		return accumKey;
 	}
 
 	/**
-	 * @param inNetworkIndicator
+	 * @param accumKey
 	 */
-	public void setInNetworkIndicator(Character inNetworkIndicator) {
-		this.inNetworkIndicator = inNetworkIndicator;
-	}
-
-	/**
-	 * @return
-	 */
-	public Integer getBenefitTierID() {
-		return benefitTierID;
-	}
-
-	/**
-	 * @param benefitTierID
-	 */
-	public void setBenefitTierID(Integer benefitTierID) {
-		this.benefitTierID = benefitTierID;
+	public void setAccumKey(String accumKey) {
+		this.accumKey = accumKey;
 	}
 
 	/**
 	 * @return
 	 */
-	public String getFamilyTierCode() {
-		return familyTierCode;
+	public String getAccumName() {
+		return accumName;
 	}
 
 	/**
-	 * @param familyTierCode
+	 * @param accumName
 	 */
-	public void setFamilyTierCode(String familyTierCode) {
-		this.familyTierCode = familyTierCode;
-	}
-
-	/**
-	 * @return
-	 */
-	public Short getCsrVariantID() {
-		return csrVariantID;
-	}
-
-	/**
-	 * @param csrVariantID
-	 */
-	public void setCsrVariantID(Short csrVariantID) {
-		this.csrVariantID = csrVariantID;
+	public void setAccumName(String accumName) {
+		this.accumName = accumName;
 	}
 
 	/**
 	 * @return
 	 */
-	public Date getLastUpdateTimestamp() {
-		return lastUpdateTimestamp;
+	public String getAccumType() {
+		return accumType;
 	}
 
 	/**
-	 * @param lastUpdateTimestamp
+	 * @param accumType
 	 */
-	public void setLastUpdateTimestamp(Date lastUpdateTimestamp) {
-		this.lastUpdateTimestamp = lastUpdateTimestamp;
+	public void setAccumType(String accumType) {
+		this.accumType = accumType;
 	}
 
 	/**
 	 * @return
 	 */
-	public Date getCreateTimestamp() {
-		return createTimestamp;
+	public Double getAmount() {
+		return amount;
 	}
 
 	/**
-	 * @param createTimestamp
+	 * @param amount
 	 */
-	public void setCreateTimestamp(Date createTimestamp) {
-		this.createTimestamp = createTimestamp;
+	public void setAmount(Double amount) {
+		this.amount = amount;
 	}
+
+	/**
+	 * @return
+	 */
+	public String getNetwork() {
+		return network;
+	}
+
+	/**
+	 * @param network
+	 */
+	public void setNetwork(String network) {
+		this.network = network;
+	}
+
+	/**
+	 * @return
+	 */
+	public String getUnitOfMeasure() {
+		return unitOfMeasure;
+	}
+
+	/**
+	 * @param unitOfMeasure
+	 */
+	public void setUnitOfMeasure(String unitOfMeasure) {
+		this.unitOfMeasure = unitOfMeasure;
+	}
+
+	/**
+	 * @return
+	 */
+	public Double getMaxAmount() {
+		return maxAmount;
+	}
+
+	/**
+	 * @param maxAmount
+	 */
+	public void setMaxAmount(Double maxAmount) {
+		this.maxAmount = maxAmount;
+	}
+
+	/**
+	 * @return
+	 */
+	public Integer getMaxVisit() {
+		return maxVisit;
+	}
+
+	/**
+	 * @param maxVisit
+	 */
+	public void setMaxVisit(Integer maxVisit) {
+		this.maxVisit = maxVisit;
+	}
+
+	/**
+	 * @return
+	 */
+	public Date getEffectiveDt() {
+		return effectiveDt;
+	}
+
+	/**
+	 * @param effectiveDt
+	 */
+	public void setEffectiveDt(Date effectiveDt) {
+		this.effectiveDt = effectiveDt;
+	}
+
+	/**
+	 * @return
+	 */
+	public Long getLedgerHeaderID() {
+		return ledgerHeaderID;
+	}
+
+	/**
+	 * @param ledgerHeaderID
+	 */
+	public void setLedgerHeaderID(Long ledgerHeaderID) {
+		this.ledgerHeaderID = ledgerHeaderID;
+	}
+
 	
 }
