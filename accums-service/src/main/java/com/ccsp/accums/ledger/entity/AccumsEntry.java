@@ -1,4 +1,5 @@
 package com.ccsp.accums.ledger.entity;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -12,7 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ACCUMLN_ENTRY")
+@Table(name = "ACCUMLATION_ENTRY")
 public class AccumsEntry  implements java.io.Serializable {
 	
 	/**
@@ -21,94 +22,199 @@ public class AccumsEntry  implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "ACCUMLN_ENTRY_ID", unique = true, nullable = false, precision = 20, scale = 0)
-	private Long accumEntryId;
+	@Column(name = "LEDGER_LINE_ID", unique = true, nullable = false)
+	private Long ledgerLineId;
 	
 	@ManyToOne(cascade = CascadeType.ALL, targetEntity = AccumulationHeader.class, fetch = FetchType.EAGER)
-	@JoinColumn(name="ACCUMLN_HDR_ID",referencedColumnName="ACCUMLN_HDR_ID", insertable = true, updatable = true)
+	@JoinColumn(name="LEDGER_ID",referencedColumnName="LEDGER_ID")
 	private AccumulationHeader ledgerHeader;
 	
+	@Column(name = "ACCUM_KEY",  nullable = true)
+	private String accumKey;
 	
+	@Column(name = "ACCUM_TYPE", nullable = true)
+	private String accumType;
 	
-	@Column(name = "ACCUMLN_TYP_ID", unique = true, nullable = false, precision = 20, scale = 0)
-	private Long accumTypeId;
+	@Column(name = "ROLE",nullable = true)
+	private String role;
 	
-	@Column(name = "INWK_IND", unique = true, nullable = false, precision = 20, scale = 0)
-	private String inNetInd;
+	@Column(name = "COST_SHARE_TIER", nullable = true)
+	private String costShareTier;
 	
-	@Column(name = "BNFT_TIER_ID", unique = true, nullable = false, precision = 20, scale = 0)
-	private Long benefitTierId;
-	
-	@Column(name = "FAM_TIER_CD", unique = true, nullable = false, precision = 20, scale = 0)
-	private String famTierCd;
-	
-	@Column(name = "CSR_VRNT_ID", unique = true, nullable = false, precision = 20, scale = 0)
-	private String csrVrntId;
-	
-	@Column(name = "FDG_ACCUMLN_ENTRY_ID", unique = true, nullable = false, precision = 20, scale = 0)
-	private Long fdgAccumEntryId;
-	
-	@Column(name = "AMT", unique = true, nullable = false, precision = 20, scale = 0)
+	@Column(name = "AMOUNT", nullable = true)
 	private Double amt;
 	
+	@Column(name = "NETWORK",nullable = true)
+	private String network;
 	
+	@Column(name = "SNAPSHOT_SUMMARY", nullable = true)
+	private double snapshotSummmary;
 	
+	@Column(name = "UNIT_OF_MEASURE", nullable = true)
+	private String UOM;
 	
-	public Long getAccumEntryId() {
-		return accumEntryId;
+	@Column(name = "SERVICE_DATE", nullable = true)
+	private Date serviceDate;
+
+	public Long getLedgerLineId() {
+		return ledgerLineId;
 	}
-	public void setAccumEntryId(Long accumEntryId) {
-		this.accumEntryId = accumEntryId;
-	}
+	/**
+	 * 
+	 * @param ledgerLineId
+	 */
 	
+	public void setLedgerLineId(Long ledgerLineId) {
+		this.ledgerLineId = ledgerLineId;
+	}
+	/**
+	 * 
+	 * @return
+	 */
+
 	public AccumulationHeader getLedgerHeader() {
 		return ledgerHeader;
 	}
+	
+	/**
+	 * 
+	 * @param ledgerHeader
+	 */
+
 	public void setLedgerHeader(AccumulationHeader ledgerHeader) {
 		this.ledgerHeader = ledgerHeader;
 	}
-	public Long getAccumTypeId() {
-		return accumTypeId;
+	
+	/**
+	 * 
+	 * @return
+	 */
+
+	public String getAccumKey() {
+		return accumKey;
 	}
-	public void setAccumTypeId(Long accumTypeId) {
-		this.accumTypeId = accumTypeId;
+	/**
+	 * 
+	 * @param accumKey
+	 */
+	public void setAccumKey(String accumKey) {
+		this.accumKey = accumKey;
 	}
-	public String getInNetInd() {
-		return inNetInd;
+	/**
+	 * 
+	 * @return
+	 */
+	public String getAccumType() {
+		return accumType;
 	}
-	public void setInNetInd(String inNetInd) {
-		this.inNetInd = inNetInd;
+	
+	/**
+	 * 
+	 * @param accumType
+	 */
+
+	public void setAccumType(String accumType) {
+		this.accumType = accumType;
 	}
-	public Long getBenefitTierId() {
-		return benefitTierId;
+	/**
+	 * 
+	 * @return
+	 */
+	public String getRole() {
+		return role;
 	}
-	public void setBenefitTierId(Long benefitTierId) {
-		this.benefitTierId = benefitTierId;
+	/**
+	 * 
+	 * @param role
+	 */
+	public void setRole(String role) {
+		this.role = role;
 	}
-	public String getFamTierCd() {
-		return famTierCd;
+	/**
+	 * 
+	 * @return
+	 */
+
+	public String getCostShareTier() {
+		return costShareTier;
 	}
-	public void setFamTierCd(String famTierCd) {
-		this.famTierCd = famTierCd;
+	/**
+	 * 
+	 * @param costShareTier
+	 */
+
+	public void setCostShareTier(String costShareTier) {
+		this.costShareTier = costShareTier;
 	}
-	public String getCsrVrntId() {
-		return csrVrntId;
-	}
-	public void setCsrVrntId(String csrVrntId) {
-		this.csrVrntId = csrVrntId;
-	}
-	public Long getFdgAccumEntryId() {
-		return fdgAccumEntryId;
-	}
-	public void setFdgAccumEntryId(Long fdgAccumEntryId) {
-		this.fdgAccumEntryId = fdgAccumEntryId;
-	}
+	/**
+	 * 
+	 * @return
+	 */
 	public Double getAmt() {
 		return amt;
 	}
+	/**
+	 * 
+	 * @param amt
+	 */
 	public void setAmt(Double amt) {
 		this.amt = amt;
 	}
-	
-	
+	/**
+	 * 
+	 * @return
+	 */
+	public String getNetwork() {
+		return network;
+	}
+	/**
+	 * 
+	 * @param network
+	 */
+	public void setNetwork(String network) {
+		this.network = network;
+	}
+	/**
+	 * 
+	 * @return
+	 */
+
+	public double getSnapshotSummmary() {
+		return snapshotSummmary;
+	}
+	/**
+	 * 
+	 * @param snapshotSummmary
+	 */
+	public void setSnapshotSummmary(double snapshotSummmary) {
+		this.snapshotSummmary = snapshotSummmary;
+	}
+	/**
+	 * 
+	 * @return
+	 */
+	public String getUOM() {
+		return UOM;
+	}
+	/**
+	 * 
+	 * @param uOM
+	 */
+	public void setUOM(String uOM) {
+		UOM = uOM;
+	}
+	/**
+	 * 
+	 * @return
+	 */
+	public Date getServiceDate() {
+		return serviceDate;
+	}
+	/**
+	 * 
+	 * @param serviceDate
+	 */
+	public void setServiceDate(Date serviceDate) {
+		this.serviceDate = serviceDate;
+	}
 }

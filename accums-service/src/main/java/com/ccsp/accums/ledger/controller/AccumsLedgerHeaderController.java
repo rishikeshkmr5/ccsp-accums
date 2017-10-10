@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ccsp.accums.ledger.dto.AccumsEntryDTO;
-import com.ccsp.accums.ledger.dto.AccumsEntryPeriodDTO;
+
 import com.ccsp.accums.ledger.dto.AccumulationHeaderDTO;
 import com.ccsp.accums.ledger.dto.AccumulationSummaryDTO;
 import com.ccsp.accums.service.impl.AccumsLedgerEntryServiceImpl;
-import com.ccsp.accums.service.impl.AccumsLedgerServicePeriodImpl;
+
 import com.ccsp.accums.service.impl.AccumulationHeaderServiceImpl;
 import com.ccsp.accums.service.impl.AccumulationSummaryServiceImpl;
 import com.ccsp.common.utils.UIConstants;
@@ -40,8 +40,6 @@ public class AccumsLedgerHeaderController{
 	private AccumulationHeaderServiceImpl accumulationHeaderService;
 	@Autowired
 	private AccumsLedgerEntryServiceImpl ledgerEntryService;
-	@Autowired
-	private AccumsLedgerServicePeriodImpl ledgerEntryServicePeriod;
 	
 	@Autowired
 	private AccumulationSummaryServiceImpl accumulationSummaryService;
@@ -83,8 +81,8 @@ public class AccumsLedgerHeaderController{
 	}
 	
 	/**
-	 * Fetches all the ledgerHeaders 
-	 * @return LedgerHeaders
+	 * Fetches all the ledgerEntries
+	 * @return LedgerEntries
 	 * @throws NotFoundException
 	 */
 	@RequestMapping(path = UIConstants.ACCUMS_ENTRY, method = RequestMethod.GET, produces = "application/json; charset=utf-8")
@@ -95,20 +93,6 @@ public class AccumsLedgerHeaderController{
 	}
 	
 	
-	@RequestMapping(path = UIConstants.ACCUMS_ENTRY_PERIOD, method = RequestMethod.POST, consumes = "application/json; charset=utf-8")
-	@ResponseBody
-	public AccumsEntryPeriodDTO createLedgerEntryPrd(@RequestBody AccumsEntryPeriodDTO ledgerEntryPeriodDTO){
-		log.info("Create LedgerEntryPeriod details");
-		
-		return ledgerEntryServicePeriod.create(ledgerEntryPeriodDTO);
-	}
-	
-	@RequestMapping(path = UIConstants.ACCUMS_ENTRY_PERIOD, method = RequestMethod.GET, produces = "application/json; charset=utf-8")
-	@ResponseBody
-	public List<AccumsEntryDTO> getLedgerEntryPeriod() throws NotFoundException{
-		log.info("Get LedgerEntryPeriod details");
-		return ledgerEntryServicePeriod.readAll();
-	}
 	
 	/**
 	 * Fetches all the accumulation summary

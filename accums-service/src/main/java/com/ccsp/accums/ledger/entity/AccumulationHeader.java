@@ -13,7 +13,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "ACCUMLN_HDR")
+@Table(name = "LEDGER_HEADER")
 public class AccumulationHeader  implements java.io.Serializable {
 
 	/**
@@ -22,269 +22,294 @@ public class AccumulationHeader  implements java.io.Serializable {
 	private static final long serialVersionUID = 8510561406430816669L;
 	
 	@Id
-	@Column(name = "ACCUMLN_HDR_ID", unique = true, nullable = false)
-	private Long accumln_hdr_id;
+	@Column(name = "LEDGER_ID", unique = true, nullable = false)
+	private Long ledgerID;
 	
-	@Column(name = "MBR_MID", unique=true, nullable = false)
-	private Long mbr_mid;
+		
+	@Column(name = "VENDOR_TAX_ID", nullable = true, length=16)
+	private String vendorTaxID;
 	
-	@Column(name = "CLM_ID", nullable = true)
-	private Long clm_id;
+	@Column(name = "DCN", nullable = true, length=16)
+	private String dcn;
 	
-	@Column(name = "CLM_LN_NBR", nullable = true)
-	private Long clm_ln_nbr;
-	
-	@Column(name = "SVC_FR_DT", nullable = true)
-	private Date svc_fr_dt;
-	
-	@Column(name = "SVC_TO_DT", nullable = true)
-	private Date svc_to_dt;
-	
-	@Column(name = "PROV_ID", nullable = true)
-	private Long prov_id;
-	
-	@Column(name = "ADJCTN_TS", nullable = false)
-	private Date adjctn_ts;
-	
-	@Column(name = "PLN_ID", nullable = false, unique = true)
-	private Long pln_id;
-	
-	@Column(name = "BNFT_SVC_ID", nullable = false, unique = true)
-	private Long bnft_svc_id;
-	
-	@Column(name = "OPER_ID", nullable = false, length = 50)
-	private String oper_id;
-	
-	@Column(name = "SUB_MID", nullable = false, unique = true)
-	private Long sub_mid;
-	
-	@Column(name = "ACCT_ID", unique=true, nullable = false, length = 6)
-	private String acct_ID;
-	
-	@Column(name = "VEND_ID", nullable = true)
-	private Long vend_id;
+	@Column(name = "CLAIM_LINE", nullable = true)
+	private Integer claimLine;
 
+	@Column(name = "SERVICE_ID", nullable = true)
+	private Integer serviceID;
 	
-	/**
-	 * @return
-	 */
-	public Long getAccumln_hdr_id() {
-		return accumln_hdr_id;
-	}
-
+	@Column(name = "SERVICE", nullable = true, length=50)
+	private String service;
 	
-	/**
-	 * @param accumln_hdr_id
-	 */
-	public void setAccumln_hdr_id(Long accumln_hdr_id) {
-		this.accumln_hdr_id = accumln_hdr_id;
-	}
+	@Column(name = "DT_OF_SERVICE", nullable = true)
+	private Date dateOfService;
+	
+	@Column(name = "DT_TIME_PROCESSED", nullable = true)
+	private Date dateTimeProcessed;
+	
+	@Column(name = "NETWORK", nullable = true, length=3)
+	private String network;
+	
+	@Column(name = "NETWORK_TIER", nullable = true, length=10)
+	private String networkTier;
+	
+	@Column(name = "PLAN_ID", nullable = true)
+	private Integer planID;
+	
+	@Column(name = "ALLOWED_AMOUNT", nullable = true, precision=12, scale=3)
+	private Double allowedAmount;
+	
+	@Column(name = "MEMBER_ID", nullable = true, length=16)
+	private String memberID;
+	
+	@Column(name = "PATIENT_ID", nullable = true)
+	private Integer patientID;
+	
+	@Column(name = "SUBSCRIBER_ID", nullable = true, length=16)
+	private String subscriberID;
+	
+	@Column(name = "UNIT_OF_MEASURE", nullable = true, length=10)
+	private String unitOfMeasure;
+	
+	@Column(name = "ACCUMULATOR_TYPE", nullable = true, length=25)
+	private String accumulatorType;
 
 	/**
 	 * @return
 	 */
-	public Long getMbr_mid() {
-		return mbr_mid;
+	public Long getLedgerID() {
+		return ledgerID;
 	}
 
 	/**
-	 * 
-	 * @param mbr_mid
+	 * @param ledgerID
 	 */
-	public void setMbr_mid(Long mbr_mid) {
-		this.mbr_mid = mbr_mid;
+	public void setLedgerID(Long ledgerID) {
+		this.ledgerID = ledgerID;
 	}
 
 	/**
-	 * 
 	 * @return
 	 */
-	public Long getClm_id() {
-		return clm_id;
+	public String getVendorTaxID() {
+		return vendorTaxID;
 	}
 
 	/**
-	 * 
-	 * @param clm_id
+	 * @param vendorTaxID
 	 */
-	public void setClm_id(Long clm_id) {
-		this.clm_id = clm_id;
+	public void setVendorTaxID(String vendorTaxID) {
+		this.vendorTaxID = vendorTaxID;
 	}
 
 	/**
-	 * 
 	 * @return
 	 */
-	public Long getClm_ln_nbr() {
-		return clm_ln_nbr;
+	public String getDcn() {
+		return dcn;
 	}
 
 	/**
-	 * 
-	 * @param clm_ln_nbr
+	 * @param dcn
 	 */
-	public void setClm_ln_nbr(Long clm_ln_nbr) {
-		this.clm_ln_nbr = clm_ln_nbr;
+	public void setDcn(String dcn) {
+		this.dcn = dcn;
 	}
 
 	/**
-	 * 
 	 * @return
 	 */
-	public Date getSvc_fr_dt() {
-		return svc_fr_dt;
+	public Integer getClaimLine() {
+		return claimLine;
 	}
 
 	/**
-	 * 
-	 * @param svc_fr_dt
+	 * @param claimLine
 	 */
-	public void setSvc_fr_dt(Date svc_fr_dt) {
-		this.svc_fr_dt = svc_fr_dt;
+	public void setClaimLine(Integer claimLine) {
+		this.claimLine = claimLine;
 	}
 
 	/**
-	 * 
 	 * @return
 	 */
-	public Date getSvc_to_dt() {
-		return svc_to_dt;
+	public Integer getServiceID() {
+		return serviceID;
 	}
 
 	/**
-	 * 
-	 * @param svc_to_dt
+	 * @param serviceID
 	 */
-	public void setSvc_to_dt(Date svc_to_dt) {
-		this.svc_to_dt = svc_to_dt;
+	public void setServiceID(Integer serviceID) {
+		this.serviceID = serviceID;
 	}
 
 	/**
-	 * 
 	 * @return
 	 */
-	public Long getProv_id() {
-		return prov_id;
+	public String getService() {
+		return service;
 	}
 
 	/**
-	 * 
-	 * @param prov_id
+	 * @param service
 	 */
-	public void setProv_id(Long prov_id) {
-		this.prov_id = prov_id;
+	public void setService(String service) {
+		this.service = service;
 	}
 
 	/**
-	 * 
 	 * @return
 	 */
-	public Date getAdjctn_ts() {
-		return adjctn_ts;
+	public Date getDateOfService() {
+		return dateOfService;
 	}
 
 	/**
-	 * 
-	 * @param adjctn_ts
+	 * @param dateOfService
 	 */
-	public void setAdjctn_ts(Date adjctn_ts) {
-		this.adjctn_ts = adjctn_ts;
+	public void setDateOfService(Date dateOfService) {
+		this.dateOfService = dateOfService;
 	}
 
 	/**
-	 * 
 	 * @return
 	 */
-	public Long getPln_id() {
-		return pln_id;
+	public Date getDateTimeProcessed() {
+		return dateTimeProcessed;
 	}
 
 	/**
-	 * 
-	 * @param pln_id
+	 * @param dateTimeProcessed
 	 */
-	public void setPln_id(Long pln_id) {
-		this.pln_id = pln_id;
+	public void setDateTimeProcessed(Date dateTimeProcessed) {
+		this.dateTimeProcessed = dateTimeProcessed;
 	}
 
 	/**
-	 * 
 	 * @return
 	 */
-	public Long getBnft_svc_id() {
-		return bnft_svc_id;
+	public String getNetwork() {
+		return network;
 	}
 
 	/**
-	 * 
-	 * @param bnft_svc_id
+	 * @param network
 	 */
-	public void setBnft_svc_id(Long bnft_svc_id) {
-		this.bnft_svc_id = bnft_svc_id;
+	public void setNetwork(String network) {
+		this.network = network;
 	}
 
 	/**
-	 * 
 	 * @return
 	 */
-	public String getOper_id() {
-		return oper_id;
+	public String getNetworkTier() {
+		return networkTier;
 	}
 
 	/**
-	 * 
-	 * @param oper_id
+	 * @param networkTier
 	 */
-	public void setOper_id(String oper_id) {
-		this.oper_id = oper_id;
+	public void setNetworkTier(String networkTier) {
+		this.networkTier = networkTier;
 	}
 
 	/**
-	 * 
 	 * @return
 	 */
-	public Long getSub_mid() {
-		return sub_mid;
+	public Integer getPlanID() {
+		return planID;
 	}
 
 	/**
-	 * 
-	 * @param sub_mid
+	 * @param planID
 	 */
-	public void setSub_mid(Long sub_mid) {
-		this.sub_mid = sub_mid;
+	public void setPlanID(Integer planID) {
+		this.planID = planID;
 	}
 
 	/**
-	 * 
 	 * @return
 	 */
-	public String getAcct_ID() {
-		return acct_ID;
+	public Double getAllowedAmount() {
+		return allowedAmount;
 	}
 
 	/**
-	 * 
-	 * @param acct_ID
+	 * @param allowedAmount
 	 */
-	public void setAcct_ID(String acct_ID) {
-		this.acct_ID = acct_ID;
+	public void setAllowedAmount(Double allowedAmount) {
+		this.allowedAmount = allowedAmount;
 	}
 
 	/**
-	 * 
 	 * @return
 	 */
-	public Long getVend_id() {
-		return vend_id;
+	public String getMemberID() {
+		return memberID;
 	}
 
 	/**
-	 * 
-	 * @param vend_id
+	 * @param memberID
 	 */
-	public void setVend_id(Long vend_id) {
-		this.vend_id = vend_id;
+	public void setMemberID(String memberID) {
+		this.memberID = memberID;
 	}
-	
-}
+
+	/**
+	 * @return
+	 */
+	public Integer getPatientID() {
+		return patientID;
+	}
+
+	/**
+	 * @param patientID
+	 */
+	public void setPatientID(Integer patientID) {
+		this.patientID = patientID;
+	}
+
+	/**
+	 * @return
+	 */
+	public String getSubscriberID() {
+		return subscriberID;
+	}
+
+	/**
+	 * @param subscriberID
+	 */
+	public void setSubscriberID(String subscriberID) {
+		this.subscriberID = subscriberID;
+	}
+
+	/**
+	 * @return
+	 */
+	public String getUnitOfMeasure() {
+		return unitOfMeasure;
+	}
+
+	/**
+	 * @param unitOfMeasure
+	 */
+	public void setUnitOfMeasure(String unitOfMeasure) {
+		this.unitOfMeasure = unitOfMeasure;
+	}
+
+	/**
+	 * @return
+	 */
+	public String getAccumulatorType() {
+		return accumulatorType;
+	}
+
+	/**
+	 * @param accumulatorType
+	 */
+	public void setAccumulatorType(String accumulatorType) {
+		this.accumulatorType = accumulatorType;
+	}
+
+	}

@@ -1,76 +1,176 @@
 package com.ccsp.accums.ledger.dto;
 
+import java.util.Date;
+
 import com.ccsp.common.dto.ICommonDTO;
 
 public class AccumsEntryDTO implements ICommonDTO{
 
 	
-	private Long accumEntryId;
+	private Long ledgerLineId;
 	private Long accumHeaderId;
-	private Long accumTypeId;
-	private String inNetInd;
-	private Long benefitTierId;
-	private String famTierCd;
-	private String csrVrntId;
-	private Long fdgAccumEntryId;
+	private String accumKey;
+	private String accumType;
+	private String role;
+	private String costShareTier;
 	private Double amt;
-	public Long getAccumEntryId() {
-		return accumEntryId;
+	private String network;
+	private double snapshotSummmary;
+	private String UOM;
+	private Date serviceDate;
+	/**
+	 * 
+	 * @return
+	 */
+	public Long getLedgerLineId() {
+		return ledgerLineId;
 	}
-	public void setAccumEntryId(Long accumEntryId) {
-		this.accumEntryId = accumEntryId;
+	/**
+	 * 
+	 * @param ledgerLineId
+	 */
+	public void setLedgerLineId(Long ledgerLineId) {
+		this.ledgerLineId = ledgerLineId;
 	}
+	/**
+	 * 
+	 * @return
+	 */
 	public Long getAccumHeaderId() {
 		return accumHeaderId;
 	}
+	/**
+	 * 
+	 * @param accumHeaderId
+	 */
 	public void setAccumHeaderId(Long accumHeaderId) {
 		this.accumHeaderId = accumHeaderId;
 	}
-	public Long getAccumTypeId() {
-		return accumTypeId;
+	/**
+	 * 
+	 * @return
+	 */
+	public String getAccumKey() {
+		return accumKey;
 	}
-	public void setAccumTypeId(Long accumTypeId) {
-		this.accumTypeId = accumTypeId;
+	/**
+	 * 
+	 * @param accumKey
+	 */
+	public void setAccumKey(String accumKey) {
+		this.accumKey = accumKey;
 	}
-	public String getInNetInd() {
-		return inNetInd;
+	/**
+	 * 
+	 * @return
+	 */
+	public String getAccumType() {
+		return accumType;
 	}
-	public void setInNetInd(String inNetInd) {
-		this.inNetInd = inNetInd;
+	/**
+	 * 
+	 * @param accumType
+	 */
+	public void setAccumType(String accumType) {
+		this.accumType = accumType;
 	}
-	public Long getBenefitTierId() {
-		return benefitTierId;
+	/**
+	 * 
+	 * @return
+	 */
+	public String getRole() {
+		return role;
 	}
-	public void setBenefitTierId(Long benefitTierId) {
-		this.benefitTierId = benefitTierId;
+	/**
+	 * 
+	 * @param role
+	 */
+	public void setRole(String role) {
+		this.role = role;
 	}
-	public String getFamTierCd() {
-		return famTierCd;
+	/**
+	 * 
+	 * @return
+	 */
+	public String getCostShareTier() {
+		return costShareTier;
 	}
-	public void setFamTierCd(String famTierCd) {
-		this.famTierCd = famTierCd;
+	/**
+	 * 
+	 * @param costShareTier
+	 */
+	public void setCostShareTier(String costShareTier) {
+		this.costShareTier = costShareTier;
 	}
-	public String getCsrVrntId() {
-		return csrVrntId;
-	}
-	public void setCsrVrntId(String csrVrntId) {
-		this.csrVrntId = csrVrntId;
-	}
-	public Long getFdgAccumEntryId() {
-		return fdgAccumEntryId;
-	}
-	public void setFdgAccumEntryId(Long fdgAccumEntryId) {
-		this.fdgAccumEntryId = fdgAccumEntryId;
-	}
+	/**
+	 * 
+	 * @return
+	 */
 	public Double getAmt() {
 		return amt;
 	}
+	/**
+	 * 
+	 * @param amt
+	 */
 	public void setAmt(Double amt) {
 		this.amt = amt;
 	}
+	/**
+	 * 
+	 * @return
+	 */
+	public String getNetwork() {
+		return network;
+	}
+	/**
+	 * 
+	 * @param network
+	 */
+	public void setNetwork(String network) {
+		this.network = network;
+	}
+	/**
+	 * 
+	 * @return
+	 */
+	public double getSnapshotSummmary() {
+		return snapshotSummmary;
+	}
+	/**
+	 * 
+	 * @param snapshotSummmary
+	 */
+	public void setSnapshotSummmary(double snapshotSummmary) {
+		this.snapshotSummmary = snapshotSummmary;
+	}
+	/**
+	 * 
+	 * @return
+	 */
+	public String getUOM() {
+		return UOM;
+	}
+	/**
+	 * 
+	 * @param uOM
+	 */
+	public void setUOM(String uOM) {
+		UOM = uOM;
+	}
+	/**
+	 * 
+	 * @return
+	 */
+	public Date getServiceDate() {
+		return serviceDate;
+	}
+	/**
+	 * 
+	 * @param serviceDate
+	 */
+	public void setServiceDate(Date serviceDate) {
+		this.serviceDate = serviceDate;
+	}
 	
-	
-	
-
-
 }

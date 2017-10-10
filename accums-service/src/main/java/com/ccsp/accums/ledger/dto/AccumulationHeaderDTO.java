@@ -2,6 +2,9 @@ package com.ccsp.accums.ledger.dto;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+
 import com.ccsp.common.dto.ICommonDTO;
 
 /**
@@ -12,233 +15,280 @@ import com.ccsp.common.dto.ICommonDTO;
 public class AccumulationHeaderDTO  implements ICommonDTO {
 
 	/**
-	 * serialVersion id
+	 * serialization
 	 */
 	private static final long serialVersionUID = 1L;
-
-	private Long accumulationHeaderID;
 	
-	private Long memberMID;
+	private Long ledgerID;
 	
-	private Long claimID;
+	private String vendorTaxID;
 	
-	private Long claimLineNumber;
+	private String dcn;
 	
-	private Date serviceFromDate;
+	private Integer claimLine;
+
+	private Integer serviceID;
 	
-	private Date serviceToDate;
+	private String service;
 	
-	private Long providerID;
+	private Date dateOfService;
 	
-	private Date adjudicationTimestamp;
+	private Date dateTimeProcessed;
 	
-	private Long planId;
+	private String network;
 	
-	private Long benefitServiceID;
+	private String networkTier;
 	
-	private String operatorID;
+	private Integer planID;
 	
-	private Long subscriberMID;
+	private Double allowedAmount;
 	
-	private String accountID;
+	private String memberID;
 	
-	private Long vendorID;
+	private Integer patientID;
+	
+	private String subscriberID;
+	
+	private String unitOfMeasure;
+	
+	private String accumulatorType;
 
 	/**
 	 * @return
 	 */
-	public Long getAccumulationHeaderID() {
-		return accumulationHeaderID;
+	public Long getLedgerID() {
+		return ledgerID;
 	}
 
 	/**
-	 * @param accumulationHeaderID
+	 * @param ledgerID
 	 */
-	public void setAccumulationHeaderID(Long accumulationHeaderID) {
-		this.accumulationHeaderID = accumulationHeaderID;
-	}
-
-	/**
-	 * @return
-	 */
-	public Long getMemberMID() {
-		return memberMID;
-	}
-
-	/**
-	 * @param memberMID
-	 */
-	public void setMemberMID(Long memberMID) {
-		this.memberMID = memberMID;
+	public void setLedgerID(Long ledgerID) {
+		this.ledgerID = ledgerID;
 	}
 
 	/**
 	 * @return
 	 */
-	public Long getClaimID() {
-		return claimID;
+	public String getVendorTaxID() {
+		return vendorTaxID;
 	}
 
 	/**
-	 * @param claimID
+	 * @param vendorTaxID
 	 */
-	public void setClaimID(Long claimID) {
-		this.claimID = claimID;
-	}
-
-	/**
-	 * @return
-	 */
-	public Long getClaimLineNumber() {
-		return claimLineNumber;
-	}
-
-	/**
-	 * @param claimLineNumber
-	 */
-	public void setClaimLineNumber(Long claimLineNumber) {
-		this.claimLineNumber = claimLineNumber;
+	public void setVendorTaxID(String vendorTaxID) {
+		this.vendorTaxID = vendorTaxID;
 	}
 
 	/**
 	 * @return
 	 */
-	public Date getServiceFromDate() {
-		return serviceFromDate;
+	public String getDcn() {
+		return dcn;
 	}
 
 	/**
-	 * @param serviceFromDate
+	 * @param dcn
 	 */
-	public void setServiceFromDate(Date serviceFromDate) {
-		this.serviceFromDate = serviceFromDate;
-	}
-
-	/**
-	 * @return
-	 */
-	public Date getServiceToDate() {
-		return serviceToDate;
-	}
-
-	/**
-	 * @param serviceToDate
-	 */
-	public void setServiceToDate(Date serviceToDate) {
-		this.serviceToDate = serviceToDate;
+	public void setDcn(String dcn) {
+		this.dcn = dcn;
 	}
 
 	/**
 	 * @return
 	 */
-	public Long getProviderID() {
-		return providerID;
+	public Integer getClaimLine() {
+		return claimLine;
 	}
 
 	/**
-	 * @param providerID
+	 * @param claimLine
 	 */
-	public void setProviderID(Long providerID) {
-		this.providerID = providerID;
-	}
-
-	/**
-	 * @return
-	 */
-	public Date getAdjudicationTimestamp() {
-		return adjudicationTimestamp;
-	}
-
-	/**
-	 * @param adjudicationTimestamp
-	 */
-	public void setAdjudicationTimestamp(Date adjudicationTimestamp) {
-		this.adjudicationTimestamp = adjudicationTimestamp;
+	public void setClaimLine(Integer claimLine) {
+		this.claimLine = claimLine;
 	}
 
 	/**
 	 * @return
 	 */
-	public Long getPlanId() {
-		return planId;
+	public Integer getServiceID() {
+		return serviceID;
 	}
 
 	/**
-	 * @param planId
+	 * @param serviceID
 	 */
-	public void setPlanId(Long planId) {
-		this.planId = planId;
-	}
-
-	/**
-	 * @return
-	 */
-	public Long getBenefitServiceID() {
-		return benefitServiceID;
-	}
-
-	/**
-	 * @param benefitServiceID
-	 */
-	public void setBenefitServiceID(Long benefitServiceID) {
-		this.benefitServiceID = benefitServiceID;
+	public void setServiceID(Integer serviceID) {
+		this.serviceID = serviceID;
 	}
 
 	/**
 	 * @return
 	 */
-	public String getOperatorID() {
-		return operatorID;
+	public String getService() {
+		return service;
 	}
 
 	/**
-	 * @param operatorID
+	 * @param service
 	 */
-	public void setOperatorID(String operatorID) {
-		this.operatorID = operatorID;
-	}
-
-	/**
-	 * @return
-	 */
-	public Long getSubscriberMID() {
-		return subscriberMID;
-	}
-
-	/**
-	 * @param subscriberMID
-	 */
-	public void setSubscriberMID(Long subscriberMID) {
-		this.subscriberMID = subscriberMID;
+	public void setService(String service) {
+		this.service = service;
 	}
 
 	/**
 	 * @return
 	 */
-	public String getAccountID() {
-		return accountID;
+	public Date getDateOfService() {
+		return dateOfService;
 	}
 
 	/**
-	 * @param accountID
+	 * @param dateOfService
 	 */
-	public void setAccountID(String accountID) {
-		this.accountID = accountID;
+	public void setDateOfService(Date dateOfService) {
+		this.dateOfService = dateOfService;
 	}
 
 	/**
 	 * @return
 	 */
-	public Long getVendorID() {
-		return vendorID;
+	public Date getDateTimeProcessed() {
+		return dateTimeProcessed;
 	}
 
 	/**
-	 * @param vendorID
+	 * @param dateTimeProcessed
 	 */
-	public void setVendorID(Long vendorID) {
-		this.vendorID = vendorID;
+	public void setDateTimeProcessed(Date dateTimeProcessed) {
+		this.dateTimeProcessed = dateTimeProcessed;
 	}
 
+	/**
+	 * @return
+	 */
+	public String getNetwork() {
+		return network;
+	}
 
-}
+	/**
+	 * @param network
+	 */
+	public void setNetwork(String network) {
+		this.network = network;
+	}
+
+	/**
+	 * @return
+	 */
+	public String getNetworkTier() {
+		return networkTier;
+	}
+
+	/**
+	 * @param networkTier
+	 */
+	public void setNetworkTier(String networkTier) {
+		this.networkTier = networkTier;
+	}
+
+	/**
+	 * @return
+	 */
+	public Integer getPlanID() {
+		return planID;
+	}
+
+	/**
+	 * @param planID
+	 */
+	public void setPlanID(Integer planID) {
+		this.planID = planID;
+	}
+
+	/**
+	 * @return
+	 */
+	public Double getAllowedAmount() {
+		return allowedAmount;
+	}
+
+	/**
+	 * @param allowedAmount
+	 */
+	public void setAllowedAmount(Double allowedAmount) {
+		this.allowedAmount = allowedAmount;
+	}
+
+	/**
+	 * @return
+	 */
+	public String getMemberID() {
+		return memberID;
+	}
+
+	/**
+	 * @param memberID
+	 */
+	public void setMemberID(String memberID) {
+		this.memberID = memberID;
+	}
+
+	/**
+	 * @return
+	 */
+	public Integer getPatientID() {
+		return patientID;
+	}
+
+	/**
+	 * @param patientID
+	 */
+	public void setPatientID(Integer patientID) {
+		this.patientID = patientID;
+	}
+
+	/**
+	 * @return
+	 */
+	public String getSubscriberID() {
+		return subscriberID;
+	}
+
+	/**
+	 * @param subscriberID
+	 */
+	public void setSubscriberID(String subscriberID) {
+		this.subscriberID = subscriberID;
+	}
+
+	/**
+	 * @return
+	 */
+	public String getUnitOfMeasure() {
+		return unitOfMeasure;
+	}
+
+	/**
+	 * @param unitOfMeasure
+	 */
+	public void setUnitOfMeasure(String unitOfMeasure) {
+		this.unitOfMeasure = unitOfMeasure;
+	}
+
+	/**
+	 * @return
+	 */
+	public String getAccumulatorType() {
+		return accumulatorType;
+	}
+
+	/**
+	 * @param accumulatorType
+	 */
+	public void setAccumulatorType(String accumulatorType) {
+		this.accumulatorType = accumulatorType;
+	}
+
+	}

@@ -84,7 +84,7 @@ public class AccumsLedgerEntryServiceImpl extends CommonServiceImpl  {
 		for(AccumsEntry ledgerEntry: accumssEntries) {
 			
 			AccumsEntryDTO ledgerEntryDTO=getMapper().convertToDTO(ledgerEntry);
-			ledgerEntryDTO.setAccumHeaderId(ledgerEntry.getLedgerHeader().getAccumln_hdr_id());
+			ledgerEntryDTO.setAccumHeaderId(ledgerEntry.getLedgerHeader().getLedgerID());
 			accumsEntriesDTO.add(ledgerEntryDTO);
 			
 		}
