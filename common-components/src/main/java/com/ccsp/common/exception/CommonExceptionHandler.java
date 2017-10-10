@@ -35,6 +35,19 @@ public class CommonExceptionHandler {
         ErrorMessage error = buildErrorMap(ErrorCodes.NOT_FOUND, ex.getMessage());
         return new ResponseEntity<ErrorMessage>(error, HttpStatus.NOT_FOUND);
     }
+    
+    
+    @ResponseStatus(code=HttpStatus.NOT_FOUND)
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorMessage> handleException(Exception ex) {
+    	System.out.println("Inside ExceptionHandler in Controller");
+    	System.out.println("Exception message is: "+ex.getMessage());
+    	//log.info(ex.getMessage());
+    	ErrorMessage error = buildErrorMap(ErrorCodes.NOT_FOUND, ex.getMessage());
+    	//log.error(error.toString());
+    	return new ResponseEntity<ErrorMessage>(error, HttpStatus.NOT_FOUND);
+    } 
+    
 	
     protected ErrorMessage buildErrorMap(ErrorCodes errorCode, String msg) {
 		return buildErrorMap(errorCode, msg, "error");
