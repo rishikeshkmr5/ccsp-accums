@@ -25,5 +25,10 @@ public class UIConstants {
 	 * Accumulation Summary URI
 	 */
 	public static final String ACCUMULATION_SUMMARY = "/accumulationsummary";
+	
+	/**
+	 * Accums Inquiry API
+	 */
+	public static final String BENEFIT_BALANCE = "/benefitbalance";
 		
 }
