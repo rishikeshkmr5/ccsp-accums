@@ -8,9 +8,7 @@ import javax.annotation.Resource;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
-import com.ccsp.accums.ledger.dto.AccumsEntryDTO;
 import com.ccsp.accums.ledger.dto.AccumulationSummaryDTO;
-import com.ccsp.accums.ledger.entity.AccumsEntry;
 import com.ccsp.accums.ledger.entity.AccumulationHeader;
 import com.ccsp.accums.ledger.entity.AccumulationSummary;
 import com.ccsp.accums.ledger.repository.AccumulationHeaderRepository;
@@ -83,21 +81,21 @@ public class AccumulationSummaryServiceImpl extends CommonServiceImpl {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T extends ICommonDTO> List<T> readAll() throws NotFoundException {
-		List<AccumulationSummaryDTO> accumulationSummaryDTO = new ArrayList<>(); 
+		List<AccumulationSummaryDTO> accumulationSummaryDTOs = new ArrayList<>(); 
 		List<AccumulationSummary> accumulationSummaries= accumulationSummaryRepository.findAll();
 		
 		if(accumulationSummaries == null || accumulationSummaries.size() == 0) {
 			throw new NotFoundException("Resource Not Found");
 		}
 		
-		for(AccumulationSummary ledgerEntry: accumulationSummaries) {
+		for(AccumulationSummary accumulationSummary: accumulationSummaries) {
 			
-			AccumulationSummaryDTO ledgerEntryDTO=getMapper().convertToDTO(ledgerEntry);
-			ledgerEntryDTO.setLedgerHeaderID(ledgerEntry.getLedgerHeader().getLedgerID());
-			accumulationSummaryDTO.add(ledgerEntryDTO);
+			AccumulationSummaryDTO accumulationSummaryDTO=getMapper().convertToDTO(accumulationSummary);
+			accumulationSummaryDTO.setLedgerHeaderID(accumulationSummary.getLedgerHeader().getLedgerID());
+			accumulationSummaryDTOs.add(accumulationSummaryDTO);
 			
 		}
-		return (List<T>) accumulationSummaryDTO;
+		return (List<T>) accumulationSummaryDTOs;
 		
 	}
 }

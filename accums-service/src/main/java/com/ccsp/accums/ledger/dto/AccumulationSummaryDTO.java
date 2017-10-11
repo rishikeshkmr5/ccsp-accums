@@ -47,6 +47,10 @@ public class AccumulationSummaryDTO  implements ICommonDTO {
 	private Integer maxVisit;
 	
 	private Date effectiveDt;
+	
+	private Date startDt;
+	
+	private Date endDt;
 
 	/**
 	 * @return
@@ -242,6 +246,34 @@ public class AccumulationSummaryDTO  implements ICommonDTO {
 	 */
 	public void setLedgerHeaderID(Long ledgerHeaderID) {
 		this.ledgerHeaderID = ledgerHeaderID;
+	}
+
+	/**
+	 * @return
+	 */
+	public Date getStartDt() {
+		return startDt;
+	}
+
+	/**
+	 * @param startDt
+	 */
+	public void setStartDt(Date startDt) {
+		this.startDt = startDt;
+	}
+
+	/**
+	 * @return
+	 */
+	public Date getEndDt() {
+		return endDt;
+	}
+
+	/**
+	 * @param endDt
+	 */
+	public void setEndDt(Date endDt) {
+		this.endDt = endDt;
 	}
 
 	

@@ -19,7 +19,9 @@ import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ccsp.accums.ledger.dto.AccumulationSummaryDTO;
+import com.ccsp.accums.ledger.entity.AccumulationHeader;
 import com.ccsp.accums.ledger.entity.AccumulationSummary;
+import com.ccsp.accums.ledger.repository.AccumulationHeaderRepository;
 import com.ccsp.accums.ledger.repository.AccumulationSummaryRepository;
 import com.ccsp.accums.mapper.AccumulationSummaryMapper;
 
@@ -29,7 +31,6 @@ import javassist.NotFoundException;
  * @author Vaibhav
  *
  */
-@Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
 public class AccumulationSummaryImplTest {
 
@@ -41,6 +42,12 @@ public class AccumulationSummaryImplTest {
 	 */
 	@Mock
 	private AccumulationSummaryRepository accumulationSummaryRepository;
+	
+	/**
+	 * Mock the repository
+	 */
+	@Mock
+	private AccumulationHeaderRepository ledgerHeaderRepository;
 	
 	/**
 	 * Mock the Mapper
@@ -58,7 +65,9 @@ public class AccumulationSummaryImplTest {
 		setFinalStatic(AccumulationSummaryMapper.class.getField("INSTANCE"), accumulationSummaryMapper);
 		AccumulationSummary accumulationSummary = new AccumulationSummary();
 		AccumulationSummaryDTO accumulationSummaryDTO = new AccumulationSummaryDTO();
+		AccumulationHeader ledger= ledgerHeaderRepository.findOne(accumulationSummaryDTO.getLedgerHeaderID());
 		when(accumulationSummaryMapper.convertToEntity(accumulationSummaryDTO)).thenReturn(accumulationSummary);
+		accumulationSummary.setLedgerHeader(ledger);
 		serviceImpl.create(accumulationSummaryDTO);
 		verify(accumulationSummaryRepository, times(1)).saveAndFlush(accumulationSummary);		
 	}
@@ -68,16 +77,25 @@ public class AccumulationSummaryImplTest {
 	 * @throws SecurityException
 	 * @throws Exception
 	 */
+	@Ignore
 	@Test
 	public void testGetAllLedgerHeaders() throws NoSuchFieldException, SecurityException, Exception {
 		List<AccumulationSummary> accumulationSummaries = new ArrayList<>();
 		accumulationSummaries.add(new AccumulationSummary());
-		List<AccumulationSummaryDTO> AccumulationHeaderDTOList = new ArrayList<>();
+		List<AccumulationSummaryDTO> accumulationHeaderDTOList = new ArrayList<>();
 		when(accumulationSummaryRepository.findAll()).thenReturn(accumulationSummaries);
-		when(accumulationSummaryMapper.convertToDTOList(accumulationSummaries)).thenReturn(AccumulationHeaderDTOList);
+		//when(accumulationSummaryMapper.convertToDTOList(accumulationSummaries)).thenReturn(AccumulationHeaderDTOList);
+		for(AccumulationSummary accumulationSummary: accumulationSummaries) {
+			
+			AccumulationSummaryDTO accumulationSummaryDTO=new AccumulationSummaryDTO();
+			when(accumulationSummaryMapper.convertToDTO(accumulationSummary)).thenReturn(accumulationSummaryDTO);
+			accumulationSummaryDTO.setLedgerHeaderID(accumulationSummary.getLedgerHeader().getLedgerID());
+			accumulationHeaderDTOList.add(accumulationSummaryDTO);
+			
+		}
 		setFinalStatic(AccumulationSummaryMapper.class.getField("INSTANCE"), accumulationSummaryMapper);
 		List<AccumulationSummaryDTO> actual = serviceImpl.readAll();
-		Assert.assertEquals(AccumulationHeaderDTOList, actual);
+		Assert.assertEquals(accumulationHeaderDTOList, actual);
 	}
 	
 	/**

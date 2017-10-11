@@ -68,7 +68,14 @@ public class AccumulationSummary  implements java.io.Serializable {
 	
 	@Column(name = "EFFECTIVE_DT",  nullable = true)
 	private Date effectiveDt;
+	
+	@Column(name = "START_DT",  nullable = true)
+	private Date startDt;
+	
+	@Column(name = "END_DT",  nullable = true)
+	private Date endDt;
 
+	
 	/**
 	 * @return
 	 */
@@ -238,12 +245,60 @@ public class AccumulationSummary  implements java.io.Serializable {
 	}
 
 
+	/**
+	 * @return
+	 */
 	public AccumulationHeader getLedgerHeader() {
 		return ledgerHeader;
 	}
 
+	/**
+	 * @param ledgerHeader
+	 */
 	public void setLedgerHeader(AccumulationHeader ledgerHeader) {
 		this.ledgerHeader = ledgerHeader;
+	}
+
+	/**
+	 * @return
+	 */
+	public Date getEffectiveDt() {
+		return effectiveDt;
+	}
+
+	/**
+	 * @param effectiveDt
+	 */
+	public void setEffectiveDt(Date effectiveDt) {
+		this.effectiveDt = effectiveDt;
+	}
+
+	/**
+	 * @return
+	 */
+	public Date getStartDt() {
+		return startDt;
+	}
+
+	/**
+	 * @param startDt
+	 */
+	public void setStartDt(Date startDt) {
+		this.startDt = startDt;
+	}
+
+	/**
+	 * @return
+	 */
+	public Date getEndDt() {
+		return endDt;
+	}
+
+	/**
+	 * @param endDt
+	 */
+	public void setEndDt(Date endDt) {
+		this.endDt = endDt;
 	}
 	
 }
