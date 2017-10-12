@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,10 +17,12 @@ import com.ccsp.accums.ledger.dto.AccumsEntryDTO;
 import com.ccsp.accums.ledger.dto.AccumulationHeaderDTO;
 import com.ccsp.accums.ledger.dto.AccumulationSummaryDTO;
 import com.ccsp.accums.ledger.dto.BenefitBalanceDTO;
+import com.ccsp.accums.ledger.dto.ClaimDetailsForAccumTypeDTO;
 import com.ccsp.accums.service.impl.AccumsLedgerEntryServiceImpl;
 import com.ccsp.accums.service.impl.AccumulationHeaderServiceImpl;
 import com.ccsp.accums.service.impl.AccumulationSummaryServiceImpl;
 import com.ccsp.accums.service.impl.BenefitBalanceServiceImpl;
+import com.ccsp.accums.service.impl.ClaimDetailServiceImpl;
 import com.ccsp.common.utils.UIConstants;
 
 import javassist.NotFoundException;
@@ -48,6 +51,10 @@ public class AccumsLedgerHeaderController {
 
 	@Autowired
 	private BenefitBalanceServiceImpl benefitBalanceServiceImpl;
+	
+	@Autowired
+	private ClaimDetailServiceImpl claimDetailServiceImpl;
+	
 
 	/**
 	 * Fetches all the ledgerHeaders
@@ -141,5 +148,13 @@ public class AccumsLedgerHeaderController {
 			throws NotFoundException {
 		return benefitBalanceServiceImpl.getBenefitBalance(subscriberID, memberID);
 
+	}
+	
+	@RequestMapping(path = UIConstants.CLAIIMS_ASSOCIATED_TO_ACCUMS, method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public List<ClaimDetailsForAccumTypeDTO> getClaimsAssociatedToAccums(@PathVariable("accumType") String accumType) throws NotFoundException {
+		log.info("Get all claim details related to accums type");
+		return claimDetailServiceImpl.getClaimDetail(accumType);
+		
 	}
 }

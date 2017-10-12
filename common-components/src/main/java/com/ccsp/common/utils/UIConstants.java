@@ -30,5 +30,6 @@ public class UIConstants {
 	 * Accums Inquiry API
 	 */
 	public static final String BENEFIT_BALANCE = "/benefitbalance";
+	public static final String CLAIIMS_ASSOCIATED_TO_ACCUMS = "/claimsRelatedToAccums/{accumType}";
 		
 }

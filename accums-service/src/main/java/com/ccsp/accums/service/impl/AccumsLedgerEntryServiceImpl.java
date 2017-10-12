@@ -12,7 +12,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
 import com.ccsp.accums.ledger.dto.AccumsEntryDTO;
-
+import com.ccsp.accums.ledger.dto.ClaimDetailsForAccumTypeDTO;
 import com.ccsp.accums.ledger.entity.AccumsEntry;
 import com.ccsp.accums.ledger.entity.AccumulationHeader;
 
@@ -95,14 +95,14 @@ public class AccumsLedgerEntryServiceImpl extends CommonServiceImpl  {
 			
 			AccumsEntryDTO ledgerEntryDTO=getMapper().convertToDTO(ledgerEntry);
 			ledgerEntryDTO.setAccumHeaderId(ledgerEntry.getLedgerHeader().getLedgerID());
+			if(ledgerEntry.getAccumsEntry()  != null) {
+				ledgerEntryDTO.setLinkToPrimary(ledgerEntry.getAccumsEntry().getLedgerLineId());
+			}
 			accumsEntriesDTO.add(ledgerEntryDTO);
 			
 		}
 		
-		
-		return (List<T>) accumsEntriesDTO;
-		
+		return (List<T>) accumsEntriesDTO;		
 	}
-
-
+	
 }
