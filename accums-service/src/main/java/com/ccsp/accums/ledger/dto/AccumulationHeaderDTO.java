@@ -2,9 +2,10 @@ package com.ccsp.accums.ledger.dto;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlAccessType;
 import com.ccsp.common.dto.ICommonDTO;
 
 /**
@@ -12,6 +13,8 @@ import com.ccsp.common.dto.ICommonDTO;
  * DTO class for Accumulation Header
  *
  */
+@XmlRootElement(name = "accumulationheader")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class AccumulationHeaderDTO  implements ICommonDTO {
 
 	/**
@@ -19,38 +22,55 @@ public class AccumulationHeaderDTO  implements ICommonDTO {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	@XmlElement(name ="ledgerID") 
 	private Long ledgerID;
 	
+	@XmlElement(name="vendorTaxID")
 	private String vendorTaxID;
 	
+	@XmlElement(name="dcn")  
 	private String dcn;
 	
+	@XmlElement(name="claimLine")  
 	private Integer claimLine;
 
+	@XmlElement(name="serviceID")  
 	private Integer serviceID;
 	
+	@XmlElement(name="service")  
 	private String service;
 	
+	@XmlElement(name="dateOfService")  
 	private Date dateOfService;
 	
+	@XmlElement(name="dateTimeProcessed")  
 	private Date dateTimeProcessed;
 	
+	@XmlElement(name="network")  
 	private String network;
 	
+	@XmlElement(name="networkTier")  
 	private String networkTier;
 	
+	@XmlElement(name="planID")  
 	private Integer planID;
 	
+	@XmlElement(name="allowedAmount")  
 	private Double allowedAmount;
 	
+	@XmlElement(name="memberID")  
 	private String memberID;
 	
+	@XmlElement(name="patientID")  
 	private Integer patientID;
 	
+	@XmlElement(name="subscriberID")  
 	private String subscriberID;
 	
+	@XmlElement(name="unitOfMeasure")  
 	private String unitOfMeasure;
 	
+	@XmlElement(name="accumulatorType")  
 	private String accumulatorType;
 
 	/**

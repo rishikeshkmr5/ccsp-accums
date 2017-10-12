@@ -1,7 +1,16 @@
 package com.ccsp.accums.ledger.controller;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.util.List;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.transform.Result;
+
+import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ccsp.accums.ledger.dto.AccumsEntryDTO;
 import com.ccsp.accums.ledger.dto.AccumulationHeaderDTO;
@@ -42,6 +52,7 @@ public class AccumsLedgerHeaderController {
 	 * Logger for AccumsController
 	 */
 	private static Logger log = Logger.getLogger(AccumsLedgerHeaderController.class);
+	
 
 	@Autowired
 	private AccumulationHeaderServiceImpl accumulationHeaderService;
@@ -67,7 +78,7 @@ public class AccumsLedgerHeaderController {
 	 * @return LedgerHeaders
 	 * @throws NotFoundException
 	 */
-	@RequestMapping(path = UIConstants.LEDGER_HEADER, method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+	@RequestMapping(path = UIConstants.LEDGER_HEADER, method = RequestMethod.GET, produces = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
 	@ResponseBody
 	public List<AccumulationHeaderDTO> getLedgerHeader() throws NotFoundException {
 		log.info("Get all members accums details");
@@ -79,7 +90,7 @@ public class AccumsLedgerHeaderController {
 	 * 
 	 * @param ledgerHeaderDTO
 	 */
-	@RequestMapping(path = UIConstants.LEDGER_HEADER, method = RequestMethod.POST, consumes = "application/json; charset=utf-8")
+	@RequestMapping(path = UIConstants.LEDGER_HEADER, method = RequestMethod.POST, consumes = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
 	@ResponseBody
 	public AccumulationHeaderDTO createLedgerHeader(@RequestBody AccumulationHeaderDTO ledgerHeaderDTO) {
 		log.info("Create LedgerHeader details");
@@ -91,7 +102,7 @@ public class AccumsLedgerHeaderController {
 	 * 
 	 * @param ledgerEntryDTO
 	 */
-	@RequestMapping(path = UIConstants.ACCUMS_ENTRY, method = RequestMethod.POST, consumes = "application/json; charset=utf-8")
+	@RequestMapping(path = UIConstants.ACCUMS_ENTRY, method = RequestMethod.POST, consumes = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
 	@ResponseBody
 	public AccumsEntryDTO createLedgerEntry(@RequestBody AccumsEntryDTO ledgerEntryDTO) {
 		log.info("Create LedgerEntry details");
@@ -106,7 +117,7 @@ public class AccumsLedgerHeaderController {
 	 * @return LedgerEntries
 	 * @throws NotFoundException
 	 */
-	@RequestMapping(path = UIConstants.ACCUMS_ENTRY, method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+	@RequestMapping(path = UIConstants.ACCUMS_ENTRY, method = RequestMethod.GET, produces = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
 	@ResponseBody
 	public List<AccumsEntryDTO> getLedgerEntry() throws NotFoundException {
 		log.info("Get LedgerEntry details");
@@ -119,7 +130,7 @@ public class AccumsLedgerHeaderController {
 	 * @return
 	 * @throws NotFoundException
 	 */
-	@RequestMapping(path = UIConstants.ACCUMULATION_SUMMARY, method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+	@RequestMapping(path = UIConstants.ACCUMULATION_SUMMARY, method = RequestMethod.GET, produces = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
 	@ResponseBody
 	public List<AccumulationSummaryDTO> getAccumulationSummary() throws NotFoundException {
 		log.info("Get all members accums summary details");
@@ -132,7 +143,7 @@ public class AccumsLedgerHeaderController {
 	 * @param accumulationSummaryDTO
 	 * @return
 	 */
-	@RequestMapping(path = UIConstants.ACCUMULATION_SUMMARY, method = RequestMethod.POST, consumes = "application/json; charset=utf-8")
+	@RequestMapping(path = UIConstants.ACCUMULATION_SUMMARY, method = RequestMethod.POST, consumes = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
 	@ResponseBody
 	public AccumulationSummaryDTO createAccumulationSummary(
 			@RequestBody AccumulationSummaryDTO accumulationSummaryDTO) {
@@ -147,7 +158,7 @@ public class AccumsLedgerHeaderController {
 	 * @return
 	 * @throws NotFoundException
 	 */
-	@RequestMapping(path = UIConstants.BENEFIT_BALANCE, method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+	@RequestMapping(path = UIConstants.BENEFIT_BALANCE, method = RequestMethod.GET, produces = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
 	public @ResponseBody List<BenefitBalanceDTO> getBenefitBalanceBySubscriberOrMemberId(
 			@RequestParam(value="subscriberid", required=false) String subscriberID, @RequestParam(value="memberid", required=false) String memberID)
 			throws NotFoundException {
@@ -156,7 +167,7 @@ public class AccumsLedgerHeaderController {
 
 	}
 	
-	@RequestMapping(path = UIConstants.CLAIIMS_ASSOCIATED_TO_ACCUMS, method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+	@RequestMapping(path = UIConstants.CLAIIMS_ASSOCIATED_TO_ACCUMS, method = RequestMethod.GET, produces = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
 	@ResponseBody
 	public List<ClaimDetailsForAccumTypeDTO> getClaimsAssociatedToAccums(@PathVariable("accumType") String accumType) throws NotFoundException {
 		log.info("Get all claim details related to accums type");
@@ -171,13 +182,37 @@ public class AccumsLedgerHeaderController {
 	 * @return
 	 * @throws NotFoundException
 	 */
-	@RequestMapping(path = UIConstants.BENEFIT_SPENDING, method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+	@RequestMapping(path = UIConstants.BENEFIT_SPENDING, method = RequestMethod.GET, produces = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
 	public @ResponseBody List<BenefitSpendingDTO> getBenefitSpendingByMemberId(
 			@RequestParam("memberid") String memberID)
 			throws NotFoundException {
 		log.info("Benefit spending details based on member id");
 		return benefitSpendingServiceImpl.getBenefitSpending(memberID);
 
-	}
+	}	
 	
+	@RequestMapping(value = "/fileupload", headers=("content-type=multipart/*"), method = RequestMethod.POST)
+    public @ResponseBody void upload(@RequestParam("file") MultipartFile inputFile){
+           AccumulationHeaderDTO header = new AccumulationHeaderDTO();
+           if (!inputFile.isEmpty()) {       
+        	   ByteArrayInputStream stream = null;
+			try {
+				stream = new   ByteArrayInputStream(inputFile.getBytes());
+				//extension = IOUtils.toString(stream, "UTF-8");
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			try {
+				JAXBContext context = JAXBContext.newInstance(AccumulationHeaderDTO.class);
+			    Unmarshaller unmarshaller = context.createUnmarshaller();
+			    header = (AccumulationHeaderDTO) unmarshaller.unmarshal(stream);
+               
+			} catch (JAXBException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+           }
+           accumulationHeaderService.create(header);
+    }
 }
