@@ -17,11 +17,13 @@ import com.ccsp.accums.ledger.dto.AccumsEntryDTO;
 import com.ccsp.accums.ledger.dto.AccumulationHeaderDTO;
 import com.ccsp.accums.ledger.dto.AccumulationSummaryDTO;
 import com.ccsp.accums.ledger.dto.BenefitBalanceDTO;
+import com.ccsp.accums.ledger.dto.BenefitSpendingDTO;
 import com.ccsp.accums.ledger.dto.ClaimDetailsForAccumTypeDTO;
 import com.ccsp.accums.service.impl.AccumsLedgerEntryServiceImpl;
 import com.ccsp.accums.service.impl.AccumulationHeaderServiceImpl;
 import com.ccsp.accums.service.impl.AccumulationSummaryServiceImpl;
 import com.ccsp.accums.service.impl.BenefitBalanceServiceImpl;
+import com.ccsp.accums.service.impl.BenefitSpendingServiceImpl;
 import com.ccsp.accums.service.impl.ClaimDetailServiceImpl;
 import com.ccsp.common.utils.UIConstants;
 
@@ -54,6 +56,9 @@ public class AccumsLedgerHeaderController {
 	
 	@Autowired
 	private ClaimDetailServiceImpl claimDetailServiceImpl;
+
+	@Autowired
+	private BenefitSpendingServiceImpl benefitSpendingServiceImpl;
 	
 
 	/**
@@ -146,6 +151,7 @@ public class AccumsLedgerHeaderController {
 	public @ResponseBody List<BenefitBalanceDTO> getBenefitSubAssemblyByidAndBenefitId(
 			@RequestParam(value="subscriberid", required=false) String subscriberID, @RequestParam(value="memberid", required=false) String memberID)
 			throws NotFoundException {
+		log.info("Benefit balance details based on subscriber or member id");
 		return benefitBalanceServiceImpl.getBenefitBalance(subscriberID, memberID);
 
 	}
@@ -157,4 +163,21 @@ public class AccumsLedgerHeaderController {
 		return claimDetailServiceImpl.getClaimDetail(accumType);
 		
 	}
+	
+	/**
+	 * Fetches benefit spending details based on member id
+	 * @param subscriberID
+	 * @param memberID
+	 * @return
+	 * @throws NotFoundException
+	 */
+	@RequestMapping(path = UIConstants.BENEFIT_SPENDING, method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+	public @ResponseBody List<BenefitSpendingDTO> getBenefitSpendingByMemberId(
+			@RequestParam("memberid") String memberID)
+			throws NotFoundException {
+		log.info("Benefit spending details based on member id");
+		return benefitSpendingServiceImpl.getBenefitSpending(memberID);
+
+	}
+	
 }

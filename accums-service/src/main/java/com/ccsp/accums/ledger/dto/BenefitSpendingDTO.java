@@ -6,10 +6,10 @@ import com.ccsp.common.dto.ICommonDTO;
 
 /**
  * @author Vaibhav
- * DTO class for Benefit Balance
+ * DTO class for Benefit Spending
  *
  */
-public class BenefitBalanceDTO  implements ICommonDTO {
+public class BenefitSpendingDTO  implements ICommonDTO {
 
 	/**
 	 * serialization
@@ -18,15 +18,14 @@ public class BenefitBalanceDTO  implements ICommonDTO {
 
 	private String accumName;
 	
-	private String accumType;
+	private String services;
 	
 	private String network;
-	
-	private Double maxAmount;
 	
 	private Date startDt;
 	
 	private Date endDt;
+
 
 
 	/**
@@ -46,20 +45,6 @@ public class BenefitBalanceDTO  implements ICommonDTO {
 	/**
 	 * @return
 	 */
-	public String getAccumType() {
-		return accumType;
-	}
-
-	/**
-	 * @param accumType
-	 */
-	public void setAccumType(String accumType) {
-		this.accumType = accumType;
-	}
-
-	/**
-	 * @return
-	 */
 	public String getNetwork() {
 		return network;
 	}
@@ -69,20 +54,6 @@ public class BenefitBalanceDTO  implements ICommonDTO {
 	 */
 	public void setNetwork(String network) {
 		this.network = network;
-	}
-
-	/**
-	 * @return
-	 */
-	public Double getMaxAmount() {
-		return maxAmount;
-	}
-
-	/**
-	 * @param maxAmount
-	 */
-	public void setMaxAmount(Double maxAmount) {
-		this.maxAmount = maxAmount;
 	}
 
 	/**
@@ -113,5 +84,20 @@ public class BenefitBalanceDTO  implements ICommonDTO {
 		this.endDt = endDt;
 	}
 
+	/**
+	 * @return
+	 */
+	public String getServices() {
+		return services;
+	}
+
+	/**
+	 * @param services
+	 */
+	public void setServices(String services) {
+		this.services = services;
+	}
+
+	
 	
 }
