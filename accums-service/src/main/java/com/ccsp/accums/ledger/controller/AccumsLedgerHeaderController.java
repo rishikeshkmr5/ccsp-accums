@@ -148,7 +148,7 @@ public class AccumsLedgerHeaderController {
 	 * @throws NotFoundException
 	 */
 	@RequestMapping(path = UIConstants.BENEFIT_BALANCE, method = RequestMethod.GET, produces = "application/json; charset=utf-8")
-	public @ResponseBody List<BenefitBalanceDTO> getBenefitSubAssemblyByidAndBenefitId(
+	public @ResponseBody List<BenefitBalanceDTO> getBenefitBalanceBySubscriberOrMemberId(
 			@RequestParam(value="subscriberid", required=false) String subscriberID, @RequestParam(value="memberid", required=false) String memberID)
 			throws NotFoundException {
 		log.info("Benefit balance details based on subscriber or member id");
