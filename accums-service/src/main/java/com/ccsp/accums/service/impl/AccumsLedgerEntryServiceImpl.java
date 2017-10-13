@@ -121,8 +121,11 @@ public class AccumsLedgerEntryServiceImpl extends CommonServiceImpl  {
 			accumsEntry.add(entry);
 			counter++;
 		}
-		if(accumsEntry.size() > 0)
-			ledgerHeaderRepository.save(accumsEntry);
+		if(accumsEntry.size() > 0) {
+			for(AccumsEntry entryEntity : accumsEntry) {
+				accumsEntryRepository.save(entryEntity);
+			}			
+		}
 		for(AccumsEntry entryEntity : accumsEntry) {
 			AccumsEntryDTO dto = new AccumsEntryDTO();
 			dto = getMapper().convertToDTO(entryEntity);
