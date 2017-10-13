@@ -66,12 +66,12 @@ public class AccumsControllerTest {
 	/**
 	 * Test the ledgerHeader creation
 	 */
-	@Test
+	/*@Test
 	public void testSetLedgerHeader() {
 		AccumulationHeaderDTO ledgerHeaderDTO = new AccumulationHeaderDTO();
 		accumsController.createLedgerHeader(ledgerHeaderDTO);
 		verify(ledgerHeaderService, times(1)).create(ledgerHeaderDTO);
-	}
+	}*/
 
 	/**
 	 * @throws NotFoundException

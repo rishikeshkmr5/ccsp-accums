@@ -29,6 +29,7 @@ import com.ccsp.accums.ledger.dto.BenefitSpendingDTO;
 import com.ccsp.accums.ledger.dto.ClaimAccumEntryDTO;
 import com.ccsp.accums.ledger.dto.ClaimDetailsForAccumTypeDTO;
 import com.ccsp.accums.ledger.dto.ClaimSummaryDTO;
+import com.ccsp.accums.ledger.dto.ClaimsForAccumulationHeaderDTO;
 import com.ccsp.accums.service.impl.AccumsLedgerEntryServiceImpl;
 import com.ccsp.accums.service.impl.AccumulationHeaderServiceImpl;
 import com.ccsp.accums.service.impl.AccumulationSummaryServiceImpl;
@@ -95,9 +96,11 @@ public class AccumsLedgerHeaderController {
 	 */
 	@RequestMapping(path = UIConstants.LEDGER_HEADER, method = RequestMethod.POST, consumes = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
 	@ResponseBody
-	public AccumulationHeaderDTO createLedgerHeader(@RequestBody AccumulationHeaderDTO ledgerHeaderDTO) {
+	public AccumulationHeaderDTO createLedgerHeader(@RequestBody ClaimsForAccumulationHeaderDTO claimsForAccumulationHeaderDTO) {
 		log.info("Create LedgerHeader details");
-		return accumulationHeaderService.create(ledgerHeaderDTO);
+		AccumulationHeaderDTO accumulationHeaderDTO = claimsForAccumulationHeaderDTO.getAccumulationHeaderDTO();
+		validator.validate(accumulationHeaderDTO);
+		return accumulationHeaderService.create(accumulationHeaderDTO);
 	}
 
 	/**

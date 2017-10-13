@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import com.ccsp.common.dto.ICommonDTO;
 
@@ -22,54 +23,71 @@ public class AccumulationHeaderDTO  implements ICommonDTO {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	@NotNull(message = "Ledger Id cannot be null")
 	@XmlElement(name ="ledgerID") 
 	private Long ledgerID;
 	
+	@NotNull(message = "Vendor Tax ID cannot be null")
 	@XmlElement(name="vendorTaxID")
 	private String vendorTaxID;
 	
+	@NotNull(message = "DCN cannot be null")
 	@XmlElement(name="dcn")  
 	private String dcn;
 	
+	@NotNull(message = "Claim Line cannot be null")
 	@XmlElement(name="claimLine")  
 	private Integer claimLine;
 
+	@NotNull(message = "Service Id cannot be null")
 	@XmlElement(name="serviceID")  
 	private Integer serviceID;
 	
+	@NotNull(message = "Service cannot be null")
 	@XmlElement(name="service")  
 	private String service;
 	
+	@NotNull(message = "Service Date cannot be null")
 	@XmlElement(name="dateOfService")  
 	private Date dateOfService;
 	
+	@NotNull(message = "Processed Date cannot be null")
 	@XmlElement(name="dateTimeProcessed")  
 	private Date dateTimeProcessed;
 	
+	@NotNull(message = "Network cannot be null")
 	@XmlElement(name="network")  
 	private String network;
 	
+	@NotNull(message = "NetworkTier cannot be null")
 	@XmlElement(name="networkTier")  
 	private String networkTier;
 	
+	@NotNull(message = "Plan ID cannot be null")
 	@XmlElement(name="planID")  
 	private Integer planID;
 	
+	@NotNull(message = "Allowed Amount cannot be null")
 	@XmlElement(name="allowedAmount")  
 	private Double allowedAmount;
 	
+	@NotNull(message = "Member ID cannot be null")
 	@XmlElement(name="memberID")  
 	private String memberID;
 	
+	@NotNull(message = "Patient ID cannot be null")
 	@XmlElement(name="patientID")  
 	private Integer patientID;
 	
+	@NotNull(message = "Subscriber ID cannot be null")
 	@XmlElement(name="subscriberID")  
 	private String subscriberID;
 	
+	@NotNull(message = "Unit of Measure cannot be null")
 	@XmlElement(name="unitOfMeasure")  
 	private String unitOfMeasure;
 	
+	@NotNull(message = "Accumulator Type cannot be null")
 	@XmlElement(name="accumulatorType")  
 	private String accumulatorType;
 
