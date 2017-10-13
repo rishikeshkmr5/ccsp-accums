@@ -6,6 +6,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -26,7 +28,8 @@ public class AccumulationSummary  implements java.io.Serializable {
 	private static final long serialVersionUID = 4325638042231113322L;
 
 	@Id
-	@Column(name = "SUMMARY_ID", unique = true, nullable = false)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "SUMMARY_ID")
 	private Long summaryID;
 	
 	@ManyToOne(cascade = CascadeType.ALL, targetEntity = AccumulationHeader.class, fetch = FetchType.EAGER)
