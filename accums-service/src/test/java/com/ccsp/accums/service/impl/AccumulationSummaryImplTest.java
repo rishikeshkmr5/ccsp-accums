@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -61,7 +60,7 @@ public class AccumulationSummaryImplTest {
 	 * @throws Exception
 	 */
 	@Test
-	public void testSetLedgerHeader() throws NoSuchFieldException, SecurityException, Exception {
+	public void testSetLedgerSummary() throws NoSuchFieldException, SecurityException, Exception {
 		setFinalStatic(AccumulationSummaryMapper.class.getField("INSTANCE"), accumulationSummaryMapper);
 		AccumulationSummary accumulationSummary = new AccumulationSummary();
 		AccumulationSummaryDTO accumulationSummaryDTO = new AccumulationSummaryDTO();
@@ -77,19 +76,21 @@ public class AccumulationSummaryImplTest {
 	 * @throws SecurityException
 	 * @throws Exception
 	 */
-	@Ignore
 	@Test
-	public void testGetAllLedgerHeaders() throws NoSuchFieldException, SecurityException, Exception {
+	public void testGetAllLedgerSummaries() throws NoSuchFieldException, SecurityException, Exception {
 		List<AccumulationSummary> accumulationSummaries = new ArrayList<>();
-		accumulationSummaries.add(new AccumulationSummary());
+		AccumulationSummary accumulationSummary = new AccumulationSummary();
+		AccumulationHeader accumulationHeader = new AccumulationHeader();
+		accumulationHeader.setLedgerID(1L);
+		accumulationSummary.setLedgerHeader(accumulationHeader);
+		accumulationSummaries.add(accumulationSummary);
 		List<AccumulationSummaryDTO> accumulationHeaderDTOList = new ArrayList<>();
 		when(accumulationSummaryRepository.findAll()).thenReturn(accumulationSummaries);
-		//when(accumulationSummaryMapper.convertToDTOList(accumulationSummaries)).thenReturn(AccumulationHeaderDTOList);
-		for(AccumulationSummary accumulationSummary: accumulationSummaries) {
+		for(AccumulationSummary summary: accumulationSummaries) {
 			
 			AccumulationSummaryDTO accumulationSummaryDTO=new AccumulationSummaryDTO();
-			when(accumulationSummaryMapper.convertToDTO(accumulationSummary)).thenReturn(accumulationSummaryDTO);
-			accumulationSummaryDTO.setLedgerHeaderID(accumulationSummary.getLedgerHeader().getLedgerID());
+			when(accumulationSummaryMapper.convertToDTO(summary)).thenReturn(accumulationSummaryDTO);
+			accumulationSummaryDTO.setLedgerHeaderID(summary.getLedgerHeader().getLedgerID());
 			accumulationHeaderDTOList.add(accumulationSummaryDTO);
 			
 		}
