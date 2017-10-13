@@ -7,8 +7,9 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.ValidationException;
+
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -24,7 +25,6 @@ import com.ccsp.common.dto.ICommonDTO;
 
 import javassist.NotFoundException;
 
-
 /**
  * @author nnarayanaperumaln
  *
@@ -39,19 +39,19 @@ public class AccumsControllerTest {
 
 	@InjectMocks
 	private AccumsLedgerHeaderController accumsController;
-	
+
 	/**
 	 * Mock the Service layer
 	 */
 	@Mock
 	private AccumulationHeaderServiceImpl ledgerHeaderService;
-	
+
 	/**
 	 * Mock the Service layer
 	 */
 	@Mock
 	private AccumulationSummaryServiceImpl accumulationSummaryService;
-	
+
 	/**
 	 * @throws NotFoundException
 	 */
@@ -62,7 +62,7 @@ public class AccumsControllerTest {
 		List<AccumulationHeaderDTO> actual = accumsController.getLedgerHeader();
 		Assert.assertEquals(actual, ledgerHeaderDTOList);
 	}
-	
+
 	/**
 	 * Test the ledgerHeader creation
 	 */
@@ -83,21 +83,37 @@ public class AccumsControllerTest {
 		List<AccumulationSummaryDTO> actual = accumsController.getAccumulationSummary();
 		Assert.assertEquals(actual, accumulationSummaryDTOList);
 	}
-	
+
 	/**
 	 * Test the ledger summary creation
-	 * @throws NotFoundException 
+	 * 
+	 * @throws NotFoundException
 	 */
 	@Test
 	public void testSetAccumulationSummary() throws NotFoundException {
 		List<AccumulationSummaryDTO> accumulationSummaryDTOs = new ArrayList<>();
 		AccumulationSummaryDTO accumulationSummaryDTO = new AccumulationSummaryDTO();
 		ClaimSummaryDTO claimSummaryDTO = new ClaimSummaryDTO();
-		
+
 		accumulationSummaryDTO.setAccumType("str");
 		accumulationSummaryDTO.setLedgerHeaderID(1L);
 		accumulationSummaryDTOs.add(accumulationSummaryDTO);
-		
+
+		claimSummaryDTO.setAccumulationSummaryList(accumulationSummaryDTOs);
+		accumsController.createAccumulationSummary(claimSummaryDTO);
+		verify(accumulationSummaryService, times(1)).createClaimSummary(claimSummaryDTO);
+	}
+
+	/**
+	 * Test the ledger summary creation
+	 * 
+	 * @throws NotFoundException
+	 */
+	@Test(expected = ValidationException.class)
+	public void testSetAccumulationSummaryWithValidationError() throws NotFoundException {
+		List<AccumulationSummaryDTO> accumulationSummaryDTOs = new ArrayList<>();
+		ClaimSummaryDTO claimSummaryDTO = new ClaimSummaryDTO();
+		accumulationSummaryDTOs.add(new AccumulationSummaryDTO());
 		claimSummaryDTO.setAccumulationSummaryList(accumulationSummaryDTOs);
 		accumsController.createAccumulationSummary(claimSummaryDTO);
 		verify(accumulationSummaryService, times(1)).createClaimSummary(claimSummaryDTO);
