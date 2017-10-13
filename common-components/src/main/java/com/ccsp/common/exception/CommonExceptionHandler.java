@@ -6,6 +6,8 @@ package com.ccsp.common.exception;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.validation.ValidationException;
+
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +36,13 @@ public class CommonExceptionHandler {
     public ResponseEntity<ErrorMessage> handleNotFoundException(NotFoundException ex) {
         ErrorMessage error = buildErrorMap(ErrorCodes.NOT_FOUND, ex.getMessage());
         return new ResponseEntity<ErrorMessage>(error, HttpStatus.NOT_FOUND);
+    }
+    
+    @ResponseStatus(code=HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(ValidationException.class)
+    public ResponseEntity<ErrorMessage> handleValidationException(ValidationException ex) {
+        ErrorMessage error = buildErrorMap(ErrorCodes.VALIDATION_ERROR_CODE, ex.getMessage());
+        return new ResponseEntity<ErrorMessage>(error, HttpStatus.BAD_REQUEST);
     }
     
     
