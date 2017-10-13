@@ -2,8 +2,12 @@ package com.ccsp.accums.ledger.controller;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
+import javax.validation.ValidationException;
+import javax.validation.ValidatorFactory;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
@@ -25,6 +29,7 @@ import com.ccsp.accums.ledger.dto.AccumulationHeaderDTO;
 import com.ccsp.accums.ledger.dto.AccumulationSummaryDTO;
 import com.ccsp.accums.ledger.dto.BenefitBalanceDTO;
 import com.ccsp.accums.ledger.dto.BenefitSpendingDTO;
+import com.ccsp.accums.ledger.dto.ClaimAccumEntryDTO;
 import com.ccsp.accums.ledger.dto.ClaimDetailsForAccumTypeDTO;
 import com.ccsp.accums.service.impl.AccumsLedgerEntryServiceImpl;
 import com.ccsp.accums.service.impl.AccumulationHeaderServiceImpl;
@@ -32,7 +37,9 @@ import com.ccsp.accums.service.impl.AccumulationSummaryServiceImpl;
 import com.ccsp.accums.service.impl.BenefitBalanceServiceImpl;
 import com.ccsp.accums.service.impl.BenefitSpendingServiceImpl;
 import com.ccsp.accums.service.impl.ClaimDetailServiceImpl;
+import com.ccsp.common.dto.ICommonDTO;
 import com.ccsp.common.utils.UIConstants;
+import com.ccsp.common.validator.Validator;
 
 import javassist.NotFoundException;
 
@@ -68,6 +75,7 @@ public class AccumsLedgerHeaderController {
 	@Autowired
 	private BenefitSpendingServiceImpl benefitSpendingServiceImpl;
 	
+	private Validator validator = new Validator();
 
 	/**
 	 * Fetches all the ledgerHeaders
@@ -101,11 +109,12 @@ public class AccumsLedgerHeaderController {
 	 */
 	@RequestMapping(path = UIConstants.ACCUMS_ENTRY, method = RequestMethod.POST, consumes = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
 	@ResponseBody
-	public AccumsEntryDTO createLedgerEntry(@RequestBody AccumsEntryDTO ledgerEntryDTO) {
+	public List<AccumsEntryDTO> createLedgerEntry(@RequestBody ClaimAccumEntryDTO claimAccumEntry) throws ValidationException{
 		log.info("Create LedgerEntry details");
 		MDC.put("username", "ABC");
-
-		return ledgerEntryService.create(ledgerEntryDTO);
+		List<? extends ICommonDTO> accumsEntry = claimAccumEntry.getAccumEntryList();
+		validator.validate(accumsEntry);
+		return ledgerEntryService.create(accumsEntry);
 	}
 
 	/**

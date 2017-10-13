@@ -2,22 +2,54 @@ package com.ccsp.accums.ledger.dto;
 
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.validation.constraints.NotNull;
 import com.ccsp.common.dto.ICommonDTO;
 
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class AccumsEntryDTO implements ICommonDTO{
 
-	
+	/**
+	*  Serial version UID
+	*/
+	private static final long serialVersionUID = 1L;
+
 	private Long ledgerLineId;
+	
+	@NotNull(message = "Accums Header cannot be empty")
 	private Long accumHeaderId;
+	
+	@NotNull(message = "Accums Key cannot be empty")
 	private String accumKey;
+	
+	@NotNull(message = "Accums Type cannot be empty")
 	private String accumType;
+	
+	@NotNull(message = "Role cannot be empty")
 	private String role;
+	
+	@NotNull(message = "CostShareTier cannot be empty")
 	private String costShareTier;
+	
+	@NotNull(message = "Amount cannot be empty")
 	private Double amt;
+	
+	@NotNull(message = "Network cannot be empty")
 	private String network;
+	
+	@NotNull(message = "SnapshotSummary cannot be empty")
 	private double snapshotSummmary;
+	
+	@NotNull(message = "UOM cannot be empty")
 	private String UOM;
+	
+	@NotNull(message = "Service Date cannot be empty")
 	private Date serviceDate;
+	
+	
 	private Long linkToPrimary;
 	/**
 	 * 

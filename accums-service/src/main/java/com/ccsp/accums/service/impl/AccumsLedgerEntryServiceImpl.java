@@ -105,4 +105,31 @@ public class AccumsLedgerEntryServiceImpl extends CommonServiceImpl  {
 		return (List<T>) accumsEntriesDTO;		
 	}
 	
+	public List<AccumsEntryDTO> create(List<? extends ICommonDTO> accumsEntryList){
+		List<AccumsEntry> accumsEntry = new ArrayList<>();
+		List<AccumsEntryDTO> entryDTOList = new ArrayList<>();
+		int counter = 1;
+		AccumsEntry baseEntry = null;
+		for(ICommonDTO dto : accumsEntryList) {
+			AccumsEntry entry = new AccumsEntry();
+			AccumsEntryDTO accumsEntryDTO = (AccumsEntryDTO)dto;
+			entry = getMapper().convertToEntity(accumsEntryDTO);
+			if(counter == 1) 
+				baseEntry = entry;
+			else
+				entry.setAccumsEntry(baseEntry);
+			accumsEntry.add(entry);
+			counter++;
+		}
+		if(accumsEntry.size() > 0)
+			ledgerHeaderRepository.save(accumsEntry);
+		for(AccumsEntry entryEntity : accumsEntry) {
+			AccumsEntryDTO dto = new AccumsEntryDTO();
+			dto = getMapper().convertToDTO(entryEntity);
+			if(entryEntity.getAccumsEntry() != null)
+				dto.setLinkToPrimary(entryEntity.getAccumsEntry().getLedgerLineId());
+			entryDTOList.add(dto);			
+		}
+		return entryDTOList;
+	}
 }

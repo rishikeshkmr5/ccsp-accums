@@ -2,6 +2,10 @@ package com.ccsp.accums.ledger.dto;
 
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import com.ccsp.common.dto.ICommonDTO;
 
 /**
@@ -13,6 +17,8 @@ import com.ccsp.common.dto.ICommonDTO;
  * @author vamehta
  *
  */
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class AccumulationSummaryDTO  implements ICommonDTO {
 
 	/**
