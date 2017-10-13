@@ -2,12 +2,9 @@ package com.ccsp.accums.ledger.controller;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.validation.ValidationException;
-import javax.validation.ValidatorFactory;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
@@ -31,6 +28,7 @@ import com.ccsp.accums.ledger.dto.BenefitBalanceDTO;
 import com.ccsp.accums.ledger.dto.BenefitSpendingDTO;
 import com.ccsp.accums.ledger.dto.ClaimAccumEntryDTO;
 import com.ccsp.accums.ledger.dto.ClaimDetailsForAccumTypeDTO;
+import com.ccsp.accums.ledger.dto.ClaimSummaryDTO;
 import com.ccsp.accums.service.impl.AccumsLedgerEntryServiceImpl;
 import com.ccsp.accums.service.impl.AccumulationHeaderServiceImpl;
 import com.ccsp.accums.service.impl.AccumulationSummaryServiceImpl;
@@ -148,13 +146,17 @@ public class AccumsLedgerHeaderController {
 	 * 
 	 * @param accumulationSummaryDTO
 	 * @return
+	 * @throws NotFoundException 
 	 */
-	@RequestMapping(path = UIConstants.ACCUMULATION_SUMMARY, method = RequestMethod.POST, consumes = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
+	@RequestMapping(path = UIConstants.ACCUMULATION_SUMMARY, method = RequestMethod.POST, consumes = {
+			"application/json; charset=utf-8", "application/xml; charset=utf-8" })
 	@ResponseBody
-	public AccumulationSummaryDTO createAccumulationSummary(
-			@RequestBody AccumulationSummaryDTO accumulationSummaryDTO) {
+	public ClaimSummaryDTO createAccumulationSummary(
+			@RequestBody ClaimSummaryDTO accumulationSummaryDTO) throws NotFoundException {
 		log.info("Create AccumulationSummary details");
-		return accumulationSummaryService.create(accumulationSummaryDTO);
+		List<? extends ICommonDTO> accumsSummary = accumulationSummaryDTO.getAccumulationSummaryList();
+		validator.validate(accumsSummary);
+		return accumulationSummaryService.createClaimSummary(accumulationSummaryDTO);
 	}
 
 	/**

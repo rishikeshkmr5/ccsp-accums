@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
 import com.ccsp.accums.ledger.dto.AccumulationSummaryDTO;
+import com.ccsp.accums.ledger.dto.ClaimSummaryDTO;
 import com.ccsp.accums.ledger.entity.AccumulationHeader;
 import com.ccsp.accums.ledger.entity.AccumulationSummary;
 import com.ccsp.accums.ledger.repository.AccumulationHeaderRepository;
@@ -31,7 +32,7 @@ public class AccumulationSummaryServiceImpl extends CommonServiceImpl {
 	 */
 	@Resource
 	private AccumulationSummaryRepository accumulationSummaryRepository;
-	
+
 	@Resource
 	private AccumulationHeaderRepository ledgerHeaderRepository;
 
@@ -44,7 +45,9 @@ public class AccumulationSummaryServiceImpl extends CommonServiceImpl {
 		return accumulationSummaryRepository;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ccsp.common.service.impl.CommonServiceImpl#getMapper()
 	 */
 	@SuppressWarnings("unchecked")
@@ -52,52 +55,52 @@ public class AccumulationSummaryServiceImpl extends CommonServiceImpl {
 	public IBaseMapper<AccumulationSummary, AccumulationSummaryDTO> getMapper() {
 		return AccumulationSummaryMapper.INSTANCE;
 	}
-	
-	/* (non-Javadoc)
-	 * @see com.ccsp.common.service.impl.CommonServiceImpl#create(com.ccsp.common.dto.ICommonDTO)
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public <T extends ICommonDTO> T create(T dto) {
-		
-		AccumulationSummaryDTO accumulationSummaryDTO = (AccumulationSummaryDTO) dto;
-		AccumulationHeader ledger= ledgerHeaderRepository.findOne(accumulationSummaryDTO.getLedgerHeaderID());
-		
-		AccumulationSummary accumulationSummary = getMapper().convertToEntity(accumulationSummaryDTO);
-		
-		accumulationSummary.setLedgerHeader(ledger);
-		
-		if(accumulationSummary != null){
-			accumulationSummary = getJPARepository().saveAndFlush(accumulationSummary);
+
+	public ClaimSummaryDTO createClaimSummary(ClaimSummaryDTO claimSummaryDTO) throws NotFoundException {
+
+		ClaimSummaryDTO claimSummaryDTOAfterInseration = new ClaimSummaryDTO();
+		List<AccumulationSummaryDTO> accumulationSummaryDTOs = claimSummaryDTO.getAccumulationSummaryList();
+		List<AccumulationSummaryDTO> accumulationSummaryDTOsAfterInseration = new ArrayList<>();
+		for (AccumulationSummaryDTO accumulationSummaryDTO : accumulationSummaryDTOs) {
+			AccumulationHeader ledger = ledgerHeaderRepository.findOne(accumulationSummaryDTO.getLedgerHeaderID());
+			if(ledger == null)
+				throw new NotFoundException("Ledger ID : " + ledger + " not found in Ledger Header");
+			AccumulationSummary accumulationSummary = getMapper().convertToEntity(accumulationSummaryDTO);
+			accumulationSummary.setLedgerHeader(ledger);
+
+			if (accumulationSummary != null) {
+				accumulationSummary = getJPARepository().saveAndFlush(accumulationSummary);
+			}
+			ICommonDTO resultDTO = getMapper().convertToDTO(accumulationSummary);
+			accumulationSummaryDTOsAfterInseration.add((AccumulationSummaryDTO) resultDTO);
 		}
-		
-		ICommonDTO resultDTO =  getMapper().convertToDTO(accumulationSummary);
-		return (T) resultDTO;
+		claimSummaryDTOAfterInseration.setAccumulationSummaryList(accumulationSummaryDTOsAfterInseration);
+		return claimSummaryDTOAfterInseration;
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ccsp.common.service.impl.CommonServiceImpl#readAll()
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T extends ICommonDTO> List<T> readAll() throws NotFoundException {
-		List<AccumulationSummaryDTO> accumulationSummaryDTOs = new ArrayList<>(); 
-		List<AccumulationSummary> accumulationSummaries= accumulationSummaryRepository.findAll();
-		
-		if(accumulationSummaries == null || accumulationSummaries.size() == 0) {
+		List<AccumulationSummaryDTO> accumulationSummaryDTOs = new ArrayList<>();
+		List<AccumulationSummary> accumulationSummaries = accumulationSummaryRepository.findAll();
+
+		if (accumulationSummaries == null || accumulationSummaries.size() == 0) {
 			throw new NotFoundException("Resource Not Found");
 		}
-		
-		for(AccumulationSummary accumulationSummary: accumulationSummaries) {
-			
-			AccumulationSummaryDTO accumulationSummaryDTO=getMapper().convertToDTO(accumulationSummary);
+
+		for (AccumulationSummary accumulationSummary : accumulationSummaries) {
+
+			AccumulationSummaryDTO accumulationSummaryDTO = getMapper().convertToDTO(accumulationSummary);
 			accumulationSummaryDTO.setLedgerHeaderID(accumulationSummary.getLedgerHeader().getLedgerID());
 			accumulationSummaryDTOs.add(accumulationSummaryDTO);
-			
+
 		}
 		return (List<T>) accumulationSummaryDTOs;
-		
+
 	}
 }
-
-

@@ -2,6 +2,7 @@ package com.ccsp.accums.ledger.dto;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -28,6 +29,7 @@ public class AccumulationSummaryDTO  implements ICommonDTO {
 
 	private Long summaryID;
 	
+	@NotNull(message = "Ledger header ID cannot be empty")
 	private Long ledgerHeaderID;
 	
 	private String subscriberID;
@@ -40,6 +42,7 @@ public class AccumulationSummaryDTO  implements ICommonDTO {
 	
 	private String accumName;
 	
+	@NotNull(message = "Accum type cannot be empty")
 	private String accumType;
 	
 	private Double amount;

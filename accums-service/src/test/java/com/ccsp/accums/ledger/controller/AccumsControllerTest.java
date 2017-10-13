@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -16,6 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ccsp.accums.ledger.dto.AccumulationHeaderDTO;
 import com.ccsp.accums.ledger.dto.AccumulationSummaryDTO;
+import com.ccsp.accums.ledger.dto.ClaimSummaryDTO;
 import com.ccsp.accums.service.impl.AccumulationHeaderServiceImpl;
 import com.ccsp.accums.service.impl.AccumulationSummaryServiceImpl;
 import com.ccsp.common.dto.ICommonDTO;
@@ -83,13 +85,22 @@ public class AccumsControllerTest {
 	}
 	
 	/**
-	 * Test the ledgerHeader creation
+	 * Test the ledger summary creation
+	 * @throws NotFoundException 
 	 */
 	@Test
-	public void testSetAccumulationSummary() {
+	public void testSetAccumulationSummary() throws NotFoundException {
+		List<AccumulationSummaryDTO> accumulationSummaryDTOs = new ArrayList<>();
 		AccumulationSummaryDTO accumulationSummaryDTO = new AccumulationSummaryDTO();
-		accumsController.createAccumulationSummary(accumulationSummaryDTO);
-		verify(accumulationSummaryService, times(1)).create(accumulationSummaryDTO);
+		ClaimSummaryDTO claimSummaryDTO = new ClaimSummaryDTO();
+		
+		accumulationSummaryDTO.setAccumType("str");
+		accumulationSummaryDTO.setLedgerHeaderID(1L);
+		accumulationSummaryDTOs.add(accumulationSummaryDTO);
+		
+		claimSummaryDTO.setAccumulationSummaryList(accumulationSummaryDTOs);
+		accumsController.createAccumulationSummary(claimSummaryDTO);
+		verify(accumulationSummaryService, times(1)).createClaimSummary(claimSummaryDTO);
 	}
 
 }
