@@ -16,11 +16,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.ccsp.accums.ledger.dto.AccumulationHeaderDTO;
-import com.ccsp.accums.ledger.dto.AccumulationSummaryDTO;
-import com.ccsp.accums.ledger.dto.ClaimSummaryDTO;
-import com.ccsp.accums.service.impl.AccumulationHeaderServiceImpl;
-import com.ccsp.accums.service.impl.AccumulationSummaryServiceImpl;
+import com.ccsp.accums.ledger.header.controller.LedgerHeaderController;
+import com.ccsp.accums.ledger.header.dto.LedgerHeaderDTO;
+import com.ccsp.accums.ledger.header.service.LedgerHeaderService;
+import com.ccsp.accums.ledger.summary.dto.LedgerSummaryDTO;
+import com.ccsp.accums.ledger.summary.dto.LedgerSummaryClaimDTO;
+import com.ccsp.accums.ledger.summary.service.LedgerSummaryService;
 import com.ccsp.common.dto.ICommonDTO;
 
 import javassist.NotFoundException;
@@ -38,19 +39,19 @@ public class AccumsControllerTest {
 	public static int i = 10;
 
 	@InjectMocks
-	private AccumsLedgerHeaderController accumsController;
+	private LedgerHeaderController accumsController;
 
 	/**
 	 * Mock the Service layer
 	 */
 	@Mock
-	private AccumulationHeaderServiceImpl ledgerHeaderService;
+	private LedgerHeaderService ledgerHeaderService;
 
 	/**
 	 * Mock the Service layer
 	 */
 	@Mock
-	private AccumulationSummaryServiceImpl accumulationSummaryService;
+	private LedgerSummaryService accumulationSummaryService;
 
 	/**
 	 * @throws NotFoundException
@@ -59,7 +60,7 @@ public class AccumsControllerTest {
 	public void testGetLedgerHeader() throws NotFoundException {
 		List<ICommonDTO> ledgerHeaderDTOList = new ArrayList<>();
 		when(ledgerHeaderService.readAll()).thenReturn(ledgerHeaderDTOList);
-		List<AccumulationHeaderDTO> actual = accumsController.getLedgerHeader();
+		List<LedgerHeaderDTO> actual = accumsController.getLedgerHeader();
 		Assert.assertEquals(actual, ledgerHeaderDTOList);
 	}
 
@@ -80,7 +81,7 @@ public class AccumsControllerTest {
 	public void testGetAccumulationSummary() throws NotFoundException {
 		List<ICommonDTO> accumulationSummaryDTOList = new ArrayList<>();
 		when(accumulationSummaryService.readAll()).thenReturn(accumulationSummaryDTOList);
-		List<AccumulationSummaryDTO> actual = accumsController.getAccumulationSummary();
+		List<LedgerSummaryDTO> actual = accumsController.getAccumulationSummary();
 		Assert.assertEquals(actual, accumulationSummaryDTOList);
 	}
 
@@ -91,9 +92,9 @@ public class AccumsControllerTest {
 	 */
 	@Test
 	public void testSetAccumulationSummary() throws NotFoundException {
-		List<AccumulationSummaryDTO> accumulationSummaryDTOs = new ArrayList<>();
-		AccumulationSummaryDTO accumulationSummaryDTO = new AccumulationSummaryDTO();
-		ClaimSummaryDTO claimSummaryDTO = new ClaimSummaryDTO();
+		List<LedgerSummaryDTO> accumulationSummaryDTOs = new ArrayList<>();
+		LedgerSummaryDTO accumulationSummaryDTO = new LedgerSummaryDTO();
+		LedgerSummaryClaimDTO claimSummaryDTO = new LedgerSummaryClaimDTO();
 
 		accumulationSummaryDTO.setAccumType("str");
 		accumulationSummaryDTO.setLedgerHeaderID(1L);
@@ -111,9 +112,9 @@ public class AccumsControllerTest {
 	 */
 	@Test(expected = ValidationException.class)
 	public void testSetAccumulationSummaryWithValidationError() throws NotFoundException {
-		List<AccumulationSummaryDTO> accumulationSummaryDTOs = new ArrayList<>();
-		ClaimSummaryDTO claimSummaryDTO = new ClaimSummaryDTO();
-		accumulationSummaryDTOs.add(new AccumulationSummaryDTO());
+		List<LedgerSummaryDTO> accumulationSummaryDTOs = new ArrayList<>();
+		LedgerSummaryClaimDTO claimSummaryDTO = new LedgerSummaryClaimDTO();
+		accumulationSummaryDTOs.add(new LedgerSummaryDTO());
 		claimSummaryDTO.setAccumulationSummaryList(accumulationSummaryDTOs);
 		accumsController.createAccumulationSummary(claimSummaryDTO);
 		verify(accumulationSummaryService, times(1)).createClaimSummary(claimSummaryDTO);

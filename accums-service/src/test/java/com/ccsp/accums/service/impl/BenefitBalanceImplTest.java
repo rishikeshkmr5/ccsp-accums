@@ -15,10 +15,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.ccsp.accums.ledger.dto.BenefitBalanceDTO;
-import com.ccsp.accums.ledger.entity.AccumulationSummary;
-import com.ccsp.accums.ledger.repository.BenefitBalanceRepository;
-import com.ccsp.accums.mapper.BenefitBalanceMapper;
+import com.ccsp.accums.ledger.benefit.dto.BenefitBalanceDTO;
+import com.ccsp.accums.ledger.benefit.mapper.BenefitBalanceMapper;
+import com.ccsp.accums.ledger.benefit.repository.BenefitBalanceRepository;
+import com.ccsp.accums.ledger.benefit.service.BenefitBalanceServiceImpl;
+import com.ccsp.accums.ledger.summary.entity.LedgerSummaryEntity;
 
 import javassist.NotFoundException;
 
@@ -54,8 +55,8 @@ public class BenefitBalanceImplTest {
 		String subscriberID=null;
 		String memberID="str";
 		List<BenefitBalanceDTO> balanceDTOs= new ArrayList<>();
-		List<AccumulationSummary> accumulationSummaryList = new ArrayList<>();
-		accumulationSummaryList.add(new AccumulationSummary());
+		List<LedgerSummaryEntity> accumulationSummaryList = new ArrayList<>();
+		accumulationSummaryList.add(new LedgerSummaryEntity());
 		when(benefitBalanceRepository.findBymemberID(memberID)).thenReturn(accumulationSummaryList);
 		when(benefitBalanceMapper.convertToDTOList(accumulationSummaryList)).thenReturn(balanceDTOs);
 		setFinalStatic(BenefitBalanceMapper.class.getField("INSTANCE"), benefitBalanceMapper);
@@ -73,8 +74,8 @@ public class BenefitBalanceImplTest {
 		String subscriberID="str";
 		String memberID=null;
 		List<BenefitBalanceDTO> balanceDTOs= new ArrayList<>();
-		List<AccumulationSummary> accumulationSummaryList = new ArrayList<>();
-		accumulationSummaryList.add(new AccumulationSummary());
+		List<LedgerSummaryEntity> accumulationSummaryList = new ArrayList<>();
+		accumulationSummaryList.add(new LedgerSummaryEntity());
 		when(benefitBalanceRepository.findBysubscriberID(subscriberID)).thenReturn(accumulationSummaryList);
 		when(benefitBalanceMapper.convertToDTOList(accumulationSummaryList)).thenReturn(balanceDTOs);
 		setFinalStatic(BenefitBalanceMapper.class.getField("INSTANCE"), benefitBalanceMapper);
@@ -89,7 +90,7 @@ public class BenefitBalanceImplTest {
 	@Test(expected = NotFoundException.class)
 	public void testGetAllLedgerHeadersThrowsException() throws NotFoundException
 	{
-		List<AccumulationSummary> accumulationSummary = new ArrayList<>();
+		List<LedgerSummaryEntity> accumulationSummary = new ArrayList<>();
 		when(benefitBalanceRepository.findAll()).thenReturn(accumulationSummary);
 		serviceImpl.readAll();
 	}

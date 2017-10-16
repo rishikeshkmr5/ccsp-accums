@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<name>springfox-swagger-ui</name>
 
-	<groupId>com.org</groupId>
+	<groupId>com.ccsp</groupId>
 	<artifactId>springfox-swagger-ui</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
