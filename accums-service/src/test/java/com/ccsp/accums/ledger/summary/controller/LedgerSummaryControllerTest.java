@@ -66,7 +66,7 @@ public class LedgerSummaryControllerTest {
 		LedgerSummaryDTO accumulationSummaryDTO = new LedgerSummaryDTO();
 		LedgerSummaryClaimDTO claimSummaryDTO = new LedgerSummaryClaimDTO();
 
-		accumulationSummaryDTO.setAccumType("str");
+		accumulationSummaryDTO.setAccumTypeName("str");
 		accumulationSummaryDTO.setLedgerHeaderID(1L);
 		accumulationSummaryDTOs.add(accumulationSummaryDTO);
 

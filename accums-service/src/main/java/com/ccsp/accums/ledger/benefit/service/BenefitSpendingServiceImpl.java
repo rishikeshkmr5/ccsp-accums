@@ -72,7 +72,7 @@ public class BenefitSpendingServiceImpl extends CommonServiceImpl {
 			for(LedgerSummaryEntity accumulationSummary : summaries) {
 				
 				BenefitSpendingDTO benefitSpendingDTO = getMapper().convertToDTO(accumulationSummary);
-				benefitSpendingDTO.setServices(accumulationSummary.getLedgerHeader().getService());
+				benefitSpendingDTO.setServices(accumulationSummary.getLedgerHeader().getServiceName());
 				benefitSpendingDTOs.add(benefitSpendingDTO);
 			}
 			return benefitSpendingDTOs;

@@ -22,42 +22,39 @@ public class LedgerEntryEntity  implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "LEDGER_LINE_ID", unique = true, nullable = false)
+	@Column(name = "LDGR_ENTRY_ID", unique = true, nullable = false)
 	private Long ledgerLineId;
 	
 	@ManyToOne(cascade={CascadeType.ALL})
-	@JoinColumn(name="Link_To_Primary")
+	@JoinColumn(name="PRIMY_LDGR_ENTRY_ID")
 	private LedgerEntryEntity accumsEntry;
 	
 	@ManyToOne(cascade = CascadeType.ALL, targetEntity = LedgerHeaderEntity.class, fetch = FetchType.EAGER)
-	@JoinColumn(name="LEDGER_ID",referencedColumnName="LEDGER_ID")
+	@JoinColumn(name="LDGR_ID",referencedColumnName="LEDGER_ID")
 	private LedgerHeaderEntity ledgerHeader;
 	
-	@Column(name = "ACCUM_KEY",  nullable = true)
-	private String accumKey;
-	
-	@Column(name = "ACCUM_TYPE", nullable = true)
+	@Column(name = "ACCUM_TYP_NM", nullable = true)
 	private String accumType;
 	
-	@Column(name = "ROLE",nullable = true)
+	@Column(name = "ROLE_NM",nullable = true)
 	private String role;
 	
-	@Column(name = "COST_SHARE_TIER", nullable = true)
+	@Column(name = "CST_SHR_TIER_NM", nullable = true)
 	private String costShareTier;
 	
-	@Column(name = "AMOUNT", nullable = true)
+	@Column(name = "AMT", nullable = true)
 	private Double amt;
 	
-	@Column(name = "NETWORK",nullable = true)
+	@Column(name = "NTWK_CD",nullable = true)
 	private String network;
 	
-	@Column(name = "SNAPSHOT_SUMMARY", nullable = true)
+	@Column(name = "SNPSHT_SUM_AMT", nullable = true)
 	private double snapshotSummmary;
 	
-	@Column(name = "UNIT_OF_MEASURE", nullable = true)
+	@Column(name = "UOM_NM", nullable = true)
 	private String UOM;
 	
-	@Column(name = "SERVICE_DATE", nullable = true)
+	@Column(name = "SVC_DT", nullable = true)
 	private Date serviceDate;
 
 	public Long getLedgerLineId() {
@@ -94,20 +91,6 @@ public class LedgerEntryEntity  implements java.io.Serializable {
 	 * @return
 	 */
 
-	public String getAccumKey() {
-		return accumKey;
-	}
-	/**
-	 * 
-	 * @param accumKey
-	 */
-	public void setAccumKey(String accumKey) {
-		this.accumKey = accumKey;
-	}
-	/**
-	 * 
-	 * @return
-	 */
 	public String getAccumType() {
 		return accumType;
 	}

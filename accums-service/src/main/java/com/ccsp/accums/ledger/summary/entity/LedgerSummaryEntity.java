@@ -31,53 +31,47 @@ public class LedgerSummaryEntity  implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "SUMMARY_ID")
+	@Column(name = "LDGR_SUM_ID",unique=true)
 	private Long summaryID;
 	
 	@ManyToOne(cascade = CascadeType.ALL, targetEntity = LedgerHeaderEntity.class, fetch = FetchType.EAGER)
-	@JoinColumn(name="LEDGER_ID",referencedColumnName="LEDGER_ID")
+	@JoinColumn(name="LDGR_ID",referencedColumnName="LEDGER_ID")
 	private LedgerHeaderEntity ledgerHeader;
 	
-	@Column(name = "SUBSCRIBER_ID",  nullable = true)
+	@Column(name = "SUB_ID",  nullable = true)
 	private String subscriberID;
 	
-	@Column(name = "MEMBER_ID",  nullable = true)
+	@Column(name = "MBR_ID",  nullable = true,unique=true)
 	private String memberID;
 	
-	@Column(name = "PLAN_ID",  nullable = true)
+	@Column(name = "PLN_ID",  nullable = true)
 	private String planID;
+		
+	@Column(name = "ACCUM_TYP_NM",  nullable = true,unique=true)
+	private String accumTypeName;
 	
-	@Column(name = "ACCUM_KEY",  nullable = true)
-	private String accumKey;
-	
-	@Column(name = "ACCUM_NAME",  nullable = true)
-	private String accumName;
-	
-	@Column(name = "ACCUM_TYPE",  nullable = true)
-	private String accumType;
-	
-	@Column(name = "Amount",  nullable = true)
+	@Column(name = "AMT",  nullable = true)
 	private Double amount;
 	
-	@Column(name = "NETWORK",  nullable = true)
+	@Column(name = "NTWK_CD",  nullable = true ,unique=true)
 	private String network;
 	
-	@Column(name = "UNIT_OF_MEASURE",  nullable = true)
+	@Column(name = "NTWK_TIER_NM",  nullable = true,unique=true)
+	private String networkTierName;
+	
+	@Column(name = "UOM_NM",  nullable = true)
 	private String unitOfMeasure;
 	
-	@Column(name = "MAX_AMOUNT",  nullable = true)
+	@Column(name = "MAX_AMT",  nullable = true)
 	private Double maxAmount;
 	
-	@Column(name = "MAX_VISIT",  nullable = true)
+	@Column(name = "MAX_VST_CNT",  nullable = true)
 	private Integer maxVisit;
 	
-	@Column(name = "EFFECTIVE_DT",  nullable = true)
+	@Column(name = "EFF_DT",  nullable = true)
 	private Date effectiveDt;
 	
-	@Column(name = "START_DT",  nullable = true)
-	private Date startDt;
-	
-	@Column(name = "END_DT",  nullable = true)
+	@Column(name = "END_DT",  nullable = true,unique=true)
 	private Date endDt;
 
 	
@@ -136,49 +130,6 @@ public class LedgerSummaryEntity  implements java.io.Serializable {
 	public void setPlanID(String planID) {
 		this.planID = planID;
 	}
-
-	/**
-	 * @return
-	 */
-	public String getAccumKey() {
-		return accumKey;
-	}
-
-	/**
-	 * @param accumKey
-	 */
-	public void setAccumKey(String accumKey) {
-		this.accumKey = accumKey;
-	}
-
-	/**
-	 * @return
-	 */
-	public String getAccumName() {
-		return accumName;
-	}
-
-	/**
-	 * @param accumName
-	 */
-	public void setAccumName(String accumName) {
-		this.accumName = accumName;
-	}
-
-	/**
-	 * @return
-	 */
-	public String getAccumType() {
-		return accumType;
-	}
-
-	/**
-	 * @param accumType
-	 */
-	public void setAccumType(String accumType) {
-		this.accumType = accumType;
-	}
-
 	/**
 	 * @return
 	 */
@@ -278,20 +229,7 @@ public class LedgerSummaryEntity  implements java.io.Serializable {
 		this.effectiveDt = effectiveDt;
 	}
 
-	/**
-	 * @return
-	 */
-	public Date getStartDt() {
-		return startDt;
-	}
-
-	/**
-	 * @param startDt
-	 */
-	public void setStartDt(Date startDt) {
-		this.startDt = startDt;
-	}
-
+	
 	/**
 	 * @return
 	 */
@@ -305,5 +243,32 @@ public class LedgerSummaryEntity  implements java.io.Serializable {
 	public void setEndDt(Date endDt) {
 		this.endDt = endDt;
 	}
+	/**
+	 * @return
+	 */
+	public String getAccumTypeName() {
+		return accumTypeName;
+	}
+
+	/**
+	 * @param accumTypeName
+	 */
+	public void setAccumTypeName(String accumTypeName) {
+		this.accumTypeName = accumTypeName;
+	}
+	/**
+	 * @return
+	 */
+	public String getNetworkTierName() {
+		return networkTierName;
+	}
+
+	/**
+	 * @param networkTierName
+	 */
+	public void setNetworkTierName(String networkTierName) {
+		this.networkTierName = networkTierName;
+	}
+	
 	
 }

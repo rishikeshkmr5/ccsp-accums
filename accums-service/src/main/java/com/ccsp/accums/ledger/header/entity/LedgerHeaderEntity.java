@@ -15,7 +15,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "LEDGER_HEADER")
+@Table(name = "LDGR_HDR")
 public class LedgerHeaderEntity  implements java.io.Serializable {
 
 	/**
@@ -24,56 +24,57 @@ public class LedgerHeaderEntity  implements java.io.Serializable {
 	private static final long serialVersionUID = 8510561406430816669L;
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "LEDGER_ID", unique = true, nullable = false)
+	@Column(name = "LDGR_ID", unique = true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long ledgerID;
+	
 		
-	@Column(name = "VENDOR_TAX_ID", nullable = true, length=16)
+	@Column(name = "VEND_XACTN_ID", nullable = true, length=16)
 	private String vendorTaxID;
 	
 	@Column(name = "DCN", nullable = true, length=16)
 	private String dcn;
 	
-	@Column(name = "CLAIM_LINE", nullable = true)
+	@Column(name = "CLM_LN_ID", nullable = true)
 	private Integer claimLine;
 
-	@Column(name = "SERVICE_ID", nullable = true)
+	@Column(name = "SVC_ID", nullable = true)
 	private Integer serviceID;
 	
-	@Column(name = "SERVICE", nullable = true)
-	private String service;
+	@Column(name = "SVC_NM", nullable = true)
+	private String serviceName;
 	
-	@Column(name = "DT_OF_SERVICE", nullable = true)
+	@Column(name = "SVC_DT", nullable = true)
 	private Date dateOfService;
 	
-	@Column(name = "DT_TIME_PROCESSED", nullable = true)
+	@Column(name = "PROC_DT", nullable = true)
 	private Date dateTimeProcessed;
 	
-	@Column(name = "NETWORK", nullable = true)
+	@Column(name = "NTWK_CD", nullable = true)
 	private String network;
 	
-	@Column(name = "NETWORK_TIER", nullable = true)
+	@Column(name = "NTWK_TIER_NM", nullable = true)
 	private String networkTier;
 	
-	@Column(name = "PLAN_ID", nullable = true)
+	@Column(name = "PLN_ID", nullable = true)
 	private Integer planID;
 	
-	@Column(name = "ALLOWED_AMOUNT", nullable = true)
+	@Column(name = "ALWD_AMT", nullable = true)
 	private Double allowedAmount;
 	
-	@Column(name = "MEMBER_ID", nullable = true)
+	@Column(name = "MBR_ID", nullable = true)
 	private String memberID;
 	
-	@Column(name = "PATIENT_ID", nullable = true)
-	private Integer patientID;
+	/*@Column(name = "SUB_ID", nullable = true)
+	private Integer patientID;*/
 	
-	@Column(name = "SUBSCRIBER_ID", nullable = true)
+	@Column(name = "SUB_ID", nullable = true)
 	private String subscriberID;
 	
-	@Column(name = "UNIT_OF_MEASURE", nullable = true)
+	@Column(name = "UOM_NM", nullable = true)
 	private String unitOfMeasure;
 	
-	@Column(name = "ACCUMULATOR_TYPE", nullable = true)
+	@Column(name = "ACCUM_TYP_NM", nullable = true)
 	private String accumulatorType;
 
 	/**
@@ -144,20 +145,6 @@ public class LedgerHeaderEntity  implements java.io.Serializable {
 	 */
 	public void setServiceID(Integer serviceID) {
 		this.serviceID = serviceID;
-	}
-
-	/**
-	 * @return
-	 */
-	public String getService() {
-		return service;
-	}
-
-	/**
-	 * @param service
-	 */
-	public void setService(String service) {
-		this.service = service;
 	}
 
 	/**
@@ -257,21 +244,6 @@ public class LedgerHeaderEntity  implements java.io.Serializable {
 	public void setMemberID(String memberID) {
 		this.memberID = memberID;
 	}
-
-	/**
-	 * @return
-	 */
-	public Integer getPatientID() {
-		return patientID;
-	}
-
-	/**
-	 * @param patientID
-	 */
-	public void setPatientID(Integer patientID) {
-		this.patientID = patientID;
-	}
-
 	/**
 	 * @return
 	 */
@@ -313,5 +285,22 @@ public class LedgerHeaderEntity  implements java.io.Serializable {
 	public void setAccumulatorType(String accumulatorType) {
 		this.accumulatorType = accumulatorType;
 	}
+	/**
+	 * 
+	 * @return
+	 */
+
+	public String getServiceName() {
+		return serviceName;
+	}
+
+	/**
+	 * @param serviceName
+	 */
+	public void setServiceName(String serviceName) {
+		this.serviceName = serviceName;
+	}
+	
+	
 
 	}

@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.ccsp.accums.ledger.header.entity.LedgerHeaderEntity;
 import com.ccsp.common.dto.ICommonDTO;
 
 /**
@@ -25,7 +26,7 @@ public class LedgerSummaryDTO  implements ICommonDTO {
 	/**
 	 * serialization
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 4325638042231113322L;
 
 	private Long summaryID;
 	
@@ -37,17 +38,15 @@ public class LedgerSummaryDTO  implements ICommonDTO {
 	private String memberID;
 	
 	private String planID;
-	
-	private String accumKey;
-	
-	private String accumName;
-	
-	@NotNull(message = "Accum type cannot be empty")
-	private String accumType;
+		
+	@NotNull(message = "AccumTypeName cannot be empty")
+	private String accumTypeName;
 	
 	private Double amount;
 	
 	private String network;
+	
+	private String networkTierName;
 	
 	private String unitOfMeasure;
 	
@@ -56,8 +55,6 @@ public class LedgerSummaryDTO  implements ICommonDTO {
 	private Integer maxVisit;
 	
 	private Date effectiveDt;
-	
-	private Date startDt;
 	
 	private Date endDt;
 
@@ -116,49 +113,6 @@ public class LedgerSummaryDTO  implements ICommonDTO {
 	public void setPlanID(String planID) {
 		this.planID = planID;
 	}
-
-	/**
-	 * @return
-	 */
-	public String getAccumKey() {
-		return accumKey;
-	}
-
-	/**
-	 * @param accumKey
-	 */
-	public void setAccumKey(String accumKey) {
-		this.accumKey = accumKey;
-	}
-
-	/**
-	 * @return
-	 */
-	public String getAccumName() {
-		return accumName;
-	}
-
-	/**
-	 * @param accumName
-	 */
-	public void setAccumName(String accumName) {
-		this.accumName = accumName;
-	}
-
-	/**
-	 * @return
-	 */
-	public String getAccumType() {
-		return accumType;
-	}
-
-	/**
-	 * @param accumType
-	 */
-	public void setAccumType(String accumType) {
-		this.accumType = accumType;
-	}
-
 	/**
 	 * @return
 	 */
@@ -243,34 +197,7 @@ public class LedgerSummaryDTO  implements ICommonDTO {
 		this.effectiveDt = effectiveDt;
 	}
 
-	/**
-	 * @return
-	 */
-	public Long getLedgerHeaderID() {
-		return ledgerHeaderID;
-	}
-
-	/**
-	 * @param ledgerHeaderID
-	 */
-	public void setLedgerHeaderID(Long ledgerHeaderID) {
-		this.ledgerHeaderID = ledgerHeaderID;
-	}
-
-	/**
-	 * @return
-	 */
-	public Date getStartDt() {
-		return startDt;
-	}
-
-	/**
-	 * @param startDt
-	 */
-	public void setStartDt(Date startDt) {
-		this.startDt = startDt;
-	}
-
+	
 	/**
 	 * @return
 	 */
@@ -284,6 +211,43 @@ public class LedgerSummaryDTO  implements ICommonDTO {
 	public void setEndDt(Date endDt) {
 		this.endDt = endDt;
 	}
+	/**
+	 * @return
+	 */
+	public String getNetworkTierName() {
+		return networkTierName;
+	}
 
+	/**
+	 * @param networkTierName
+	 */
+	public void setNetworkTierName(String networkTierName) {
+		this.networkTierName = networkTierName;
+	}
+	/**
+	 * @return
+	 */
+	public Long getLedgerHeaderID() {
+		return ledgerHeaderID;
+	}
+	/**
+	 * @param ledgerHeaderID
+	 */
+	public void setLedgerHeaderID(Long ledgerHeaderID) {
+		this.ledgerHeaderID = ledgerHeaderID;
+	}
+	/**
+	 * @return
+	 */
+	public String getAccumTypeName() {
+		return accumTypeName;
+	}
+	/**
+	 * @param accumTypeName
+	 */
+	public void setAccumTypeName(String accumTypeName) {
+		this.accumTypeName = accumTypeName;
+	}
+	
 	
 }

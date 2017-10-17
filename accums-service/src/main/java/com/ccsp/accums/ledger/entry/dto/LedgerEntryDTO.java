@@ -23,9 +23,6 @@ public class LedgerEntryDTO implements ICommonDTO{
 	@NotNull(message = "Accums Header cannot be empty")
 	private Long accumHeaderId;
 	
-	@NotNull(message = "Accums Key cannot be empty")
-	private String accumKey;
-	
 	@NotNull(message = "Accums Type cannot be empty")
 	private String accumType;
 	
@@ -79,20 +76,6 @@ public class LedgerEntryDTO implements ICommonDTO{
 	 */
 	public void setAccumHeaderId(Long accumHeaderId) {
 		this.accumHeaderId = accumHeaderId;
-	}
-	/**
-	 * 
-	 * @return
-	 */
-	public String getAccumKey() {
-		return accumKey;
-	}
-	/**
-	 * 
-	 * @param accumKey
-	 */
-	public void setAccumKey(String accumKey) {
-		this.accumKey = accumKey;
 	}
 	/**
 	 * 
