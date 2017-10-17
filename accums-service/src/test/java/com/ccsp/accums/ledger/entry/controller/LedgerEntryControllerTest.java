@@ -1,4 +1,4 @@
-package com.ccsp.accums.ledger.controller;
+package com.ccsp.accums.ledger.entry.controller;
 
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

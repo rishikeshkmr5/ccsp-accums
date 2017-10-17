@@ -1,4 +1,4 @@
-package com.ccsp.accums.ledger.controller;
+package com.ccsp.accums.ledger.summary.controller;
 
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;

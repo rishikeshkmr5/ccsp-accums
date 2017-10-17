@@ -35,7 +35,7 @@ import javassist.NotFoundException;
  *
  */
 /*@RunWith(SpringJUnit4ClassRunner.class)
-public class AccumsControllerTest {
+public class LedgerHeaderControllerTest {
 	public static int i = 10;
 
 	@InjectMocks
