@@ -3,6 +3,7 @@ package com.ccsp.accums.configuration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.ccsp.AccumsApplication;
 import com.ccsp.common.AbstractSwaggerConfig;
 
 import springfox.documentation.swagger.web.UiConfiguration;
