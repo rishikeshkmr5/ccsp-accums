@@ -40,7 +40,7 @@ public class LedgerEntryController {
 	 * 
 	 * @param ledgerEntryDTO
 	 */
-	@RequestMapping(path = UIConstants.ACCUMS_ENTRY, method = RequestMethod.POST, consumes = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
+	@RequestMapping(path = UIConstants.LEDGER_ENTRY, method = RequestMethod.POST, consumes = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
 	@ResponseBody
 	public List<LedgerEntryDTO> createLedgerEntry(@RequestBody LedgerEntryClaimDTO claimAccumEntry) throws ValidationException{
 		log.info("Create LedgerEntry details");
@@ -56,7 +56,7 @@ public class LedgerEntryController {
 	 * @return LedgerEntries
 	 * @throws NotFoundException
 	 */
-	@RequestMapping(path = UIConstants.ACCUMS_ENTRY, method = RequestMethod.GET, produces = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
+	@RequestMapping(path = UIConstants.LEDGER_ENTRY, method = RequestMethod.GET, produces = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
 	@ResponseBody
 	public List<LedgerEntryDTO> getLedgerEntry() throws NotFoundException {
 		log.info("Get LedgerEntry details");

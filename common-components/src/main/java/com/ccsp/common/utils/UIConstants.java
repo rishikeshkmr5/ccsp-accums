@@ -17,14 +17,14 @@ public class UIConstants {
 	/**
 	 * LEDGER HEADER URI
 	 */
-	public static final String LEDGER_HEADER = "/ledgerheader";
-	public static final String ACCUMS_ENTRY = "/accumsentry";
+	public static final String LEDGER_HEADER = "/ledger-header";
+	public static final String LEDGER_ENTRY = "/ledger-entry";
 	public static final String ACCUMS_ENTRY_PERIOD = "/accumsentryperiod";
 	
 	/**
 	 * Accumulation Summary URI
 	 */
-	public static final String ACCUMULATION_SUMMARY = "/accumulationsummary";
+	public static final String LEDGER_SUMMARY = "/ledger-summary";
 	
 	/**
 	 * Accums Inquiry API

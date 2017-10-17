@@ -38,7 +38,7 @@ public class LedgerSummaryController {
 	 * @return
 	 * @throws NotFoundException
 	 */
-	@RequestMapping(path = UIConstants.ACCUMULATION_SUMMARY, method = RequestMethod.GET, produces = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
+	@RequestMapping(path = UIConstants.LEDGER_SUMMARY, method = RequestMethod.GET, produces = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
 	@ResponseBody
 	public List<LedgerSummaryDTO> getAccumulationSummary() throws NotFoundException {
 		log.info("Get all members accums summary details");
@@ -52,7 +52,7 @@ public class LedgerSummaryController {
 	 * @return
 	 * @throws NotFoundException 
 	 */
-	@RequestMapping(path = UIConstants.ACCUMULATION_SUMMARY, method = RequestMethod.POST, consumes = {
+	@RequestMapping(path = UIConstants.LEDGER_SUMMARY, method = RequestMethod.POST, consumes = {
 			"application/json; charset=utf-8", "application/xml; charset=utf-8" })
 	@ResponseBody
 	public LedgerSummaryClaimDTO createAccumulationSummary(
