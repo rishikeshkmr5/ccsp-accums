@@ -12,10 +12,9 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 
 import com.ccsp.common.aspect.LoggingAspect;
 
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
-
 /**
  * @author nnarayanaperumaln
+ * This class should be on the root package as it is used for swagger configurations.
  *
  */
 @EnableAspectJAutoProxy

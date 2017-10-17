@@ -20,13 +20,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ccsp.accums.ledger.header.entity.LedgerHeaderEntity;
 import com.ccsp.accums.ledger.header.repository.ILedgerHeaderRepository;
+import com.ccsp.accums.ledger.summary.dto.LedgerSummaryClaimDTO;
 import com.ccsp.accums.ledger.summary.dto.LedgerSummaryDTO;
 import com.ccsp.accums.ledger.summary.entity.LedgerSummaryEntity;
-import com.ccsp.accums.ledger.summary.dto.LedgerSummaryClaimDTO;
 import com.ccsp.accums.ledger.summary.mapper.LedgerSummaryMapper;
 import com.ccsp.accums.ledger.summary.repository.LedgerSummaryRepository;
 import com.ccsp.accums.ledger.summary.service.LedgerSummaryService;
-import com.ccsp.common.dto.ICommonDTO;
 
 import javassist.NotFoundException;
 
