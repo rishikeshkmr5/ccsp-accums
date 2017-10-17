@@ -21,7 +21,7 @@ import com.ccsp.accums.ledger.header.entity.LedgerHeaderEntity;
  *
  */
 @Entity
-@Table(name = "LEDGER_SUMMARY")
+@Table(name = "LDGR_SUM")
 public class LedgerSummaryEntity  implements java.io.Serializable {
 
 	/**
@@ -35,7 +35,7 @@ public class LedgerSummaryEntity  implements java.io.Serializable {
 	private Long summaryID;
 	
 	@ManyToOne(cascade = CascadeType.ALL, targetEntity = LedgerHeaderEntity.class, fetch = FetchType.EAGER)
-	@JoinColumn(name="LDGR_ID",referencedColumnName="LEDGER_ID")
+	@JoinColumn(name="LDGR_ID",referencedColumnName="LDGR_ID")
 	private LedgerHeaderEntity ledgerHeader;
 	
 	@Column(name = "SUB_ID",  nullable = true)

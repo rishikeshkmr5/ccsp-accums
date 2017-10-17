@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import com.ccsp.accums.ledger.header.entity.LedgerHeaderEntity;
 
 @Entity
-@Table(name = "ACCUMLATION_ENTRY")
+@Table(name = "LDGR_ENTRY")
 public class LedgerEntryEntity  implements java.io.Serializable {
 	
 	/**
@@ -30,7 +30,7 @@ public class LedgerEntryEntity  implements java.io.Serializable {
 	private LedgerEntryEntity accumsEntry;
 	
 	@ManyToOne(cascade = CascadeType.ALL, targetEntity = LedgerHeaderEntity.class, fetch = FetchType.EAGER)
-	@JoinColumn(name="LDGR_ID",referencedColumnName="LEDGER_ID")
+	@JoinColumn(name="LDGR_ID",referencedColumnName="LDGR_ID")
 	private LedgerHeaderEntity ledgerHeader;
 	
 	@Column(name = "ACCUM_TYP_NM", nullable = true)
