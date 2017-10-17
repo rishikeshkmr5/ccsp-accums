@@ -59,11 +59,6 @@ public class LedgerHeaderController {
 
 	@Autowired
 	private LedgerHeaderService accumulationHeaderService;
-	@Autowired
-	private LedgerEntryService ledgerEntryService;
-
-	@Autowired
-	private LedgerSummaryService accumulationSummaryService;
 
 	@Autowired
 	private BenefitBalanceServiceImpl benefitBalanceServiceImpl;
@@ -91,7 +86,6 @@ public class LedgerHeaderController {
 
 	/**
 	 * Persist the received LedgerHeader Details
-	 * 
 	 * @param ledgerHeaderDTO
 	 */
 	@RequestMapping(path = UIConstants.LEDGER_HEADER, method = RequestMethod.POST, consumes = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
@@ -103,64 +97,8 @@ public class LedgerHeaderController {
 		return accumulationHeaderService.create(accumulationHeaderDTO);
 	}
 
-	/**
-	 * Persist the received LedgerEntry Details
-	 * 
-	 * @param ledgerEntryDTO
-	 */
-	@RequestMapping(path = UIConstants.ACCUMS_ENTRY, method = RequestMethod.POST, consumes = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
-	@ResponseBody
-	public List<LedgerEntryDTO> createLedgerEntry(@RequestBody LedgerEntryClaimDTO claimAccumEntry) throws ValidationException{
-		log.info("Create LedgerEntry details");
-		MDC.put("username", "ABC");
-		List<? extends ICommonDTO> accumsEntry = claimAccumEntry.getAccumEntryList();
-		validator.validate(accumsEntry);
-		return ledgerEntryService.create(accumsEntry);
-	}
-
-	/**
-	 * Fetches all the ledgerEntries
-	 * 
-	 * @return LedgerEntries
-	 * @throws NotFoundException
-	 */
-	@RequestMapping(path = UIConstants.ACCUMS_ENTRY, method = RequestMethod.GET, produces = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
-	@ResponseBody
-	public List<LedgerEntryDTO> getLedgerEntry() throws NotFoundException {
-		log.info("Get LedgerEntry details");
-		return ledgerEntryService.readAll();
-	}
-
-	/**
-	 * Fetches all the accumulation summary
-	 * 
-	 * @return
-	 * @throws NotFoundException
-	 */
-	@RequestMapping(path = UIConstants.ACCUMULATION_SUMMARY, method = RequestMethod.GET, produces = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
-	@ResponseBody
-	public List<LedgerSummaryDTO> getAccumulationSummary() throws NotFoundException {
-		log.info("Get all members accums summary details");
-		return accumulationSummaryService.readAll();
-	}
-
-	/**
-	 * Persist the received accumulation summary Details
-	 * 
-	 * @param accumulationSummaryDTO
-	 * @return
-	 * @throws NotFoundException 
-	 */
-	@RequestMapping(path = UIConstants.ACCUMULATION_SUMMARY, method = RequestMethod.POST, consumes = {
-			"application/json; charset=utf-8", "application/xml; charset=utf-8" })
-	@ResponseBody
-	public LedgerSummaryClaimDTO createAccumulationSummary(
-			@RequestBody LedgerSummaryClaimDTO accumulationSummaryDTO) throws NotFoundException {
-		log.info("Create AccumulationSummary details");
-		List<? extends ICommonDTO> accumsSummary = accumulationSummaryDTO.getAccumulationSummaryList();
-		validator.validate(accumsSummary);
-		return accumulationSummaryService.createClaimSummary(accumulationSummaryDTO);
-	}
+	
+	
 
 	/**
 	 * Fetches benefit balance details based on subscriber or member id

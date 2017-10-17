@@ -87,7 +87,8 @@ public class LedgerEntryService extends CommonServiceImpl  {
 		for(LedgerEntryEntity ledgerEntry: accumssEntries) {
 			
 			LedgerEntryDTO ledgerEntryDTO=getMapper().convertToDTO(ledgerEntry);
-			ledgerEntryDTO.setAccumHeaderId(ledgerEntry.getLedgerHeader().getLedgerID());
+			if(ledgerEntry.getLedgerHeader() != null)
+				ledgerEntryDTO.setAccumHeaderId(ledgerEntry.getLedgerHeader().getLedgerID());
 			if(ledgerEntry.getAccumsEntry()  != null) {
 				ledgerEntryDTO.setLinkToPrimary(ledgerEntry.getAccumsEntry().getLedgerLineId());
 			}
