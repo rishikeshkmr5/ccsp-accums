@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
@@ -24,10 +25,10 @@ public class LedgerHeaderEntity  implements java.io.Serializable {
 	private static final long serialVersionUID = 8510561406430816669L;
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_LDGR_HDR")
+	@SequenceGenerator(name = "SEQ_LDGR_HDR", sequenceName = "SEQ_LDGR_HDR", allocationSize = 1)
 	@Column(name = "LDGR_ID", unique = true, nullable = false)
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long ledgerID;
-	
 		
 	@Column(name = "VEND_XACTN_ID", nullable = true, length=16)
 	private String vendorTaxID;

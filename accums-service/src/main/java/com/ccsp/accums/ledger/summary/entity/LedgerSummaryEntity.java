@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.ccsp.accums.ledger.header.entity.LedgerHeaderEntity;
@@ -30,8 +31,9 @@ public class LedgerSummaryEntity  implements java.io.Serializable {
 	private static final long serialVersionUID = 4325638042231113322L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "LDGR_SUM_ID",unique=true)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_LDGR_SUM")
+	@SequenceGenerator(name = "SEQ_LDGR_SUM", sequenceName = "SEQ_LDGR_SUM", allocationSize = 1)
+	@Column(name = "LDGR_SUM_ID", unique = true, nullable = false)
 	private Long summaryID;
 	
 	@ManyToOne(cascade = CascadeType.ALL, targetEntity = LedgerHeaderEntity.class, fetch = FetchType.EAGER)
