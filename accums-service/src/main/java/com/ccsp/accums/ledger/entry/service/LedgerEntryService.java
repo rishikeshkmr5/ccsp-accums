@@ -17,15 +17,13 @@ import com.ccsp.accums.ledger.header.repository.ILedgerHeaderRepository;
 import com.ccsp.common.dto.ICommonDTO;
 import com.ccsp.common.mapper.IBaseMapper;
 import com.ccsp.common.service.impl.CommonServiceImpl;
-
-import javassist.NotFoundException;
 @Component
 public class LedgerEntryService extends CommonServiceImpl  {
 	/**
 	 * Autowiring repository layer
 	 */
 	@Resource
-	private LedgerEntryRepository accumsEntryRepository;
+	private LedgerEntryRepository ledgerEntryRepository;
 	@Resource
 	private ILedgerHeaderRepository ledgerHeaderRepository;
 
@@ -35,7 +33,7 @@ public class LedgerEntryService extends CommonServiceImpl  {
 	@SuppressWarnings("unchecked")
 	@Override
 	public JpaRepository<LedgerEntryEntity, Long> getJPARepository() {
-		return accumsEntryRepository;
+		return ledgerEntryRepository;
 	}
 
 	/* (non-Javadoc)
@@ -47,86 +45,76 @@ public class LedgerEntryService extends CommonServiceImpl  {
 		return LedgerEntryMapper.INSTANCE;
 	}	
 	
+	/**
+	 * Creates the provided Ledger Entry.
+	 * It expects ledger header id and primary ledger entry id along with other attributes.
+	 * @param dto
+	 * @return T
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T extends ICommonDTO> T create(T dto) {
 		
 		LedgerEntryDTO accumsEntryDTO = (LedgerEntryDTO) dto;
-		LedgerEntryEntity accumsEntry = getMapper().convertToEntity(accumsEntryDTO);
+		LedgerEntryEntity ledgerEntry = getMapper().convertToEntity(accumsEntryDTO);
 		
-		LedgerHeaderEntity ledger= ledgerHeaderRepository.findOne(accumsEntryDTO.getAccumHeaderId());
+		LedgerHeaderEntity ledger= ledgerHeaderRepository.findOne(accumsEntryDTO.getLedgerHeaderID());
+		ledgerEntry.setLedgerHeader(ledger);
 		
-		
-		
-		accumsEntry.setLedgerHeader(ledger);
-		
-		if(accumsEntryDTO.getLinkToPrimary() != null) {
-			LedgerEntryEntity linkAccums = accumsEntryRepository.findOne(accumsEntryDTO.getLinkToPrimary());
-			accumsEntry.setAccumsEntry(linkAccums);
+		if(accumsEntryDTO.getPrimaryLedgerEntryID() != null) {
+			LedgerEntryEntity primaryLedgerEntry = getJPARepository().findOne(accumsEntryDTO.getPrimaryLedgerEntryID());
+			ledgerEntry.setPrimaryLedgerEntry(primaryLedgerEntry);
 		}
 		
+		ledgerEntry = getJPARepository().saveAndFlush(ledgerEntry);
 		
-		if(accumsEntry != null){
-			accumsEntry = getJPARepository().saveAndFlush(accumsEntry);
-		}
-		
-		ICommonDTO resultDTO =  getMapper().convertToDTO(accumsEntry);
+		ICommonDTO resultDTO =  getMapper().convertToDTO(ledgerEntry);
 		return (T) resultDTO;
 	}
 	
+	/**
+	 * Persists provided list of data.
+	 * Populates the required entities like header entity and primary reportable entity.
+	 * @param ledgerEntries
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T extends ICommonDTO> List<T> readAll() throws NotFoundException {
-		List<LedgerEntryDTO> accumsEntriesDTO = new ArrayList<>(); 
-		List<LedgerEntryEntity> accumssEntries= accumsEntryRepository.findAll();
+	public <T extends ICommonDTO> List<T> create(List<T> dtoList){
+		List<LedgerEntryDTO> ledgerEntries = (List<LedgerEntryDTO>) dtoList;
+		List<LedgerEntryEntity> entities = new ArrayList<LedgerEntryEntity>();
 		
-		if(accumssEntries == null || accumssEntries.size() == 0) {
-			throw new NotFoundException("Resource Not Found");
-		}
+		boolean isFirst = true;
+		LedgerEntryEntity primaryLedgerEntry = null;
+		LedgerHeaderEntity ledgerHeader = null;
 		
-		for(LedgerEntryEntity ledgerEntry: accumssEntries) {
-			
-			LedgerEntryDTO ledgerEntryDTO=getMapper().convertToDTO(ledgerEntry);
-			if(ledgerEntry.getLedgerHeader() != null)
-				ledgerEntryDTO.setAccumHeaderId(ledgerEntry.getLedgerHeader().getLedgerID());
-			if(ledgerEntry.getAccumsEntry()  != null) {
-				ledgerEntryDTO.setLinkToPrimary(ledgerEntry.getAccumsEntry().getLedgerLineId());
+		for(LedgerEntryDTO ledgerEntry : ledgerEntries) {
+			LedgerEntryEntity entity = getMapper().convertToEntity(ledgerEntry);
+			if (isFirst) {
+				primaryLedgerEntry = entity;
+				ledgerHeader = ledgerHeaderRepository.findOne(ledgerEntry.getLedgerHeaderID());
+				isFirst = false;
+			} else { 
+				entity.setPrimaryLedgerEntry(primaryLedgerEntry);
 			}
-			accumsEntriesDTO.add(ledgerEntryDTO);
-			
+			entity.setLedgerHeader(ledgerHeader);
+			entities.add(entity);
 		}
 		
-		return (List<T>) accumsEntriesDTO;		
-	}
-	
-	public List<LedgerEntryDTO> create(List<? extends ICommonDTO> accumsEntryList){
-		List<LedgerEntryEntity> accumsEntry = new ArrayList<>();
-		List<LedgerEntryDTO> entryDTOList = new ArrayList<>();
-		int counter = 1;
-		LedgerEntryEntity baseEntry = null;
-		for(ICommonDTO dto : accumsEntryList) {
-			LedgerEntryEntity entry = new LedgerEntryEntity();
-			LedgerEntryDTO accumsEntryDTO = (LedgerEntryDTO)dto;
-			entry = getMapper().convertToEntity(accumsEntryDTO);
-			if(counter == 1) 
-				baseEntry = entry;
-			else
-				entry.setAccumsEntry(baseEntry);
-			accumsEntry.add(entry);
-			counter++;
+		getJPARepository().save(entities);
+		
+		List<LedgerEntryDTO> ledgerEntryResults = new ArrayList<LedgerEntryDTO>();
+		
+		for(LedgerEntryEntity entryEntity : entities) {
+			LedgerEntryDTO dto = getMapper().convertToDTO(entryEntity);
+			if (entryEntity.getPrimaryLedgerEntry() != null) {
+				dto.setPrimaryLedgerEntryID(entryEntity.getPrimaryLedgerEntry().getId());
+			}
+			if (entryEntity.getLedgerHeader() != null) {
+				dto.setLedgerHeaderID(entryEntity.getLedgerHeader().getId());
+			}
+			ledgerEntryResults.add(dto);
 		}
-		if(accumsEntry.size() > 0) {
-			for(LedgerEntryEntity entryEntity : accumsEntry) {
-				accumsEntryRepository.save(entryEntity);
-			}			
-		}
-		for(LedgerEntryEntity entryEntity : accumsEntry) {
-			LedgerEntryDTO dto = new LedgerEntryDTO();
-			dto = getMapper().convertToDTO(entryEntity);
-			if(entryEntity.getAccumsEntry() != null)
-				dto.setLinkToPrimary(entryEntity.getAccumsEntry().getLedgerLineId());
-			entryDTOList.add(dto);			
-		}
-		return entryDTOList;
+		return (List<T>) ledgerEntryResults;
 	}
 }

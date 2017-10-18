@@ -28,15 +28,21 @@ public class LedgerEntryEntity  implements java.io.Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_LDGR_ENTRY")
 	@SequenceGenerator(name = "SEQ_LDGR_ENTRY", sequenceName = "SEQ_LDGR_ENTRY", allocationSize = 1)
 	@Column(name = "LDGR_ENTRY_ID", unique = true, nullable = false)
-	private Long ledgerLineId;
+	private Long id;
 	
 	@ManyToOne(cascade={CascadeType.ALL})
 	@JoinColumn(name="PRIMY_LDGR_ENTRY_ID")
-	private LedgerEntryEntity accumsEntry;
+	private LedgerEntryEntity primaryLedgerEntry;
+	
+	@Column(name = "PRIMY_LDGR_ENTRY_ID", insertable = false, updatable = false)
+	private Long primaryLedgerEntryID;
 	
 	@ManyToOne(cascade = CascadeType.ALL, targetEntity = LedgerHeaderEntity.class, fetch = FetchType.EAGER)
 	@JoinColumn(name="LDGR_ID",referencedColumnName="LDGR_ID")
 	private LedgerHeaderEntity ledgerHeader;
+	
+	@Column(name = "LDGR_ID", insertable = false, updatable = false)
+	private Long ledgerHeaderID;
 	
 	@Column(name = "ACCUM_TYP_NM", nullable = true)
 	private String accumType;
@@ -48,7 +54,7 @@ public class LedgerEntryEntity  implements java.io.Serializable {
 	private String costShareTier;
 	
 	@Column(name = "AMT", nullable = true)
-	private Double amt;
+	private Double amount;
 	
 	@Column(name = "NTWK_CD",nullable = true)
 	private String network;
@@ -57,22 +63,30 @@ public class LedgerEntryEntity  implements java.io.Serializable {
 	private double snapshotSummmary;
 	
 	@Column(name = "UOM_NM", nullable = true)
-	private String UOM;
+	private String unitOfMeasure;
 	
 	@Column(name = "SVC_DT", nullable = true)
 	private Date serviceDate;
 
-	public Long getLedgerLineId() {
-		return ledgerLineId;
-	}
 	/**
-	 * 
-	 * @param ledgerLineId
+	 * Default constructor.
 	 */
+	public LedgerEntryEntity() { }
 	
-	public void setLedgerLineId(Long ledgerLineId) {
-		this.ledgerLineId = ledgerLineId;
+	/**
+	 * @return the id
+	 */
+	public Long getId() {
+		return id;
 	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	/**
 	 * 
 	 * @return
@@ -91,6 +105,12 @@ public class LedgerEntryEntity  implements java.io.Serializable {
 		this.ledgerHeader = ledgerHeader;
 	}
 	
+	public Long getLedgerHeaderID() {
+		return ledgerHeaderID;
+	}
+	public void setLedgerHeaderID(Long ledgerHeaderID) {
+		this.ledgerHeaderID = ledgerHeaderID;
+	}
 	/**
 	 * 
 	 * @return
@@ -138,20 +158,21 @@ public class LedgerEntryEntity  implements java.io.Serializable {
 	public void setCostShareTier(String costShareTier) {
 		this.costShareTier = costShareTier;
 	}
+	
 	/**
-	 * 
-	 * @return
+	 * @return the amount
 	 */
-	public Double getAmt() {
-		return amt;
+	public Double getAmount() {
+		return amount;
 	}
+
 	/**
-	 * 
-	 * @param amt
+	 * @param amount the amount to set
 	 */
-	public void setAmt(Double amt) {
-		this.amt = amt;
+	public void setAmount(Double amount) {
+		this.amount = amount;
 	}
+
 	/**
 	 * 
 	 * @return
@@ -181,20 +202,21 @@ public class LedgerEntryEntity  implements java.io.Serializable {
 	public void setSnapshotSummmary(double snapshotSummmary) {
 		this.snapshotSummmary = snapshotSummmary;
 	}
+	
 	/**
-	 * 
-	 * @return
+	 * @return the unitOfMeasure
 	 */
-	public String getUOM() {
-		return UOM;
+	public String getUnitOfMeasure() {
+		return unitOfMeasure;
 	}
+
 	/**
-	 * 
-	 * @param uOM
+	 * @param unitOfMeasure the unitOfMeasure to set
 	 */
-	public void setUOM(String uOM) {
-		UOM = uOM;
+	public void setUnitOfMeasure(String unitOfMeasure) {
+		this.unitOfMeasure = unitOfMeasure;
 	}
+
 	/**
 	 * 
 	 * @return
@@ -209,12 +231,30 @@ public class LedgerEntryEntity  implements java.io.Serializable {
 	public void setServiceDate(Date serviceDate) {
 		this.serviceDate = serviceDate;
 	}
-	public LedgerEntryEntity getAccumsEntry() {
-		return accumsEntry;
+	/**
+	 * @return the primaryLedgerEntry
+	 */
+	public LedgerEntryEntity getPrimaryLedgerEntry() {
+		return primaryLedgerEntry;
 	}
-	public void setAccumsEntry(LedgerEntryEntity accumsEntry) {
-		this.accumsEntry = accumsEntry;
+	/**
+	 * @param primaryLedgerEntry the primaryLedgerEntry to set
+	 */
+	public void setPrimaryLedgerEntry(LedgerEntryEntity primaryLedgerEntry) {
+		this.primaryLedgerEntry = primaryLedgerEntry;
 	}
-	
-	
+
+	/**
+	 * @return the primaryLedgerEntryID
+	 */
+	public Long getPrimaryLedgerEntryID() {
+		return primaryLedgerEntryID;
+	}
+
+	/**
+	 * @param primaryLedgerEntryID the primaryLedgerEntryID to set
+	 */
+	public void setPrimaryLedgerEntryID(Long primaryLedgerEntryID) {
+		this.primaryLedgerEntryID = primaryLedgerEntryID;
+	}
 }

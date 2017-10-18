@@ -28,7 +28,7 @@ public class LedgerHeaderEntity  implements java.io.Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_LDGR_HDR")
 	@SequenceGenerator(name = "SEQ_LDGR_HDR", sequenceName = "SEQ_LDGR_HDR", allocationSize = 1)
 	@Column(name = "LDGR_ID", unique = true, nullable = false)
-	private Long ledgerID;
+	private Long id;
 		
 	@Column(name = "VEND_XACTN_ID", nullable = true, length=16)
 	private String vendorTaxID;
@@ -46,7 +46,7 @@ public class LedgerHeaderEntity  implements java.io.Serializable {
 	private String serviceName;
 	
 	@Column(name = "SVC_DT", nullable = true)
-	private Date dateOfService;
+	private Date serviceDate;
 	
 	@Column(name = "PROC_DT", nullable = true)
 	private Date dateTimeProcessed;
@@ -76,20 +76,25 @@ public class LedgerHeaderEntity  implements java.io.Serializable {
 	private String unitOfMeasure;
 	
 	@Column(name = "ACCUM_TYP_NM", nullable = true)
-	private String accumulatorType;
+	private String accumType;
 
 	/**
-	 * @return
+	 * Default constructor.
 	 */
-	public Long getLedgerID() {
-		return ledgerID;
+	public LedgerHeaderEntity() { }
+
+	/**
+	 * @return the id
+	 */
+	public Long getId() {
+		return id;
 	}
 
 	/**
-	 * @param ledgerID
+	 * @param id the id to set
 	 */
-	public void setLedgerID(Long ledgerID) {
-		this.ledgerID = ledgerID;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	/**
@@ -149,17 +154,17 @@ public class LedgerHeaderEntity  implements java.io.Serializable {
 	}
 
 	/**
-	 * @return
+	 * @return the serviceDate
 	 */
-	public Date getDateOfService() {
-		return dateOfService;
+	public Date getServiceDate() {
+		return serviceDate;
 	}
 
 	/**
-	 * @param dateOfService
+	 * @param serviceDate the serviceDate to set
 	 */
-	public void setDateOfService(Date dateOfService) {
-		this.dateOfService = dateOfService;
+	public void setServiceDate(Date serviceDate) {
+		this.serviceDate = serviceDate;
 	}
 
 	/**
@@ -274,18 +279,19 @@ public class LedgerHeaderEntity  implements java.io.Serializable {
 	}
 
 	/**
-	 * @return
+	 * @return the accumType
 	 */
-	public String getAccumulatorType() {
-		return accumulatorType;
+	public String getAccumType() {
+		return accumType;
 	}
 
 	/**
-	 * @param accumulatorType
+	 * @param accumType the accumType to set
 	 */
-	public void setAccumulatorType(String accumulatorType) {
-		this.accumulatorType = accumulatorType;
+	public void setAccumType(String accumType) {
+		this.accumType = accumType;
 	}
+
 	/**
 	 * 
 	 * @return

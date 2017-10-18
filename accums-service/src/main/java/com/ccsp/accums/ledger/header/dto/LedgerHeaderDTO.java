@@ -2,7 +2,6 @@ package com.ccsp.accums.ledger.header.dto;
 
 import java.util.Date;
 
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -25,8 +24,8 @@ public class LedgerHeaderDTO  implements ICommonDTO {
 	private static final long serialVersionUID = 1L;
 	
 	
-	@XmlElement(name ="ledgerID") 
-	private Long ledgerID;
+	@XmlElement(name ="id") 
+	private Long id;
 	
 	
 	@XmlElement(name="vendorTaxID")
@@ -49,8 +48,8 @@ public class LedgerHeaderDTO  implements ICommonDTO {
 	private String serviceName;
 	
 	
-	@XmlElement(name="dateOfService")  
-	private Date dateOfService;
+	@XmlElement(name="serviceDate")  
+	private Date serviceDate;
 	
 	
 	@XmlElement(name="dateTimeProcessed")  
@@ -81,21 +80,26 @@ public class LedgerHeaderDTO  implements ICommonDTO {
 	private String unitOfMeasure;
 	
 	
-	@XmlElement(name="accumulatorType")  
-	private String accumulatorType;
+	@XmlElement(name="accumType")  
+	private String accumType;
 
 	/**
-	 * @return
+	 * Default constructor.
 	 */
-	public Long getLedgerID() {
-		return ledgerID;
+	public LedgerHeaderDTO() { }
+
+	/**
+	 * @return the id
+	 */
+	public Long getId() {
+		return id;
 	}
 
 	/**
-	 * @param ledgerID
+	 * @param id the id to set
 	 */
-	public void setLedgerID(Long ledgerID) {
-		this.ledgerID = ledgerID;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	/**
@@ -155,17 +159,17 @@ public class LedgerHeaderDTO  implements ICommonDTO {
 	}
 
 	/**
-	 * @return
+	 * @return the serviceDate
 	 */
-	public Date getDateOfService() {
-		return dateOfService;
+	public Date getServiceDate() {
+		return serviceDate;
 	}
 
 	/**
-	 * @param dateOfService
+	 * @param serviceDate the serviceDate to set
 	 */
-	public void setDateOfService(Date dateOfService) {
-		this.dateOfService = dateOfService;
+	public void setServiceDate(Date serviceDate) {
+		this.serviceDate = serviceDate;
 	}
 
 	/**
@@ -281,18 +285,19 @@ public class LedgerHeaderDTO  implements ICommonDTO {
 	}
 
 	/**
-	 * @return
+	 * @return the accumType
 	 */
-	public String getAccumulatorType() {
-		return accumulatorType;
+	public String getAccumType() {
+		return accumType;
 	}
 
 	/**
-	 * @param accumulatorType
+	 * @param accumType the accumType to set
 	 */
-	public void setAccumulatorType(String accumulatorType) {
-		this.accumulatorType = accumulatorType;
+	public void setAccumType(String accumType) {
+		this.accumType = accumType;
 	}
+
 	/**
 	 * 
 	 * @return

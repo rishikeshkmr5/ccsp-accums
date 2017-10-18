@@ -1,8 +1,6 @@
 package com.ccsp.accums.ledger.summary.mapper;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 
 import com.ccsp.accums.ledger.summary.dto.LedgerSummaryDTO;
@@ -17,13 +15,4 @@ public abstract class LedgerSummaryMapper implements IBaseMapper<LedgerSummaryEn
 	 * 
 	 */
 	public static final LedgerSummaryMapper INSTANCE = Mappers.getMapper(LedgerSummaryMapper.class);
-
-	/* (non-Javadoc)
-	 * @see com.ccsp.common.mapper.IBaseMapper#convertToEntity(com.ccsp.common.dto.ICommonDTO)
-	 */
-	@Override
-	@Mappings({
-		@Mapping(target = "summaryID", ignore = true)
-	})
-	public abstract LedgerSummaryEntity convertToEntity(LedgerSummaryDTO dto);
 }

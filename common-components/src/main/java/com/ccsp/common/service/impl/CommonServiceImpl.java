@@ -34,6 +34,17 @@ public abstract class CommonServiceImpl implements ICommonService {
 		ICommonDTO resultDTO =  getMapper().convertToDTO(entity);
 		return (T) resultDTO;
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T extends ICommonDTO> List<T> create(List<T> dtoList) {
+		List<Serializable> entities = getMapper().convertToEntityList((List<ICommonDTO>) dtoList);
+		if(entities != null){
+			entities = getJPARepository().save(entities);
+		}
+		List<T> resultDTOList =  (List<T>) getMapper().convertToDTOList(entities);
+		return resultDTOList;
+	}
 
 	/* (non-Javadoc)
 	 * @see com.ccsp.common.service.ICommonService#update(com.ccsp.common.dto.ICommonDTO)

@@ -42,5 +42,5 @@ public interface IBaseMapper<Entity extends Serializable, DTO extends ICommonDTO
 	 * @param dto
 	 * @return
 	 */
-	List<Entity> convertToEntity(List<DTO> dto);
+	List<Entity> convertToEntityList(List<DTO> dto);
 }

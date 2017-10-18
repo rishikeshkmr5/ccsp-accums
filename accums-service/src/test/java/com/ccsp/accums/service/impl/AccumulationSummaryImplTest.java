@@ -96,7 +96,7 @@ public class AccumulationSummaryImplTest {
 		//accumulationSummaryDTOs = claimSummaryDTO.getAccumulationSummaryDTO();
 		for (LedgerSummaryDTO accumulationSummaryDTO : accumulationSummaryDTOs) {
 			LedgerHeaderEntity ledger = new LedgerHeaderEntity();
-			ledger.setLedgerID(1L);
+			ledger.setId(1L);
 			when(ledgerHeaderRepository.findOne(accumulationSummaryDTO.getLedgerHeaderID())).thenReturn(ledger);
 			//LedgerHeaderEntity ledger = ledgerHeaderRepository.findOne(accumulationSummaryDTO.getLedgerHeaderID());
 			LedgerSummaryEntity accumulationSummary = new LedgerSummaryEntity();
@@ -108,7 +108,7 @@ public class AccumulationSummaryImplTest {
 			accumulationSummaryDTOsAfterInseration.add(accumulationSummaryDTO);
 		}
 		claimSummaryDTOAfterInseration.setAccumulationSummaryList(accumulationSummaryDTOsAfterInseration);
-		LedgerSummaryClaimDTO actual = serviceImpl.createClaimSummary(claimSummaryDTO);
+		LedgerSummaryClaimDTO actual = serviceImpl.create(claimSummaryDTO);
 		Assert.assertEquals(claimSummaryDTOAfterInseration, actual);
 	}
 	
@@ -122,7 +122,7 @@ public class AccumulationSummaryImplTest {
 		List<LedgerSummaryEntity> accumulationSummaries = new ArrayList<>();
 		LedgerSummaryEntity accumulationSummary = new LedgerSummaryEntity();
 		LedgerHeaderEntity ledgerHeaderEntity = new LedgerHeaderEntity();
-		ledgerHeaderEntity.setLedgerID(1L);
+		ledgerHeaderEntity.setId(1L);
 		accumulationSummary.setLedgerHeader(ledgerHeaderEntity);
 		accumulationSummaries.add(accumulationSummary);
 		List<LedgerSummaryDTO> accumulationHeaderDTOList = new ArrayList<>();
@@ -131,7 +131,7 @@ public class AccumulationSummaryImplTest {
 			
 			LedgerSummaryDTO accumulationSummaryDTO=new LedgerSummaryDTO();
 			when(ledgerSummaryMapper.convertToDTO(summary)).thenReturn(accumulationSummaryDTO);
-			accumulationSummaryDTO.setLedgerHeaderID(summary.getLedgerHeader().getLedgerID());
+			accumulationSummaryDTO.setLedgerHeaderID(summary.getLedgerHeader().getId());
 			accumulationHeaderDTOList.add(accumulationSummaryDTO);
 			
 		}

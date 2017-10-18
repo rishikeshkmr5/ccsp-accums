@@ -66,13 +66,13 @@ public class LedgerSummaryControllerTest {
 		LedgerSummaryDTO accumulationSummaryDTO = new LedgerSummaryDTO();
 		LedgerSummaryClaimDTO claimSummaryDTO = new LedgerSummaryClaimDTO();
 
-		accumulationSummaryDTO.setAccumTypeName("str");
+		accumulationSummaryDTO.setAccumType("str");
 		accumulationSummaryDTO.setLedgerHeaderID(1L);
 		accumulationSummaryDTOs.add(accumulationSummaryDTO);
 
 		claimSummaryDTO.setAccumulationSummaryList(accumulationSummaryDTOs);
-		ledgerSummaryController.createAccumulationSummary(claimSummaryDTO);
-		verify(accumulationSummaryService, times(1)).createClaimSummary(claimSummaryDTO);
+		ledgerSummaryController.createLedgerSummary(claimSummaryDTO);
+		verify(accumulationSummaryService, times(1)).create(claimSummaryDTO.getAccumulationSummaryList());
 	}
 
 	/**
@@ -86,8 +86,8 @@ public class LedgerSummaryControllerTest {
 		LedgerSummaryClaimDTO claimSummaryDTO = new LedgerSummaryClaimDTO();
 		accumulationSummaryDTOs.add(new LedgerSummaryDTO());
 		claimSummaryDTO.setAccumulationSummaryList(accumulationSummaryDTOs);
-		ledgerSummaryController.createAccumulationSummary(claimSummaryDTO);
-		verify(accumulationSummaryService, times(1)).createClaimSummary(claimSummaryDTO);
+		ledgerSummaryController.createLedgerSummary(claimSummaryDTO);
+		verify(accumulationSummaryService, times(1)).create(claimSummaryDTO.getAccumulationSummaryList());
 	}
 
 }

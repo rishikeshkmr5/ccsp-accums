@@ -15,9 +15,9 @@ public abstract class LedgerHeaderRepository implements ILedgerHeaderRepository 
 	
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<LedgerHeaderEntity> findByaccumulatorType(String accumulatorType){
+	public List<LedgerHeaderEntity> findByAccumType(String accumType){
 		Query query = entityManager.createNamedQuery("findMappings",LedgerHeaderEntity.class);
-		query.setParameter("accumulatorType", accumulatorType);		
+		query.setParameter("accumType", accumType);		
 		List<LedgerHeaderEntity> result = query.getResultList();
 		return result;
 		

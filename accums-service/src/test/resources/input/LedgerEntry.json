@@ -1,0 +1,59 @@
+{
+  "accumEntryList": [
+    {
+      "ledgerHeaderID": 1,
+      "accumType": "SPC Copay",
+      "amount": 50,
+      "costShareTier": "PPO",
+      "network": "IN",
+      "role": "PTNT",
+      "serviceDate": "2017-10-18T09:09:59.805Z",
+      "snapshotSummmary": 50,
+      "unitOfMeasure": "Dollars"
+    },
+    {
+      "ledgerHeaderID": 1,
+      "accumType": "Individual OPX",
+      "amount": 50,
+      "costShareTier": "PPO",
+      "network": "IN",
+      "role": "PTNT",
+      "serviceDate": "2017-10-18T09:09:59.805Z",
+      "snapshotSummmary": 50,
+      "unitOfMeasure": "Dollars"
+    },
+    {
+      "ledgerHeaderID": 1,
+      "accumType": "Individual Ded",
+      "amount": 50,
+      "costShareTier": "PPO",
+      "network": "IN",
+      "role": "PTNT",
+      "serviceDate": "2017-10-18T09:09:59.805Z",
+      "snapshotSummmary": 50,
+      "unitOfMeasure": "Dollars"
+    },
+    {
+      "ledgerHeaderID": 1,
+      "accumType": "Family Ded",
+      "amount": 50,
+      "costShareTier": "PPO",
+      "network": "IN",
+      "role": "PTNT",
+      "serviceDate": "2017-10-18T09:09:59.805Z",
+      "snapshotSummmary": 50,
+      "unitOfMeasure": "Dollars"
+    },
+    {
+      "ledgerHeaderID": 1,
+      "accumType": "Family OPX",
+      "amount": 50,
+      "costShareTier": "PPO",
+      "network": "IN",
+      "role": "PTNT",
+      "serviceDate": "2017-10-18T09:09:59.805Z",
+      "snapshotSummmary": 50,
+      "unitOfMeasure": "Dollars"
+    }
+  ]
+}

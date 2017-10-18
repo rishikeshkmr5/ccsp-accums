@@ -18,10 +18,10 @@ public class LedgerEntryDTO implements ICommonDTO{
 	*/
 	private static final long serialVersionUID = 1L;
 
-	private Long ledgerLineId;
+	private Long id;
 	
 	@NotNull(message = "Accums Header cannot be empty")
-	private Long accumHeaderId;
+	private Long ledgerHeaderID;
 	
 	@NotNull(message = "Accums Type cannot be empty")
 	private String accumType;
@@ -33,7 +33,7 @@ public class LedgerEntryDTO implements ICommonDTO{
 	private String costShareTier;
 	
 	@NotNull(message = "Amount cannot be empty")
-	private Double amt;
+	private Double amount;
 	
 	@NotNull(message = "Network cannot be empty")
 	private String network;
@@ -41,41 +41,44 @@ public class LedgerEntryDTO implements ICommonDTO{
 	@NotNull(message = "SnapshotSummary cannot be empty")
 	private double snapshotSummmary;
 	
-	@NotNull(message = "UOM cannot be empty")
-	private String UOM;
+	@NotNull(message = "Unit of measure cannot be empty")
+	private String unitOfMeasure;
 	
 	@NotNull(message = "Service Date cannot be empty")
 	private Date serviceDate;
 	
+	private Long primaryLedgerEntryID;
 	
-	private Long linkToPrimary;
+	/**
+	 * Default constructor.
+	 */
+	public LedgerEntryDTO() { }
+	
+	/**
+	 * @return the id
+	 */
+	public Long getId() {
+		return id;
+	}
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
 	/**
 	 * 
 	 * @return
 	 */
-	public Long getLedgerLineId() {
-		return ledgerLineId;
+	public Long getLedgerHeaderID() {
+		return ledgerHeaderID;
 	}
 	/**
 	 * 
-	 * @param ledgerLineId
+	 * @param ledgerHeaderID
 	 */
-	public void setLedgerLineId(Long ledgerLineId) {
-		this.ledgerLineId = ledgerLineId;
-	}
-	/**
-	 * 
-	 * @return
-	 */
-	public Long getAccumHeaderId() {
-		return accumHeaderId;
-	}
-	/**
-	 * 
-	 * @param accumHeaderId
-	 */
-	public void setAccumHeaderId(Long accumHeaderId) {
-		this.accumHeaderId = accumHeaderId;
+	public void setLedgerHeaderID(Long ledgerHeaderID) {
+		this.ledgerHeaderID = ledgerHeaderID;
 	}
 	/**
 	 * 
@@ -119,20 +122,21 @@ public class LedgerEntryDTO implements ICommonDTO{
 	public void setCostShareTier(String costShareTier) {
 		this.costShareTier = costShareTier;
 	}
+	
 	/**
-	 * 
-	 * @return
+	 * @return the amount
 	 */
-	public Double getAmt() {
-		return amt;
+	public Double getAmount() {
+		return amount;
 	}
+
 	/**
-	 * 
-	 * @param amt
+	 * @param amount the amount to set
 	 */
-	public void setAmt(Double amt) {
-		this.amt = amt;
+	public void setAmount(Double amount) {
+		this.amount = amount;
 	}
+
 	/**
 	 * 
 	 * @return
@@ -161,20 +165,21 @@ public class LedgerEntryDTO implements ICommonDTO{
 	public void setSnapshotSummmary(double snapshotSummmary) {
 		this.snapshotSummmary = snapshotSummmary;
 	}
+	
 	/**
-	 * 
-	 * @return
+	 * @return the unitOfMeasure
 	 */
-	public String getUOM() {
-		return UOM;
+	public String getUnitOfMeasure() {
+		return unitOfMeasure;
 	}
+
 	/**
-	 * 
-	 * @param uOM
+	 * @param unitOfMeasure the unitOfMeasure to set
 	 */
-	public void setUOM(String uOM) {
-		UOM = uOM;
+	public void setUnitOfMeasure(String unitOfMeasure) {
+		this.unitOfMeasure = unitOfMeasure;
 	}
+
 	/**
 	 * 
 	 * @return
@@ -189,12 +194,16 @@ public class LedgerEntryDTO implements ICommonDTO{
 	public void setServiceDate(Date serviceDate) {
 		this.serviceDate = serviceDate;
 	}
-	public Long getLinkToPrimary() {
-		return linkToPrimary;
+	/**
+	 * @return the primaryLedgerEntryID
+	 */
+	public Long getPrimaryLedgerEntryID() {
+		return primaryLedgerEntryID;
 	}
-	public void setLinkToPrimary(Long linkToPrimary) {
-		this.linkToPrimary = linkToPrimary;
+	/**
+	 * @param primaryLedgerEntryID the primaryLedgerEntryID to set
+	 */
+	public void setPrimaryLedgerEntryID(Long primaryLedgerEntryID) {
+		this.primaryLedgerEntryID = primaryLedgerEntryID;
 	}
-	
-	
 }

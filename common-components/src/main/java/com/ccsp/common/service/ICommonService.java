@@ -23,6 +23,12 @@ public interface ICommonService {
 	<T extends ICommonDTO> T create(T dto);	
 	
 	/**
+	 * @param dtoList
+	 * @return
+	 */
+	<T extends ICommonDTO> List<T >create(List<T> dtoList);	
+	
+	/**
 	 * @param dto
 	 * @return
 	 */

@@ -7,7 +7,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.ccsp.accums.ledger.header.entity.LedgerHeaderEntity;
 import com.ccsp.common.dto.ICommonDTO;
 
 /**
@@ -28,7 +27,7 @@ public class LedgerSummaryDTO  implements ICommonDTO {
 	 */
 	private static final long serialVersionUID = 4325638042231113322L;
 
-	private Long summaryID;
+	private Long id;
 	
 	@NotNull(message = "Ledger header ID cannot be empty")
 	private Long ledgerHeaderID;
@@ -37,16 +36,16 @@ public class LedgerSummaryDTO  implements ICommonDTO {
 	
 	private String memberID;
 	
-	private String planID;
+	private Long planID;
 		
 	@NotNull(message = "AccumTypeName cannot be empty")
-	private String accumTypeName;
+	private String accumType;
 	
 	private Double amount;
 	
 	private String network;
 	
-	private String networkTierName;
+	private String networkTier;
 	
 	private String unitOfMeasure;
 	
@@ -59,17 +58,22 @@ public class LedgerSummaryDTO  implements ICommonDTO {
 	private Date endDt;
 
 	/**
-	 * @return
+	 * Default constructor.
 	 */
-	public Long getSummaryID() {
-		return summaryID;
+	public LedgerSummaryDTO() { }
+
+	/**
+	 * @return the id
+	 */
+	public Long getId() {
+		return id;
 	}
 
 	/**
-	 * @param summaryID
+	 * @param id the id to set
 	 */
-	public void setSummaryID(Long summaryID) {
-		this.summaryID = summaryID;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	/**
@@ -103,14 +107,14 @@ public class LedgerSummaryDTO  implements ICommonDTO {
 	/**
 	 * @return
 	 */
-	public String getPlanID() {
+	public Long getPlanID() {
 		return planID;
 	}
 
 	/**
 	 * @param planID
 	 */
-	public void setPlanID(String planID) {
+	public void setPlanID(Long planID) {
 		this.planID = planID;
 	}
 	/**
@@ -211,19 +215,21 @@ public class LedgerSummaryDTO  implements ICommonDTO {
 	public void setEndDt(Date endDt) {
 		this.endDt = endDt;
 	}
+	
 	/**
-	 * @return
+	 * @return the networkTier
 	 */
-	public String getNetworkTierName() {
-		return networkTierName;
+	public String getNetworkTier() {
+		return networkTier;
 	}
 
 	/**
-	 * @param networkTierName
+	 * @param networkTier the networkTier to set
 	 */
-	public void setNetworkTierName(String networkTierName) {
-		this.networkTierName = networkTierName;
+	public void setNetworkTier(String networkTier) {
+		this.networkTier = networkTier;
 	}
+
 	/**
 	 * @return
 	 */
@@ -236,18 +242,18 @@ public class LedgerSummaryDTO  implements ICommonDTO {
 	public void setLedgerHeaderID(Long ledgerHeaderID) {
 		this.ledgerHeaderID = ledgerHeaderID;
 	}
+
 	/**
-	 * @return
+	 * @return the accumType
 	 */
-	public String getAccumTypeName() {
-		return accumTypeName;
+	public String getAccumType() {
+		return accumType;
 	}
+
 	/**
-	 * @param accumTypeName
+	 * @param accumType the accumType to set
 	 */
-	public void setAccumTypeName(String accumTypeName) {
-		this.accumTypeName = accumTypeName;
+	public void setAccumType(String accumType) {
+		this.accumType = accumType;
 	}
-	
-	
 }

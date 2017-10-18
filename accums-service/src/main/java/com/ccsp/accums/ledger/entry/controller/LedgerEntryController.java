@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ccsp.accums.ledger.entry.dto.LedgerEntryClaimDTO;
 import com.ccsp.accums.ledger.entry.dto.LedgerEntryDTO;
 import com.ccsp.accums.ledger.entry.service.LedgerEntryService;
-import com.ccsp.common.dto.ICommonDTO;
 import com.ccsp.common.utils.UIConstants;
 import com.ccsp.common.validator.Validator;
 
@@ -45,7 +44,7 @@ public class LedgerEntryController {
 	public List<LedgerEntryDTO> createLedgerEntry(@RequestBody LedgerEntryClaimDTO claimAccumEntry) throws ValidationException{
 		log.info("Create LedgerEntry details");
 		MDC.put("username", "ABC");
-		List<? extends ICommonDTO> accumsEntry = claimAccumEntry.getAccumEntryList();
+		List<LedgerEntryDTO> accumsEntry = claimAccumEntry.getAccumEntryList();
 		validator.validate(accumsEntry);
 		return ledgerEntryService.create(accumsEntry);
 	}

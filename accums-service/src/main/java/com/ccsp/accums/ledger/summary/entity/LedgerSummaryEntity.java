@@ -34,11 +34,14 @@ public class LedgerSummaryEntity  implements java.io.Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_LDGR_SUM")
 	@SequenceGenerator(name = "SEQ_LDGR_SUM", sequenceName = "SEQ_LDGR_SUM", allocationSize = 1)
 	@Column(name = "LDGR_SUM_ID", unique = true, nullable = false)
-	private Long summaryID;
+	private Long id;
 	
 	@ManyToOne(cascade = CascadeType.ALL, targetEntity = LedgerHeaderEntity.class, fetch = FetchType.EAGER)
 	@JoinColumn(name="LDGR_ID",referencedColumnName="LDGR_ID")
 	private LedgerHeaderEntity ledgerHeader;
+	
+	@Column(name = "LDGR_ID", insertable = false, updatable = false)
+	private Long ledgerHeaderID;
 	
 	@Column(name = "SUB_ID",  nullable = true)
 	private String subscriberID;
@@ -47,10 +50,10 @@ public class LedgerSummaryEntity  implements java.io.Serializable {
 	private String memberID;
 	
 	@Column(name = "PLN_ID",  nullable = true)
-	private String planID;
+	private Long planID;
 		
 	@Column(name = "ACCUM_TYP_NM",  nullable = true,unique=true)
-	private String accumTypeName;
+	private String accumType;
 	
 	@Column(name = "AMT",  nullable = true)
 	private Double amount;
@@ -59,7 +62,7 @@ public class LedgerSummaryEntity  implements java.io.Serializable {
 	private String network;
 	
 	@Column(name = "NTWK_TIER_NM",  nullable = true,unique=true)
-	private String networkTierName;
+	private String networkTier;
 	
 	@Column(name = "UOM_NM",  nullable = true)
 	private String unitOfMeasure;
@@ -76,19 +79,23 @@ public class LedgerSummaryEntity  implements java.io.Serializable {
 	@Column(name = "END_DT",  nullable = true,unique=true)
 	private Date endDt;
 
-	
 	/**
-	 * @return
+	 * Default constructor.
 	 */
-	public Long getSummaryID() {
-		return summaryID;
+	public LedgerSummaryEntity() { }
+
+	/**
+	 * @return the id
+	 */
+	public Long getId() {
+		return id;
 	}
 
 	/**
-	 * @param summaryID
+	 * @param id the id to set
 	 */
-	public void setSummaryID(Long summaryID) {
-		this.summaryID = summaryID;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	/**
@@ -122,14 +129,14 @@ public class LedgerSummaryEntity  implements java.io.Serializable {
 	/**
 	 * @return
 	 */
-	public String getPlanID() {
+	public Long getPlanID() {
 		return planID;
 	}
 
 	/**
 	 * @param planID
 	 */
-	public void setPlanID(String planID) {
+	public void setPlanID(Long planID) {
 		this.planID = planID;
 	}
 	/**
@@ -218,6 +225,20 @@ public class LedgerSummaryEntity  implements java.io.Serializable {
 	}
 
 	/**
+	 * @return the ledgerHeaderID
+	 */
+	public Long getLedgerHeaderID() {
+		return ledgerHeaderID;
+	}
+
+	/**
+	 * @param ledgerHeaderID the ledgerHeaderID to set
+	 */
+	public void setLedgerHeaderID(Long ledgerHeaderID) {
+		this.ledgerHeaderID = ledgerHeaderID;
+	}
+
+	/**
 	 * @return
 	 */
 	public Date getEffectiveDt() {
@@ -245,32 +266,32 @@ public class LedgerSummaryEntity  implements java.io.Serializable {
 	public void setEndDt(Date endDt) {
 		this.endDt = endDt;
 	}
+	
 	/**
-	 * @return
+	 * @return the accumType
 	 */
-	public String getAccumTypeName() {
-		return accumTypeName;
+	public String getAccumType() {
+		return accumType;
 	}
 
 	/**
-	 * @param accumTypeName
+	 * @param accumType the accumType to set
 	 */
-	public void setAccumTypeName(String accumTypeName) {
-		this.accumTypeName = accumTypeName;
-	}
-	/**
-	 * @return
-	 */
-	public String getNetworkTierName() {
-		return networkTierName;
+	public void setAccumType(String accumType) {
+		this.accumType = accumType;
 	}
 
 	/**
-	 * @param networkTierName
+	 * @return the networkTier
 	 */
-	public void setNetworkTierName(String networkTierName) {
-		this.networkTierName = networkTierName;
+	public String getNetworkTier() {
+		return networkTier;
 	}
-	
-	
+
+	/**
+	 * @param networkTier the networkTier to set
+	 */
+	public void setNetworkTier(String networkTier) {
+		this.networkTier = networkTier;
+	}
 }
