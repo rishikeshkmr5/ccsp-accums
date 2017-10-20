@@ -18,7 +18,6 @@ import com.ccsp.accums.ledger.benefit.service.BenefitBalanceServiceImpl;
 import com.ccsp.accums.ledger.benefit.service.BenefitSpendingServiceImpl;
 import com.ccsp.accums.ledger.benefit.service.ClaimDetailServiceImpl;
 import com.ccsp.common.utils.UIConstants;
-import com.ccsp.common.validator.Validator;
 
 import javassist.NotFoundException;
 
@@ -45,8 +44,6 @@ public class LedgerBenefitController {
 	@Autowired
 	private BenefitSpendingServiceImpl benefitSpendingServiceImpl;
 	
-	private Validator validator = new Validator();
-
 	/**
 	 * Fetches benefit balance details based on subscriber or member id
 	 * @param subscriberID

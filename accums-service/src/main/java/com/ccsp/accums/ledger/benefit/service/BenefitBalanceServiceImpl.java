@@ -21,7 +21,7 @@ import javassist.NotFoundException;
  *
  */
 @Component
-public class BenefitBalanceServiceImpl extends CommonServiceImpl {
+public class BenefitBalanceServiceImpl extends CommonServiceImpl<BenefitBalanceDTO, LedgerSummaryEntity> {
 	/**
 	 * Autowiring repository layer
 	 */
@@ -31,7 +31,6 @@ public class BenefitBalanceServiceImpl extends CommonServiceImpl {
 	/**
 	 * @see com.ccsp.common.service.impl.CommonServiceImpl#getJPARepository()
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public JpaRepository<LedgerSummaryEntity, Long> getJPARepository() {
 		return benefitBalanceRepository;
@@ -42,9 +41,8 @@ public class BenefitBalanceServiceImpl extends CommonServiceImpl {
 	 * 
 	 * @see com.ccsp.common.service.impl.CommonServiceImpl#getMapper()
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
-	public IBaseMapper<LedgerSummaryEntity, BenefitBalanceDTO> getMapper() {
+	public IBaseMapper<BenefitBalanceDTO, LedgerSummaryEntity> getMapper() {
 		return BenefitBalanceMapper.INSTANCE;
 	}
 

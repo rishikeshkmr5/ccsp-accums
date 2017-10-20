@@ -19,38 +19,34 @@ import javassist.NotFoundException;
  * @author nnarayanaperumaln
  *
  */
-public abstract class CommonServiceImpl implements ICommonService {
+public abstract class CommonServiceImpl <T extends ICommonDTO, S extends Serializable> implements ICommonService<T> {
 
 	/* (non-Javadoc)
 	 * @see com.ccsp.common.service.ICommonService#create(com.ccsp.common.dto.ICommonDTO)
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
-	public <T extends ICommonDTO> T create(T dto) {
-		Serializable entity = getMapper().convertToEntity(dto);
+	public T create(T dto) {
+		S entity = getMapper().convertToEntity(dto);
 		if(entity != null){
 			entity = getJPARepository().saveAndFlush(entity);
 		}
-		ICommonDTO resultDTO =  getMapper().convertToDTO(entity);
-		return (T) resultDTO;
+		return getMapper().convertToDTO(entity);
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
-	public <T extends ICommonDTO> List<T> create(List<T> dtoList) {
-		List<Serializable> entities = getMapper().convertToEntityList((List<ICommonDTO>) dtoList);
+	public List<T> create(List<T> dtoList) {
+		List<S> entities = getMapper().convertToEntityList(dtoList);
 		if(entities != null){
 			entities = getJPARepository().save(entities);
 		}
-		List<T> resultDTOList =  (List<T>) getMapper().convertToDTOList(entities);
-		return resultDTOList;
+		return getMapper().convertToDTOList(entities);
 	}
 
 	/* (non-Javadoc)
 	 * @see com.ccsp.common.service.ICommonService#update(com.ccsp.common.dto.ICommonDTO)
 	 */
 	@Override
-	public <T extends ICommonDTO> T update(T dto) {
+	public T update(T dto) {
 		//Auto-generated method stub - Do nothing
 		return null;
 	}
@@ -59,7 +55,7 @@ public abstract class CommonServiceImpl implements ICommonService {
 	 * @see com.ccsp.common.service.ICommonService#delete(com.ccsp.common.dto.ICommonDTO)
 	 */
 	@Override
-	public <T extends ICommonDTO> void delete(T dto) {
+	public void delete(T dto) {
 		//Auto-generated method stub - Do nothing
 		
 	}
@@ -68,7 +64,7 @@ public abstract class CommonServiceImpl implements ICommonService {
 	 * @see com.ccsp.common.service.ICommonService#read(java.math.BigDecimal)
 	 */
 	@Override
-	public <T extends ICommonDTO> T read(BigDecimal id) {
+	public T read(BigDecimal id) {
 		//Auto-generated method stub
 		return null;
 	}
@@ -76,27 +72,27 @@ public abstract class CommonServiceImpl implements ICommonService {
 	/* (non-Javadoc)
 	 * @see com.ccsp.common.service.ICommonService#readAll()
 	 */
-	@SuppressWarnings("unchecked")
+	
 	@Override
-	public <T extends ICommonDTO> List<T> readAll() throws NotFoundException {
-		List<Serializable> entities = getJPARepository().findAll();
+	public List<T> readAll() throws NotFoundException {
+		List<S> entities = getJPARepository().findAll();
 		
 		/**check if there are any entities in backend **/
 		if(entities == null || entities.size() == 0) {
 			throw new NotFoundException("There are no Ledger Headers");
 		}
-		return (List<T>) getMapper().convertToDTOList(entities);
+		return getMapper().convertToDTOList(entities);
 	}
 	
 	/**
 	 * provides the JpaRepository to use with service.
 	 * @return
 	 */
-	public abstract <T extends Serializable> JpaRepository<T, Long> getJPARepository();
+	public abstract JpaRepository<S, Long> getJPARepository();
 	
 	/**
 	 * Provides the mapper factory to use with service.
 	 * @return
 	 */
-	public abstract <Entity extends Serializable, DTO extends ICommonDTO> IBaseMapper<Entity, DTO> getMapper();
+	public abstract IBaseMapper<T, S> getMapper();
 }

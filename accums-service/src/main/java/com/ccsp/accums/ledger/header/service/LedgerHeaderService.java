@@ -17,7 +17,7 @@ import com.ccsp.common.service.impl.CommonServiceImpl;
  *
  */
 @Component
-public class LedgerHeaderService extends CommonServiceImpl {
+public class LedgerHeaderService extends CommonServiceImpl<LedgerHeaderDTO, LedgerHeaderEntity> {
 	/**
 	 * Autowiring repository layer
 	 */
@@ -27,7 +27,6 @@ public class LedgerHeaderService extends CommonServiceImpl {
 	/**
 	 * @see com.ccsp.common.service.impl.CommonServiceImpl#getJPARepository()
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public JpaRepository<LedgerHeaderEntity, Long> getJPARepository() {
 		return ledgerHeaderRepository;
@@ -36,9 +35,8 @@ public class LedgerHeaderService extends CommonServiceImpl {
 	/* (non-Javadoc)
 	 * @see com.ccsp.common.service.impl.CommonServiceImpl#getMapper()
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
-	public IBaseMapper<LedgerHeaderEntity, LedgerHeaderDTO> getMapper() {
+	public IBaseMapper<LedgerHeaderDTO, LedgerHeaderEntity> getMapper() {
 		return LedgerHeaderMapper.INSTANCE;
 	}	
 }

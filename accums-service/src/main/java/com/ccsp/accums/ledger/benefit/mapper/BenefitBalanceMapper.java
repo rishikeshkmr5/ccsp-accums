@@ -12,7 +12,7 @@ import com.ccsp.common.mapper.IBaseMapper;
  *
  */
 @Mapper
-public abstract class BenefitBalanceMapper implements IBaseMapper<LedgerSummaryEntity, BenefitBalanceDTO>{
+public abstract class BenefitBalanceMapper implements IBaseMapper<BenefitBalanceDTO, LedgerSummaryEntity>{
 
 	/**
 	 * Instance of BenefitBalanceMapper

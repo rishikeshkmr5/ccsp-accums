@@ -1,6 +1,5 @@
 package com.ccsp.accums.ledger.benefit.service;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,20 +18,19 @@ import com.ccsp.common.service.impl.CommonServiceImpl;
 import javassist.NotFoundException;
 
 @Component
-public class ClaimDetailServiceImpl extends CommonServiceImpl {
+public class ClaimDetailServiceImpl extends CommonServiceImpl<ClaimDetailsForAccumTypeDTO, LedgerHeaderEntity> {
 
 	@Resource
 	private ILedgerHeaderRepository ledgerHeaderRepository;
 	
 	@Override
-	public <T extends Serializable> JpaRepository<T, Long> getJPARepository() {
+	public JpaRepository<LedgerHeaderEntity, Long> getJPARepository() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public  IBaseMapper<LedgerHeaderEntity, ClaimDetailsForAccumTypeDTO> getMapper() {
+	public  IBaseMapper<ClaimDetailsForAccumTypeDTO, LedgerHeaderEntity> getMapper() {
 		// TODO Auto-generated method stub
 		return ClaimDetailMapper.INSTANCE;
 	}

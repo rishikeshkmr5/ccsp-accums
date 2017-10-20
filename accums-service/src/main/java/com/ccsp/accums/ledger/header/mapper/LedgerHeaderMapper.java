@@ -12,7 +12,7 @@ import com.ccsp.common.mapper.IBaseMapper;
  *
  */
 @Mapper
-public abstract class LedgerHeaderMapper implements IBaseMapper<LedgerHeaderEntity, LedgerHeaderDTO>{
+public abstract class LedgerHeaderMapper implements IBaseMapper<LedgerHeaderDTO, LedgerHeaderEntity>{
 
 	/**
 	 * Instance of LedgerHeaderMapper

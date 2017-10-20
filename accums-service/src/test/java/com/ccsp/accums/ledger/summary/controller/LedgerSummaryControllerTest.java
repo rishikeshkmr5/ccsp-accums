@@ -49,7 +49,7 @@ public class LedgerSummaryControllerTest {
 	 */
 	@Test
 	public void testGetAccumulationSummary() throws NotFoundException {
-		List<ICommonDTO> accumulationSummaryDTOList = new ArrayList<>();
+		List<LedgerSummaryDTO> accumulationSummaryDTOList = new ArrayList<>();
 		when(accumulationSummaryService.readAll()).thenReturn(accumulationSummaryDTOList);
 		List<LedgerSummaryDTO> actual = ledgerSummaryController.getAccumulationSummary();
 		Assert.assertEquals(actual, accumulationSummaryDTOList);

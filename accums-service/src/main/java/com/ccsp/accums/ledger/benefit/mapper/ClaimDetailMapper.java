@@ -9,7 +9,7 @@ import com.ccsp.common.mapper.IBaseMapper;
 
 
 @Mapper
-public  abstract class ClaimDetailMapper implements IBaseMapper<LedgerHeaderEntity, ClaimDetailsForAccumTypeDTO>{
+public  abstract class ClaimDetailMapper implements IBaseMapper<ClaimDetailsForAccumTypeDTO, LedgerHeaderEntity>{
 	
 	public static final ClaimDetailMapper INSTANCE = Mappers.getMapper(ClaimDetailMapper.class);
 

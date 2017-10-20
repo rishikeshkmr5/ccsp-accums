@@ -14,40 +14,40 @@ import javassist.NotFoundException;
  * @author nnarayanaperumaln
  *
  */
-public interface ICommonService {
+public interface ICommonService <T extends ICommonDTO>{
 
 	/**
 	 * @param dto
 	 * @return
 	 */
-	<T extends ICommonDTO> T create(T dto);	
+	T create(T dto);	
 	
 	/**
 	 * @param dtoList
 	 * @return
 	 */
-	<T extends ICommonDTO> List<T >create(List<T> dtoList);	
+	List<T> create(List<T> dtoList);	
 	
 	/**
 	 * @param dto
 	 * @return
 	 */
-	<T extends ICommonDTO> T update(T dto);
+	T update(T dto);
 	
 	/**
 	 * @param dto
 	 */
-	<T extends ICommonDTO> void delete(T dto);
+	void delete(T dto);
 	
 	/**
 	 * @param id
 	 * @return
 	 */
-	<T extends ICommonDTO> T read(BigDecimal id);	
+	T read(BigDecimal id);	
 	
 	/**
 	 * @return
 	 * @throws NotFoundException
 	 */
-	<T extends ICommonDTO> List<T> readAll() throws NotFoundException;
+	List<T> readAll() throws NotFoundException;
 }

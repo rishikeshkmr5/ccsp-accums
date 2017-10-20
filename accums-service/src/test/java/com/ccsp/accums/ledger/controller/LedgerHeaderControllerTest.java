@@ -1,15 +1,11 @@
 package com.ccsp.accums.ledger.controller;
 
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.validation.ValidationException;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -18,16 +14,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.ccsp.accums.ledger.entry.dto.LedgerEntryClaimDTO;
-import com.ccsp.accums.ledger.entry.dto.LedgerEntryDTO;
 import com.ccsp.accums.ledger.header.controller.LedgerHeaderController;
 import com.ccsp.accums.ledger.header.dto.LedgerHeaderClaimDTO;
 import com.ccsp.accums.ledger.header.dto.LedgerHeaderDTO;
 import com.ccsp.accums.ledger.header.service.LedgerHeaderService;
-import com.ccsp.accums.ledger.summary.dto.LedgerSummaryClaimDTO;
-import com.ccsp.accums.ledger.summary.dto.LedgerSummaryDTO;
-import com.ccsp.accums.ledger.summary.service.LedgerSummaryService;
-import com.ccsp.common.dto.ICommonDTO;
 import com.ccsp.common.validator.Validator;
 
 import javassist.NotFoundException;
@@ -60,10 +50,9 @@ public class LedgerHeaderControllerTest {
 	@Test
 	public void testGetLedgerHeader() throws NotFoundException {
 		List<LedgerHeaderDTO> ledgerHeaderDTOList = new ArrayList<>();
-		List<? extends ICommonDTO> dtoList = ledgerHeaderDTOList;
 		LedgerHeaderDTO entryDTO = new LedgerHeaderDTO();
 		ledgerHeaderDTOList.add(entryDTO);
-		when(ledgerHeaderService.readAll()).thenReturn((List<ICommonDTO>) dtoList);
+		when(ledgerHeaderService.readAll()).thenReturn(ledgerHeaderDTOList);
 		List<LedgerHeaderDTO> actual = accumsController.getLedgerHeader();
 		Assert.assertEquals(actual, ledgerHeaderDTOList);
 	}

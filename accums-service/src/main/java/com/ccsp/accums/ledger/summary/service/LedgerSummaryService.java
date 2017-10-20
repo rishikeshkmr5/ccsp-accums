@@ -14,7 +14,6 @@ import com.ccsp.accums.ledger.summary.dto.LedgerSummaryDTO;
 import com.ccsp.accums.ledger.summary.entity.LedgerSummaryEntity;
 import com.ccsp.accums.ledger.summary.mapper.LedgerSummaryMapper;
 import com.ccsp.accums.ledger.summary.repository.LedgerSummaryRepository;
-import com.ccsp.common.dto.ICommonDTO;
 import com.ccsp.common.mapper.IBaseMapper;
 import com.ccsp.common.service.impl.CommonServiceImpl;
 
@@ -23,7 +22,7 @@ import com.ccsp.common.service.impl.CommonServiceImpl;
  *
  */
 @Component
-public class LedgerSummaryService extends CommonServiceImpl {
+public class LedgerSummaryService extends CommonServiceImpl<LedgerSummaryDTO, LedgerSummaryEntity> {
 	/**
 	 * Autowiring repository layer
 	 */
@@ -36,7 +35,6 @@ public class LedgerSummaryService extends CommonServiceImpl {
 	/**
 	 * @see com.ccsp.common.service.impl.CommonServiceImpl#getJPARepository()
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public JpaRepository<LedgerSummaryEntity, Long> getJPARepository() {
 		return ledgerSummaryRepository;
@@ -47,9 +45,8 @@ public class LedgerSummaryService extends CommonServiceImpl {
 	 * 
 	 * @see com.ccsp.common.service.impl.CommonServiceImpl#getMapper()
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
-	public IBaseMapper<LedgerSummaryEntity, LedgerSummaryDTO> getMapper() {
+	public IBaseMapper<LedgerSummaryDTO, LedgerSummaryEntity> getMapper() {
 		return LedgerSummaryMapper.INSTANCE;
 	}
 
@@ -59,20 +56,17 @@ public class LedgerSummaryService extends CommonServiceImpl {
 	 * @param dto
 	 * @return T
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
-	public <T extends ICommonDTO> T create(T dto) {
+	public LedgerSummaryDTO create(LedgerSummaryDTO dto) {
 		
-		LedgerSummaryDTO ledgerSummaryDTO = (LedgerSummaryDTO) dto;
-		LedgerSummaryEntity ledgerSummaryEntity = getMapper().convertToEntity(ledgerSummaryDTO);
+		LedgerSummaryEntity ledgerSummaryEntity = getMapper().convertToEntity(dto);
 		
-		LedgerHeaderEntity ledger= ledgerHeaderRepository.findOne(ledgerSummaryDTO.getLedgerHeaderID());
+		LedgerHeaderEntity ledger= ledgerHeaderRepository.findOne(dto.getLedgerHeaderID());
 		ledgerSummaryEntity.setLedgerHeader(ledger);
 		
 		ledgerSummaryEntity = getJPARepository().saveAndFlush(ledgerSummaryEntity);
 		
-		ICommonDTO resultDTO =  getMapper().convertToDTO(ledgerSummaryEntity);
-		return (T) resultDTO;
+		return getMapper().convertToDTO(ledgerSummaryEntity);
 	}
 	
 	/**
@@ -81,16 +75,14 @@ public class LedgerSummaryService extends CommonServiceImpl {
 	 * @param ledgerEntries
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
-	public <T extends ICommonDTO> List<T> create(List<T> dtoList){
-		List<LedgerSummaryDTO> summaryDTOList = (List<LedgerSummaryDTO>) dtoList;
+	public List<LedgerSummaryDTO> create(List<LedgerSummaryDTO> dtoList){
 		List<LedgerSummaryEntity> summaryEntities = new ArrayList<LedgerSummaryEntity>();
 		
 		boolean isFirst = true;
 		LedgerHeaderEntity ledgerHeader = null;
 		
-		for(LedgerSummaryDTO summaryDTO : summaryDTOList) {
+		for(LedgerSummaryDTO summaryDTO : dtoList) {
 			LedgerSummaryEntity summaryEntity = getMapper().convertToEntity(summaryDTO);
 			if (isFirst) {
 				ledgerHeader = ledgerHeaderRepository.findOne(summaryDTO.getLedgerHeaderID());
@@ -111,6 +103,6 @@ public class LedgerSummaryService extends CommonServiceImpl {
 			}
 			summaryDTOResults.add(dto);
 		}
-		return (List<T>) summaryDTOResults;
+		return summaryDTOResults;
 	}
 }

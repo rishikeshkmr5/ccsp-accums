@@ -14,11 +14,10 @@ import com.ccsp.accums.ledger.entry.mapper.LedgerEntryMapper;
 import com.ccsp.accums.ledger.entry.repository.LedgerEntryRepository;
 import com.ccsp.accums.ledger.header.entity.LedgerHeaderEntity;
 import com.ccsp.accums.ledger.header.repository.ILedgerHeaderRepository;
-import com.ccsp.common.dto.ICommonDTO;
 import com.ccsp.common.mapper.IBaseMapper;
 import com.ccsp.common.service.impl.CommonServiceImpl;
 @Component
-public class LedgerEntryService extends CommonServiceImpl  {
+public class LedgerEntryService extends CommonServiceImpl<LedgerEntryDTO, LedgerEntryEntity>  {
 	/**
 	 * Autowiring repository layer
 	 */
@@ -30,7 +29,6 @@ public class LedgerEntryService extends CommonServiceImpl  {
 	/**
 	 * @see com.ccsp.common.service.impl.CommonServiceImpl#getJPARepository()
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public JpaRepository<LedgerEntryEntity, Long> getJPARepository() {
 		return ledgerEntryRepository;
@@ -39,9 +37,8 @@ public class LedgerEntryService extends CommonServiceImpl  {
 	/* (non-Javadoc)
 	 * @see com.ccsp.common.service.impl.CommonServiceImpl#getMapper()
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
-	public IBaseMapper<LedgerEntryEntity, LedgerEntryDTO> getMapper() {
+	public IBaseMapper<LedgerEntryDTO, LedgerEntryEntity> getMapper() {
 		return LedgerEntryMapper.INSTANCE;
 	}	
 	
@@ -51,25 +48,22 @@ public class LedgerEntryService extends CommonServiceImpl  {
 	 * @param dto
 	 * @return T
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
-	public <T extends ICommonDTO> T create(T dto) {
+	public LedgerEntryDTO create(LedgerEntryDTO dto) {
 		
-		LedgerEntryDTO accumsEntryDTO = (LedgerEntryDTO) dto;
-		LedgerEntryEntity ledgerEntry = getMapper().convertToEntity(accumsEntryDTO);
+		LedgerEntryEntity ledgerEntry = getMapper().convertToEntity(dto);
 		
-		LedgerHeaderEntity ledger= ledgerHeaderRepository.findOne(accumsEntryDTO.getLedgerHeaderID());
+		LedgerHeaderEntity ledger= ledgerHeaderRepository.findOne(dto.getLedgerHeaderID());
 		ledgerEntry.setLedgerHeader(ledger);
 		
-		if(accumsEntryDTO.getPrimaryLedgerEntryID() != null) {
-			LedgerEntryEntity primaryLedgerEntry = getJPARepository().findOne(accumsEntryDTO.getPrimaryLedgerEntryID());
+		if(dto.getPrimaryLedgerEntryID() != null) {
+			LedgerEntryEntity primaryLedgerEntry = getJPARepository().findOne(dto.getPrimaryLedgerEntryID());
 			ledgerEntry.setPrimaryLedgerEntry(primaryLedgerEntry);
 		}
 		
 		ledgerEntry = getJPARepository().saveAndFlush(ledgerEntry);
 		
-		ICommonDTO resultDTO =  getMapper().convertToDTO(ledgerEntry);
-		return (T) resultDTO;
+		return getMapper().convertToDTO(ledgerEntry);
 	}
 	
 	/**
@@ -78,17 +72,15 @@ public class LedgerEntryService extends CommonServiceImpl  {
 	 * @param ledgerEntries
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
-	public <T extends ICommonDTO> List<T> create(List<T> dtoList){
-		List<LedgerEntryDTO> ledgerEntries = (List<LedgerEntryDTO>) dtoList;
+	public List<LedgerEntryDTO> create(List<LedgerEntryDTO> dtoList){
 		List<LedgerEntryEntity> entities = new ArrayList<LedgerEntryEntity>();
 		
 		boolean isFirst = true;
 		LedgerEntryEntity primaryLedgerEntry = null;
 		LedgerHeaderEntity ledgerHeader = null;
 		
-		for(LedgerEntryDTO ledgerEntry : ledgerEntries) {
+		for(LedgerEntryDTO ledgerEntry : dtoList) {
 			LedgerEntryEntity entity = getMapper().convertToEntity(ledgerEntry);
 			if (isFirst) {
 				primaryLedgerEntry = entity;
@@ -115,6 +107,6 @@ public class LedgerEntryService extends CommonServiceImpl  {
 			}
 			ledgerEntryResults.add(dto);
 		}
-		return (List<T>) ledgerEntryResults;
+		return ledgerEntryResults;
 	}
 }

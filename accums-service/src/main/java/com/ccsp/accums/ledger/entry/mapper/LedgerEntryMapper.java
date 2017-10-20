@@ -8,7 +8,7 @@ import com.ccsp.accums.ledger.entry.entity.LedgerEntryEntity;
 import com.ccsp.common.mapper.IBaseMapper;
 
 @Mapper
-public abstract class LedgerEntryMapper implements IBaseMapper<LedgerEntryEntity, LedgerEntryDTO>{
+public abstract class LedgerEntryMapper implements IBaseMapper<LedgerEntryDTO, LedgerEntryEntity>{
 
 	/**
 	 * Instance of LedgerHeaderMapper

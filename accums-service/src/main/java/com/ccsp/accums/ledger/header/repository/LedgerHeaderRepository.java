@@ -20,8 +20,5 @@ public abstract class LedgerHeaderRepository implements ILedgerHeaderRepository 
 		query.setParameter("accumType", accumType);		
 		List<LedgerHeaderEntity> result = query.getResultList();
 		return result;
-		
-		
 	}	
-	
 }

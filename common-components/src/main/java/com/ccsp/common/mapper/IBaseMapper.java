@@ -14,7 +14,7 @@ import com.ccsp.common.dto.ICommonDTO;
  * @author rtalapaneni
  *
  */
-public interface IBaseMapper<Entity extends Serializable, DTO extends ICommonDTO> {
+public interface IBaseMapper<DTO extends ICommonDTO, Entity extends Serializable> {
 	
 	/**
 	 * Converts the provided entity to a DTO.

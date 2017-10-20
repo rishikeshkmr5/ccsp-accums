@@ -73,9 +73,8 @@ public class LedgerEntryControllerTest {
 	@Test
 	public void getLedgerEntryTest() throws NotFoundException {
 		List<LedgerEntryDTO> entryDTOList = new ArrayList<>();
-		List<? extends ICommonDTO> dtoList = entryDTOList;
 		LedgerEntryDTO entryDTO = new LedgerEntryDTO();
-		when(ledgerEntryService.readAll()).thenReturn((List<ICommonDTO>) dtoList);
+		when(ledgerEntryService.readAll()).thenReturn(entryDTOList);
 		List<LedgerEntryDTO> actual = ledgerEntryController.getLedgerEntry();
 		Assert.assertEquals(entryDTOList, actual);
  	}
