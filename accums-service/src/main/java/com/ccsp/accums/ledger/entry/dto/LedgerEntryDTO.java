@@ -17,8 +17,6 @@ public class LedgerEntryDTO implements ICommonDTO{
 	*  Serial version UID
 	*/
 	private static final long serialVersionUID = 1L;
-
-	private Long id;
 	
 	@NotNull(message = "Accums Header cannot be empty")
 	private Long ledgerHeaderID;
@@ -54,18 +52,6 @@ public class LedgerEntryDTO implements ICommonDTO{
 	 */
 	public LedgerEntryDTO() { }
 	
-	/**
-	 * @return the id
-	 */
-	public Long getId() {
-		return id;
-	}
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
 	/**
 	 * 
 	 * @return

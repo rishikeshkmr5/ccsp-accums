@@ -31,7 +31,7 @@ public class LedgerHeaderEntity  implements java.io.Serializable {
 	private Long id;
 		
 	@Column(name = "VEND_XACTN_ID", nullable = true, length=16)
-	private String vendorTaxID;
+	private String vendorTransactionCode;
 	
 	@Column(name = "DCN", nullable = true, length=16)
 	private String dcn;
@@ -40,7 +40,7 @@ public class LedgerHeaderEntity  implements java.io.Serializable {
 	private Integer claimLine;
 
 	@Column(name = "SVC_ID", nullable = true)
-	private Integer serviceID;
+	private Integer serviceId;
 	
 	@Column(name = "SVC_NM", nullable = true)
 	private String serviceName;
@@ -58,19 +58,19 @@ public class LedgerHeaderEntity  implements java.io.Serializable {
 	private String networkTier;
 	
 	@Column(name = "PLN_ID", nullable = true)
-	private Integer planID;
+	private Integer planId;
 	
 	@Column(name = "ALWD_AMT", nullable = true)
 	private Double allowedAmount;
 	
 	@Column(name = "MBR_ID", nullable = true)
-	private String memberID;
+	private String memberIdentifier;
 	
 	/*@Column(name = "SUB_ID", nullable = true)
 	private Integer patientID;*/
 	
 	@Column(name = "SUB_ID", nullable = true)
-	private String subscriberID;
+	private String subscriberId;
 	
 	@Column(name = "UOM_NM", nullable = true)
 	private String unitOfMeasure;
@@ -100,15 +100,15 @@ public class LedgerHeaderEntity  implements java.io.Serializable {
 	/**
 	 * @return
 	 */
-	public String getVendorTaxID() {
-		return vendorTaxID;
+	public String getVendorTransactionCode() {
+		return vendorTransactionCode;
 	}
 
 	/**
 	 * @param vendorTaxID
 	 */
-	public void setVendorTaxID(String vendorTaxID) {
-		this.vendorTaxID = vendorTaxID;
+	public void setVendorTransactionCode(String vendorTaxID) {
+		this.vendorTransactionCode = vendorTaxID;
 	}
 
 	/**
@@ -142,15 +142,15 @@ public class LedgerHeaderEntity  implements java.io.Serializable {
 	/**
 	 * @return
 	 */
-	public Integer getServiceID() {
-		return serviceID;
+	public Integer getServiceId() {
+		return serviceId;
 	}
 
 	/**
 	 * @param serviceID
 	 */
-	public void setServiceID(Integer serviceID) {
-		this.serviceID = serviceID;
+	public void setServiceId(Integer serviceID) {
+		this.serviceId = serviceID;
 	}
 
 	/**
@@ -212,15 +212,15 @@ public class LedgerHeaderEntity  implements java.io.Serializable {
 	/**
 	 * @return
 	 */
-	public Integer getPlanID() {
-		return planID;
+	public Integer getPlanId() {
+		return planId;
 	}
 
 	/**
 	 * @param planID
 	 */
-	public void setPlanID(Integer planID) {
-		this.planID = planID;
+	public void setPlanId(Integer planID) {
+		this.planId = planID;
 	}
 
 	/**
@@ -240,28 +240,28 @@ public class LedgerHeaderEntity  implements java.io.Serializable {
 	/**
 	 * @return
 	 */
-	public String getMemberID() {
-		return memberID;
+	public String getMemberIdentifier() {
+		return memberIdentifier;
 	}
 
 	/**
 	 * @param memberID
 	 */
-	public void setMemberID(String memberID) {
-		this.memberID = memberID;
+	public void setMemberIdentifier(String memberID) {
+		this.memberIdentifier = memberID;
 	}
 	/**
 	 * @return
 	 */
-	public String getSubscriberID() {
-		return subscriberID;
+	public String getSubscriberId() {
+		return subscriberId;
 	}
 
 	/**
 	 * @param subscriberID
 	 */
-	public void setSubscriberID(String subscriberID) {
-		this.subscriberID = subscriberID;
+	public void setSubscriberId(String subscriberID) {
+		this.subscriberId = subscriberID;
 	}
 
 	/**

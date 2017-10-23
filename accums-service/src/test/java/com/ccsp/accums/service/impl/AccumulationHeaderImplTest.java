@@ -52,7 +52,7 @@ public class AccumulationHeaderImplTest {
 	 * @throws SecurityException
 	 * @throws Exception
 	 */
-	@Test
+	/*@Test
 	public void testSetLedgerHeader() throws NoSuchFieldException, SecurityException, Exception {
 		setFinalStatic(LedgerHeaderMapper.class.getField("INSTANCE"), ledgerHeaderMapper);
 		LedgerHeaderEntity ledgerHeader = new LedgerHeaderEntity();
@@ -60,7 +60,7 @@ public class AccumulationHeaderImplTest {
 		when(ledgerHeaderMapper.convertToEntity(AccumulationHeaderDTO)).thenReturn(ledgerHeader);
 		serviceImpl.create(AccumulationHeaderDTO);
 		verify(ledgerHeaderRepository, times(1)).saveAndFlush(ledgerHeader);		
-	}
+	}*/
 	
 	/**
 	 * @throws NoSuchFieldException

@@ -1,12 +1,14 @@
 package com.ccsp.accums.ledger.header.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.ccsp.accums.ledger.entry.dto.LedgerEntryDTO;
 import com.ccsp.common.dto.ICommonDTO;
 
 /**
@@ -22,14 +24,9 @@ public class LedgerHeaderDTO  implements ICommonDTO {
 	 * serialization
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	
-	@XmlElement(name ="id") 
-	private Long id;
-	
-	
-	@XmlElement(name="vendorTaxID")
-	private String vendorTaxID;
+		
+	@XmlElement(name="vendorTansactionCode")
+	private String vendorTransactionCode;
 	
 	
 	@XmlElement(name="dcn")  
@@ -40,8 +37,8 @@ public class LedgerHeaderDTO  implements ICommonDTO {
 	private Integer claimLine;
 
 	
-	@XmlElement(name="serviceID")  
-	private Integer serviceID;
+	@XmlElement(name="serviceId")  
+	private Integer serviceId;
 	
 	
 	@XmlElement(name="service")  
@@ -62,18 +59,18 @@ public class LedgerHeaderDTO  implements ICommonDTO {
 	@XmlElement(name="networkTier")  
 	private String networkTier;
 	
-	@XmlElement(name="planID")  
-	private Integer planID;
+	@XmlElement(name="planId")  
+	private Integer planId;
 	
 	@XmlElement(name="allowedAmount")  
 	private Double allowedAmount;
 	
-	@XmlElement(name="memberID")  
-	private String memberID;
+	@XmlElement(name="memberIdentifier")  
+	private String memberIdentifier;
 	
 	
-	@XmlElement(name="subscriberID")  
-	private String subscriberID;
+	@XmlElement(name="subscriberId")  
+	private String subscriberId;
 	
 
 	@XmlElement(name="unitOfMeasure")  
@@ -83,37 +80,25 @@ public class LedgerHeaderDTO  implements ICommonDTO {
 	@XmlElement(name="accumType")  
 	private String accumType;
 
+	@XmlElement(name = "serviceLines")
+	private List<LedgerEntryDTO> serviceLines;
 	/**
 	 * Default constructor.
 	 */
 	public LedgerHeaderDTO() { }
 
 	/**
-	 * @return the id
-	 */
-	public Long getId() {
-		return id;
-	}
-
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	/**
 	 * @return
 	 */
-	public String getVendorTaxID() {
-		return vendorTaxID;
+	public String getVendorTransactionCode() {
+		return vendorTransactionCode;
 	}
 
 	/**
 	 * @param vendorTaxID
 	 */
-	public void setVendorTaxID(String vendorTaxID) {
-		this.vendorTaxID = vendorTaxID;
+	public void setVendorTransactionCode(String vendorTaxID) {
+		this.vendorTransactionCode = vendorTaxID;
 	}
 
 	/**
@@ -147,15 +132,15 @@ public class LedgerHeaderDTO  implements ICommonDTO {
 	/**
 	 * @return
 	 */
-	public Integer getServiceID() {
-		return serviceID;
+	public Integer getServiceId() {
+		return serviceId;
 	}
 
 	/**
 	 * @param serviceID
 	 */
-	public void setServiceID(Integer serviceID) {
-		this.serviceID = serviceID;
+	public void setServiceId(Integer serviceID) {
+		this.serviceId = serviceID;
 	}
 
 	/**
@@ -217,15 +202,15 @@ public class LedgerHeaderDTO  implements ICommonDTO {
 	/**
 	 * @return
 	 */
-	public Integer getPlanID() {
-		return planID;
+	public Integer getPlanId() {
+		return planId;
 	}
 
 	/**
 	 * @param planID
 	 */
-	public void setPlanID(Integer planID) {
-		this.planID = planID;
+	public void setPlanId(Integer planID) {
+		this.planId = planID;
 	}
 
 	/**
@@ -245,29 +230,29 @@ public class LedgerHeaderDTO  implements ICommonDTO {
 	/**
 	 * @return
 	 */
-	public String getMemberID() {
-		return memberID;
+	public String getMemberIdentifier() {
+		return memberIdentifier;
 	}
 
 	/**
 	 * @param memberID
 	 */
-	public void setMemberID(String memberID) {
-		this.memberID = memberID;
+	public void setMemberIdentifier(String memberID) {
+		this.memberIdentifier = memberID;
 	}
 
 	/**
 	 * @return
 	 */
-	public String getSubscriberID() {
-		return subscriberID;
+	public String getSubscriberId() {
+		return subscriberId;
 	}
 
 	/**
 	 * @param subscriberID
 	 */
-	public void setSubscriberID(String subscriberID) {
-		this.subscriberID = subscriberID;
+	public void setSubscriberId(String subscriberID) {
+		this.subscriberId = subscriberID;
 	}
 
 	/**
@@ -312,6 +297,14 @@ public class LedgerHeaderDTO  implements ICommonDTO {
 
 	public void setServiceName(String serviceName) {
 		this.serviceName = serviceName;
+	}
+
+	public List<LedgerEntryDTO> getServiceLines() {
+		return serviceLines;
+	}
+
+	public void setServiceLines(List<LedgerEntryDTO> serviceLines) {
+		this.serviceLines = serviceLines;
 	}
 	
 	}
