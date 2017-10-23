@@ -77,7 +77,6 @@ public class LedgerHeaderControllerTest {
 	}
 	
 		
-	@SuppressWarnings("unused")
 	private void setValidator(LedgerHeaderController controller, Validator validator) throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException{		
 		Field[] fields = controller.getClass().getDeclaredFields();
 		for(Field field : fields) {
