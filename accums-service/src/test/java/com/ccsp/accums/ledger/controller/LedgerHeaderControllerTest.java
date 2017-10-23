@@ -46,7 +46,6 @@ public class LedgerHeaderControllerTest {
 	/**
 	 * @throws NotFoundException
 	 */
-	@SuppressWarnings("unchecked")
 	@Test
 	public void testGetLedgerHeader() throws NotFoundException {
 		List<LedgerHeaderDTO> ledgerHeaderDTOList = new ArrayList<>();

@@ -16,11 +16,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.ccsp.accums.ledger.summary.controller.LedgerSummaryController;
 import com.ccsp.accums.ledger.summary.dto.LedgerSummaryClaimDTO;
 import com.ccsp.accums.ledger.summary.dto.LedgerSummaryDTO;
 import com.ccsp.accums.ledger.summary.service.LedgerSummaryService;
-import com.ccsp.common.dto.ICommonDTO;
 
 import javassist.NotFoundException;
 
