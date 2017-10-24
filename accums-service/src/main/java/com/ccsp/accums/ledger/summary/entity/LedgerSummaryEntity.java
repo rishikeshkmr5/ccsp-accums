@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -23,6 +24,9 @@ import com.ccsp.accums.ledger.header.entity.LedgerHeaderEntity;
  */
 @Entity
 @Table(name = "LDGR_SUM")
+@NamedQuery(
+name="findLedgerSummary",
+query="select c from LedgerSummaryEntity c where c.memberID = :memberID and c.accumType = :accumType and c.network = :network and c.networkTier = :networkTier") 
 public class LedgerSummaryEntity  implements java.io.Serializable {
 
 	/**

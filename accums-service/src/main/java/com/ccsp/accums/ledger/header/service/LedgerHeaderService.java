@@ -1,6 +1,6 @@
 package com.ccsp.accums.ledger.header.service;
 
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -15,6 +15,9 @@ import com.ccsp.accums.ledger.header.dto.LedgerHeaderDTO;
 import com.ccsp.accums.ledger.header.entity.LedgerHeaderEntity;
 import com.ccsp.accums.ledger.header.mapper.LedgerHeaderMapper;
 import com.ccsp.accums.ledger.header.repository.ILedgerHeaderRepository;
+import com.ccsp.accums.ledger.summary.entity.LedgerSummaryEntity;
+import com.ccsp.accums.ledger.summary.repository.ILedgerSummaryRepository;
+import com.ccsp.accums.ledger.summary.repository.LedgerSummaryRepository;
 import com.ccsp.common.mapper.IBaseMapper;
 import com.ccsp.common.service.impl.CommonServiceImpl;
 
@@ -32,6 +35,9 @@ public class LedgerHeaderService extends CommonServiceImpl<LedgerHeaderDTO, Ledg
 	
 	@Autowired
 	private LedgerEntryService ledgerEntryService;
+	
+	@Resource
+	private LedgerSummaryRepository ledgerSummaryRepository;
 
 	/**
 	 * @see com.ccsp.common.service.impl.CommonServiceImpl#getJPARepository()
@@ -49,21 +55,42 @@ public class LedgerHeaderService extends CommonServiceImpl<LedgerHeaderDTO, Ledg
 		return LedgerHeaderMapper.INSTANCE;
 	}	
 	
-	@SuppressWarnings("null")
 	@Override
 	public LedgerHeaderDTO create(LedgerHeaderDTO ledgerHeaderDTO){
-		List<LedgerEntryDTO> ledgerEntryDTOLists = new ArrayList<>();
 		if(ledgerHeaderDTO != null) {
 			LedgerHeaderEntity ledgerHeaderEntity = getMapper().convertToEntity(ledgerHeaderDTO);
-			ledgerHeaderEntity = getJPARepository().saveAndFlush(ledgerHeaderEntity);
+			getJPARepository().saveAndFlush(ledgerHeaderEntity);
 			List<LedgerEntryDTO> ledgerEntryDTOs = ledgerHeaderDTO.getServiceLines();
 			for(LedgerEntryDTO ledgerEntryDTO : ledgerEntryDTOs) {
 				ledgerEntryDTO.setLedgerHeaderID(ledgerHeaderEntity.getId());
-				ledgerEntryDTOLists.add(ledgerEntryDTO);
+				ledgerEntryService.create(ledgerEntryDTO);
+				LedgerSummaryEntity ledgerSummaryEntity = new LedgerSummaryEntity();
+				LedgerSummaryEntity result = null;
+				ledgerSummaryEntity.setMemberID(ledgerHeaderDTO.getMemberIdentifier());
+				ledgerSummaryEntity.setAccumType(ledgerEntryDTO.getAccumType());
+				ledgerSummaryEntity.setNetwork(ledgerEntryDTO.getNetwork());
+				ledgerSummaryEntity.setNetworkTier(ledgerHeaderDTO.getNetworkTier());
+				result = ledgerSummaryRepository.findLedgerSummary(ledgerSummaryEntity);
+				if(result != null)
+				{
+					result.setAmount(result.getAmount()+ledgerHeaderDTO.getAllowedAmount());
+					ledgerSummaryRepository.updateLedgerSummary(result);
+				}else {
+					result = ledgerSummaryEntity;
+					result.setAmount(ledgerHeaderDTO.getAllowedAmount());
+					result.setEffectiveDt(new Date());
+					result.setEndDt(new Date());
+					result.setLedgerHeader(ledgerHeaderEntity);
+					result.setLedgerHeaderID(ledgerHeaderEntity.getId());
+					result.setMaxAmount(10000d);
+					result.setMaxVisit(100);
+					result.setPlanID(10l);
+					result.setSubscriberID(ledgerHeaderDTO.getSubscriberId());
+					result.setUnitOfMeasure(ledgerEntryDTO.getUnitOfMeasure());
+					ledgerSummaryRepository.persistLedgerSummary(result);
+				}
 				
 			}
-			
-			ledgerEntryService.create(ledgerEntryDTOLists);
 		}		
 		return ledgerHeaderDTO;		
 	}

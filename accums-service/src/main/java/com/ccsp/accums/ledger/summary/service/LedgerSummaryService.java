@@ -13,6 +13,7 @@ import com.ccsp.accums.ledger.header.repository.ILedgerHeaderRepository;
 import com.ccsp.accums.ledger.summary.dto.LedgerSummaryDTO;
 import com.ccsp.accums.ledger.summary.entity.LedgerSummaryEntity;
 import com.ccsp.accums.ledger.summary.mapper.LedgerSummaryMapper;
+import com.ccsp.accums.ledger.summary.repository.ILedgerSummaryRepository;
 import com.ccsp.accums.ledger.summary.repository.LedgerSummaryRepository;
 import com.ccsp.common.mapper.IBaseMapper;
 import com.ccsp.common.service.impl.CommonServiceImpl;
@@ -32,13 +33,6 @@ public class LedgerSummaryService extends CommonServiceImpl<LedgerSummaryDTO, Le
 	@Resource
 	private ILedgerHeaderRepository ledgerHeaderRepository;
 
-	/**
-	 * @see com.ccsp.common.service.impl.CommonServiceImpl#getJPARepository()
-	 */
-	@Override
-	public JpaRepository<LedgerSummaryEntity, Long> getJPARepository() {
-		return ledgerSummaryRepository;
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -64,7 +58,7 @@ public class LedgerSummaryService extends CommonServiceImpl<LedgerSummaryDTO, Le
 		LedgerHeaderEntity ledger= ledgerHeaderRepository.findOne(dto.getLedgerHeaderID());
 		ledgerSummaryEntity.setLedgerHeader(ledger);
 		
-		ledgerSummaryEntity = getJPARepository().saveAndFlush(ledgerSummaryEntity);
+		ledgerSummaryEntity = ledgerSummaryRepository.updateLedgerSummary(ledgerSummaryEntity);
 		
 		return getMapper().convertToDTO(ledgerSummaryEntity);
 	}
@@ -75,7 +69,7 @@ public class LedgerSummaryService extends CommonServiceImpl<LedgerSummaryDTO, Le
 	 * @param ledgerEntries
 	 * @return
 	 */
-	@Override
+	/*@Override
 	public List<LedgerSummaryDTO> create(List<LedgerSummaryDTO> dtoList){
 		List<LedgerSummaryEntity> summaryEntities = new ArrayList<LedgerSummaryEntity>();
 		
@@ -104,5 +98,11 @@ public class LedgerSummaryService extends CommonServiceImpl<LedgerSummaryDTO, Le
 			summaryDTOResults.add(dto);
 		}
 		return summaryDTOResults;
+	}
+*/
+	@Override
+	public JpaRepository<LedgerSummaryEntity, Long> getJPARepository() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

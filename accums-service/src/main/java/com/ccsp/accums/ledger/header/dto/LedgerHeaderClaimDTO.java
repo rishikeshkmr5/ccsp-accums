@@ -3,7 +3,7 @@ package com.ccsp.accums.ledger.header.dto;
 public class LedgerHeaderClaimDTO {
 
 	private LedgerHeaderDTO accumulationHeaderDTO;
-
+	
 	public LedgerHeaderDTO getAccumulationHeaderDTO() {
 		return accumulationHeaderDTO;
 	}

@@ -6,8 +6,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.springframework.stereotype.Component;
+
 import com.ccsp.accums.ledger.header.entity.LedgerHeaderEntity;
 
+@Component
 public abstract class LedgerHeaderRepository implements ILedgerHeaderRepository {
 	
 	@PersistenceContext
