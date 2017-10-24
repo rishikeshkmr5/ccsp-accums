@@ -94,4 +94,11 @@ public class LedgerHeaderController {
            }
            accumulationHeaderService.create(header);
     }
+	@RequestMapping(path = UIConstants.LEDGER_HEADER, method = RequestMethod.PUT, consumes = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
+	@ResponseBody
+	public LedgerHeaderDTO updateLedgerHeader(@RequestBody LedgerHeaderClaimDTO claimsForAccumulationHeaderDTO) {
+		log.info("Create LedgerHeader details");
+		LedgerHeaderDTO accumulationHeaderDTO = claimsForAccumulationHeaderDTO.getAccumulationHeaderDTO();
+		return accumulationHeaderService.update(accumulationHeaderDTO);
+	}
 }

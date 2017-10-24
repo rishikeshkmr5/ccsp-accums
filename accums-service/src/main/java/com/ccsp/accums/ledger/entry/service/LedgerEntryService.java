@@ -12,6 +12,7 @@ import com.ccsp.accums.ledger.entry.dto.LedgerEntryDTO;
 import com.ccsp.accums.ledger.entry.entity.LedgerEntryEntity;
 import com.ccsp.accums.ledger.entry.mapper.LedgerEntryMapper;
 import com.ccsp.accums.ledger.entry.repository.LedgerEntryRepository;
+import com.ccsp.accums.ledger.header.dto.LedgerHeaderDTO;
 import com.ccsp.accums.ledger.header.entity.LedgerHeaderEntity;
 import com.ccsp.accums.ledger.header.repository.ILedgerHeaderRepository;
 import com.ccsp.common.mapper.IBaseMapper;
@@ -108,5 +109,17 @@ public class LedgerEntryService extends CommonServiceImpl<LedgerEntryDTO, Ledger
 			ledgerEntryResults.add(dto);
 		}
 		return ledgerEntryResults;
+	}
+	
+	@Override
+	public LedgerEntryDTO update(LedgerEntryDTO dto) {
+		LedgerEntryEntity ledgerEntryEntity = getMapper().convertToEntity(dto);
+		LedgerEntryEntity existingEntity = getJPARepository().findOne(dto.getId());
+			if(existingEntity != null)
+					
+				ledgerEntryEntity	= getJPARepository().save(ledgerEntryEntity);
+		
+		return dto;
+		
 	}
 }

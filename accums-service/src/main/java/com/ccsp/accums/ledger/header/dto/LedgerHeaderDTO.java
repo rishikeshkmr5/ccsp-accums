@@ -24,6 +24,8 @@ public class LedgerHeaderDTO  implements ICommonDTO {
 	 * serialization
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	private Long id;
 		
 	@XmlElement(name="vendorTansactionCode")
 	private String vendorTransactionCode;
@@ -306,5 +308,15 @@ public class LedgerHeaderDTO  implements ICommonDTO {
 	public void setServiceLines(List<LedgerEntryDTO> serviceLines) {
 		this.serviceLines = serviceLines;
 	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	
 	
 	}

@@ -1,5 +1,6 @@
 package com.ccsp.accums.ledger.header.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -48,17 +49,40 @@ public class LedgerHeaderService extends CommonServiceImpl<LedgerHeaderDTO, Ledg
 		return LedgerHeaderMapper.INSTANCE;
 	}	
 	
+	@SuppressWarnings("null")
 	@Override
 	public LedgerHeaderDTO create(LedgerHeaderDTO ledgerHeaderDTO){
+		List<LedgerEntryDTO> ledgerEntryDTOLists = new ArrayList<>();
 		if(ledgerHeaderDTO != null) {
 			LedgerHeaderEntity ledgerHeaderEntity = getMapper().convertToEntity(ledgerHeaderDTO);
-			getJPARepository().saveAndFlush(ledgerHeaderEntity);
+			ledgerHeaderEntity = getJPARepository().saveAndFlush(ledgerHeaderEntity);
 			List<LedgerEntryDTO> ledgerEntryDTOs = ledgerHeaderDTO.getServiceLines();
 			for(LedgerEntryDTO ledgerEntryDTO : ledgerEntryDTOs) {
 				ledgerEntryDTO.setLedgerHeaderID(ledgerHeaderEntity.getId());
-				ledgerEntryService.create(ledgerEntryDTO);
+				ledgerEntryDTOLists.add(ledgerEntryDTO);
+				
 			}
+			
+			ledgerEntryService.create(ledgerEntryDTOLists);
 		}		
 		return ledgerHeaderDTO;		
+	}
+	
+	@Override
+	public LedgerHeaderDTO update(LedgerHeaderDTO dto) {
+		LedgerHeaderEntity ledgerHeaderEntity = getMapper().convertToEntity(dto);
+		LedgerHeaderEntity existingEntity = getJPARepository().findOne(ledgerHeaderEntity.getId());
+		LedgerHeaderDTO existingDTO = getMapper().convertToDTO(existingEntity);
+		
+				if(existingEntity != null)
+				ledgerHeaderEntity.setId(existingEntity.getId());
+		ledgerHeaderEntity	= getJPARepository().save(ledgerHeaderEntity);
+		List<LedgerEntryDTO> ledgerEntriesDTO=dto.getServiceLines();
+		for(LedgerEntryDTO ledgerEntryDTO : ledgerEntriesDTO) {
+				ledgerEntryDTO.setLedgerHeaderID(ledgerHeaderEntity.getId());
+					ledgerEntryService.update(ledgerEntryDTO);
+		}
+		return dto;
+		
 	}
 }

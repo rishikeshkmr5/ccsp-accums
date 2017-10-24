@@ -48,7 +48,7 @@ public abstract class CommonServiceImpl <T extends ICommonDTO, S extends Seriali
 	@Override
 	public T update(T dto) {
 		//Auto-generated method stub - Do nothing
-		return null;
+		return dto;
 	}
 
 	/* (non-Javadoc)
