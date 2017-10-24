@@ -1,5 +1,6 @@
 package com.ccsp.accums.service.impl;
 
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -22,7 +23,9 @@ import com.ccsp.accums.ledger.entry.entity.LedgerEntryEntity;
 import com.ccsp.accums.ledger.entry.mapper.LedgerEntryMapper;
 import com.ccsp.accums.ledger.entry.repository.LedgerEntryRepository;
 import com.ccsp.accums.ledger.entry.service.LedgerEntryService;
+import com.ccsp.accums.ledger.header.dto.LedgerHeaderDTO;
 import com.ccsp.accums.ledger.header.entity.LedgerHeaderEntity;
+import com.ccsp.accums.ledger.header.mapper.LedgerHeaderMapper;
 import com.ccsp.accums.ledger.header.repository.ILedgerHeaderRepository;
 
 import javassist.NotFoundException;
@@ -105,25 +108,14 @@ public class AccumulationEntryImplTest {
 	 * @throws SecurityException
 	 * @throws Exception
 	 */
-	@Ignore
+	
 	@Test
 	public void testGetAllLedgerEntries() throws NoSuchFieldException, SecurityException, Exception {
-		List<LedgerEntryEntity> accumulationEntries = new ArrayList<>();
-		LedgerEntryEntity accumulationEntry = new LedgerEntryEntity();
-		LedgerHeaderEntity ledgerHeaderEntity = new LedgerHeaderEntity();
-		ledgerHeaderEntity.setId(1L);
-		accumulationEntry.setLedgerHeader(ledgerHeaderEntity);
-		accumulationEntries.add(accumulationEntry);
+		List<LedgerEntryEntity> ledgerEntries = new ArrayList<>();
+		ledgerEntries.add(new LedgerEntryEntity());
 		List<LedgerEntryDTO> accumulationEntryDTOList = new ArrayList<>();
-		when(ledgerEntryRepository.findAll()).thenReturn(accumulationEntries);
-		for (LedgerEntryEntity entry : accumulationEntries) {
-
-			LedgerEntryDTO accumulationEntryDTO = new LedgerEntryDTO();
-			when(ledgerEntryMapper.convertToDTO(entry)).thenReturn(accumulationEntryDTO);
-			accumulationEntryDTO.setLedgerHeaderID(entry.getLedgerHeader().getId());
-			accumulationEntryDTOList.add(accumulationEntryDTO);
-
-		}
+		when(ledgerEntryRepository.findAll()).thenReturn(ledgerEntries);
+		when(ledgerEntryMapper.convertToDTOList(ledgerEntries)).thenReturn(accumulationEntryDTOList);
 		setFinalStatic(LedgerEntryMapper.class.getField("INSTANCE"), ledgerEntryMapper);
 		List<LedgerEntryDTO> actual = serviceImpl.readAll();
 		Assert.assertEquals(accumulationEntryDTOList, actual);
