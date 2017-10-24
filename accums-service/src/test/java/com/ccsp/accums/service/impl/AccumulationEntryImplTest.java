@@ -1,6 +1,5 @@
 package com.ccsp.accums.service.impl;
 
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -11,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -23,9 +21,7 @@ import com.ccsp.accums.ledger.entry.entity.LedgerEntryEntity;
 import com.ccsp.accums.ledger.entry.mapper.LedgerEntryMapper;
 import com.ccsp.accums.ledger.entry.repository.LedgerEntryRepository;
 import com.ccsp.accums.ledger.entry.service.LedgerEntryService;
-import com.ccsp.accums.ledger.header.dto.LedgerHeaderDTO;
 import com.ccsp.accums.ledger.header.entity.LedgerHeaderEntity;
-import com.ccsp.accums.ledger.header.mapper.LedgerHeaderMapper;
 import com.ccsp.accums.ledger.header.repository.ILedgerHeaderRepository;
 
 import javassist.NotFoundException;

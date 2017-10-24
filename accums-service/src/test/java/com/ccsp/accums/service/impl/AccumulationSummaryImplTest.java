@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -31,7 +30,6 @@ import javassist.NotFoundException;
  * @author Vaibhav
  *
  */
-// @Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
 public class AccumulationSummaryImplTest {
 
@@ -106,28 +104,17 @@ public class AccumulationSummaryImplTest {
 	 * @throws SecurityException
 	 * @throws Exception
 	 */
-	@Ignore
 	@Test
 	public void testGetAllLedgerSummaries() throws NoSuchFieldException, SecurityException, Exception {
 		List<LedgerSummaryEntity> accumulationSummaries = new ArrayList<>();
 		LedgerSummaryEntity accumulationSummary = new LedgerSummaryEntity();
-		LedgerHeaderEntity ledgerHeaderEntity = new LedgerHeaderEntity();
-		ledgerHeaderEntity.setId(1L);
-		accumulationSummary.setLedgerHeader(ledgerHeaderEntity);
 		accumulationSummaries.add(accumulationSummary);
 		List<LedgerSummaryDTO> accumulationHeaderDTOList = new ArrayList<>();
 		when(ledgerSummaryRepository.findAll()).thenReturn(accumulationSummaries);
-		for (LedgerSummaryEntity summary : accumulationSummaries) {
-
-			LedgerSummaryDTO accumulationSummaryDTO = new LedgerSummaryDTO();
-			when(ledgerSummaryMapper.convertToDTO(summary)).thenReturn(accumulationSummaryDTO);
-			accumulationSummaryDTO.setLedgerHeaderID(summary.getLedgerHeader().getId());
-			accumulationHeaderDTOList.add(accumulationSummaryDTO);
-
-		}
+		when(ledgerSummaryMapper.convertToDTOList(accumulationSummaries)).thenReturn(accumulationHeaderDTOList);
 		setFinalStatic(LedgerSummaryMapper.class.getField("INSTANCE"), ledgerSummaryMapper);
 		List<LedgerSummaryDTO> actual = serviceImpl.readAll();
-		Assert.assertEquals(accumulationHeaderDTOList.get(0).getAccumType(), actual.get(0).getAccumType());
+		Assert.assertEquals(accumulationHeaderDTOList, actual);
 	}
 
 	/**
