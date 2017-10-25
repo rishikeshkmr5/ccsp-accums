@@ -63,12 +63,14 @@ public class AccumulationEntryImplTest {
 	public void testSetLedgerEntry() throws NoSuchFieldException, SecurityException, Exception {
 		setFinalStatic(LedgerEntryMapper.class.getField("INSTANCE"), ledgerEntryMapper);
 		LedgerEntryEntity accumulationEntry = new LedgerEntryEntity();
+		LedgerHeaderEntity headerEntity = new LedgerHeaderEntity();
 		LedgerEntryDTO accumulationEntryDTO = new LedgerEntryDTO();
-		LedgerHeaderEntity ledger = ledgerHeaderRepository.findOne(accumulationEntryDTO.getLedgerHeaderID());
+		when(ledgerHeaderRepository.findOne(accumulationEntryDTO.getLedgerHeaderID())).thenReturn(headerEntity);
 		when(ledgerEntryMapper.convertToEntity(accumulationEntryDTO)).thenReturn(accumulationEntry);
-		accumulationEntry.setLedgerHeader(ledger);
+		when(ledgerEntryRepository.saveAndFlush(accumulationEntry)).thenReturn(accumulationEntry);
+		accumulationEntry.setId(10l);
 		serviceImpl.create(accumulationEntryDTO);
-		verify(ledgerEntryRepository, times(1)).saveAndFlush(accumulationEntry);
+		verify(ledgerEntryMapper, times(1)).convertToDTO(accumulationEntry);
 	}
 
 	/**

@@ -1,6 +1,7 @@
 package com.ccsp.accums.ledger.summary.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -14,7 +15,6 @@ import com.ccsp.accums.ledger.summary.dto.LedgerSummaryDTO;
 import com.ccsp.accums.ledger.summary.entity.LedgerSummaryEntity;
 import com.ccsp.accums.ledger.summary.mapper.LedgerSummaryMapper;
 import com.ccsp.accums.ledger.summary.repository.ILedgerSummaryRepository;
-import com.ccsp.accums.ledger.summary.repository.LedgerSummaryRepository;
 import com.ccsp.common.mapper.IBaseMapper;
 import com.ccsp.common.service.impl.CommonServiceImpl;
 
@@ -28,7 +28,7 @@ public class LedgerSummaryService extends CommonServiceImpl<LedgerSummaryDTO, Le
 	 * Autowiring repository layer
 	 */
 	@Resource
-	private LedgerSummaryRepository ledgerSummaryRepository;
+	private ILedgerSummaryRepository ledgerSummaryRepository;
 
 	@Resource
 	private ILedgerHeaderRepository ledgerHeaderRepository;
@@ -58,9 +58,29 @@ public class LedgerSummaryService extends CommonServiceImpl<LedgerSummaryDTO, Le
 		LedgerHeaderEntity ledger= ledgerHeaderRepository.findOne(dto.getLedgerHeaderID());
 		ledgerSummaryEntity.setLedgerHeader(ledger);
 		
-		ledgerSummaryEntity = ledgerSummaryRepository.updateLedgerSummary(ledgerSummaryEntity);
+		ledgerSummaryEntity = ledgerSummaryRepository.save(ledgerSummaryEntity);
 		
 		return getMapper().convertToDTO(ledgerSummaryEntity);
+	}
+	
+	
+	public void createSummary(LedgerSummaryEntity ledgerSummaryEntity) {
+		LedgerSummaryEntity result = null;
+		result = ledgerSummaryRepository.findLedgerSummary(ledgerSummaryEntity.getMemberID(),ledgerSummaryEntity.getAccumType(),ledgerSummaryEntity.getNetwork(),ledgerSummaryEntity.getNetworkTier());
+		if(result != null)
+		{
+			result.setAmount(result.getAmount()+ledgerSummaryEntity.getAmount());
+			ledgerSummaryRepository.save(result);
+		}else {
+			result = ledgerSummaryEntity;
+			result.setEffectiveDt(new Date());
+			result.setEndDt(new Date());
+			result.setMaxAmount(10000d);
+			result.setMaxVisit(100);
+			result.setPlanID(10l);
+			ledgerSummaryRepository.save(result);
+		}
+		ledgerSummaryRepository.flush();
 	}
 	
 	/**
@@ -69,7 +89,7 @@ public class LedgerSummaryService extends CommonServiceImpl<LedgerSummaryDTO, Le
 	 * @param ledgerEntries
 	 * @return
 	 */
-	/*@Override
+	@Override
 	public List<LedgerSummaryDTO> create(List<LedgerSummaryDTO> dtoList){
 		List<LedgerSummaryEntity> summaryEntities = new ArrayList<LedgerSummaryEntity>();
 		
@@ -99,10 +119,10 @@ public class LedgerSummaryService extends CommonServiceImpl<LedgerSummaryDTO, Le
 		}
 		return summaryDTOResults;
 	}
-*/
+	
 	@Override
 	public JpaRepository<LedgerSummaryEntity, Long> getJPARepository() {
 		// TODO Auto-generated method stub
-		return null;
+		return ledgerSummaryRepository;
 	}
 }

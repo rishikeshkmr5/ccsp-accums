@@ -63,7 +63,7 @@ public class LedgerEntryService extends CommonServiceImpl<LedgerEntryDTO, Ledger
 		}
 		
 		ledgerEntry = getJPARepository().saveAndFlush(ledgerEntry);
-		
+		dto.setId(ledgerEntry.getId());
 		return getMapper().convertToDTO(ledgerEntry);
 	}
 	

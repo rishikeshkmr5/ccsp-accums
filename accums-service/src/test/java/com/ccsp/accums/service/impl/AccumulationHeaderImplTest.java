@@ -1,6 +1,8 @@
 package com.ccsp.accums.service.impl;
 
 
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -17,11 +19,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.ccsp.accums.ledger.entry.dto.LedgerEntryDTO;
 import com.ccsp.accums.ledger.header.dto.LedgerHeaderDTO;
 import com.ccsp.accums.ledger.header.entity.LedgerHeaderEntity;
 import com.ccsp.accums.ledger.header.mapper.LedgerHeaderMapper;
 import com.ccsp.accums.ledger.header.repository.ILedgerHeaderRepository;
 import com.ccsp.accums.ledger.header.service.LedgerHeaderService;
+import com.ccsp.accums.ledger.summary.service.LedgerSummaryService;
 
 import javassist.NotFoundException;
 
@@ -48,19 +52,28 @@ public class AccumulationHeaderImplTest {
 	private LedgerHeaderMapper ledgerHeaderMapper;
 	
 	/**
+	 * Mock the service
+	 */
+	@Mock
+	private LedgerSummaryService ledgerSummaryService;
+	
+	/**
 	 * @throws NoSuchFieldException
 	 * @throws SecurityException
 	 * @throws Exception
 	 */
-	/*@Test
+	@Test
 	public void testSetLedgerHeader() throws NoSuchFieldException, SecurityException, Exception {
 		setFinalStatic(LedgerHeaderMapper.class.getField("INSTANCE"), ledgerHeaderMapper);
-		LedgerHeaderEntity ledgerHeader = new LedgerHeaderEntity();
-		LedgerHeaderDTO AccumulationHeaderDTO = new LedgerHeaderDTO();
-		when(ledgerHeaderMapper.convertToEntity(AccumulationHeaderDTO)).thenReturn(ledgerHeader);
-		serviceImpl.create(AccumulationHeaderDTO);
-		verify(ledgerHeaderRepository, times(1)).saveAndFlush(ledgerHeader);		
-	}*/
+		LedgerHeaderEntity ledgerHeader = mock(LedgerHeaderEntity.class);
+		LedgerHeaderDTO accumulationHeaderDTO = mock(LedgerHeaderDTO.class);
+		when(ledgerHeaderMapper.convertToEntity(accumulationHeaderDTO)).thenReturn(ledgerHeader);
+		List<LedgerEntryDTO> ledgerEntryDTOs = new ArrayList<>();
+		LedgerEntryDTO ledgerEntryDTO = mock(LedgerEntryDTO.class);
+		ledgerEntryDTOs.add(ledgerEntryDTO);
+		LedgerHeaderDTO result = serviceImpl.create(accumulationHeaderDTO);		
+		Assert.assertEquals(accumulationHeaderDTO, result);
+	}
 	
 	/**
 	 * @throws NoSuchFieldException

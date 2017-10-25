@@ -6,6 +6,10 @@ import static org.mockito.Mockito.when;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -17,8 +21,10 @@ import com.ccsp.accums.ledger.header.repository.ILedgerHeaderRepository;
 import com.ccsp.accums.ledger.summary.dto.LedgerSummaryDTO;
 import com.ccsp.accums.ledger.summary.entity.LedgerSummaryEntity;
 import com.ccsp.accums.ledger.summary.mapper.LedgerSummaryMapper;
-import com.ccsp.accums.ledger.summary.repository.LedgerSummaryRepository;
+import com.ccsp.accums.ledger.summary.repository.ILedgerSummaryRepository;
 import com.ccsp.accums.ledger.summary.service.LedgerSummaryService;
+
+import javassist.NotFoundException;
 
 /**
  * @author Vaibhav
@@ -31,7 +37,7 @@ public class AccumulationSummaryImplTest {
 	private LedgerSummaryService serviceImpl;
 
 	@Mock
-	private LedgerSummaryRepository ledgerSummaryRepository;
+	private ILedgerSummaryRepository ledgerSummaryRepository;
 
 
 	@Mock
@@ -55,7 +61,7 @@ public class AccumulationSummaryImplTest {
 		when(ledgerSummaryMapper.convertToEntity(accumulationSummaryDTO)).thenReturn(accumulationSummary);
 		accumulationSummary.setLedgerHeader(ledger);
 		serviceImpl.create(accumulationSummaryDTO);
-		verify(ledgerSummaryRepository, times(1)).updateLedgerSummary(accumulationSummary);
+		verify(ledgerSummaryRepository, times(1)).save(accumulationSummary);
 	}
 
 	/**
@@ -63,7 +69,7 @@ public class AccumulationSummaryImplTest {
 	 * @throws SecurityException
 	 * @throws Exception
 	 */
-	/*@Test
+	@Test
 	public void testSetClaimLedgerSummary() throws NoSuchFieldException, SecurityException, Exception {
 		setFinalStatic(LedgerSummaryMapper.class.getField("INSTANCE"), ledgerSummaryMapper);
 		List<LedgerSummaryDTO> accumulationSummaryDTOs = new ArrayList<>();
@@ -84,14 +90,14 @@ public class AccumulationSummaryImplTest {
 		}
 		List<LedgerSummaryDTO> actual = serviceImpl.create(accumulationSummaryDTOs);
 		Assert.assertEquals(accumulationSummaryDTOsAfterInseration, actual);
-	}*/
+	}
 
 	/**
 	 * @throws NoSuchFieldException
 	 * @throws SecurityException
 	 * @throws Exception
 	 */
-	/*@Test
+	@Test
 	public void testGetAllLedgerSummaries() throws NoSuchFieldException, SecurityException, Exception {
 		List<LedgerSummaryEntity> accumulationSummaries = new ArrayList<>();
 		LedgerSummaryEntity accumulationSummary = new LedgerSummaryEntity();
@@ -102,17 +108,17 @@ public class AccumulationSummaryImplTest {
 		setFinalStatic(LedgerSummaryMapper.class.getField("INSTANCE"), ledgerSummaryMapper);
 		List<LedgerSummaryDTO> actual = serviceImpl.readAll();
 		Assert.assertEquals(accumulationHeaderDTOList, actual);
-	}*/
+	}
 
 	/**
 	 * @throws NotFoundException
 	 */
-	/*@Test(expected = NotFoundException.class)
+	@Test(expected = NotFoundException.class)
 	public void testGetAllLedgerHeadersThrowsException() throws NotFoundException {
 		List<LedgerSummaryEntity> accumulationSummaries = new ArrayList<>();
 		when(ledgerSummaryRepository.findAll()).thenReturn(accumulationSummaries);
 		serviceImpl.readAll();
-	}*/
+	}
 
 	/**
 	 * @param field

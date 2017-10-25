@@ -17,7 +17,7 @@ import com.ccsp.accums.ledger.header.mapper.LedgerHeaderMapper;
 import com.ccsp.accums.ledger.header.repository.ILedgerHeaderRepository;
 import com.ccsp.accums.ledger.summary.entity.LedgerSummaryEntity;
 import com.ccsp.accums.ledger.summary.repository.ILedgerSummaryRepository;
-import com.ccsp.accums.ledger.summary.repository.LedgerSummaryRepository;
+import com.ccsp.accums.ledger.summary.service.LedgerSummaryService;
 import com.ccsp.common.mapper.IBaseMapper;
 import com.ccsp.common.service.impl.CommonServiceImpl;
 
@@ -36,8 +36,9 @@ public class LedgerHeaderService extends CommonServiceImpl<LedgerHeaderDTO, Ledg
 	@Autowired
 	private LedgerEntryService ledgerEntryService;
 	
-	@Resource
-	private LedgerSummaryRepository ledgerSummaryRepository;
+	@Autowired
+	private LedgerSummaryService ledgerSummaryService;
+
 
 	/**
 	 * @see com.ccsp.common.service.impl.CommonServiceImpl#getJPARepository()
@@ -60,38 +61,24 @@ public class LedgerHeaderService extends CommonServiceImpl<LedgerHeaderDTO, Ledg
 		if(ledgerHeaderDTO != null) {
 			LedgerHeaderEntity ledgerHeaderEntity = getMapper().convertToEntity(ledgerHeaderDTO);
 			getJPARepository().saveAndFlush(ledgerHeaderEntity);
+			ledgerHeaderDTO.setId(ledgerHeaderEntity.getId());
 			List<LedgerEntryDTO> ledgerEntryDTOs = ledgerHeaderDTO.getServiceLines();
 			for(LedgerEntryDTO ledgerEntryDTO : ledgerEntryDTOs) {
 				ledgerEntryDTO.setLedgerHeaderID(ledgerHeaderEntity.getId());
 				ledgerEntryService.create(ledgerEntryDTO);
 				LedgerSummaryEntity ledgerSummaryEntity = new LedgerSummaryEntity();
-				LedgerSummaryEntity result = null;
 				ledgerSummaryEntity.setMemberID(ledgerHeaderDTO.getMemberIdentifier());
 				ledgerSummaryEntity.setAccumType(ledgerEntryDTO.getAccumType());
 				ledgerSummaryEntity.setNetwork(ledgerEntryDTO.getNetwork());
 				ledgerSummaryEntity.setNetworkTier(ledgerHeaderDTO.getNetworkTier());
-				result = ledgerSummaryRepository.findLedgerSummary(ledgerSummaryEntity);
-				if(result != null)
-				{
-					result.setAmount(result.getAmount()+ledgerHeaderDTO.getAllowedAmount());
-					ledgerSummaryRepository.updateLedgerSummary(result);
-				}else {
-					result = ledgerSummaryEntity;
-					result.setAmount(ledgerHeaderDTO.getAllowedAmount());
-					result.setEffectiveDt(new Date());
-					result.setEndDt(new Date());
-					result.setLedgerHeader(ledgerHeaderEntity);
-					result.setLedgerHeaderID(ledgerHeaderEntity.getId());
-					result.setMaxAmount(10000d);
-					result.setMaxVisit(100);
-					result.setPlanID(10l);
-					result.setSubscriberID(ledgerHeaderDTO.getSubscriberId());
-					result.setUnitOfMeasure(ledgerEntryDTO.getUnitOfMeasure());
-					ledgerSummaryRepository.persistLedgerSummary(result);
-				}
-				
+				ledgerSummaryEntity.setAmount(ledgerHeaderDTO.getAllowedAmount());
+				ledgerSummaryEntity.setLedgerHeader(ledgerHeaderEntity);
+				ledgerSummaryEntity.setLedgerHeaderID(ledgerHeaderEntity.getId());
+				ledgerSummaryEntity.setSubscriberID(ledgerHeaderDTO.getSubscriberId());
+				ledgerSummaryEntity.setUnitOfMeasure(ledgerEntryDTO.getUnitOfMeasure());
+				ledgerSummaryService.createSummary(ledgerSummaryEntity);
 			}
-		}		
+		}	
 		return ledgerHeaderDTO;		
 	}
 	
