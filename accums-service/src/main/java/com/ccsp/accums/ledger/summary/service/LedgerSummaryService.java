@@ -125,4 +125,9 @@ public class LedgerSummaryService extends CommonServiceImpl<LedgerSummaryDTO, Le
 		// TODO Auto-generated method stub
 		return ledgerSummaryRepository;
 	}
+
+	public void update(LedgerSummaryEntity ledgerSummaryEntity) {
+		createSummary(ledgerSummaryEntity);
+		
+	}
 }

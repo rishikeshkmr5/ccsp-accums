@@ -95,6 +95,17 @@ public class LedgerHeaderService extends CommonServiceImpl<LedgerHeaderDTO, Ledg
 		for(LedgerEntryDTO ledgerEntryDTO : ledgerEntriesDTO) {
 				ledgerEntryDTO.setLedgerHeaderID(ledgerHeaderEntity.getId());
 					ledgerEntryService.update(ledgerEntryDTO);
+					LedgerSummaryEntity ledgerSummaryEntity = new LedgerSummaryEntity();	
+					ledgerSummaryEntity.setMemberID(dto.getMemberIdentifier());
+					ledgerSummaryEntity.setAccumType(ledgerEntryDTO.getAccumType());
+					ledgerSummaryEntity.setNetwork(ledgerEntryDTO.getNetwork());
+					ledgerSummaryEntity.setNetworkTier(dto.getNetworkTier());
+					ledgerSummaryEntity.setAmount(dto.getAllowedAmount());
+					ledgerSummaryEntity.setLedgerHeader(ledgerHeaderEntity);
+					ledgerSummaryEntity.setLedgerHeaderID(ledgerHeaderEntity.getId());
+					ledgerSummaryEntity.setSubscriberID(dto.getSubscriberId());
+					ledgerSummaryEntity.setUnitOfMeasure(ledgerEntryDTO.getUnitOfMeasure());
+					ledgerSummaryService.update(ledgerSummaryEntity);
 		}
 		return dto;
 		
