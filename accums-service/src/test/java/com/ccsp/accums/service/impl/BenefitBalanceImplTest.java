@@ -57,7 +57,7 @@ public class BenefitBalanceImplTest {
 		List<BenefitBalanceDTO> balanceDTOs= new ArrayList<>();
 		List<LedgerSummaryEntity> accumulationSummaryList = new ArrayList<>();
 		accumulationSummaryList.add(new LedgerSummaryEntity());
-		when(benefitBalanceRepository.findBymemberID(memberID)).thenReturn(accumulationSummaryList);
+		when(benefitBalanceRepository.findBymemberIdentifier(memberID)).thenReturn(accumulationSummaryList);
 		when(benefitBalanceMapper.convertToDTOList(accumulationSummaryList)).thenReturn(balanceDTOs);
 		setFinalStatic(BenefitBalanceMapper.class.getField("INSTANCE"), benefitBalanceMapper);
 		List<BenefitBalanceDTO> actual = serviceImpl.getBenefitBalance(subscriberID, memberID);
@@ -76,7 +76,7 @@ public class BenefitBalanceImplTest {
 		List<BenefitBalanceDTO> balanceDTOs= new ArrayList<>();
 		List<LedgerSummaryEntity> accumulationSummaryList = new ArrayList<>();
 		accumulationSummaryList.add(new LedgerSummaryEntity());
-		when(benefitBalanceRepository.findBysubscriberID(subscriberID)).thenReturn(accumulationSummaryList);
+		when(benefitBalanceRepository.findBysubscriberId(subscriberID)).thenReturn(accumulationSummaryList);
 		when(benefitBalanceMapper.convertToDTOList(accumulationSummaryList)).thenReturn(balanceDTOs);
 		setFinalStatic(BenefitBalanceMapper.class.getField("INSTANCE"), benefitBalanceMapper);
 		List<BenefitBalanceDTO> actual = serviceImpl.getBenefitBalance(subscriberID, memberID);

@@ -57,12 +57,12 @@ public class BenefitBalanceServiceImpl extends CommonServiceImpl<BenefitBalanceD
 	public List<BenefitBalanceDTO> getBenefitBalance(String subscriberID, String memberID) throws NotFoundException {
 		List<LedgerSummaryEntity> summaries = null;
 		if (subscriberID != null && subscriberID.length() > 0) {
-			summaries = benefitBalanceRepository.findBysubscriberID(subscriberID);
+			summaries = benefitBalanceRepository.findBysubscriberId(subscriberID);
 			if (summaries.isEmpty())
 				throw new NotFoundException(
 						"There are no Summaries Balance Benefit available for subscriberid : " + subscriberID);
 		} else if (memberID != null && memberID.length() > 0) {
-			summaries = benefitBalanceRepository.findBymemberID(memberID);
+			summaries = benefitBalanceRepository.findBymemberIdentifier(memberID);
 			if (summaries.isEmpty())
 				throw new NotFoundException(
 						"There are no Summaries Balance Benefit available for memberid : " + memberID);

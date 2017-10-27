@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
@@ -13,10 +12,8 @@ import com.ccsp.accums.ledger.entry.dto.LedgerEntryDTO;
 import com.ccsp.accums.ledger.entry.entity.LedgerEntryEntity;
 import com.ccsp.accums.ledger.entry.mapper.LedgerEntryMapper;
 import com.ccsp.accums.ledger.entry.repository.LedgerEntryRepository;
-import com.ccsp.accums.ledger.header.dto.LedgerHeaderDTO;
 import com.ccsp.accums.ledger.header.entity.LedgerHeaderEntity;
 import com.ccsp.accums.ledger.header.repository.ILedgerHeaderRepository;
-import com.ccsp.accums.ledger.summary.service.LedgerSummaryService;
 import com.ccsp.common.mapper.IBaseMapper;
 import com.ccsp.common.service.impl.CommonServiceImpl;
 @Component
@@ -28,9 +25,6 @@ public class LedgerEntryService extends CommonServiceImpl<LedgerEntryDTO, Ledger
 	private LedgerEntryRepository ledgerEntryRepository;
 	@Resource
 	private ILedgerHeaderRepository ledgerHeaderRepository;
-	
-	@Autowired
-	private LedgerSummaryService ledgerSummaryService;
 
 	/**
 	 * @see com.ccsp.common.service.impl.CommonServiceImpl#getJPARepository()
@@ -62,8 +56,8 @@ public class LedgerEntryService extends CommonServiceImpl<LedgerEntryDTO, Ledger
 		LedgerHeaderEntity ledger= ledgerHeaderRepository.findOne(dto.getLedgerHeaderID());
 		ledgerEntry.setLedgerHeader(ledger);
 		
-		if(dto.getPrimaryLedgerEntryID() != null) {
-			LedgerEntryEntity primaryLedgerEntry = getJPARepository().findOne(dto.getPrimaryLedgerEntryID());
+		if(dto.getLinkToPrimary() != null) {
+			LedgerEntryEntity primaryLedgerEntry = getJPARepository().findOne(dto.getLinkToPrimary());
 			ledgerEntry.setPrimaryLedgerEntry(primaryLedgerEntry);
 		}
 		
@@ -106,7 +100,7 @@ public class LedgerEntryService extends CommonServiceImpl<LedgerEntryDTO, Ledger
 		for(LedgerEntryEntity entryEntity : entities) {
 			LedgerEntryDTO dto = getMapper().convertToDTO(entryEntity);
 			if (entryEntity.getPrimaryLedgerEntry() != null) {
-				dto.setPrimaryLedgerEntryID(entryEntity.getPrimaryLedgerEntry().getId());
+				dto.setLinkToPrimary(entryEntity.getPrimaryLedgerEntry().getId());
 			}
 			if (entryEntity.getLedgerHeader() != null) {
 				dto.setLedgerHeaderID(entryEntity.getLedgerHeader().getId());
@@ -116,17 +110,16 @@ public class LedgerEntryService extends CommonServiceImpl<LedgerEntryDTO, Ledger
 		return ledgerEntryResults;
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.ccsp.common.service.impl.CommonServiceImpl#update(com.ccsp.common.dto.ICommonDTO)
+	 */
 	@Override
 	public LedgerEntryDTO update(LedgerEntryDTO dto) {
 		LedgerEntryEntity ledgerEntryEntity = getMapper().convertToEntity(dto);
 		LedgerEntryEntity existingEntity = getJPARepository().findOne(dto.getId());
-		
-		if(existingEntity != null)
-				ledgerEntryEntity.setId(existingEntity.getId());
-		ledgerEntryEntity.setLedgerHeader(ledgerHeaderRepository.findOne(ledgerEntryEntity.getLedgerHeaderID()));
-		        ledgerEntryEntity	= getJPARepository().save(ledgerEntryEntity);
-				
-				
+			if(existingEntity != null)
+					
+				ledgerEntryEntity	= getJPARepository().save(ledgerEntryEntity);
 		
 		return dto;
 		

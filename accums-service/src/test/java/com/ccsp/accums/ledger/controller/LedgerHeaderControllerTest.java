@@ -15,7 +15,7 @@ import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ccsp.accums.ledger.header.controller.LedgerHeaderController;
-import com.ccsp.accums.ledger.header.dto.LedgerHeaderClaimDTO;
+import com.ccsp.accums.ledger.header.dto.AccumUtilization;
 import com.ccsp.accums.ledger.header.dto.LedgerHeaderDTO;
 import com.ccsp.accums.ledger.header.service.LedgerHeaderService;
 import com.ccsp.common.validator.Validator;
@@ -66,9 +66,8 @@ public class LedgerHeaderControllerTest {
 	@Test
 	public void testSetLedgerHeader() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
 		Validator validator = mock(Validator.class);
-		LedgerHeaderClaimDTO claimHeadetDTO = new LedgerHeaderClaimDTO();
-		LedgerHeaderDTO ledgerHeaderDTO = new LedgerHeaderDTO();		
-		claimHeadetDTO.setAccumulationHeaderDTO(ledgerHeaderDTO);
+		AccumUtilization claimHeadetDTO = new AccumUtilization();
+		LedgerHeaderDTO ledgerHeaderDTO = claimHeadetDTO;	
 		this.setValidator(accumsController, validator);
 		accumsController.createLedgerHeader(claimHeadetDTO);
 		when(ledgerHeaderService.create(ledgerHeaderDTO)).thenReturn(ledgerHeaderDTO);

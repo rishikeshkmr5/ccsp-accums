@@ -30,7 +30,7 @@ ALTER TABLE LDGR_HDR
 CREATE TABLE LDGR_SUM
 (
 	LDGR_SUM_ID           INTEGER NOT NULL ,
-	LDGR_ID               INTEGER NOT NULL ,
+	LDGR_ID               INTEGER NULL,
 	ACCUM_TYP_NM          VARCHAR(25),
 	MBR_ID                VARCHAR(16),
 	NTWK_CD               CHAR(3),

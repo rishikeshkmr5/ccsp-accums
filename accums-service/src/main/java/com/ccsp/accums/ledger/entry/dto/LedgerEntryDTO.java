@@ -8,7 +8,12 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.ccsp.common.dto.ICommonDTO;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
+/**
+ * @author nnarayanaperumaln
+ *
+ */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class LedgerEntryDTO implements ICommonDTO{
@@ -45,9 +50,10 @@ public class LedgerEntryDTO implements ICommonDTO{
 	private String unitOfMeasure;
 	
 	@NotNull(message = "Service Date cannot be empty")
+	@JsonFormat(pattern = "MM/dd/yyyy")
 	private Date serviceDate;
 	
-	private Long primaryLedgerEntryID;
+	private Long linkToPrimary;
 	
 	/**
 	 * Default constructor.
@@ -182,25 +188,33 @@ public class LedgerEntryDTO implements ICommonDTO{
 	public void setServiceDate(Date serviceDate) {
 		this.serviceDate = serviceDate;
 	}
-	/**
-	 * @return the primaryLedgerEntryID
-	 */
-	public Long getPrimaryLedgerEntryID() {
-		return primaryLedgerEntryID;
-	}
-	/**
-	 * @param primaryLedgerEntryID the primaryLedgerEntryID to set
-	 */
-	public void setPrimaryLedgerEntryID(Long primaryLedgerEntryID) {
-		this.primaryLedgerEntryID = primaryLedgerEntryID;
-	}
 
+	/**
+	 * @return
+	 */
 	public Long getId() {
 		return id;
 	}
 
+	/**
+	 * @param id
+	 */
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	/**
+	 * @return
+	 */
+	public Long getLinkToPrimary() {
+		return linkToPrimary;
+	}
+
+	/**
+	 * @param linkToPrimary
+	 */
+	public void setLinkToPrimary(Long linkToPrimary) {
+		this.linkToPrimary = linkToPrimary;
 	}
 	
 }

@@ -1,14 +1,19 @@
 package com.ccsp.accums.ledger.summary.service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
+import com.ccsp.accums.ledger.entry.dto.LedgerEntryDTO;
+import com.ccsp.accums.ledger.header.dto.LedgerHeaderDTO;
 import com.ccsp.accums.ledger.header.entity.LedgerHeaderEntity;
 import com.ccsp.accums.ledger.header.repository.ILedgerHeaderRepository;
 import com.ccsp.accums.ledger.summary.dto.LedgerSummaryDTO;
@@ -32,7 +37,8 @@ public class LedgerSummaryService extends CommonServiceImpl<LedgerSummaryDTO, Le
 
 	@Resource
 	private ILedgerHeaderRepository ledgerHeaderRepository;
-
+	
+	private final SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
 	/*
 	 * (non-Javadoc)
@@ -45,58 +51,68 @@ public class LedgerSummaryService extends CommonServiceImpl<LedgerSummaryDTO, Le
 	}
 
 	/**
-	 * Creates the provided Ledger Entry.
-	 * It expects ledger header id along with other attributes.
+	 * Creates the provided Ledger Entry. It expects ledger header id along with
+	 * other attributes.
+	 * 
 	 * @param dto
 	 * @return T
 	 */
 	@Override
 	public LedgerSummaryDTO create(LedgerSummaryDTO dto) {
-		
+
 		LedgerSummaryEntity ledgerSummaryEntity = getMapper().convertToEntity(dto);
-		
-		LedgerHeaderEntity ledger= ledgerHeaderRepository.findOne(dto.getLedgerHeaderID());
+
+		LedgerHeaderEntity ledger = ledgerHeaderRepository.findOne(dto.getLedgerHeaderID());
 		ledgerSummaryEntity.setLedgerHeader(ledger);
-		
+
 		ledgerSummaryEntity = ledgerSummaryRepository.save(ledgerSummaryEntity);
-		
+
 		return getMapper().convertToDTO(ledgerSummaryEntity);
 	}
-	
-	
-	public void createSummary(LedgerSummaryEntity ledgerSummaryEntity) {
-		LedgerSummaryEntity result = null;
-		result = ledgerSummaryRepository.findLedgerSummary(ledgerSummaryEntity.getMemberID(),ledgerSummaryEntity.getAccumType(),ledgerSummaryEntity.getNetwork(),ledgerSummaryEntity.getNetworkTier());
-		if(result != null)
-		{
-			result.setAmount(result.getAmount()+ledgerSummaryEntity.getAmount());
-			ledgerSummaryRepository.save(result);
-		}else {
-			result = ledgerSummaryEntity;
-			result.setEffectiveDt(new Date());
-			result.setEndDt(new Date());
-			result.setMaxAmount(10000d);
-			result.setMaxVisit(100);
-			result.setPlanID(10l);
-			ledgerSummaryRepository.save(result);
-		}
-		ledgerSummaryRepository.flush();
-	}
-	
+
 	/**
-	 * Persists provided list of data.
-	 * Populates the required entities like header entity and primary reportable entity.
+	 * @param ledgerHeaderDTO
+	 */
+	public void create(LedgerHeaderDTO ledgerHeaderDTO) {  
+		Map<String, LedgerSummaryEntity> ledgerSummaryMap = new HashMap<String, LedgerSummaryEntity>();
+		List<LedgerSummaryEntity> ledgerSummaryEntities = ledgerSummaryRepository.findBySubscriberId(ledgerHeaderDTO.getSubscriberId());
+		if(CollectionUtils.isNotEmpty(ledgerSummaryEntities)) {
+			for(LedgerSummaryEntity ledgerSummaryEntity : ledgerSummaryEntities) {
+				ledgerSummaryMap.put(generateKey(ledgerSummaryEntity), ledgerSummaryEntity);
+			}
+		}
+		for (LedgerEntryDTO ledgerEntryDTO : ledgerHeaderDTO.getServiceLines()) {
+			LedgerSummaryMapper mapper = (LedgerSummaryMapper) getMapper();
+			LedgerSummaryEntity entity = mapper.convertHeaderDTOtoEntity(ledgerHeaderDTO);
+			entity.setAccumType(ledgerEntryDTO.getAccumType());
+			LedgerSummaryEntity result = null;
+			result = ledgerSummaryMap.get(generateKey(entity));
+			if (result != null) {
+				result.setAmount(result.getAmount() + ledgerEntryDTO.getAmount());
+			} else {
+				result = entity;
+				result.setAmount(ledgerEntryDTO.getAmount());
+			}
+			ledgerSummaryEntities.add(result);
+		}
+		ledgerSummaryRepository.save(ledgerSummaryEntities);
+	}
+
+	/**
+	 * Persists provided list of data. Populates the required entities like header
+	 * entity and primary reportable entity.
+	 * 
 	 * @param ledgerEntries
 	 * @return
 	 */
 	@Override
-	public List<LedgerSummaryDTO> create(List<LedgerSummaryDTO> dtoList){
+	public List<LedgerSummaryDTO> create(List<LedgerSummaryDTO> dtoList) {
 		List<LedgerSummaryEntity> summaryEntities = new ArrayList<LedgerSummaryEntity>();
-		
+
 		boolean isFirst = true;
 		LedgerHeaderEntity ledgerHeader = null;
-		
-		for(LedgerSummaryDTO summaryDTO : dtoList) {
+
+		for (LedgerSummaryDTO summaryDTO : dtoList) {
 			LedgerSummaryEntity summaryEntity = getMapper().convertToEntity(summaryDTO);
 			if (isFirst) {
 				ledgerHeader = ledgerHeaderRepository.findOne(summaryDTO.getLedgerHeaderID());
@@ -105,12 +121,12 @@ public class LedgerSummaryService extends CommonServiceImpl<LedgerSummaryDTO, Le
 			summaryEntity.setLedgerHeader(ledgerHeader);
 			summaryEntities.add(summaryEntity);
 		}
-		
+
 		getJPARepository().save(summaryEntities);
-		
+
 		List<LedgerSummaryDTO> summaryDTOResults = new ArrayList<LedgerSummaryDTO>();
-		
-		for(LedgerSummaryEntity summaryEntity : summaryEntities) {
+
+		for (LedgerSummaryEntity summaryEntity : summaryEntities) {
 			LedgerSummaryDTO dto = getMapper().convertToDTO(summaryEntity);
 			if (summaryEntity.getLedgerHeader() != null) {
 				dto.setLedgerHeaderID(summaryEntity.getLedgerHeader().getId());
@@ -119,15 +135,18 @@ public class LedgerSummaryService extends CommonServiceImpl<LedgerSummaryDTO, Le
 		}
 		return summaryDTOResults;
 	}
-	
+
 	@Override
 	public JpaRepository<LedgerSummaryEntity, Long> getJPARepository() {
 		// TODO Auto-generated method stub
 		return ledgerSummaryRepository;
 	}
 
-	public void update(LedgerSummaryEntity ledgerSummaryEntity) {
-		createSummary(ledgerSummaryEntity);
-		
+	public void updateLedgerSummary() {
+
+	}
+	
+	private String generateKey(LedgerSummaryEntity ledgerSummaryEntity) {
+		return ledgerSummaryEntity.getMemberIdentifier()+"_"+ledgerSummaryEntity.getAccumType()+"_"+ledgerSummaryEntity.getNetworkCode()+"_"+ledgerSummaryEntity.getNetworkTier()+"_"+formatter.format(ledgerSummaryEntity.getEndDate());
 	}
 }

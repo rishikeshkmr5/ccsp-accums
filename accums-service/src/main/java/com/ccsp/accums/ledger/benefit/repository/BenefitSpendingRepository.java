@@ -18,6 +18,6 @@ public interface BenefitSpendingRepository extends JpaRepository<LedgerSummaryEn
 	 * @param memberID
 	 * @return
 	 */
-	List<LedgerSummaryEntity> findBymemberID(String memberID);
+	List<LedgerSummaryEntity> findBymemberIdentifier(String memberIdentifier);
 	
 }

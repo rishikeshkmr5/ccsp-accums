@@ -32,18 +32,18 @@ public class LedgerSummaryDTO  implements ICommonDTO {
 	@NotNull(message = "Ledger header ID cannot be empty")
 	private Long ledgerHeaderID;
 	
-	private String subscriberID;
+	private String subscriberId;
 	
-	private String memberID;
+	private String memberIdentifier;
 	
-	private Long planID;
+	private Long planId;
 		
 	@NotNull(message = "AccumTypeName cannot be empty")
 	private String accumType;
 	
 	private Double amount;
 	
-	private String network;
+	private String networkCode;
 	
 	private String networkTier;
 	
@@ -53,9 +53,9 @@ public class LedgerSummaryDTO  implements ICommonDTO {
 	
 	private Integer maxVisit;
 	
-	private Date effectiveDt;
+	private Date effectiveDate;
 	
-	private Date endDt;
+	private Date endDate;
 
 	/**
 	 * Default constructor.
@@ -79,43 +79,43 @@ public class LedgerSummaryDTO  implements ICommonDTO {
 	/**
 	 * @return
 	 */
-	public String getSubscriberID() {
-		return subscriberID;
+	public String getSubscriberId() {
+		return subscriberId;
 	}
 
 	/**
 	 * @param subscriberID
 	 */
-	public void setSubscriberID(String subscriberID) {
-		this.subscriberID = subscriberID;
+	public void setSubscriberId(String subscriberID) {
+		this.subscriberId = subscriberID;
 	}
 
 	/**
 	 * @return
 	 */
-	public String getMemberID() {
-		return memberID;
+	public String getMemberIdentifier() {
+		return memberIdentifier;
 	}
 
 	/**
 	 * @param memberID
 	 */
-	public void setMemberID(String memberID) {
-		this.memberID = memberID;
+	public void setMemberIdentifier(String memberID) {
+		this.memberIdentifier = memberID;
 	}
 
 	/**
 	 * @return
 	 */
-	public Long getPlanID() {
-		return planID;
+	public Long getPlanId() {
+		return planId;
 	}
 
 	/**
 	 * @param planID
 	 */
-	public void setPlanID(Long planID) {
-		this.planID = planID;
+	public void setPlanId(Long planID) {
+		this.planId = planID;
 	}
 	/**
 	 * @return
@@ -134,15 +134,15 @@ public class LedgerSummaryDTO  implements ICommonDTO {
 	/**
 	 * @return
 	 */
-	public String getNetwork() {
-		return network;
+	public String getNetworkCode() {
+		return networkCode;
 	}
 
 	/**
 	 * @param network
 	 */
-	public void setNetwork(String network) {
-		this.network = network;
+	public void setNetworkCode(String network) {
+		this.networkCode = network;
 	}
 
 	/**
@@ -190,30 +190,30 @@ public class LedgerSummaryDTO  implements ICommonDTO {
 	/**
 	 * @return
 	 */
-	public Date getEffectiveDt() {
-		return effectiveDt;
+	public Date getEffectiveDate() {
+		return effectiveDate;
 	}
 
 	/**
 	 * @param effectiveDt
 	 */
-	public void setEffectiveDt(Date effectiveDt) {
-		this.effectiveDt = effectiveDt;
+	public void setEffectiveDate(Date effectiveDt) {
+		this.effectiveDate = effectiveDt;
 	}
 
 	
 	/**
 	 * @return
 	 */
-	public Date getEndDt() {
-		return endDt;
+	public Date getEndDate() {
+		return endDate;
 	}
 
 	/**
 	 * @param endDt
 	 */
-	public void setEndDt(Date endDt) {
-		this.endDt = endDt;
+	public void setEndDate(Date endDt) {
+		this.endDate = endDt;
 	}
 	
 	/**

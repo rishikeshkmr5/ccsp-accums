@@ -20,6 +20,7 @@ import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ccsp.accums.ledger.entry.dto.LedgerEntryDTO;
+import com.ccsp.accums.ledger.entry.service.LedgerEntryService;
 import com.ccsp.accums.ledger.header.dto.LedgerHeaderDTO;
 import com.ccsp.accums.ledger.header.entity.LedgerHeaderEntity;
 import com.ccsp.accums.ledger.header.mapper.LedgerHeaderMapper;
@@ -52,10 +53,17 @@ public class AccumulationHeaderImplTest {
 	private LedgerHeaderMapper ledgerHeaderMapper;
 	
 	/**
-	 * Mock the service
+	 * Mock the LedgerSummaryservice
 	 */
 	@Mock
 	private LedgerSummaryService ledgerSummaryService;
+	
+	
+	/**
+	 * Mock the LedgerEntryService
+	 */
+	@Mock
+	private LedgerEntryService ledgerEntryService;
 	
 	/**
 	 * @throws NoSuchFieldException
@@ -65,14 +73,19 @@ public class AccumulationHeaderImplTest {
 	@Test
 	public void testSetLedgerHeader() throws NoSuchFieldException, SecurityException, Exception {
 		setFinalStatic(LedgerHeaderMapper.class.getField("INSTANCE"), ledgerHeaderMapper);
-		LedgerHeaderEntity ledgerHeader = mock(LedgerHeaderEntity.class);
-		LedgerHeaderDTO accumulationHeaderDTO = mock(LedgerHeaderDTO.class);
-		when(ledgerHeaderMapper.convertToEntity(accumulationHeaderDTO)).thenReturn(ledgerHeader);
+		LedgerHeaderEntity ledgerHeaderEntity = mock(LedgerHeaderEntity.class);
+		LedgerHeaderDTO ledgerHeaderDTO = mock(LedgerHeaderDTO.class);
+		List<LedgerEntryDTO> ledgerEntryDTOList = new ArrayList<>();
+		Long headerId = new Long(100l);
+		when(ledgerHeaderEntity.getId()).thenReturn(headerId);
+		ledgerHeaderDTO.setId(headerId);
+		when(ledgerHeaderDTO.getServiceLines()).thenReturn(ledgerEntryDTOList);
+		when(ledgerHeaderMapper.convertToEntity(ledgerHeaderDTO)).thenReturn(ledgerHeaderEntity);
 		List<LedgerEntryDTO> ledgerEntryDTOs = new ArrayList<>();
 		LedgerEntryDTO ledgerEntryDTO = mock(LedgerEntryDTO.class);
 		ledgerEntryDTOs.add(ledgerEntryDTO);
-		LedgerHeaderDTO result = serviceImpl.create(accumulationHeaderDTO);		
-		Assert.assertEquals(accumulationHeaderDTO, result);
+		LedgerHeaderDTO result = serviceImpl.create(ledgerHeaderDTO);		
+		Assert.assertEquals(ledgerHeaderDTO, result);
 	}
 	
 	/**

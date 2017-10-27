@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import com.ccsp.accums.ledger.entry.dto.LedgerEntryDTO;
 import com.ccsp.common.dto.ICommonDTO;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
  * @author Vaibhav
@@ -27,16 +28,16 @@ public class LedgerHeaderDTO  implements ICommonDTO {
 	
 	private Long id;
 		
-	@XmlElement(name="vendorTansactionCode")
-	private String vendorTransactionCode;
+	@XmlElement(name="transactionCode")
+	private String transactionCode;
 	
 	
 	@XmlElement(name="dcn")  
 	private String dcn;
 	
 	
-	@XmlElement(name="claimLine")  
-	private Integer claimLine;
+	@XmlElement(name="claimLineId")  
+	private Integer claimLineId;
 
 	
 	@XmlElement(name="serviceId")  
@@ -48,15 +49,17 @@ public class LedgerHeaderDTO  implements ICommonDTO {
 	
 	
 	@XmlElement(name="serviceDate")  
+	@JsonFormat(pattern = "MM/dd/yyyy")
 	private Date serviceDate;
 	
 	
-	@XmlElement(name="dateTimeProcessed")  
-	private Date dateTimeProcessed;
+	@XmlElement(name="processedDate") 
+	@JsonFormat(pattern = "MM/dd/yyyy")
+	private Date processedDate;
 	
 	
-	@XmlElement(name="network")  
-	private String network;
+	@XmlElement(name="networkCode")  
+	private String networkCode;
 	
 	@XmlElement(name="networkTier")  
 	private String networkTier;
@@ -68,19 +71,31 @@ public class LedgerHeaderDTO  implements ICommonDTO {
 	private Double allowedAmount;
 	
 	@XmlElement(name="memberIdentifier")  
-	private String memberIdentifier;
-	
+	private String memberIdentifier;	
 	
 	@XmlElement(name="subscriberId")  
-	private String subscriberId;
-	
+	private String subscriberId;	
 
 	@XmlElement(name="unitOfMeasure")  
-	private String unitOfMeasure;
-	
+	private String unitOfMeasure;	
 	
 	@XmlElement(name="accumType")  
 	private String accumType;
+	
+	@XmlElement(name="endDate")
+	@JsonFormat(pattern = "MM/dd/yyyy")
+	private Date endDate;
+	
+	@XmlElement(name="effectiveDate")
+	@JsonFormat(pattern = "MM/dd/yyyy")
+	private Date effectiveDate;
+	
+	@XmlElement(name="maxAmount")
+	private double maxAmount;
+	
+	@XmlElement(name="maxVisit")
+	private int maxVisit;
+	
 
 	@XmlElement(name = "serviceLines")
 	private List<LedgerEntryDTO> serviceLines;
@@ -92,15 +107,15 @@ public class LedgerHeaderDTO  implements ICommonDTO {
 	/**
 	 * @return
 	 */
-	public String getVendorTransactionCode() {
-		return vendorTransactionCode;
+	public String getTransactionCode() {
+		return transactionCode;
 	}
 
 	/**
 	 * @param vendorTaxID
 	 */
-	public void setVendorTransactionCode(String vendorTaxID) {
-		this.vendorTransactionCode = vendorTaxID;
+	public void setTransactionCode(String vendorTaxID) {
+		this.transactionCode = vendorTaxID;
 	}
 
 	/**
@@ -120,15 +135,15 @@ public class LedgerHeaderDTO  implements ICommonDTO {
 	/**
 	 * @return
 	 */
-	public Integer getClaimLine() {
-		return claimLine;
+	public Integer getClaimLineId() {
+		return claimLineId;
 	}
 
 	/**
 	 * @param claimLine
 	 */
-	public void setClaimLine(Integer claimLine) {
-		this.claimLine = claimLine;
+	public void setClaimLineId(Integer claimLine) {
+		this.claimLineId = claimLine;
 	}
 
 	/**
@@ -162,29 +177,29 @@ public class LedgerHeaderDTO  implements ICommonDTO {
 	/**
 	 * @return
 	 */
-	public Date getDateTimeProcessed() {
-		return dateTimeProcessed;
+	public Date getProcessedDate() {
+		return processedDate;
 	}
 
 	/**
 	 * @param dateTimeProcessed
 	 */
-	public void setDateTimeProcessed(Date dateTimeProcessed) {
-		this.dateTimeProcessed = dateTimeProcessed;
+	public void setProcessedDate(Date dateTimeProcessed) {
+		this.processedDate = dateTimeProcessed;
 	}
 
 	/**
 	 * @return
 	 */
-	public String getNetwork() {
-		return network;
+	public String getNetworkCode() {
+		return networkCode;
 	}
 
 	/**
 	 * @param network
 	 */
-	public void setNetwork(String network) {
-		this.network = network;
+	public void setNetworkCode(String network) {
+		this.networkCode = network;
 	}
 
 	/**
@@ -316,7 +331,37 @@ public class LedgerHeaderDTO  implements ICommonDTO {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	
-	
+
+	public Date getEndDate() {
+		return endDate;
 	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+	public Date getEffectiveDate() {
+		return effectiveDate;
+	}
+
+	public void setEffectiveDate(Date effectiveDate) {
+		this.effectiveDate = effectiveDate;
+	}
+
+	public double getMaxAmount() {
+		return maxAmount;
+	}
+
+	public void setMaxAmount(double maxAmount) {
+		this.maxAmount = maxAmount;
+	}
+
+	public int getMaxVisit() {
+		return maxVisit;
+	}
+
+	public void setMaxVisit(int maxVisit) {
+		this.maxVisit = maxVisit;
+	}	
+	
+}

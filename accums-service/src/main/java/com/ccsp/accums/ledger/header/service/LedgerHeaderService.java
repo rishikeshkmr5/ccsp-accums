@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
@@ -32,13 +33,12 @@ public class LedgerHeaderService extends CommonServiceImpl<LedgerHeaderDTO, Ledg
 	 */
 	@Resource
 	private ILedgerHeaderRepository ledgerHeaderRepository;
-	
+
 	@Autowired
 	private LedgerEntryService ledgerEntryService;
-	
+
 	@Autowired
 	private LedgerSummaryService ledgerSummaryService;
-
 
 	/**
 	 * @see com.ccsp.common.service.impl.CommonServiceImpl#getJPARepository()
@@ -48,66 +48,48 @@ public class LedgerHeaderService extends CommonServiceImpl<LedgerHeaderDTO, Ledg
 		return ledgerHeaderRepository;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ccsp.common.service.impl.CommonServiceImpl#getMapper()
 	 */
 	@Override
 	public IBaseMapper<LedgerHeaderDTO, LedgerHeaderEntity> getMapper() {
 		return LedgerHeaderMapper.INSTANCE;
-	}	
-	
+	}
+
 	@Override
-	public LedgerHeaderDTO create(LedgerHeaderDTO ledgerHeaderDTO){
-		if(ledgerHeaderDTO != null) {
+	public LedgerHeaderDTO create(LedgerHeaderDTO ledgerHeaderDTO) {
+		if (ledgerHeaderDTO != null) {
 			LedgerHeaderEntity ledgerHeaderEntity = getMapper().convertToEntity(ledgerHeaderDTO);
 			getJPARepository().saveAndFlush(ledgerHeaderEntity);
 			ledgerHeaderDTO.setId(ledgerHeaderEntity.getId());
-			List<LedgerEntryDTO> ledgerEntryDTOs = ledgerHeaderDTO.getServiceLines();
-			for(LedgerEntryDTO ledgerEntryDTO : ledgerEntryDTOs) {
-				ledgerEntryDTO.setLedgerHeaderID(ledgerHeaderEntity.getId());
-				ledgerEntryService.create(ledgerEntryDTO);
-				LedgerSummaryEntity ledgerSummaryEntity = new LedgerSummaryEntity();
-				ledgerSummaryEntity.setMemberID(ledgerHeaderDTO.getMemberIdentifier());
-				ledgerSummaryEntity.setAccumType(ledgerEntryDTO.getAccumType());
-				ledgerSummaryEntity.setNetwork(ledgerEntryDTO.getNetwork());
-				ledgerSummaryEntity.setNetworkTier(ledgerHeaderDTO.getNetworkTier());
-				ledgerSummaryEntity.setAmount(ledgerHeaderDTO.getAllowedAmount());
-				ledgerSummaryEntity.setLedgerHeader(ledgerHeaderEntity);
-				ledgerSummaryEntity.setLedgerHeaderID(ledgerHeaderEntity.getId());
-				ledgerSummaryEntity.setSubscriberID(ledgerHeaderDTO.getSubscriberId());
-				ledgerSummaryEntity.setUnitOfMeasure(ledgerEntryDTO.getUnitOfMeasure());
-				ledgerSummaryService.createSummary(ledgerSummaryEntity);
+			if (CollectionUtils.isNotEmpty(ledgerHeaderDTO.getServiceLines())) {
+				for (LedgerEntryDTO ledgerEntryDTO : ledgerHeaderDTO.getServiceLines()) {
+					ledgerEntryDTO.setLedgerHeaderID(ledgerHeaderEntity.getId());
+				}
+				ledgerHeaderDTO.setServiceLines(ledgerEntryService.create(ledgerHeaderDTO.getServiceLines()));
+				ledgerSummaryService.create(ledgerHeaderDTO);
 			}
-		}	
-		return ledgerHeaderDTO;		
+		}
+		return ledgerHeaderDTO;
 	}
-	
+
 	@Override
 	public LedgerHeaderDTO update(LedgerHeaderDTO dto) {
 		LedgerHeaderEntity ledgerHeaderEntity = getMapper().convertToEntity(dto);
 		LedgerHeaderEntity existingEntity = getJPARepository().findOne(ledgerHeaderEntity.getId());
 		LedgerHeaderDTO existingDTO = getMapper().convertToDTO(existingEntity);
-		
-				if(existingEntity != null)
-				ledgerHeaderEntity.setId(existingEntity.getId());
-		ledgerHeaderEntity	= getJPARepository().save(ledgerHeaderEntity);
-		List<LedgerEntryDTO> ledgerEntriesDTO=dto.getServiceLines();
-		for(LedgerEntryDTO ledgerEntryDTO : ledgerEntriesDTO) {
-				ledgerEntryDTO.setLedgerHeaderID(ledgerHeaderEntity.getId());
-					ledgerEntryService.update(ledgerEntryDTO);
-					LedgerSummaryEntity ledgerSummaryEntity = new LedgerSummaryEntity();	
-					ledgerSummaryEntity.setMemberID(dto.getMemberIdentifier());
-					ledgerSummaryEntity.setAccumType(ledgerEntryDTO.getAccumType());
-					ledgerSummaryEntity.setNetwork(ledgerEntryDTO.getNetwork());
-					ledgerSummaryEntity.setNetworkTier(dto.getNetworkTier());
-					ledgerSummaryEntity.setAmount(dto.getAllowedAmount());
-					ledgerSummaryEntity.setLedgerHeader(ledgerHeaderEntity);
-					ledgerSummaryEntity.setLedgerHeaderID(ledgerHeaderEntity.getId());
-					ledgerSummaryEntity.setSubscriberID(dto.getSubscriberId());
-					ledgerSummaryEntity.setUnitOfMeasure(ledgerEntryDTO.getUnitOfMeasure());
-					ledgerSummaryService.update(ledgerSummaryEntity);
+
+		if (existingEntity != null)
+			ledgerHeaderEntity.setId(existingEntity.getId());
+		ledgerHeaderEntity = getJPARepository().save(ledgerHeaderEntity);
+		List<LedgerEntryDTO> ledgerEntriesDTO = dto.getServiceLines();
+		for (LedgerEntryDTO ledgerEntryDTO : ledgerEntriesDTO) {
+			ledgerEntryDTO.setLedgerHeaderID(ledgerHeaderEntity.getId());
+			ledgerEntryService.update(ledgerEntryDTO);
 		}
 		return dto;
-		
+
 	}
 }

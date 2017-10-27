@@ -18,13 +18,13 @@ public interface BenefitBalanceRepository extends JpaRepository<LedgerSummaryEnt
 	 * @param subscriberID
 	 * @return
 	 */
-	List<LedgerSummaryEntity> findBysubscriberID(String subscriberID);
+	List<LedgerSummaryEntity> findBysubscriberId(String subscriberId);
 	
 	/**
 	 * To get all accumulation summary based on member id
 	 * @param memberID
 	 * @return
 	 */
-	List<LedgerSummaryEntity> findBymemberID(String memberID);
+	List<LedgerSummaryEntity> findBymemberIdentifier(String memberIdentifier);
 	
 }

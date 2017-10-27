@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.ccsp.accums.ledger.header.dto.LedgerHeaderClaimDTO;
+import com.ccsp.accums.ledger.header.dto.AccumUtilization;
 import com.ccsp.accums.ledger.header.dto.LedgerHeaderDTO;
 import com.ccsp.accums.ledger.header.service.LedgerHeaderService;
 import com.ccsp.common.utils.UIConstants;
@@ -65,11 +65,10 @@ public class LedgerHeaderController {
 	 */
 	@RequestMapping(path = UIConstants.LEDGER_HEADER, method = RequestMethod.POST, consumes = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
 	@ResponseBody
-	public LedgerHeaderDTO createLedgerHeader(@RequestBody LedgerHeaderClaimDTO claimsForAccumulationHeaderDTO) {
+	public LedgerHeaderDTO createLedgerHeader(@RequestBody AccumUtilization accumUtilization) {
 		log.info("Create LedgerHeader details");
-		LedgerHeaderDTO accumulationHeaderDTO = claimsForAccumulationHeaderDTO.getAccumulationHeaderDTO();
-		validator.validate(accumulationHeaderDTO);
-		return accumulationHeaderService.create(accumulationHeaderDTO);
+		validator.validate(accumUtilization);
+		return accumulationHeaderService.create(accumUtilization);
 	}
 	
 	@RequestMapping(value = "/fileupload", headers=("content-type=multipart/*"), method = RequestMethod.POST)
@@ -96,9 +95,9 @@ public class LedgerHeaderController {
     }
 	@RequestMapping(path = UIConstants.LEDGER_HEADER, method = RequestMethod.PUT, consumes = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
 	@ResponseBody
-	public LedgerHeaderDTO updateLedgerHeader(@RequestBody LedgerHeaderClaimDTO claimsForAccumulationHeaderDTO) {
+	public LedgerHeaderDTO updateLedgerHeader(@RequestBody AccumUtilization claimsForAccumulationHeaderDTO) {
 		log.info("Create LedgerHeader details");
-		LedgerHeaderDTO accumulationHeaderDTO = claimsForAccumulationHeaderDTO.getAccumulationHeaderDTO();
+		LedgerHeaderDTO accumulationHeaderDTO = claimsForAccumulationHeaderDTO;
 		return accumulationHeaderService.update(accumulationHeaderDTO);
 	}
 }

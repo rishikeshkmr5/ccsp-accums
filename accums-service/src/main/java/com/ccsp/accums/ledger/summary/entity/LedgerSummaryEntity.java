@@ -23,10 +23,7 @@ import com.ccsp.accums.ledger.header.entity.LedgerHeaderEntity;
  *
  */
 @Entity
-@Table(name = "LDGR_SUM")
-@NamedQuery(
-name="findLedgerSummary",
-query="select c from LedgerSummaryEntity c where c.memberID = :memberID and c.accumType = :accumType and c.network = :network and c.networkTier = :networkTier") 
+@Table(name = "LDGR_SUM") 
 public class LedgerSummaryEntity  implements java.io.Serializable {
 
 	/**
@@ -44,17 +41,17 @@ public class LedgerSummaryEntity  implements java.io.Serializable {
 	@JoinColumn(name="LDGR_ID",referencedColumnName="LDGR_ID")
 	private LedgerHeaderEntity ledgerHeader;
 	
-	@Column(name = "LDGR_ID", insertable = false, updatable = false)
+	@Column(name = "LDGR_ID", insertable = false, updatable = false, nullable = true)
 	private Long ledgerHeaderID;
 	
 	@Column(name = "SUB_ID",  nullable = true)
-	private String subscriberID;
+	private String subscriberId;
 	
 	@Column(name = "MBR_ID",  nullable = true,unique=true)
-	private String memberID;
+	private String memberIdentifier;
 	
 	@Column(name = "PLN_ID",  nullable = true)
-	private Long planID;
+	private Long planId;
 		
 	@Column(name = "ACCUM_TYP_NM",  nullable = true,unique=true)
 	private String accumType;
@@ -63,7 +60,7 @@ public class LedgerSummaryEntity  implements java.io.Serializable {
 	private Double amount;
 	
 	@Column(name = "NTWK_CD",  nullable = true ,unique=true)
-	private String network;
+	private String networkCode;
 	
 	@Column(name = "NTWK_TIER_NM",  nullable = true,unique=true)
 	private String networkTier;
@@ -78,10 +75,10 @@ public class LedgerSummaryEntity  implements java.io.Serializable {
 	private Integer maxVisit;
 	
 	@Column(name = "EFF_DT",  nullable = true)
-	private Date effectiveDt;
+	private Date effectiveDate;
 	
 	@Column(name = "END_DT",  nullable = true,unique=true)
-	private Date endDt;
+	private Date endDate;
 
 	/**
 	 * Default constructor.
@@ -105,43 +102,43 @@ public class LedgerSummaryEntity  implements java.io.Serializable {
 	/**
 	 * @return
 	 */
-	public String getSubscriberID() {
-		return subscriberID;
+	public String getSubscriberId() {
+		return subscriberId;
 	}
 
 	/**
 	 * @param subscriberID
 	 */
-	public void setSubscriberID(String subscriberID) {
-		this.subscriberID = subscriberID;
+	public void setSubscriberId(String subscriberID) {
+		this.subscriberId = subscriberID;
 	}
 
 	/**
 	 * @return
 	 */
-	public String getMemberID() {
-		return memberID;
+	public String getMemberIdentifier() {
+		return memberIdentifier;
 	}
 
 	/**
 	 * @param memberID
 	 */
-	public void setMemberID(String memberID) {
-		this.memberID = memberID;
+	public void setMemberIdentifier(String memberID) {
+		this.memberIdentifier = memberID;
 	}
 
 	/**
 	 * @return
 	 */
-	public Long getPlanID() {
-		return planID;
+	public Long getPlanId() {
+		return planId;
 	}
 
 	/**
 	 * @param planID
 	 */
-	public void setPlanID(Long planID) {
-		this.planID = planID;
+	public void setPlanId(Long planID) {
+		this.planId = planID;
 	}
 	/**
 	 * @return
@@ -160,15 +157,15 @@ public class LedgerSummaryEntity  implements java.io.Serializable {
 	/**
 	 * @return
 	 */
-	public String getNetwork() {
-		return network;
+	public String getNetworkCode() {
+		return networkCode;
 	}
 
 	/**
 	 * @param network
 	 */
-	public void setNetwork(String network) {
-		this.network = network;
+	public void setNetworkCode(String network) {
+		this.networkCode = network;
 	}
 
 	/**
@@ -245,30 +242,30 @@ public class LedgerSummaryEntity  implements java.io.Serializable {
 	/**
 	 * @return
 	 */
-	public Date getEffectiveDt() {
-		return effectiveDt;
+	public Date getEffectiveDate() {
+		return effectiveDate;
 	}
 
 	/**
 	 * @param effectiveDt
 	 */
-	public void setEffectiveDt(Date effectiveDt) {
-		this.effectiveDt = effectiveDt;
+	public void setEffectiveDate(Date effectiveDt) {
+		this.effectiveDate = effectiveDt;
 	}
 
 	
 	/**
 	 * @return
 	 */
-	public Date getEndDt() {
-		return endDt;
+	public Date getEndDate() {
+		return endDate;
 	}
 
 	/**
 	 * @param endDt
 	 */
-	public void setEndDt(Date endDt) {
-		this.endDt = endDt;
+	public void setEndDate(Date endDt) {
+		this.endDate = endDt;
 	}
 	
 	/**
