@@ -25,6 +25,6 @@ public interface BenefitBalanceRepository extends JpaRepository<LedgerSummaryEnt
 	 * @param memberID
 	 * @return
 	 */
-	List<LedgerSummaryEntity> findBymemberIdentifier(String memberIdentifier);
+	List<LedgerSummaryEntity> findBymemberId(String memberId);
 	
 }

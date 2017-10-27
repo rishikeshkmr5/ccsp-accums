@@ -14,5 +14,6 @@ import com.ccsp.accums.ledger.header.entity.LedgerHeaderEntity;
 public interface ILedgerHeaderRepository extends JpaRepository<LedgerHeaderEntity, Long>{
 	
 	List<LedgerHeaderEntity> findByAccumType(String accumType);
-
+	
+	List<LedgerHeaderEntity> findBySubscriberId(String subscriberId);
 }

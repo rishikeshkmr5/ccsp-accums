@@ -7,6 +7,7 @@ import javax.validation.ValidationException;
 import org.apache.log4j.Logger;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -62,4 +63,13 @@ public class LedgerSummaryController {
 		return accumulationSummaryService.create(accumsEntry);
 	}
 	
+	/**
+	 * @param subscriberId
+	 */
+	@RequestMapping(path = UIConstants.LEDGER_SUMMARY_UPDATE, method = RequestMethod.PUT, produces = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
+	@ResponseBody
+	public void updateLedgerSummary(@PathVariable("subscriberId")String subscriberId) {
+		log.info("Update LedgerSummary details");
+		accumulationSummaryService.updateLedgerSummary(subscriberId);
+	}	
 }

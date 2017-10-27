@@ -26,6 +26,8 @@ public class UIConstants {
 	 */
 	public static final String LEDGER_SUMMARY = "/ledger-summary";
 	
+	public static final String LEDGER_SUMMARY_UPDATE = "/ledger-summary/{subscriberId}";
+	
 	/**
 	 * Accums Inquiry API
 	 */

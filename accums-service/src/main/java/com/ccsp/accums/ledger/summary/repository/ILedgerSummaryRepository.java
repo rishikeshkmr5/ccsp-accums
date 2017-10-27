@@ -15,8 +15,8 @@ import com.ccsp.accums.ledger.summary.entity.LedgerSummaryEntity;
  */
 public interface ILedgerSummaryRepository extends JpaRepository<LedgerSummaryEntity, Long>{
 	
-	@Query("select c from LedgerSummaryEntity c where c.memberIdentifier = :memberIdentifier and c.accumType = :accumType and c.networkCode = :networkCode and c.networkTier = :networkTier")
-	LedgerSummaryEntity findLedgerSummary(@Param("memberIdentifier") String memberIdentifier, @Param("accumType") String accumType, @Param("networkCode") String networkCode, @Param("networkTier") String networkTier);
+	@Query("select c from LedgerSummaryEntity c where c.memberId = :memberId and c.accumType = :accumType and c.networkCode = :networkCode and c.networkTier = :networkTier")
+	LedgerSummaryEntity findLedgerSummary(@Param("memberId") String memberId, @Param("accumType") String accumType, @Param("networkCode") String networkCode, @Param("networkTier") String networkTier);
 	
 	List<LedgerSummaryEntity> findBySubscriberId(String subscriberId);
 }

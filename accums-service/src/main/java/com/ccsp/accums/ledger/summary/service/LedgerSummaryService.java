@@ -13,8 +13,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
 import com.ccsp.accums.ledger.entry.dto.LedgerEntryDTO;
+import com.ccsp.accums.ledger.entry.entity.LedgerEntryEntity;
+import com.ccsp.accums.ledger.entry.repository.LedgerEntryRepository;
 import com.ccsp.accums.ledger.header.dto.LedgerHeaderDTO;
 import com.ccsp.accums.ledger.header.entity.LedgerHeaderEntity;
+import com.ccsp.accums.ledger.header.mapper.LedgerHeaderMapper;
 import com.ccsp.accums.ledger.header.repository.ILedgerHeaderRepository;
 import com.ccsp.accums.ledger.summary.dto.LedgerSummaryDTO;
 import com.ccsp.accums.ledger.summary.entity.LedgerSummaryEntity;
@@ -37,6 +40,9 @@ public class LedgerSummaryService extends CommonServiceImpl<LedgerSummaryDTO, Le
 
 	@Resource
 	private ILedgerHeaderRepository ledgerHeaderRepository;
+	
+	@Resource
+	private LedgerEntryRepository ledgerEntryRepository;
 	
 	private final SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -142,11 +148,47 @@ public class LedgerSummaryService extends CommonServiceImpl<LedgerSummaryDTO, Le
 		return ledgerSummaryRepository;
 	}
 
-	public void updateLedgerSummary() {
-
+	/**
+	 * @param subscriberId
+	 */
+	public void updateLedgerSummary(String subscriberId) {
+		Map<String, LedgerSummaryEntity> ledgerSummaryMap = new HashMap<String, LedgerSummaryEntity>();
+		List<LedgerSummaryEntity> ledgerSummaryEntities = ledgerSummaryRepository.findBySubscriberId(subscriberId);
+		if(CollectionUtils.isNotEmpty(ledgerSummaryEntities)) {
+			for(LedgerSummaryEntity ledgerSummaryEntity : ledgerSummaryEntities) {
+				ledgerSummaryEntity.setAmount(0d);
+				ledgerSummaryMap.put(generateKey(ledgerSummaryEntity), ledgerSummaryEntity);
+			}
+		}
+		List<LedgerHeaderEntity> ledgerHeaderEntityList = ledgerHeaderRepository.findBySubscriberId(subscriberId);
+		for(LedgerHeaderEntity ledgerHeaderEntity : ledgerHeaderEntityList) {
+			LedgerHeaderMapper headerMapper = LedgerHeaderMapper.INSTANCE;
+			LedgerHeaderDTO ledgerHeaderDTO = headerMapper.convertToDTO(ledgerHeaderEntity);
+			List<LedgerEntryEntity> ledgerEntryList = ledgerEntryRepository.findByledgerHeaderID(ledgerHeaderEntity.getId());
+			for(LedgerEntryEntity ledgerEntryEntity:ledgerEntryList) {
+				LedgerSummaryMapper mapper = (LedgerSummaryMapper) getMapper();
+				LedgerSummaryEntity entity = mapper.convertHeaderDTOtoEntity(ledgerHeaderDTO);
+				entity.setAccumType(ledgerEntryEntity.getAccumType());
+				LedgerSummaryEntity result = null;
+				result = ledgerSummaryMap.get(generateKey(entity));
+				if (result != null) {
+					result.setAmount(result.getAmount() + ledgerEntryEntity.getAmount());
+				} else {
+					result = entity;
+					result.setAmount(ledgerEntryEntity.getAmount());
+				}
+				ledgerSummaryEntities.add(result);
+			}
+		}
+		ledgerSummaryRepository.save(ledgerSummaryEntities);
 	}
 	
+	/**
+	 * @param ledgerSummaryEntity
+	 * @return
+	 */
 	private String generateKey(LedgerSummaryEntity ledgerSummaryEntity) {
-		return ledgerSummaryEntity.getMemberIdentifier()+"_"+ledgerSummaryEntity.getAccumType()+"_"+ledgerSummaryEntity.getNetworkCode()+"_"+ledgerSummaryEntity.getNetworkTier()+"_"+formatter.format(ledgerSummaryEntity.getEndDate());
+		return ledgerSummaryEntity.getMemberId()+"_"+ledgerSummaryEntity.getAccumType()+"_"+ledgerSummaryEntity.getNetworkCode()+"_"+ledgerSummaryEntity.getNetworkTier();
 	}
 }
+

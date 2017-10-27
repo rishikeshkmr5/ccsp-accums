@@ -70,8 +70,8 @@ public class LedgerHeaderDTO  implements ICommonDTO {
 	@XmlElement(name="allowedAmount")  
 	private Double allowedAmount;
 	
-	@XmlElement(name="memberIdentifier")  
-	private String memberIdentifier;	
+	@XmlElement(name="memberId")  
+	private String memberId;	
 	
 	@XmlElement(name="subscriberId")  
 	private String subscriberId;	
@@ -247,15 +247,15 @@ public class LedgerHeaderDTO  implements ICommonDTO {
 	/**
 	 * @return
 	 */
-	public String getMemberIdentifier() {
-		return memberIdentifier;
+	public String getMemberId() {
+		return memberId;
 	}
 
 	/**
 	 * @param memberID
 	 */
-	public void setMemberIdentifier(String memberID) {
-		this.memberIdentifier = memberID;
+	public void setMemberId(String memberID) {
+		this.memberId = memberID;
 	}
 
 	/**

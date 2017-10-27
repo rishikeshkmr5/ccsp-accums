@@ -48,7 +48,7 @@ public class LedgerSummaryEntity  implements java.io.Serializable {
 	private String subscriberId;
 	
 	@Column(name = "MBR_ID",  nullable = true,unique=true)
-	private String memberIdentifier;
+	private String memberId;
 	
 	@Column(name = "PLN_ID",  nullable = true)
 	private Long planId;
@@ -116,15 +116,15 @@ public class LedgerSummaryEntity  implements java.io.Serializable {
 	/**
 	 * @return
 	 */
-	public String getMemberIdentifier() {
-		return memberIdentifier;
+	public String getMemberId() {
+		return memberId;
 	}
 
 	/**
 	 * @param memberID
 	 */
-	public void setMemberIdentifier(String memberID) {
-		this.memberIdentifier = memberID;
+	public void setMemberId(String memberID) {
+		this.memberId = memberID;
 	}
 
 	/**

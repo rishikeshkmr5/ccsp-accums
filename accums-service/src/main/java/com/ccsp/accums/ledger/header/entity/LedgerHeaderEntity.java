@@ -31,13 +31,13 @@ public class LedgerHeaderEntity  implements java.io.Serializable {
 	private Long id;
 		
 	@Column(name = "VEND_XACTN_ID", nullable = true, length=16)
-	private String vendorTransactionCode;
+	private String transactionCode;
 	
 	@Column(name = "DCN", nullable = true, length=16)
 	private String dcn;
 	
 	@Column(name = "CLM_LN_ID", nullable = true)
-	private Integer claimLine;
+	private Integer claimLineId;
 
 	@Column(name = "SVC_ID", nullable = true)
 	private Integer serviceId;
@@ -49,10 +49,10 @@ public class LedgerHeaderEntity  implements java.io.Serializable {
 	private Date serviceDate;
 	
 	@Column(name = "PROC_DT", nullable = true)
-	private Date dateTimeProcessed;
+	private Date processedDate;
 	
 	@Column(name = "NTWK_CD", nullable = true)
-	private String network;
+	private String networkCode;
 	
 	@Column(name = "NTWK_TIER_NM", nullable = true)
 	private String networkTier;
@@ -64,7 +64,7 @@ public class LedgerHeaderEntity  implements java.io.Serializable {
 	private Double allowedAmount;
 	
 	@Column(name = "MBR_ID", nullable = true)
-	private String memberIdentifier;
+	private String memberId;
 	
 	/*@Column(name = "SUB_ID", nullable = true)
 	private Integer patientID;*/
@@ -100,15 +100,15 @@ public class LedgerHeaderEntity  implements java.io.Serializable {
 	/**
 	 * @return
 	 */
-	public String getVendorTransactionCode() {
-		return vendorTransactionCode;
+	public String getTransactionCode() {
+		return transactionCode;
 	}
 
 	/**
 	 * @param vendorTaxID
 	 */
-	public void setVendorTransactionCode(String vendorTaxID) {
-		this.vendorTransactionCode = vendorTaxID;
+	public void setTransactionCode(String vendorTaxID) {
+		this.transactionCode = vendorTaxID;
 	}
 
 	/**
@@ -128,15 +128,15 @@ public class LedgerHeaderEntity  implements java.io.Serializable {
 	/**
 	 * @return
 	 */
-	public Integer getClaimLine() {
-		return claimLine;
+	public Integer getClaimLineId() {
+		return claimLineId;
 	}
 
 	/**
 	 * @param claimLine
 	 */
-	public void setClaimLine(Integer claimLine) {
-		this.claimLine = claimLine;
+	public void setClaimLineId(Integer claimLine) {
+		this.claimLineId = claimLine;
 	}
 
 	/**
@@ -170,29 +170,29 @@ public class LedgerHeaderEntity  implements java.io.Serializable {
 	/**
 	 * @return
 	 */
-	public Date getDateTimeProcessed() {
-		return dateTimeProcessed;
+	public Date getProcessedDate() {
+		return processedDate;
 	}
 
 	/**
 	 * @param dateTimeProcessed
 	 */
-	public void setDateTimeProcessed(Date dateTimeProcessed) {
-		this.dateTimeProcessed = dateTimeProcessed;
+	public void setProcessedDate(Date dateTimeProcessed) {
+		this.processedDate = dateTimeProcessed;
 	}
 
 	/**
 	 * @return
 	 */
-	public String getNetwork() {
-		return network;
+	public String getNetworkCode() {
+		return networkCode;
 	}
 
 	/**
 	 * @param network
 	 */
-	public void setNetwork(String network) {
-		this.network = network;
+	public void setNetworkCode(String network) {
+		this.networkCode = network;
 	}
 
 	/**
@@ -240,15 +240,15 @@ public class LedgerHeaderEntity  implements java.io.Serializable {
 	/**
 	 * @return
 	 */
-	public String getMemberIdentifier() {
-		return memberIdentifier;
+	public String getMemberId() {
+		return memberId;
 	}
 
 	/**
 	 * @param memberID
 	 */
-	public void setMemberIdentifier(String memberID) {
-		this.memberIdentifier = memberID;
+	public void setMemberId(String memberID) {
+		this.memberId = memberID;
 	}
 	/**
 	 * @return

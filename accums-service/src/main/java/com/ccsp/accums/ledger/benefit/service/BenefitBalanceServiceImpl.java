@@ -62,7 +62,7 @@ public class BenefitBalanceServiceImpl extends CommonServiceImpl<BenefitBalanceD
 				throw new NotFoundException(
 						"There are no Summaries Balance Benefit available for subscriberid : " + subscriberID);
 		} else if (memberID != null && memberID.length() > 0) {
-			summaries = benefitBalanceRepository.findBymemberIdentifier(memberID);
+			summaries = benefitBalanceRepository.findBymemberId(memberID);
 			if (summaries.isEmpty())
 				throw new NotFoundException(
 						"There are no Summaries Balance Benefit available for memberid : " + memberID);
