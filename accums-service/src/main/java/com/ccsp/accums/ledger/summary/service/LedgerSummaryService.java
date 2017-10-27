@@ -170,15 +170,20 @@ public class LedgerSummaryService extends CommonServiceImpl<LedgerSummaryDTO, Le
 				LedgerSummaryEntity entity = mapper.convertHeaderDTOtoEntity(ledgerHeaderDTO);
 				entity.setAccumType(ledgerEntryEntity.getAccumType());
 				LedgerSummaryEntity result = null;
-				result = ledgerSummaryMap.get(generateKey(entity));
+				String key = generateKey(entity);
+				result = ledgerSummaryMap.get(key);
 				if (result != null) {
 					result.setAmount(result.getAmount() + ledgerEntryEntity.getAmount());
 				} else {
 					result = entity;
 					result.setAmount(ledgerEntryEntity.getAmount());
 				}
-				ledgerSummaryEntities.add(result);
+				ledgerSummaryMap.put(key, result);
 			}
+		}
+		ledgerSummaryEntities = new ArrayList<>();
+		for(Map.Entry<String, LedgerSummaryEntity> map : ledgerSummaryMap.entrySet()) {
+			ledgerSummaryEntities.add(map.getValue());
 		}
 		ledgerSummaryRepository.save(ledgerSummaryEntities);
 	}
