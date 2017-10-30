@@ -15,10 +15,10 @@
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <intProp name="LoopController.loops">-1</intProp>
+          <stringProp name="LoopController.loops">1</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">1000</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">2</stringProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
         <longProp name="ThreadGroup.start_time">1508231356000</longProp>
         <longProp name="ThreadGroup.end_time">1508231356000</longProp>
         <boolProp name="ThreadGroup.scheduler">false</boolProp>
@@ -69,7 +69,7 @@
         <hashTree/>
         <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">true</boolProp>
-          <stringProp name="LoopController.loops">5</stringProp>
+          <stringProp name="LoopController.loops">1</stringProp>
         </LoopController>
         <hashTree>
           <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Ledger Header HTTP Request ${counter_value}" enabled="true">
@@ -79,80 +79,78 @@
                 <elementProp name="" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.value">{&#xd;
-  &quot;accumulationHeaderDTO&quot;: {&#xd;
-    &quot;accumType&quot;: &quot;COPAY ${random_value}&quot;,&#xd;
-    &quot;allowedAmount&quot;: ${random_value},&#xd;
-    &quot;claimLine&quot;: ${counter_value},&#xd;
-    &quot;dateTimeProcessed&quot;: &quot;${time}&quot;,&#xd;
-    &quot;dcn&quot;: &quot;CLM0000001&quot;,&#xd;
-    &quot;memberIdentifier&quot;: &quot;M00${rand_value}&quot;,&#xd;
-    &quot;network&quot;: &quot;IN&quot;,&#xd;
-    &quot;networkTier&quot;: &quot;PPO&quot;,&#xd;
-    &quot;planId&quot;: ${counter_value},&#xd;
-    &quot;serviceDate&quot;: &quot;${time}&quot;,&#xd;
-    &quot;serviceId&quot;: 10000,&#xd;
-    &quot;serviceName&quot;: &quot;${time}&quot;,&#xd;
-    &quot;subscriberId&quot;: &quot;A${random_value}&quot;,&#xd;
-    &quot;unitOfMeasure&quot;: &quot;Dollars&quot;,&#xd;
-    &quot;vendorTransactionCode&quot;: &quot;V${random_value}&quot;,&#xd;
+  &quot;accumType&quot;: &quot;SPC COPAY&quot;,&#xd;
+  &quot;allowedAmount&quot;: ${amount},&#xd;
+  &quot;claimLineId&quot;: ${counter_value},&#xd;
+  &quot;dcn&quot;: &quot;CLM${clm}&quot;,&#xd;
+  &quot;effectiveDate&quot;: &quot;01/01/2017&quot;,&#xd;
+  &quot;endDate&quot;: &quot;12/31/2017&quot;,&#xd;
+  &quot;maxAmount&quot;: 1000,&#xd;
+  &quot;maxVisit&quot;: 10,&#xd;
+  &quot;memberId&quot;: &quot;M00${rand_value}&quot;,&#xd;
+  &quot;networkCode&quot;: &quot;INB&quot;,&#xd;
+  &quot;networkTier&quot;: &quot;PPO&quot;,&#xd;
+  &quot;planId&quot;: 10,&#xd;
+  &quot;processedDate&quot;: &quot;${dateTimeProcessed}&quot;,&#xd;
+  &quot;serviceDate&quot;: &quot;${serviceDate}&quot;,&#xd;
+  &quot;serviceId&quot;: 10001,&#xd;
+  &quot;serviceName&quot;: &quot;Surgey&quot;,&#xd;
+  &quot;subscriberId&quot;: &quot;A${random_value}&quot;,&#xd;
+  &quot;transactionCode&quot;: &quot;xxx&quot;,&#xd;
+  &quot;unitOfMeasure&quot;: &quot;Dollars&quot;,&#xd;
+	&#xd;
 	&quot;serviceLines&quot;: [&#xd;
        {&#xd;
-        &quot;accumType&quot;: &quot;SPC COPAY&quot;,&#xd;
-        &quot;amount&quot;: ${random_value},&#xd;
-        &quot;costShareTier&quot;: &quot;PPO&quot;,&#xd;
-        &quot;network&quot;: &quot;IN&quot;,&#xd;
-        &quot;primaryLedgerEntryID&quot;: 1,&#xd;
-        &quot;role&quot;: &quot;PTNT&quot;,&#xd;
-        &quot;serviceDate&quot;: &quot;2017-10-24T00:57:39.090Z&quot;,&#xd;
-        &quot;snapshotSummmary&quot;: ${random_value},&#xd;
-        &quot;unitOfMeasure&quot;: &quot;Dollars&quot;&#xd;
+      &quot;accumType&quot;: &quot;SPC COPAY&quot;,&#xd;
+      &quot;amount&quot;: ${amount},&#xd;
+      &quot;costShareTier&quot;: &quot;PPO&quot;,&#xd;
+      &quot;network&quot;: &quot;INB&quot;,&#xd;
+      &quot;role&quot;: &quot;PTNT&quot;,&#xd;
+      &quot;serviceDate&quot;: &quot;${serviceDate}&quot;,&#xd;
+      &quot;snapshotSummmary&quot;: ${amount},&#xd;
+      &quot;unitOfMeasure&quot;: &quot;Dollars&quot;&#xd;
       },&#xd;
       {&#xd;
         &quot;accumType&quot;: &quot;Individual OPX&quot;,&#xd;
-        &quot;amount&quot;: ${random_value},&#xd;
+        &quot;amount&quot;: ${amount},&#xd;
         &quot;costShareTier&quot;: &quot;PPO&quot;,&#xd;
         &quot;network&quot;: &quot;INB&quot;,&#xd;
-        &quot;primaryLedgerEntryID&quot;: 1,&#xd;
         &quot;role&quot;: &quot;PTNT&quot;,&#xd;
-        &quot;serviceDate&quot;: &quot;2017-10-24T00:57:39.090Z&quot;,&#xd;
-        &quot;snapshotSummmary&quot;: ${random_value},&#xd;
+        &quot;serviceDate&quot;: &quot;${serviceDate}&quot;,&#xd;
+        &quot;snapshotSummmary&quot;: ${amount},&#xd;
         &quot;unitOfMeasure&quot;: &quot;Dollars&quot;&#xd;
       },&#xd;
       {&#xd;
         &quot;accumType&quot;: &quot;Individual Ded&quot;,&#xd;
-        &quot;amount&quot;: ${random_value},&#xd;
+        &quot;amount&quot;: ${amount},&#xd;
         &quot;costShareTier&quot;: &quot;PPO&quot;,&#xd;
         &quot;network&quot;: &quot;IN&quot;,&#xd;
-        &quot;primaryLedgerEntryID&quot;: 1,&#xd;
         &quot;role&quot;: &quot;PTNT&quot;,&#xd;
-        &quot;serviceDate&quot;: &quot;2017-10-24T00:57:39.090Z&quot;,&#xd;
-        &quot;snapshotSummmary&quot;: ${random_value},&#xd;
+        &quot;serviceDate&quot;: &quot;${serviceDate}&quot;,&#xd;
+        &quot;snapshotSummmary&quot;: ${amount},&#xd;
         &quot;unitOfMeasure&quot;: &quot;Dollars&quot;&#xd;
       },&#xd;
       {&#xd;
 	   &quot;accumType&quot;: &quot;Family Ded&quot;,&#xd;
-        &quot;amount&quot;: ${random_value},&#xd;
+        &quot;amount&quot;: ${amount},&#xd;
         &quot;costShareTier&quot;: &quot;PPO&quot;,&#xd;
         &quot;network&quot;: &quot;INB&quot;,&#xd;
-        &quot;primaryLedgerEntryID&quot;: 1,&#xd;
         &quot;role&quot;: &quot;PTNT&quot;,&#xd;
-        &quot;serviceDate&quot;: &quot;2017-10-24T00:57:39.090Z&quot;,&#xd;
-        &quot;snapshotSummmary&quot;: ${random_value},&#xd;
+        &quot;serviceDate&quot;: &quot;${serviceDate}&quot;,&#xd;
+        &quot;snapshotSummmary&quot;: ${amount},&#xd;
         &quot;unitOfMeasure&quot;: &quot;Dollars&quot;&#xd;
       },&#xd;
       {&#xd;
 	   &quot;accumType&quot;: &quot;Family OPX&quot;,&#xd;
-        &quot;amount&quot;: 50,&#xd;
+        &quot;amount&quot;: ${amount},&#xd;
         &quot;costShareTier&quot;: &quot;PPO&quot;,&#xd;
         &quot;network&quot;: &quot;INB&quot;,&#xd;
-        &quot;primaryLedgerEntryID&quot;: 1,&#xd;
         &quot;role&quot;: &quot;PTNT&quot;,&#xd;
-        &quot;serviceDate&quot;: &quot;2017-10-24T00:57:39.090Z&quot;,&#xd;
-        &quot;snapshotSummmary&quot;: ${random_value},&#xd;
+        &quot;serviceDate&quot;: &quot;${serviceDate}&quot;,&#xd;
+        &quot;snapshotSummmary&quot;: ${amount},&#xd;
         &quot;unitOfMeasure&quot;: &quot;Dollars&quot;&#xd;
       }&#xd;
     ]&#xd;
-  }&#xd;
 }</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                 </elementProp>
@@ -343,20 +341,110 @@
               <stringProp name="variableName">rand_value</stringProp>
             </RandomVariableConfig>
             <hashTree/>
+            <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="Start Date" enabled="true">
+              <stringProp name="filename"></stringProp>
+              <stringProp name="parameters"></stringProp>
+              <boolProp name="resetInterpreter">false</boolProp>
+              <stringProp name="script">import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Calendar; // imports
+import java.text.SimpleDateFormat;
+
+
+dateFormat1 = new SimpleDateFormat(&quot;d-M-yyyy&quot;);
+//dateFormat2 = new SimpleDateFormat(&quot;dd-MM-yyyy&quot;);
+//dateFormat2 = new SimpleDateFormat(&quot;yyyy-MM-dd&quot;);
+dateFormat2 = new SimpleDateFormat(&quot;MM/dd/yyyy&quot;);
+
+int randBetween(int start, int end) {
+        return start + (int)Math.round(Math.random() * (end - start));
+    }
+
+gc = new GregorianCalendar();
+//year = randBetween(1950, 2000);
+gc.set(gc.YEAR, 2017);
+dayOfYear = randBetween(1, gc.getActualMaximum(gc.DAY_OF_YEAR));
+gc.set(gc.DAY_OF_YEAR, dayOfYear);  
+vars.put(&quot;serviceDate&quot;, (dateFormat2.format(dateFormat1.parse(gc.get(gc.DAY_OF_MONTH) + &quot;-&quot; + (gc.get(Calendar.MONTH)+1) + &quot;-&quot; + gc.get(Calendar.YEAR)))));
+log.info(&quot;START date ====================== =&quot; + vars.get(&quot;serviceDate&quot;));
+
+//vars.put(&quot;dob1&quot;, (dateFormat2.format(dateFormat1.parse(gc.get(gc.DAY_OF_MONTH,1) + &quot;-&quot; + (gc.get(Calendar.MONTH)+1) + &quot;-&quot; + gc.get(Calendar.YEAR)))));
+//log.info(&quot;END DATE ====================== =&quot; + vars.get(&quot;dob1&quot;));
+
+Date date2 = dateFormat2.parse(vars.get(&quot;serviceDate&quot;)); // get DATE2 from UDV
+
+Calendar cal = Calendar.getInstance();
+cal.setTime(date2); // set Calendar time to DATE2
+cal.add(Calendar.DAY_OF_YEAR,1); // add 1 day
+date2 = cal.getTime(); // set the new value for date2
+vars.put(&quot;dateTimeProcessed&quot;,dateFormat2.format(date2)); // update DATE2 JMeter variable
+
+log.info(&quot;END date ====================== =&quot; + vars.get(&quot;dateTimeProcessed&quot;)); // print value of DATE2 to jmeter.log </stringProp>
+            </BeanShellPreProcessor>
+            <hashTree/>
+            <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="End Date" enabled="false">
+              <boolProp name="resetInterpreter">false</boolProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="script">import java.text.SimpleDateFormat; // necessary
+import java.util.Calendar; // imports
+import java.util.Date;
+
+SimpleDateFormat sdf = new SimpleDateFormat(&quot;yyyy-MM-dd&quot;); // define date format
+Date date2 = sdf.parse(vars.get(&quot;dob&quot;)); // get DATE2 from UDV
+
+Calendar cal = Calendar.getInstance();
+cal.setTime(date2); // set Calendar time to DATE2
+cal.add(Calendar.DAY_OF_YEAR,1); // add 1 day
+date2 = cal.getTime(); // set the new value for date2
+vars.put(&quot;DATE2&quot;,sdf.format(date2)); // update DATE2 JMeter variable
+
+log.info(&quot;DATE2=======&quot; + vars.get(&quot;DATE2&quot;)); // print value of DATE2 to jmeter.log 
+
+</stringProp>
+            </BeanShellPreProcessor>
+            <hashTree/>
+            <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="false">
+              <stringProp name="filename"></stringProp>
+              <stringProp name="parameters"></stringProp>
+              <boolProp name="resetInterpreter">false</boolProp>
+              <stringProp name="script">log.info(&quot;Amount ====================== =&quot; + vars.get(&quot;amount&quot;) +&quot;\n CLM value &quot; + vars.get(&quot;clm&quot;) + &quot;\n Counter value &quot; +vars.get(&quot;counter_value&quot;) + &quot;\n Rand value &quot; +vars.get(&quot;rand_value&quot;) +
+ &quot;\n Global random value &quot; +vars.get(&quot;random_value&quot;)
+); // print value of DATE2 to jmeter.log </stringProp>
+            </BeanShellPostProcessor>
+            <hashTree/>
           </hashTree>
         </hashTree>
+        <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="CLM Counter" enabled="true">
+          <stringProp name="CounterConfig.start">1</stringProp>
+          <stringProp name="CounterConfig.end">999999999</stringProp>
+          <stringProp name="CounterConfig.incr">1</stringProp>
+          <stringProp name="CounterConfig.name">clm</stringProp>
+          <stringProp name="CounterConfig.format">000</stringProp>
+          <boolProp name="CounterConfig.per_user">false</boolProp>
+        </CounterConfig>
+        <hashTree/>
         <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="Counter" enabled="true">
           <stringProp name="CounterConfig.start">1</stringProp>
-          <stringProp name="CounterConfig.end">9999999</stringProp>
+          <stringProp name="CounterConfig.end">10</stringProp>
           <stringProp name="CounterConfig.incr">1</stringProp>
           <stringProp name="CounterConfig.name">counter_value</stringProp>
           <stringProp name="CounterConfig.format"></stringProp>
           <boolProp name="CounterConfig.per_user">false</boolProp>
         </CounterConfig>
         <hashTree/>
-        <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="Global Random Variable" enabled="true">
-          <stringProp name="maximumValue">999999</stringProp>
-          <stringProp name="minimumValue">50</stringProp>
+        <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="Global Amount" enabled="true">
+          <stringProp name="maximumValue">500</stringProp>
+          <stringProp name="minimumValue">10</stringProp>
+          <stringProp name="outputFormat"></stringProp>
+          <boolProp name="perThread">false</boolProp>
+          <stringProp name="randomSeed"></stringProp>
+          <stringProp name="variableName">amount</stringProp>
+        </RandomVariableConfig>
+        <hashTree/>
+        <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="Global Random variable" enabled="true">
+          <stringProp name="maximumValue">999999999</stringProp>
+          <stringProp name="minimumValue">1</stringProp>
           <stringProp name="outputFormat"></stringProp>
           <boolProp name="perThread">false</boolProp>
           <stringProp name="randomSeed"></stringProp>
