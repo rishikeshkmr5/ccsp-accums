@@ -1,5 +1,8 @@
 package com.ccsp.accums.service.impl;
 
+import static org.mockito.Matchers.anyCollection;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -16,7 +19,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.ccsp.accums.ledger.entry.entity.LedgerEntryEntity;
+import com.ccsp.accums.ledger.entry.repository.LedgerEntryRepository;
+import com.ccsp.accums.ledger.header.dto.LedgerHeaderDTO;
 import com.ccsp.accums.ledger.header.entity.LedgerHeaderEntity;
+import com.ccsp.accums.ledger.header.mapper.LedgerHeaderMapper;
 import com.ccsp.accums.ledger.header.repository.ILedgerHeaderRepository;
 import com.ccsp.accums.ledger.summary.dto.LedgerSummaryDTO;
 import com.ccsp.accums.ledger.summary.entity.LedgerSummaryEntity;
@@ -46,6 +53,9 @@ public class AccumulationSummaryImplTest {
 
 	@Mock
 	private LedgerSummaryMapper ledgerSummaryMapper;
+	
+	@Mock
+	private LedgerEntryRepository ledgerEntryRepository;
 
 	/**
 	 * @throws NoSuchFieldException
@@ -118,6 +128,42 @@ public class AccumulationSummaryImplTest {
 		List<LedgerSummaryEntity> accumulationSummaries = new ArrayList<>();
 		when(ledgerSummaryRepository.findAll()).thenReturn(accumulationSummaries);
 		serviceImpl.readAll();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Test
+	public void testUpdateLedgerSummary() throws NoSuchFieldException, SecurityException, Exception {
+		String subscriberId = "A0001";
+		List<LedgerSummaryEntity> ledgerSummaryEntities = new ArrayList<>();
+		LedgerSummaryEntity entity = new LedgerSummaryEntity();
+		entity.setMemberId("A0001");
+		entity.setNetworkCode("nw001");
+		entity.setNetworkTier("nt001");
+		entity.setAmount(100d);
+		entity.setAccumType("Accum01");
+		ledgerSummaryEntities.add(entity);
+		when(ledgerSummaryRepository.findBySubscriberId(subscriberId)).thenReturn(ledgerSummaryEntities);
+		List<LedgerHeaderEntity> ledgerHeaderEntityList = new ArrayList<>();
+		LedgerHeaderEntity ledgerHeaderEntity = mock(LedgerHeaderEntity.class);
+		Long mockId = 1000l;
+		when(ledgerHeaderEntity.getId()).thenReturn(mockId);
+		ledgerHeaderEntityList.add(ledgerHeaderEntity);
+		when(ledgerHeaderRepository.findBySubscriberId(subscriberId)).thenReturn(ledgerHeaderEntityList);
+		LedgerHeaderMapper headerMapper = mock(LedgerHeaderMapper.class);
+		LedgerHeaderDTO ledgerHeaderDTO  = new LedgerHeaderDTO();
+		setFinalStatic(LedgerHeaderMapper.class.getField("INSTANCE"), headerMapper);
+		when(headerMapper.convertToDTO(ledgerHeaderEntity)).thenReturn(ledgerHeaderDTO);
+		List<LedgerEntryEntity> ledgerEntryList = new ArrayList<>();	
+		LedgerEntryEntity ledgerEntryEntity = new LedgerEntryEntity();
+		ledgerEntryEntity.setAccumType("Accum01");
+		ledgerEntryEntity.setAmount(100d);
+		ledgerEntryList.add(ledgerEntryEntity);
+		when(ledgerEntryRepository.findByledgerHeaderID(mockId)).thenReturn(ledgerEntryList);
+		LedgerSummaryMapper summaryMapper = mock(LedgerSummaryMapper.class);
+		setFinalStatic(LedgerSummaryMapper.class.getField("INSTANCE"), summaryMapper);
+		when(summaryMapper.convertHeaderDTOtoEntity(ledgerHeaderDTO)).thenReturn(entity);
+		serviceImpl.updateLedgerSummary(subscriberId);
+		verify(ledgerSummaryRepository).save(anyCollection());
 	}
 
 	/**
