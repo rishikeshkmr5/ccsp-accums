@@ -1,6 +1,5 @@
 package com.ccsp.accums.ledger.header.service;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -16,8 +15,6 @@ import com.ccsp.accums.ledger.header.dto.LedgerHeaderDTO;
 import com.ccsp.accums.ledger.header.entity.LedgerHeaderEntity;
 import com.ccsp.accums.ledger.header.mapper.LedgerHeaderMapper;
 import com.ccsp.accums.ledger.header.repository.ILedgerHeaderRepository;
-import com.ccsp.accums.ledger.summary.entity.LedgerSummaryEntity;
-import com.ccsp.accums.ledger.summary.repository.ILedgerSummaryRepository;
 import com.ccsp.accums.ledger.summary.service.LedgerSummaryService;
 import com.ccsp.common.mapper.IBaseMapper;
 import com.ccsp.common.service.impl.CommonServiceImpl;
@@ -58,23 +55,40 @@ public class LedgerHeaderService extends CommonServiceImpl<LedgerHeaderDTO, Ledg
 		return LedgerHeaderMapper.INSTANCE;
 	}
 
+	/**
+	 * Maps the data from provided DTO to database entity model.
+	 * 
+	 * Invokes the repository to persist in database by passing the entity.
+	 * 
+	 * Checks for the availability of service lines and invokes Ledger 
+	 * entry service by passing them.
+	 * 
+	 * @param ledgerHeaderDTO
+	 * @return {@link LedgerHeaderDTO}
+	 */
 	@Override
 	public LedgerHeaderDTO create(LedgerHeaderDTO ledgerHeaderDTO) {
 		if (ledgerHeaderDTO != null) {
-			//Convert DTO to entity for persistence
+			//Convert DTO to entity.
 			LedgerHeaderEntity ledgerHeaderEntity = getMapper().convertToEntity(ledgerHeaderDTO);
+			
+			//Persist records in database.
 			getJPARepository().saveAndFlush(ledgerHeaderEntity);
-			//Set the header id which gets auto generated to the DTO
+			
+			//Set the header id which was auto generated during persistence.
 			ledgerHeaderDTO.setId(ledgerHeaderEntity.getId());
 			
-			//Check if the serviceLines are not empty, if so provide the generated header id to each serviceLine
+			//Check if the serviceLines are not empty, if so provide the generated header id to each serviceLine.
 			if (CollectionUtils.isNotEmpty(ledgerHeaderDTO.getServiceLines())) {
 				for (LedgerEntryDTO ledgerEntryDTO : ledgerHeaderDTO.getServiceLines()) {
+					//ledger header id will be used in service to map the parent-child relationship.
 					ledgerEntryDTO.setLedgerHeaderID(ledgerHeaderEntity.getId());
 				}
+				
 				//pass the serviceLines to the existing service for persistence
 				ledgerHeaderDTO.setServiceLines(ledgerEntryService.create(ledgerHeaderDTO.getServiceLines()));
-				//Generate summary from the header and serviceLines
+				
+				//Calculates and persists the accums summary based on header and service lines.
 				ledgerSummaryService.create(ledgerHeaderDTO);
 			}
 		}

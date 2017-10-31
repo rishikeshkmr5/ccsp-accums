@@ -78,10 +78,18 @@ public class LedgerSummaryService extends CommonServiceImpl<LedgerSummaryDTO, Le
 	}
 
 	/**
+	 * Maps the data from provided DTO to database entity model.
+	 * 
+	 * Accumulates the amount with already persisted summary entities based on unique constraint key.
+	 * 
+	 * Invokes the repository to persist in database by passing the entity.
+	 * 
 	 * @param ledgerHeaderDTO
 	 */
-	public void create(LedgerHeaderDTO ledgerHeaderDTO) {  
+	public void create(LedgerHeaderDTO ledgerHeaderDTO) {
+		//Holds the ledger summary entity details with key as combination of unique constraint fields.
 		Map<String, LedgerSummaryEntity> ledgerSummaryMap = new HashMap<String, LedgerSummaryEntity>();
+		
 		//fetch the existing ledgerSummary entries for the given subscriber id
 		List<LedgerSummaryEntity> ledgerSummaryEntities = ledgerSummaryRepository.findBySubscriberId(ledgerHeaderDTO.getSubscriberId());
 		
@@ -91,18 +99,25 @@ public class LedgerSummaryService extends CommonServiceImpl<LedgerSummaryDTO, Le
 				ledgerSummaryMap.put(generateKey(ledgerSummaryEntity), ledgerSummaryEntity);
 			}
 		}
+		
 		//Iterate the service lines to update the summary table with the latest amount consumed under each accumulator
 		for (LedgerEntryDTO ledgerEntryDTO : ledgerHeaderDTO.getServiceLines()) {
 			LedgerSummaryMapper mapper = (LedgerSummaryMapper) getMapper();
+			
+			//Map details from the header DTO to summary entity.
 			LedgerSummaryEntity entity = mapper.convertHeaderDTOtoEntity(ledgerHeaderDTO);
 			entity.setAccumType(ledgerEntryDTO.getAccumType());
-			LedgerSummaryEntity result = null;
-			result = ledgerSummaryMap.get(generateKey(entity));
-			if (result != null) {
-				result.setAmount(result.getAmount() + ledgerEntryDTO.getAmount());
-			} else {
+			
+			//Check and get if summary entity is already available with unique constraint key.
+			LedgerSummaryEntity result = ledgerSummaryMap.get(generateKey(entity));
+			
+			//Assign the new ledger summary entity, if not already available.
+			if (result == null) {
 				result = entity;
 				result.setAmount(ledgerEntryDTO.getAmount());
+			} else { 
+				//Accumulate the amounts for the existing and newly provided summary of same accum type.
+				result.setAmount(result.getAmount() + ledgerEntryDTO.getAmount());
 			}
 			ledgerSummaryEntities.add(result);
 		}
@@ -203,6 +218,7 @@ public class LedgerSummaryService extends CommonServiceImpl<LedgerSummaryDTO, Le
 	}
 	
 	/**
+	 * Generates the key as {member_id}_{accum_type}_{network_code}_{network_tier}
 	 * @param ledgerSummaryEntity
 	 * @return
 	 * Generate the key based on the unique fields in the ledgersummary

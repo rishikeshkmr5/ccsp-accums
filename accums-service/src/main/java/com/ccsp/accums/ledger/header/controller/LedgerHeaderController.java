@@ -27,8 +27,7 @@ import com.ccsp.common.validator.Validator;
 import javassist.NotFoundException;
 
 /**
- * This controller holds the methods to perform CURD operations on ledger
- * header.
+ * Ledger header controller exposes the API end points to handle CRUD operations on ledger header.
  * 
  * @author nnarayanaperumaln
  *
@@ -36,18 +35,39 @@ import javassist.NotFoundException;
 @RestController
 public class LedgerHeaderController {
 	/**
-	 * Logger for AccumsController
+	 * Logger for LedgerHeaderController.
 	 */
 	private static Logger log = Logger.getLogger(LedgerHeaderController.class);
 	
-
 	@Autowired
 	private LedgerHeaderService accumulationHeaderService;
 
+	/**
+	 * Validates the availability of required information in request.
+	 */
 	private Validator validator = new Validator();
+	
+	/**
+	 * Checks for the mandatory data and passes accum utilization details to service for persisting in database.
+	 * 
+	 * @param accumUtilization {@link AccumUtilization}
+	 * @return {@link LedgerHeaderDTO}
+	 */
+	@RequestMapping(path = UIConstants.LEDGER_HEADER, method = RequestMethod.POST
+			, consumes = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
+	@ResponseBody
+	public LedgerHeaderDTO createLedgerHeader(@RequestBody AccumUtilization accumUtilization) {
+		log.info("Create LedgerHeader details");
+		
+		//Perform mandatory fields validation
+		validator.validate(accumUtilization);
+		
+		return accumulationHeaderService.create(accumUtilization);
+	}
+	
 
 	/**
-	 * Fetches all the ledgerHeaders
+	 * Fetches all the available ledger header details.
 	 * 
 	 * @return LedgerHeaders
 	 * @throws NotFoundException
@@ -59,19 +79,6 @@ public class LedgerHeaderController {
 		return accumulationHeaderService.readAll();
 	}
 
-	/**
-	 * Persist the received LedgerHeader Details
-	 * @param ledgerHeaderDTO
-	 */
-	@RequestMapping(path = UIConstants.LEDGER_HEADER, method = RequestMethod.POST, consumes = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
-	@ResponseBody
-	public LedgerHeaderDTO createLedgerHeader(@RequestBody AccumUtilization accumUtilization) {
-		log.info("Create LedgerHeader details");
-		//validate the DTO - basic Java validation
-		validator.validate(accumUtilization);
-		return accumulationHeaderService.create(accumUtilization);
-	}
-	
 	@RequestMapping(value = "/fileupload", headers=("content-type=multipart/*"), method = RequestMethod.POST)
     public @ResponseBody void upload(@RequestParam("file") MultipartFile inputFile){
            LedgerHeaderDTO header = new LedgerHeaderDTO();
@@ -93,6 +100,7 @@ public class LedgerHeaderController {
            }
            accumulationHeaderService.create(header);
     }
+	
 	@RequestMapping(path = UIConstants.LEDGER_HEADER, method = RequestMethod.PUT, consumes = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
 	@ResponseBody
 	public LedgerHeaderDTO updateLedgerHeader(@RequestBody AccumUtilization claimsForAccumulationHeaderDTO) {

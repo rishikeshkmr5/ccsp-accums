@@ -75,6 +75,10 @@ public class LedgerEntryService extends CommonServiceImpl<LedgerEntryDTO, Ledger
 	}
 
 	/**
+	 * Maps the data from provided DTO to database entity model.
+	 * 
+	 * Invokes the repository to persist in database by passing the entity.
+	 * 
 	 * Persists provided list of data. Populates the required entities like header
 	 * entity and primary reportable entity.
 	 * 
@@ -83,31 +87,36 @@ public class LedgerEntryService extends CommonServiceImpl<LedgerEntryDTO, Ledger
 	 */
 	@Override
 	public List<LedgerEntryDTO> create(List<LedgerEntryDTO> dtoList) {
-		List<LedgerEntryEntity> entities = new ArrayList<LedgerEntryEntity>();
+		//Convert DTO's to entities.
+		List<LedgerEntryEntity> entities = getMapper().convertToEntityList(dtoList);
 
 		boolean isFirst = true;
+		
+		//First ledger entry will be used as parent for all the remaining ledger entries.
 		LedgerEntryEntity primaryLedgerEntry = null;
+		
+		//Ledger header will be needed to manage the JPA mappings, will be fetched from database for the first accum entry.
 		LedgerHeaderEntity ledgerHeader = null;
-		// iterate the ledger entries to populate the ledger header and linkToPrimary
-		// details
-		for (LedgerEntryDTO ledgerEntry : dtoList) {
-			LedgerEntryEntity entity = getMapper().convertToEntity(ledgerEntry);
+		
+		// iterate the ledger entries to populate the ledger header and linkToPrimary details.
+		for (LedgerEntryEntity ledgerEntry : entities) {
+			//Holds the activities that needs to be performed only first time.
 			if (isFirst) {
-				primaryLedgerEntry = entity;
+				primaryLedgerEntry = ledgerEntry;
 				ledgerHeader = ledgerHeaderRepository.findOne(ledgerEntry.getLedgerHeaderID());
 				isFirst = false;
 			} else {
-				entity.setPrimaryLedgerEntry(primaryLedgerEntry);
+				ledgerEntry.setPrimaryLedgerEntry(primaryLedgerEntry);
 			}
-			entity.setLedgerHeader(ledgerHeader);
-			entities.add(entity);
+			ledgerEntry.setLedgerHeader(ledgerHeader);
 		}
+		
 		// save the update ledger entries
 		getJPARepository().save(entities);
 
 		List<LedgerEntryDTO> ledgerEntryResults = new ArrayList<LedgerEntryDTO>();
-		// iterate the ledger entry entities to update the dtos and return it back to
-		// the caller
+		
+		// iterate the ledger entry entities to update the dtos and return it back to the caller
 		for (LedgerEntryEntity entryEntity : entities) {
 			LedgerEntryDTO dto = getMapper().convertToDTO(entryEntity);
 			if (entryEntity.getPrimaryLedgerEntry() != null) {
