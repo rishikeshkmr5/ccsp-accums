@@ -38,8 +38,7 @@ import com.sun.xml.xsom.impl.scd.ParseException;
 import javassist.NotFoundException;
 
 /**
- * This controller holds the methods to perform CURD operations on ledger
- * header.
+ * Ledger header controller exposes the API end points to handle ledger header CRUD operations.
  * 
  * @author nnarayanaperumaln
  *
@@ -47,13 +46,16 @@ import javassist.NotFoundException;
 @RestController
 public class LedgerHeaderController {
 	/**
-	 * Logger for AccumsController
+	 * Logger for LedgerHeaderController
 	 */
 	private static Logger log = Logger.getLogger(LedgerHeaderController.class);
 
 	@Autowired
 	private LedgerHeaderService accumulationHeaderService;
 
+	/**
+	 * Validates the availability of required information in request.
+	 */
 	private Validator validator = new Validator();
 
 	/**
@@ -71,17 +73,20 @@ public class LedgerHeaderController {
 	}
 
 	/**
-	 * Persist the received LedgerHeader Details
+	 * Checks for the mandatory data and passes accum utilization details to service for persisting in database.
 	 * 
-	 * @param ledgerHeaderDTO
+	 * @param accumUtilization {@link AccumUtilization}
+	 * @return {@link LedgerHeaderDTO}
 	 */
 	@RequestMapping(path = UIConstants.LEDGER_HEADER, method = RequestMethod.POST, consumes = {
 			"application/json; charset=utf-8", "application/xml; charset=utf-8" })
 	@ResponseBody
 	public LedgerHeaderDTO createLedgerHeader(@RequestBody AccumUtilization accumUtilization) {
 		log.info("Create LedgerHeader details");
+		
 		// validate the DTO - basic Java validation
 		validator.validate(accumUtilization);
+		
 		return accumulationHeaderService.create(accumUtilization);
 	}
 
