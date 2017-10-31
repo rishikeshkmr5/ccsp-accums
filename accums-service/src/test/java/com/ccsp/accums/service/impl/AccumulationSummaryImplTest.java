@@ -133,7 +133,7 @@ public class AccumulationSummaryImplTest {
 	@SuppressWarnings("unchecked")
 	@Test
 	public void testUpdateLedgerSummary() throws NoSuchFieldException, SecurityException, Exception {
-		String subscriberId = "A0001";
+		String memberId = "A0001";
 		List<LedgerSummaryEntity> ledgerSummaryEntities = new ArrayList<>();
 		LedgerSummaryEntity entity = new LedgerSummaryEntity();
 		entity.setMemberId("A0001");
@@ -142,13 +142,13 @@ public class AccumulationSummaryImplTest {
 		entity.setAmount(100d);
 		entity.setAccumType("Accum01");
 		ledgerSummaryEntities.add(entity);
-		when(ledgerSummaryRepository.findBySubscriberId(subscriberId)).thenReturn(ledgerSummaryEntities);
+		when(ledgerSummaryRepository.findByMemberId(memberId)).thenReturn(ledgerSummaryEntities);
 		List<LedgerHeaderEntity> ledgerHeaderEntityList = new ArrayList<>();
 		LedgerHeaderEntity ledgerHeaderEntity = mock(LedgerHeaderEntity.class);
 		Long mockId = 1000l;
 		when(ledgerHeaderEntity.getId()).thenReturn(mockId);
 		ledgerHeaderEntityList.add(ledgerHeaderEntity);
-		when(ledgerHeaderRepository.findBySubscriberId(subscriberId)).thenReturn(ledgerHeaderEntityList);
+		when(ledgerHeaderRepository.findByMemberId(memberId)).thenReturn(ledgerHeaderEntityList);
 		LedgerHeaderMapper headerMapper = mock(LedgerHeaderMapper.class);
 		LedgerHeaderDTO ledgerHeaderDTO  = new LedgerHeaderDTO();
 		setFinalStatic(LedgerHeaderMapper.class.getField("INSTANCE"), headerMapper);
@@ -162,7 +162,7 @@ public class AccumulationSummaryImplTest {
 		LedgerSummaryMapper summaryMapper = mock(LedgerSummaryMapper.class);
 		setFinalStatic(LedgerSummaryMapper.class.getField("INSTANCE"), summaryMapper);
 		when(summaryMapper.convertHeaderDTOtoEntity(ledgerHeaderDTO)).thenReturn(entity);
-		serviceImpl.updateLedgerSummary(subscriberId);
+		serviceImpl.updateLedgerSummary(memberId);
 		verify(ledgerSummaryRepository).save(anyCollection());
 	}
 

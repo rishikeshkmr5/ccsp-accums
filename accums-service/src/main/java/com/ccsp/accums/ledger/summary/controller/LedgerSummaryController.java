@@ -68,8 +68,8 @@ public class LedgerSummaryController {
 	 */
 	@RequestMapping(path = UIConstants.LEDGER_SUMMARY_UPDATE, method = RequestMethod.PUT, produces = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
 	@ResponseBody
-	public void updateLedgerSummary(@PathVariable("subscriberId")String subscriberId) {
+	public void updateLedgerSummary(@PathVariable("memberId")String memberId) {
 		log.info("Update LedgerSummary details");
-		accumulationSummaryService.updateLedgerSummary(subscriberId);
+		accumulationSummaryService.updateLedgerSummary(memberId);
 	}	
 }

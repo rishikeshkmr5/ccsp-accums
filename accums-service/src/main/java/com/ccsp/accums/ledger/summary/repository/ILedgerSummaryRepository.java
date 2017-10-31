@@ -30,4 +30,10 @@ public interface ILedgerSummaryRepository extends JpaRepository<LedgerSummaryEnt
 	 * @return
 	 */
 	List<LedgerSummaryEntity> findBySubscriberId(String subscriberId);
+	
+	/**
+	 * @param memberId
+	 * @return
+	 */
+	List<LedgerSummaryEntity> findByMemberId(String memberId);
 }

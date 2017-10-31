@@ -158,10 +158,10 @@ public class LedgerSummaryService extends CommonServiceImpl<LedgerSummaryDTO, Le
 	 * @param subscriberId
 	 * Update the ledgerSummary table for the given summary id
 	 */
-	public void updateLedgerSummary(String subscriberId) {
+	public void updateLedgerSummary(String memberId) {
 		Map<String, LedgerSummaryEntity> ledgerSummaryMap = new HashMap<String, LedgerSummaryEntity>();
 		//fetch the existing summary entities for the given subscriber id
-		List<LedgerSummaryEntity> ledgerSummaryEntities = ledgerSummaryRepository.findBySubscriberId(subscriberId);
+		List<LedgerSummaryEntity> ledgerSummaryEntities = ledgerSummaryRepository.findByMemberId(memberId);
 		//if there are existing summary entities set the amount to 0 as we are going to calculate the cummulative amount
 		if(CollectionUtils.isNotEmpty(ledgerSummaryEntities)) {
 			//iterate the ledgerSummary entries to populate the ledgerSummaryMap with unique constraints as the key and the summary object as the value
@@ -171,7 +171,7 @@ public class LedgerSummaryService extends CommonServiceImpl<LedgerSummaryDTO, Le
 			}
 		}
 		//fetch the header entries based on the subscriber id
-		List<LedgerHeaderEntity> ledgerHeaderEntityList = ledgerHeaderRepository.findBySubscriberId(subscriberId);
+		List<LedgerHeaderEntity> ledgerHeaderEntityList = ledgerHeaderRepository.findByMemberId(memberId);
 		
 		//For each header entry get the corresponding ledger entries
 		for(LedgerHeaderEntity ledgerHeaderEntity : ledgerHeaderEntityList) {
