@@ -10,12 +10,19 @@ import org.springframework.stereotype.Component;
 
 import com.ccsp.accums.ledger.header.entity.LedgerHeaderEntity;
 
+/**
+ * @author Koyel
+ *
+ */
 @Component
 public abstract class LedgerHeaderRepository implements ILedgerHeaderRepository {
 	
 	@PersistenceContext
 	private EntityManager entityManager;
 	
+	/* (non-Javadoc)
+	 * @see com.ccsp.accums.ledger.header.repository.ILedgerHeaderRepository#findByAccumType(java.lang.String)
+	 */
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<LedgerHeaderEntity> findByAccumType(String accumType){

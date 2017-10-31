@@ -24,6 +24,7 @@ public class SwaggerConfig  extends AbstractSwaggerConfig{
 	 */
 	@Override
 	public String getBasePackageName() {
+		//return the SpringBootInitializer class name
 		return AccumsApplication.class.getPackage().getName();
 	}
 

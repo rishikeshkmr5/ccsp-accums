@@ -67,6 +67,7 @@ public class LedgerHeaderController {
 	@ResponseBody
 	public LedgerHeaderDTO createLedgerHeader(@RequestBody AccumUtilization accumUtilization) {
 		log.info("Create LedgerHeader details");
+		//validate the DTO - basic Java validation
 		validator.validate(accumUtilization);
 		return accumulationHeaderService.create(accumUtilization);
 	}
@@ -78,7 +79,6 @@ public class LedgerHeaderController {
         	   ByteArrayInputStream stream = null;
 			try {
 				stream = new   ByteArrayInputStream(inputFile.getBytes());
-				//extension = IOUtils.toString(stream, "UTF-8");
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}

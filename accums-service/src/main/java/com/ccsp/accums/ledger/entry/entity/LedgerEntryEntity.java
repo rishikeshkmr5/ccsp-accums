@@ -20,7 +20,7 @@ import com.ccsp.accums.ledger.header.entity.LedgerHeaderEntity;
 public class LedgerEntryEntity  implements java.io.Serializable {
 	
 	/**
-	 * 
+	 * Default serialization id
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -89,7 +89,7 @@ public class LedgerEntryEntity  implements java.io.Serializable {
 
 	/**
 	 * 
-	 * @return
+	 * @return ledgerHeader
 	 */
 
 	public LedgerHeaderEntity getLedgerHeader() {

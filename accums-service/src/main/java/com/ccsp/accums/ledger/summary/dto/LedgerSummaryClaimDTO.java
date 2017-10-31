@@ -11,6 +11,10 @@ import com.ccsp.common.dto.ICommonDTO;
  * @author vamehta
  *
  */
+/**
+ * @author nnarayanaperumaln
+ *
+ */
 public class LedgerSummaryClaimDTO implements ICommonDTO {
 
 	/**
@@ -20,10 +24,16 @@ public class LedgerSummaryClaimDTO implements ICommonDTO {
 	
 	private List<LedgerSummaryDTO> accumulationSummaryList;
 
+	/**
+	 * @return
+	 */
 	public List<LedgerSummaryDTO> getAccumulationSummaryList() {
 		return accumulationSummaryList;
 	}
 
+	/**
+	 * @param accumulationSummaryList
+	 */
 	public void setAccumulationSummaryList(List<LedgerSummaryDTO> accumulationSummaryList) {
 		this.accumulationSummaryList = accumulationSummaryList;
 	}

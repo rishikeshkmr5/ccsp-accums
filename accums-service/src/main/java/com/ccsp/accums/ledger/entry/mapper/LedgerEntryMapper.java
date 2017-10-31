@@ -16,6 +16,4 @@ public abstract class LedgerEntryMapper implements IBaseMapper<LedgerEntryDTO, L
 	 */
 	public static final LedgerEntryMapper INSTANCE = Mappers.getMapper(LedgerEntryMapper.class);
 
-	//public abstract AccumsEntry convertToEntity(AccumsEntryDTO accumsEntityDTO);
-	
 }

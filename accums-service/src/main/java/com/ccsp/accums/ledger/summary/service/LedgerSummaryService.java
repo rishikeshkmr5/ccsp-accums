@@ -65,14 +65,15 @@ public class LedgerSummaryService extends CommonServiceImpl<LedgerSummaryDTO, Le
 	 */
 	@Override
 	public LedgerSummaryDTO create(LedgerSummaryDTO dto) {
-
+		//convert dto to entity for persistence
 		LedgerSummaryEntity ledgerSummaryEntity = getMapper().convertToEntity(dto);
-
+		
+		//find the Ledger header based on the header id
 		LedgerHeaderEntity ledger = ledgerHeaderRepository.findOne(dto.getLedgerHeaderID());
 		ledgerSummaryEntity.setLedgerHeader(ledger);
-
+		
+		//update the summary with the ledgerheader details and persist it
 		ledgerSummaryEntity = ledgerSummaryRepository.save(ledgerSummaryEntity);
-
 		return getMapper().convertToDTO(ledgerSummaryEntity);
 	}
 
@@ -81,12 +82,16 @@ public class LedgerSummaryService extends CommonServiceImpl<LedgerSummaryDTO, Le
 	 */
 	public void create(LedgerHeaderDTO ledgerHeaderDTO) {  
 		Map<String, LedgerSummaryEntity> ledgerSummaryMap = new HashMap<String, LedgerSummaryEntity>();
+		//fetch the existing ledgerSummary entries for the given subscriber id
 		List<LedgerSummaryEntity> ledgerSummaryEntities = ledgerSummaryRepository.findBySubscriberId(ledgerHeaderDTO.getSubscriberId());
+		
+		//iterate the ledgerSummary entries to populate the ledgerSummaryMap with unique constraints as the key and the summary object as the value
 		if(CollectionUtils.isNotEmpty(ledgerSummaryEntities)) {
 			for(LedgerSummaryEntity ledgerSummaryEntity : ledgerSummaryEntities) {
 				ledgerSummaryMap.put(generateKey(ledgerSummaryEntity), ledgerSummaryEntity);
 			}
 		}
+		//Iterate the service lines to update the summary table with the latest amount consumed under each accumulator
 		for (LedgerEntryDTO ledgerEntryDTO : ledgerHeaderDTO.getServiceLines()) {
 			LedgerSummaryMapper mapper = (LedgerSummaryMapper) getMapper();
 			LedgerSummaryEntity entity = mapper.convertHeaderDTOtoEntity(ledgerHeaderDTO);
@@ -101,6 +106,7 @@ public class LedgerSummaryService extends CommonServiceImpl<LedgerSummaryDTO, Le
 			}
 			ledgerSummaryEntities.add(result);
 		}
+		//persist the updated summary entities
 		ledgerSummaryRepository.save(ledgerSummaryEntities);
 	}
 
@@ -117,7 +123,7 @@ public class LedgerSummaryService extends CommonServiceImpl<LedgerSummaryDTO, Le
 
 		boolean isFirst = true;
 		LedgerHeaderEntity ledgerHeader = null;
-
+		//Iterate the given ledgerSummaryDTOs to convert them into entities
 		for (LedgerSummaryDTO summaryDTO : dtoList) {
 			LedgerSummaryEntity summaryEntity = getMapper().convertToEntity(summaryDTO);
 			if (isFirst) {
@@ -127,11 +133,11 @@ public class LedgerSummaryService extends CommonServiceImpl<LedgerSummaryDTO, Le
 			summaryEntity.setLedgerHeader(ledgerHeader);
 			summaryEntities.add(summaryEntity);
 		}
-
+		//persist the summary entities
 		getJPARepository().save(summaryEntities);
 
 		List<LedgerSummaryDTO> summaryDTOResults = new ArrayList<LedgerSummaryDTO>();
-
+		//populate the summary dtos with the generated header id and return it back to the caller
 		for (LedgerSummaryEntity summaryEntity : summaryEntities) {
 			LedgerSummaryDTO dto = getMapper().convertToDTO(summaryEntity);
 			if (summaryEntity.getLedgerHeader() != null) {
@@ -150,21 +156,29 @@ public class LedgerSummaryService extends CommonServiceImpl<LedgerSummaryDTO, Le
 
 	/**
 	 * @param subscriberId
+	 * Update the ledgerSummary table for the given summary id
 	 */
 	public void updateLedgerSummary(String subscriberId) {
 		Map<String, LedgerSummaryEntity> ledgerSummaryMap = new HashMap<String, LedgerSummaryEntity>();
+		//fetch the existing summary entities for the given subscriber id
 		List<LedgerSummaryEntity> ledgerSummaryEntities = ledgerSummaryRepository.findBySubscriberId(subscriberId);
+		//if there are existing summary entities set the amount to 0 as we are going to calculate the cummulative amount
 		if(CollectionUtils.isNotEmpty(ledgerSummaryEntities)) {
+			//iterate the ledgerSummary entries to populate the ledgerSummaryMap with unique constraints as the key and the summary object as the value
 			for(LedgerSummaryEntity ledgerSummaryEntity : ledgerSummaryEntities) {
 				ledgerSummaryEntity.setAmount(0d);
 				ledgerSummaryMap.put(generateKey(ledgerSummaryEntity), ledgerSummaryEntity);
 			}
 		}
+		//fetch the header entries based on the subscriber id
 		List<LedgerHeaderEntity> ledgerHeaderEntityList = ledgerHeaderRepository.findBySubscriberId(subscriberId);
+		
+		//For each header entry get the corresponding ledger entries
 		for(LedgerHeaderEntity ledgerHeaderEntity : ledgerHeaderEntityList) {
 			LedgerHeaderMapper headerMapper = LedgerHeaderMapper.INSTANCE;
 			LedgerHeaderDTO ledgerHeaderDTO = headerMapper.convertToDTO(ledgerHeaderEntity);
 			List<LedgerEntryEntity> ledgerEntryList = ledgerEntryRepository.findByledgerHeaderID(ledgerHeaderEntity.getId());
+			//iterate the ledger entries to find the cummulative amount for each accumator type for the subscriber id
 			for(LedgerEntryEntity ledgerEntryEntity:ledgerEntryList) {
 				LedgerSummaryMapper mapper = (LedgerSummaryMapper) getMapper();
 				LedgerSummaryEntity entity = mapper.convertHeaderDTOtoEntity(ledgerHeaderDTO);
@@ -191,6 +205,7 @@ public class LedgerSummaryService extends CommonServiceImpl<LedgerSummaryDTO, Le
 	/**
 	 * @param ledgerSummaryEntity
 	 * @return
+	 * Generate the key based on the unique fields in the ledgersummary
 	 */
 	private String generateKey(LedgerSummaryEntity ledgerSummaryEntity) {
 		return ledgerSummaryEntity.getMemberId()+"_"+ledgerSummaryEntity.getAccumType()+"_"+ledgerSummaryEntity.getNetworkCode()+"_"+ledgerSummaryEntity.getNetworkTier();

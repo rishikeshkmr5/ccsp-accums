@@ -45,6 +45,7 @@ public class LedgerEntryController {
 		log.info("Create LedgerEntry details");
 		MDC.put("username", "ABC");
 		List<LedgerEntryDTO> accumsEntry = claimAccumEntry.getAccumEntryList();
+		//validate the ledger entries
 		validator.validate(accumsEntry);
 		return ledgerEntryService.create(accumsEntry);
 	}

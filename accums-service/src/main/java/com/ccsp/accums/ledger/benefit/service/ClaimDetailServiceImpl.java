@@ -38,16 +38,16 @@ public class ClaimDetailServiceImpl extends CommonServiceImpl<ClaimDetailsForAcc
 	public List<ClaimDetailsForAccumTypeDTO> getClaimDetail(String accumType) throws NotFoundException {
 		ClaimDetailsForAccumTypeDTO claimDetailForAccumTypeDTO = new ClaimDetailsForAccumTypeDTO();
 		List<ClaimDetailsForAccumTypeDTO> claimDetailsForAccumTypeDTO = new ArrayList<ClaimDetailsForAccumTypeDTO>();
+		//Retrieve the LedgerHeader details based on the accumType
 		List<LedgerHeaderEntity> accumHeaderList =  ledgerHeaderRepository.findByAccumType(accumType);
 		if(accumHeaderList.isEmpty()) {
 			throw new NotFoundException(
 					"There are no Claims available for accumType : " + accumType);
 		}
 		for(LedgerHeaderEntity ledgerHeaderEntity:accumHeaderList) {
-			
+			//Convert the entity to DTO
 			claimDetailForAccumTypeDTO =getMapper().convertToDTO(ledgerHeaderEntity); 
 			claimDetailForAccumTypeDTO.setRunningBalance(0.0);
-			
 			claimDetailsForAccumTypeDTO.add(claimDetailForAccumTypeDTO);
 		}
 		
