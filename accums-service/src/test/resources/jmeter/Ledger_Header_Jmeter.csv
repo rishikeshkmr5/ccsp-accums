@@ -1,0 +1,10 @@
+LDGR_ID      ,DCN          ,CLM_LN_ID    ,SVC_ID       ,SVC_NM       ,SVC_DT       ,PROC_DT      ,NTWK_CD      ,NTWK_TIER_NM ,PLN_ID       ,ALWD_AMT     ,MBR_ID       ,SUB_ID       ,UOM_NM       ,ACCUM_TYP_NM ,VEND_XACTN_ID,MAX_AMT      ,MAX_VST_CNT  ,ACCUM_TYP_NM_LDGR_ENTRY         ,ROLE_NM              
+1,CLM0000001,1,10000,Special Office Visit,5/4/2017,5/25/2017,INB,PPO,10,50,M003110201,A0003110201,Dollars,Family Ded,V0001,5000,5,Individual OPX,PTNT
+1,,,,,,,,,,,,,,,,1000,10,Individual Ded,PTNT
+1,,,,,,,,,,,,,,,,10000,100,Family OPX,PTNT
+1,,,,,,,,,,,,,,,,3000,30,Family Ded,PTNT
+1,,,,,,,,,,,,,,,,2000,20,SPC COPAY,PTNT
+2,CLM0000002,2,30000,Surgey,5/10/2017,6/1/2017,IN,PPO,10,500,M003011201,A003010201,Dollars,Family Ded,V0001,1000,10,Individual Ded,PTNT
+2,,,,,,,,,,,,,,,,10000,100,Family OPX,PTNT
+2,,,,,,,,,,,,,,,,3000,30,Family Ded,PTNT
+3,CLM0000003,3,30000,Surgey,6/10/2017,6/11/2017,IN,PPO,10,500,M003911201,A003010201,Dollars,Family Ded,V0002,2000,20,SPC COPAY,PTNT
