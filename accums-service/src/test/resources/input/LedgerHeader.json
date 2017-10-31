@@ -1,20 +1,63 @@
 {
-  "accumulationHeaderDTO": {
-    "accumType": "SPC Copay",
-    "allowedAmount": 50,
-    "claimLine": 1,
-    "serviceDate": "2017-05-04T06:26:42.067Z",
-    "dateTimeProcessed": "2017-05-25T06:26:42.067Z",
-    "dcn": "CLM0000001",
-    "memberID": "A0001",
-    "network": "INB",
-    "networkTier": "PPO",
-    "patientID": 1,
-    "planID": 1,
-    "serviceName": "Specialist Office Visit",
-    "serviceID": 10000,
-    "subscriberID": "A0001",
-    "unitOfMeasure": "DOLLARS",
-    "vendorTaxID": "TX1"
-  }
+  "accumType": "SPC COPAY",
+  "allowedAmount": 50,
+  "claimLineId": 10,
+  "dcn": "CLM0001",
+  "effectiveDate": "01/01/2017",
+  "endDate": "12/31/2017",
+  "maxAmount": 1000,
+  "maxVisit": 10,
+  "memberId": "M00120",
+  "networkCode": "INB",
+  "networkTier": "PPO",
+  "planId": 10,
+  "processedDate": "14/10/2017",
+  "serviceDate": "10/10/2017",
+  "serviceId": 10001,
+  "serviceName": "Surgey",
+  "subscriberId": "A00120",
+  "transactionCode": "xxx",
+  "unitOfMeasure": "Dollars",
+  "serviceLines": [
+    {
+      "accumType": "Individual Ded",
+      "amount": 50,
+      "costShareTier": "PPO",
+      "network": "INB",
+      "role": "PTNT",
+      "serviceDate": "11/01/2017",
+      "snapshotSummmary": 50,
+      "unitOfMeasure": "Dollars"
+    },
+    {
+      "accumType": "Family Ded",
+      "amount": 50,
+      "costShareTier": "PPO",
+      "network": "INB",
+      "role": "PTNT",
+      "serviceDate": "12/02/2017",
+      "snapshotSummmary": 50,
+      "unitOfMeasure": "Dollars"
+    },
+    {
+      "accumType": "Individual OPX",
+      "amount": 50,
+      "costShareTier": "PPO",
+      "network": "INB",
+      "role": "PTNT",
+      "serviceDate": "01/03/2017",
+      "snapshotSummmary": 50,
+      "unitOfMeasure": "Dollars"
+    },
+    {
+      "accumType": "Family OPX",
+      "amount": 50,
+      "costShareTier": "PPO",
+      "network": "INB",
+      "role": "PTNT",
+      "serviceDate": "11/04/2017",
+      "snapshotSummmary": 50,
+      "unitOfMeasure": "Dollars"
+    }
+  ]
 }
