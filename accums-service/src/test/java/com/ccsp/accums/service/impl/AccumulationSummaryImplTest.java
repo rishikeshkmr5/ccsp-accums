@@ -1,7 +1,6 @@
 package com.ccsp.accums.service.impl;
 
 import static org.mockito.Matchers.anyCollection;
-import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -67,9 +66,7 @@ public class AccumulationSummaryImplTest {
 		setFinalStatic(LedgerSummaryMapper.class.getField("INSTANCE"), ledgerSummaryMapper);
 		LedgerSummaryEntity accumulationSummary = new LedgerSummaryEntity();
 		LedgerSummaryDTO accumulationSummaryDTO = new LedgerSummaryDTO();
-		LedgerHeaderEntity ledger = ledgerHeaderRepository.findOne(accumulationSummaryDTO.getLedgerHeaderID());
 		when(ledgerSummaryMapper.convertToEntity(accumulationSummaryDTO)).thenReturn(accumulationSummary);
-		accumulationSummary.setLedgerHeader(ledger);
 		serviceImpl.create(accumulationSummaryDTO);
 		verify(ledgerSummaryRepository, times(1)).save(accumulationSummary);
 	}
@@ -84,22 +81,18 @@ public class AccumulationSummaryImplTest {
 		setFinalStatic(LedgerSummaryMapper.class.getField("INSTANCE"), ledgerSummaryMapper);
 		List<LedgerSummaryDTO> accumulationSummaryDTOs = new ArrayList<>();
 		accumulationSummaryDTOs.add(new LedgerSummaryDTO());
+		
+		List<LedgerSummaryEntity> accumulationSummaryEntities = new ArrayList<>();
+		accumulationSummaryEntities.add(new LedgerSummaryEntity());
+		
+		when(ledgerSummaryMapper.convertToEntityList(accumulationSummaryDTOs)).thenReturn(accumulationSummaryEntities);
 
-		List<LedgerSummaryDTO> accumulationSummaryDTOsAfterInseration = new ArrayList<>();
+		when(ledgerSummaryRepository.save(accumulationSummaryEntities)).thenReturn(accumulationSummaryEntities);
 
-		for (LedgerSummaryDTO accumulationSummaryDTO : accumulationSummaryDTOs) {
-			LedgerHeaderEntity ledger = new LedgerHeaderEntity();
-			when(ledgerHeaderRepository.findOne(accumulationSummaryDTO.getLedgerHeaderID())).thenReturn(ledger);
-			LedgerSummaryEntity accumulationSummary = new LedgerSummaryEntity();
-			when(ledgerSummaryMapper.convertToEntity(accumulationSummaryDTO)).thenReturn(accumulationSummary);
-			accumulationSummary.setLedgerHeader(ledger);
+		when(ledgerSummaryMapper.convertToDTOList(accumulationSummaryEntities)).thenReturn(accumulationSummaryDTOs);
 
-			when(ledgerSummaryRepository.saveAndFlush(accumulationSummary)).thenReturn(accumulationSummary);
-			when(ledgerSummaryMapper.convertToDTO(accumulationSummary)).thenReturn(accumulationSummaryDTO);
-			accumulationSummaryDTOsAfterInseration.add(accumulationSummaryDTO);
-		}
 		List<LedgerSummaryDTO> actual = serviceImpl.create(accumulationSummaryDTOs);
-		Assert.assertEquals(accumulationSummaryDTOsAfterInseration, actual);
+		Assert.assertEquals(accumulationSummaryDTOs, actual);
 	}
 
 	/**

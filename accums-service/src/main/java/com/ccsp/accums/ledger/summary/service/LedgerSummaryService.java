@@ -68,10 +68,6 @@ public class LedgerSummaryService extends CommonServiceImpl<LedgerSummaryDTO, Le
 		//convert dto to entity for persistence
 		LedgerSummaryEntity ledgerSummaryEntity = getMapper().convertToEntity(dto);
 		
-		//find the Ledger header based on the header id
-		LedgerHeaderEntity ledger = ledgerHeaderRepository.findOne(dto.getLedgerHeaderID());
-		ledgerSummaryEntity.setLedgerHeader(ledger);
-		
 		//update the summary with the ledgerheader details and persist it
 		ledgerSummaryEntity = ledgerSummaryRepository.save(ledgerSummaryEntity);
 		return getMapper().convertToDTO(ledgerSummaryEntity);
@@ -134,33 +130,12 @@ public class LedgerSummaryService extends CommonServiceImpl<LedgerSummaryDTO, Le
 	 */
 	@Override
 	public List<LedgerSummaryDTO> create(List<LedgerSummaryDTO> dtoList) {
-		List<LedgerSummaryEntity> summaryEntities = new ArrayList<LedgerSummaryEntity>();
+		List<LedgerSummaryEntity> summaryEntities = getMapper().convertToEntityList(dtoList);
 
-		boolean isFirst = true;
-		LedgerHeaderEntity ledgerHeader = null;
-		//Iterate the given ledgerSummaryDTOs to convert them into entities
-		for (LedgerSummaryDTO summaryDTO : dtoList) {
-			LedgerSummaryEntity summaryEntity = getMapper().convertToEntity(summaryDTO);
-			if (isFirst) {
-				ledgerHeader = ledgerHeaderRepository.findOne(summaryDTO.getLedgerHeaderID());
-				isFirst = false;
-			}
-			summaryEntity.setLedgerHeader(ledgerHeader);
-			summaryEntities.add(summaryEntity);
-		}
 		//persist the summary entities
 		getJPARepository().save(summaryEntities);
-
-		List<LedgerSummaryDTO> summaryDTOResults = new ArrayList<LedgerSummaryDTO>();
-		//populate the summary dtos with the generated header id and return it back to the caller
-		for (LedgerSummaryEntity summaryEntity : summaryEntities) {
-			LedgerSummaryDTO dto = getMapper().convertToDTO(summaryEntity);
-			if (summaryEntity.getLedgerHeader() != null) {
-				dto.setLedgerHeaderID(summaryEntity.getLedgerHeader().getId());
-			}
-			summaryDTOResults.add(dto);
-		}
-		return summaryDTOResults;
+		
+		return getMapper().convertToDTOList(summaryEntities);
 	}
 
 	@Override

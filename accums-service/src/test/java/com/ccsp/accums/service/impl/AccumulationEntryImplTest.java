@@ -83,23 +83,30 @@ public class AccumulationEntryImplTest {
 		setFinalStatic(LedgerEntryMapper.class.getField("INSTANCE"), ledgerEntryMapper);
 		List<LedgerEntryDTO> accumulationEntryDTOs = new ArrayList<>();
 		accumulationEntryDTOs.add(new LedgerEntryDTO());
+		
+		List<LedgerEntryEntity> accumulationEntryEntities = new ArrayList<>();
+		accumulationEntryEntities.add(new LedgerEntryEntity());
+		
+		when(ledgerEntryMapper.convertToEntityList(accumulationEntryDTOs)).thenReturn(accumulationEntryEntities);
 
 		List<LedgerEntryDTO> accumulationEntryDTOsAfterInseration = new ArrayList<>();
 
-		for (LedgerEntryDTO accumulationEntryDTO : accumulationEntryDTOs) {
+		for (LedgerEntryEntity accumulationEntryEntity : accumulationEntryEntities) {
 			LedgerHeaderEntity ledger = new LedgerHeaderEntity();
-			when(ledgerHeaderRepository.findOne(accumulationEntryDTO.getLedgerHeaderID())).thenReturn(ledger);
-			LedgerEntryEntity accumulationEntry = new LedgerEntryEntity();
-			when(ledgerEntryMapper.convertToEntity(accumulationEntryDTO)).thenReturn(accumulationEntry);
-			accumulationEntry.setLedgerHeader(ledger);
-
-			when(ledgerEntryRepository.saveAndFlush(accumulationEntry)).thenReturn(accumulationEntry);
-			when(ledgerEntryMapper.convertToDTO(accumulationEntry)).thenReturn(accumulationEntryDTO);
-			accumulationEntryDTOsAfterInseration.add(accumulationEntryDTO);
+			when(ledgerHeaderRepository.findOne(accumulationEntryEntity.getLedgerHeaderID())).thenReturn(ledger);
+			accumulationEntryEntity.setLedgerHeader(ledger);
+			
+			LedgerEntryDTO ledgerEntryDTO = new LedgerEntryDTO();
+			when(ledgerEntryMapper.convertToDTO(accumulationEntryEntity)).thenReturn(ledgerEntryDTO);
+			accumulationEntryDTOsAfterInseration.add(ledgerEntryDTO);
 		}
+		
+		when(ledgerEntryRepository.save(accumulationEntryEntities)).thenReturn(accumulationEntryEntities);
+		
 		List<LedgerEntryDTO> actual = serviceImpl.create(accumulationEntryDTOs);
 		Assert.assertEquals(accumulationEntryDTOsAfterInseration, actual);
 	}
+	
 
 	/**
 	 * @throws NoSuchFieldException

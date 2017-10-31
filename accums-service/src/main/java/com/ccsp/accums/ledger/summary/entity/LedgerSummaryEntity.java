@@ -2,20 +2,13 @@ package com.ccsp.accums.ledger.summary.entity;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import com.ccsp.accums.ledger.header.entity.LedgerHeaderEntity;
 
 /**
  * @author Vaibhav
@@ -36,13 +29,6 @@ public class LedgerSummaryEntity  implements java.io.Serializable {
 	@SequenceGenerator(name = "SEQ_LDGR_SUM", sequenceName = "SEQ_LDGR_SUM", allocationSize = 1)
 	@Column(name = "LDGR_SUM_ID", unique = true, nullable = false)
 	private Long id;
-	
-	@ManyToOne(cascade = CascadeType.ALL, targetEntity = LedgerHeaderEntity.class, fetch = FetchType.EAGER)
-	@JoinColumn(name="LDGR_ID",referencedColumnName="LDGR_ID")
-	private LedgerHeaderEntity ledgerHeader;
-	
-	@Column(name = "LDGR_ID", insertable = false, updatable = false, nullable = true)
-	private Long ledgerHeaderID;
 	
 	@Column(name = "SUB_ID",  nullable = true)
 	private String subscriberId;
@@ -208,35 +194,6 @@ public class LedgerSummaryEntity  implements java.io.Serializable {
 	 */
 	public void setMaxVisit(Integer maxVisit) {
 		this.maxVisit = maxVisit;
-	}
-
-
-	/**
-	 * @return
-	 */
-	public LedgerHeaderEntity getLedgerHeader() {
-		return ledgerHeader;
-	}
-
-	/**
-	 * @param ledgerHeader
-	 */
-	public void setLedgerHeader(LedgerHeaderEntity ledgerHeader) {
-		this.ledgerHeader = ledgerHeader;
-	}
-
-	/**
-	 * @return the ledgerHeaderID
-	 */
-	public Long getLedgerHeaderID() {
-		return ledgerHeaderID;
-	}
-
-	/**
-	 * @param ledgerHeaderID the ledgerHeaderID to set
-	 */
-	public void setLedgerHeaderID(Long ledgerHeaderID) {
-		this.ledgerHeaderID = ledgerHeaderID;
 	}
 
 	/**

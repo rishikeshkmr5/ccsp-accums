@@ -29,9 +29,6 @@ public class LedgerSummaryDTO  implements ICommonDTO {
 
 	private Long id;
 	
-	@NotNull(message = "Ledger header ID cannot be empty")
-	private Long ledgerHeaderID;
-	
 	private String subscriberId;
 	
 	private String memberIdentifier;
@@ -228,19 +225,6 @@ public class LedgerSummaryDTO  implements ICommonDTO {
 	 */
 	public void setNetworkTier(String networkTier) {
 		this.networkTier = networkTier;
-	}
-
-	/**
-	 * @return
-	 */
-	public Long getLedgerHeaderID() {
-		return ledgerHeaderID;
-	}
-	/**
-	 * @param ledgerHeaderID
-	 */
-	public void setLedgerHeaderID(Long ledgerHeaderID) {
-		this.ledgerHeaderID = ledgerHeaderID;
 	}
 
 	/**
