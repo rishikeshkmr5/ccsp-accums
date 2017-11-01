@@ -199,7 +199,8 @@ public class LedgerSummaryService extends CommonServiceImpl<LedgerSummaryDTO, Le
 	 * Generate the key based on the unique fields in the ledgersummary
 	 */
 	private String generateKey(LedgerSummaryEntity ledgerSummaryEntity) {
-		return ledgerSummaryEntity.getMemberId()+"_"+ledgerSummaryEntity.getAccumType()+"_"+ledgerSummaryEntity.getNetworkCode()+"_"+ledgerSummaryEntity.getNetworkTier();
+		//System.out.println("\n \t "+(ledgerSummaryEntity.getMemberId()+"_"+ledgerSummaryEntity.getAccumType()+"_"+ledgerSummaryEntity.getNetworkCode()+"_"+ledgerSummaryEntity.getNetworkTier()).trim());
+		return ledgerSummaryEntity.getMemberId().trim()+"_"+ledgerSummaryEntity.getAccumType().trim()+"_"+ledgerSummaryEntity.getNetworkCode().trim()+"_"+ledgerSummaryEntity.getNetworkTier().trim();
 	}
 }
 

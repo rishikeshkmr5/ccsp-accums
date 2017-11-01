@@ -156,6 +156,12 @@ public class LedgerHeaderController {
 
 			// Creation of Service lines
 			LedgerEntryDTO entryDTO = new LedgerEntryDTO();
+			/*
+			 * commented to have same value from header only.
+			 * header.setMaxAmount(Double.parseDouble(column[16]));
+			header.setMaxVisit(Integer.parseInt(column[17]));
+			*
+			*/
 			entryDTO.setAccumType(column[18]);
 			entryDTO.setRole(column[19]);
 			entryDTO.setAmount(header.getAllowedAmount());
