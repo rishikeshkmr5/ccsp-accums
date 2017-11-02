@@ -26,14 +26,24 @@ public interface ILedgerSummaryRepository extends JpaRepository<LedgerSummaryEnt
 	LedgerSummaryEntity findLedgerSummary(@Param("memberId") String memberId, @Param("accumType") String accumType, @Param("networkCode") String networkCode, @Param("networkTier") String networkTier);
 	
 	/**
+	 * To get all accumulation summary based on subscriber id
 	 * @param subscriberId
 	 * @return
 	 */
 	List<LedgerSummaryEntity> findBySubscriberId(String subscriberId);
 	
 	/**
+	 * To get all accumulation summary based on subscriber id
 	 * @param memberId
 	 * @return
 	 */
 	List<LedgerSummaryEntity> findByMemberId(String memberId);
+	
+	/**
+	 * To get all accumulation summary based on member id and subscriber id
+	 * @param memberId
+	 * @return
+	 */
+	List<LedgerSummaryEntity> findByMemberIdAndSubscriberId(String memberId, String subscriberId);
+
 }

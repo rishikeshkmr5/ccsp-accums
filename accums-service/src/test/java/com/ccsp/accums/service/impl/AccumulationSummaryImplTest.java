@@ -174,4 +174,79 @@ public class AccumulationSummaryImplTest {
 
 		field.set(null, newValue);
 	}
+	
+	/**
+	 * @throws NotFoundException
+	 */
+	@Test(expected = NotFoundException.class)
+	public void getBenefitBalanceThrowsException() throws NotFoundException {
+		String member = "M0001234";
+		String subscriber = "S0001234";
+		List<LedgerSummaryEntity> accumulationSummaries = new ArrayList<>();
+		when(ledgerSummaryRepository.findByMemberIdAndSubscriberId(member, subscriber)).thenReturn(accumulationSummaries);
+		serviceImpl.getBenefitBalance(subscriber, member);
+	}
+	
+	/**
+	 * Get benefit balance by member and subscriber id
+	 * @throws NoSuchFieldException
+	 * @throws SecurityException
+	 * @throws Exception
+	 */
+	@Test
+	public void getBenefitBalanceByMemberAndSubscriberId() throws NoSuchFieldException, SecurityException, Exception {
+		String member = "M0001234";
+		String subscriber = "S0001234";
+		List<LedgerSummaryEntity> accumulationSummaries = new ArrayList<>();
+		LedgerSummaryEntity accumulationSummary = new LedgerSummaryEntity();
+		accumulationSummaries.add(accumulationSummary);
+		List<LedgerSummaryDTO> accumulationHeaderDTOList = new ArrayList<>();
+		when(ledgerSummaryRepository.findByMemberIdAndSubscriberId(member, subscriber)).thenReturn(accumulationSummaries);
+		when(ledgerSummaryMapper.convertToDTOList(accumulationSummaries)).thenReturn(accumulationHeaderDTOList);
+		setFinalStatic(LedgerSummaryMapper.class.getField("INSTANCE"), ledgerSummaryMapper);
+		List<LedgerSummaryDTO> actual = serviceImpl.getBenefitBalance(subscriber, member);
+		Assert.assertEquals(accumulationHeaderDTOList, actual);
+	}
+	
+	/**
+	 * Get benefit balance by member id
+	 * @throws NoSuchFieldException
+	 * @throws SecurityException
+	 * @throws Exception
+	 */
+	@Test
+	public void getBenefitBalanceByMemberId() throws NoSuchFieldException, SecurityException, Exception {
+		String member = "M0001234";
+		String subscriber = null;
+		List<LedgerSummaryEntity> accumulationSummaries = new ArrayList<>();
+		LedgerSummaryEntity accumulationSummary = new LedgerSummaryEntity();
+		accumulationSummaries.add(accumulationSummary);
+		List<LedgerSummaryDTO> accumulationHeaderDTOList = new ArrayList<>();
+		when(ledgerSummaryRepository.findByMemberId(member)).thenReturn(accumulationSummaries);
+		when(ledgerSummaryMapper.convertToDTOList(accumulationSummaries)).thenReturn(accumulationHeaderDTOList);
+		setFinalStatic(LedgerSummaryMapper.class.getField("INSTANCE"), ledgerSummaryMapper);
+		List<LedgerSummaryDTO> actual = serviceImpl.getBenefitBalance(subscriber, member);
+		Assert.assertEquals(accumulationHeaderDTOList, actual);
+	}
+	
+	/**
+	 * Get benefit balance by subscriber id
+	 * @throws NoSuchFieldException
+	 * @throws SecurityException
+	 * @throws Exception
+	 */
+	@Test
+	public void getBenefitBalanceBySubscriberId() throws NoSuchFieldException, SecurityException, Exception {
+		String member = null;
+		String subscriber = "S0001234";
+		List<LedgerSummaryEntity> accumulationSummaries = new ArrayList<>();
+		LedgerSummaryEntity accumulationSummary = new LedgerSummaryEntity();
+		accumulationSummaries.add(accumulationSummary);
+		List<LedgerSummaryDTO> accumulationHeaderDTOList = new ArrayList<>();
+		when(ledgerSummaryRepository.findBySubscriberId(subscriber)).thenReturn(accumulationSummaries);
+		when(ledgerSummaryMapper.convertToDTOList(accumulationSummaries)).thenReturn(accumulationHeaderDTOList);
+		setFinalStatic(LedgerSummaryMapper.class.getField("INSTANCE"), ledgerSummaryMapper);
+		List<LedgerSummaryDTO> actual = serviceImpl.getBenefitBalance(subscriber, member);
+		Assert.assertEquals(accumulationHeaderDTOList, actual);
+	}
 }

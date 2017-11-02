@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -71,5 +72,21 @@ public class LedgerSummaryController {
 	public void updateLedgerSummary(@PathVariable("memberId")String memberId) {
 		log.info("Update LedgerSummary details");
 		accumulationSummaryService.updateLedgerSummary(memberId);
-	}	
+	}
+	
+	/**
+	 * Fetches benefit balance details based on subscriber or member id
+	 * @param subscriberID
+	 * @param memberID
+	 * @return
+	 * @throws NotFoundException
+	 */
+	@RequestMapping(path = UIConstants.BENEFIT_BALANCE, method = RequestMethod.GET, produces = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
+	public @ResponseBody List<LedgerSummaryDTO> getLedgerSummaryBalanceBySubscriberOrMemberId(
+			@RequestParam(value="subscriber", required=false) String subscriberID, @RequestParam(value="member", required=false) String memberID)
+			throws NotFoundException {
+		log.info("Benefit balance details based on subscriber or member id");
+		return accumulationSummaryService.getBenefitBalance(subscriberID, memberID);
+
+	}
 }

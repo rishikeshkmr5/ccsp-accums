@@ -31,7 +31,7 @@ public class LedgerSummaryDTO  implements ICommonDTO {
 	
 	private String subscriberId;
 	
-	private String memberIdentifier;
+	private String memberId;
 	
 	private Long planId;
 		
@@ -88,17 +88,19 @@ public class LedgerSummaryDTO  implements ICommonDTO {
 	}
 
 	/**
+	 * 
 	 * @return
 	 */
-	public String getMemberIdentifier() {
-		return memberIdentifier;
+	public String getMemberId() {
+		return memberId;
 	}
 
 	/**
-	 * @param memberID
+	 * 
+	 * @param memberId
 	 */
-	public void setMemberIdentifier(String memberID) {
-		this.memberIdentifier = memberID;
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 
 	/**
