@@ -1,0 +1,4 @@
+DB Table,Record Count - Before,Record Count - After,Environment
+LDGR_HDR,111,211,Local Machine
+LDGR_ENTRY,550,1050,Local Machine
+LDGR_SUM,550,1024,Local Machine
