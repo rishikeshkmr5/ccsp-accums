@@ -1,9 +1,10 @@
 package com.ccsp.accums.ledger.header.dto;
 
+import com.ccsp.common.dto.ICommonDTO;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-@JsonDeserialize(as = LedgerHeaderDTO.class)
-public interface ILedgerHeaderDTO {
+//@JsonDeserialize
+public interface ILedgerHeaderDTO extends ICommonDTO{
 	
 	Double getAllowedAmount();
 	void setAllowedAmount(Double allowedAmount);

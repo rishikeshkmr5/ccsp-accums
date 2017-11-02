@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class AccumsUtilizationDTO implements ICommonDTO, ILedgerHeaderDTO {
+public class AccumsUtilizationDTO implements ILedgerHeaderDTO {
 
 	/**
 	 * serialization
