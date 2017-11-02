@@ -51,14 +51,14 @@ public class LedgerBenefitController {
 	 * @return
 	 * @throws NotFoundException
 	 */
-	@RequestMapping(path = UIConstants.BENEFIT_BALANCE, method = RequestMethod.GET, produces = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
+	/*@RequestMapping(path = UIConstants.BENEFIT_BALANCE, method = RequestMethod.GET, produces = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
 	public @ResponseBody List<BenefitBalanceDTO> getBenefitBalanceBySubscriberOrMemberId(
 			@RequestParam(value="subscriberid", required=false) String subscriberID, @RequestParam(value="memberid", required=false) String memberID)
 			throws NotFoundException {
 		log.info("Benefit balance details based on subscriber or member id");
 		return benefitBalanceServiceImpl.getBenefitBalance(subscriberID, memberID);
 
-	}
+	}*/
 	
 	@RequestMapping(path = UIConstants.CLAIIMS_ASSOCIATED_TO_ACCUMS, method = RequestMethod.GET, produces = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
 	@ResponseBody

@@ -26,6 +26,8 @@ import com.ccsp.accums.ledger.summary.repository.ILedgerSummaryRepository;
 import com.ccsp.common.mapper.IBaseMapper;
 import com.ccsp.common.service.impl.CommonServiceImpl;
 
+import javassist.NotFoundException;
+
 /**
  * @author Vaibhav
  *
@@ -199,8 +201,36 @@ public class LedgerSummaryService extends CommonServiceImpl<LedgerSummaryDTO, Le
 	 * Generate the key based on the unique fields in the ledgersummary
 	 */
 	private String generateKey(LedgerSummaryEntity ledgerSummaryEntity) {
-		//System.out.println("\n \t "+(ledgerSummaryEntity.getMemberId()+"_"+ledgerSummaryEntity.getAccumType()+"_"+ledgerSummaryEntity.getNetworkCode()+"_"+ledgerSummaryEntity.getNetworkTier()).trim());
 		return ledgerSummaryEntity.getMemberId().trim()+"_"+ledgerSummaryEntity.getAccumType().trim()+"_"+ledgerSummaryEntity.getNetworkCode().trim()+"_"+ledgerSummaryEntity.getNetworkTier().trim();
+	}
+
+	/**
+	 * Gets Benefit balance based on member or subscriber id
+	 * @param subscriberID
+	 * @param memberID
+	 * @return
+	 * @throws NotFoundException 
+	 */
+	public List<LedgerSummaryDTO> getBenefitBalance(String subscriberID, String memberID) throws NotFoundException {
+		List<LedgerSummaryEntity> ledgerSummaryEntities = null;
+		if (subscriberID != null && subscriberID.length() > 0) {
+			//If both member and subscriber id are present then response is combination of both
+			if (memberID != null && memberID.length() > 0)
+				ledgerSummaryEntities = ledgerSummaryRepository.findByMemberIdAndSubscriberId(memberID, subscriberID);
+			else
+				ledgerSummaryEntities = ledgerSummaryRepository.findBySubscriberId(subscriberID);
+			if (ledgerSummaryEntities.isEmpty())
+				throw new NotFoundException(
+						"There are no Summaries Balance Benefit available for subscriberid : " + subscriberID);
+		} else if (memberID != null && memberID.length() > 0) {
+			ledgerSummaryEntities = ledgerSummaryRepository.findByMemberId(memberID);
+			if (ledgerSummaryEntities.isEmpty())
+				throw new NotFoundException(
+						"There are no Summaries Balance Benefit available for memberid : " + memberID);
+		} else {
+			throw new NotFoundException("There are no Summaries Balance Benefit available");
+		}
+		return getMapper().convertToDTOList(ledgerSummaryEntities);
 	}
 }
 

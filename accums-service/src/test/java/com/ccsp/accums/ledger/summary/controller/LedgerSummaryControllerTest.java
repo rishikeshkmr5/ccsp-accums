@@ -15,10 +15,15 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ccsp.accums.ledger.summary.dto.LedgerSummaryClaimDTO;
 import com.ccsp.accums.ledger.summary.dto.LedgerSummaryDTO;
 import com.ccsp.accums.ledger.summary.service.LedgerSummaryService;
+import com.ccsp.common.utils.UIConstants;
 
 import javassist.NotFoundException;
 
@@ -32,16 +37,16 @@ import javassist.NotFoundException;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 public class LedgerSummaryControllerTest {
-	
+
 	@InjectMocks
 	private LedgerSummaryController ledgerSummaryController;
-	
+
 	/**
 	 * Mock the Service layer
 	 */
 	@Mock
 	private LedgerSummaryService accumulationSummaryService;
-	
+
 	/**
 	 * @throws NotFoundException
 	 */
@@ -85,6 +90,25 @@ public class LedgerSummaryControllerTest {
 		claimSummaryDTO.setAccumulationSummaryList(accumulationSummaryDTOs);
 		ledgerSummaryController.createLedgerSummary(claimSummaryDTO);
 		verify(accumulationSummaryService, times(1)).create(claimSummaryDTO.getAccumulationSummaryList());
+	}
+
+	/**
+	 * Fetches benefit balance details based on subscriber or member id
+	 * 
+	 * @param subscriberID
+	 * @param memberID
+	 * @return
+	 * @throws NotFoundException
+	 */
+	@Test
+	public void getLedgerSummaryBalanceBySubscriberOrMemberId() throws NotFoundException {
+		List<LedgerSummaryDTO> accumulationSummaryDTOs = new ArrayList<>();
+		String member = "M0001234";
+		String subscriber = "S0001234";
+		when(accumulationSummaryService.getBenefitBalance(subscriber, member)).thenReturn(accumulationSummaryDTOs);
+		List<LedgerSummaryDTO> actual = ledgerSummaryController.getLedgerSummaryBalanceBySubscriberOrMemberId(subscriber, member);
+		Assert.assertEquals(actual, accumulationSummaryDTOs);
+
 	}
 
 }
