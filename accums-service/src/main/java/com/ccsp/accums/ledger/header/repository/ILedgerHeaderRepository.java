@@ -30,4 +30,11 @@ public interface ILedgerHeaderRepository extends JpaRepository<LedgerHeaderEntit
 	 * @return
 	 */
 	List<LedgerHeaderEntity> findByMemberId(String memberId);
+	
+	/**
+	 * @param memberId
+	 * @param subscriberId
+	 * @return
+	 */
+	List<LedgerHeaderEntity> findByMemberIdAndSubscriberId(String memberId, String subscriberId);
 }

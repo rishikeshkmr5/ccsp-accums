@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
  */
 @XmlRootElement(name = "accumulationheader")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class LedgerHeaderDTO  implements ICommonDTO {
+public class LedgerHeaderDTO  implements ICommonDTO, ILedgerHeaderDTO {
 
 	/**
 	 * serialization
