@@ -73,7 +73,7 @@ public class AccumsUtilizationControllerTest {
 		String memberId = "M0001234";
 		String subscriberId = "S0001234";
 		when(accumulationSummaryService.getBenefitBalance(subscriberId, memberId)).thenReturn(accumulationSummaryDTOs);
-		List<LedgerSummaryDTO> actual = controller.getLedgerSummaryBalance(subscriberId, memberId);
+		List<LedgerSummaryDTO> actual = controller.getBenefitBalance(subscriberId, memberId);
 		Assert.assertEquals(actual, accumulationSummaryDTOs);
 
 	}
@@ -89,7 +89,7 @@ public class AccumsUtilizationControllerTest {
 		String memberId = "A0001";
 		String subscriberId = "S0001";
 		when(accumulationSummaryService.getBenefitBalance(subscriberId, memberId)).thenReturn(accumulationSummaryDTOs);
-		controller.getLedgerSummaryBalance(subscriberId, memberId);
+		controller.getBenefitBalance(subscriberId, memberId);
 	}
 
 
