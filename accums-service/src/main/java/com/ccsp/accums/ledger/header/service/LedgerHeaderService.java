@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,7 @@ import com.ccsp.accums.ledger.header.entity.LedgerHeaderEntity;
 import com.ccsp.accums.ledger.header.mapper.LedgerHeaderMapper;
 import com.ccsp.accums.ledger.header.repository.ILedgerHeaderRepository;
 import com.ccsp.accums.ledger.summary.service.LedgerSummaryService;
+import com.ccsp.accums.utilization.dto.SpendingSummaryDTO;
 import com.ccsp.common.mapper.IBaseMapper;
 import com.ccsp.common.service.impl.CommonServiceImpl;
 
@@ -119,27 +121,29 @@ public class LedgerHeaderService extends CommonServiceImpl<LedgerHeaderDTO, Ledg
 	}
 	
 	/**
+	 * Fetches the spending summary for the member id and subscriber id
 	 * @param memberId
 	 * @param subscriberId
 	 * @return
 	 */
-	public List<LedgerHeaderDTO> fetchByMemberIdAndSubscriberId(String memberId, String subscriberId){
-		List<LedgerHeaderDTO> ledgerHeaderDTOList = new ArrayList<>();
+	public List<SpendingSummaryDTO> getSpendingSummary(String memberId, String subscriberId){
+		List<SpendingSummaryDTO> spendingSummaryDTOList = new ArrayList<>();
+		LedgerHeaderMapper mapper = (LedgerHeaderMapper) getMapper();
 		List<LedgerHeaderEntity> ledgerHeaderEntityList = new ArrayList<>();		
-		if(memberId!= null && subscriberId!=null) {
+		if(StringUtils.isNotEmpty(memberId) && StringUtils.isNotEmpty(subscriberId)) {
 			//retrieve the summary based on memberId and subscriberId
 			ledgerHeaderEntityList = ledgerHeaderRepository.findByMemberIdAndSubscriberId(memberId, subscriberId);
-		}else if(memberId != null) {
+		}else if(StringUtils.isNotEmpty(memberId)) {
 			//retrieve the summary based on the memberId
 			ledgerHeaderEntityList = ledgerHeaderRepository.findByMemberId(memberId);
-		}else if(subscriberId != null) {
+		}else if(StringUtils.isNotEmpty(subscriberId)) {
 			//retrieve the summary based on the summaryId
 			ledgerHeaderEntityList = ledgerHeaderRepository.findBySubscriberId(subscriberId);
 		}
 		//if the ledgerHeader entity list is not empty convert them to DTOs
 		if(CollectionUtils.isNotEmpty(ledgerHeaderEntityList)) {
-			ledgerHeaderDTOList = getMapper().convertToDTOList(ledgerHeaderEntityList);
+			spendingSummaryDTOList = mapper.convertEntitiesToAccumTypeSummaryDTOs(ledgerHeaderEntityList);
 		}
-		return ledgerHeaderDTOList;
+		return spendingSummaryDTOList;
 	}
 }

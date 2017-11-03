@@ -12,11 +12,8 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import com.ccsp.accums.ledger.header.dto.ILedgerHeaderDTO;
-import com.ccsp.accums.ledger.header.dto.LedgerHeaderDTO;
 import com.ccsp.accums.ledger.header.service.LedgerHeaderService;
-import com.ccsp.accums.utilization.dto.AccumsUtilizationDTO;
+import com.ccsp.accums.utilization.dto.SpendingSummaryDTO;
 import com.ccsp.accums.utilization.service.AccumsUtilizationService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -30,8 +27,8 @@ public class AccumsUtilizationServiceTest {
 	
 	@Test
 	public void testGetAccumsUtilization() throws ParseException {
-		List<LedgerHeaderDTO> ledgerHeaderDTOList = new ArrayList<>();
-		LedgerHeaderDTO ledgerHeaderDTO = new LedgerHeaderDTO();		
+		List<SpendingSummaryDTO> ledgerHeaderDTOList = new ArrayList<>();
+		SpendingSummaryDTO ledgerHeaderDTO = new SpendingSummaryDTO();		
 		String memberId = "A0001";
 		String subscriberId = "S0001";
 		ledgerHeaderDTO.setMemberId(memberId);
@@ -40,9 +37,9 @@ public class AccumsUtilizationServiceTest {
 		ledgerHeaderDTO.setNetworkCode("networkCode");
 		ledgerHeaderDTO.setServiceName("serviceName");
 		ledgerHeaderDTOList.add(ledgerHeaderDTO);
-		when(ledgerHeaderService.fetchByMemberIdAndSubscriberId(memberId, subscriberId)).thenReturn(ledgerHeaderDTOList);
-		List<AccumsUtilizationDTO> resultList = accumsUtilizationService.getAccumsUtilization(memberId, subscriberId);
-		for(AccumsUtilizationDTO result : resultList) {
+		when(ledgerHeaderService.getSpendingSummary(memberId, subscriberId)).thenReturn(ledgerHeaderDTOList);
+		List<SpendingSummaryDTO> resultList = accumsUtilizationService.getSpendingSummary(memberId, subscriberId);
+		for(SpendingSummaryDTO result : resultList) {
 			Assert.assertEquals(memberId, result.getMemberId());
 			Assert.assertEquals(subscriberId, result.getSubscriberId());
 			Assert.assertEquals(ledgerHeaderDTO.getNetworkCode(), result.getNetworkCode());

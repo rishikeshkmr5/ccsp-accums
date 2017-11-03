@@ -37,7 +37,7 @@ public class LedgerEntryEntity  implements java.io.Serializable {
 	@Column(name = "PRIMY_LDGR_ENTRY_ID", insertable = false, updatable = false)
 	private Long primaryLedgerEntryID;
 	
-	@ManyToOne(cascade = CascadeType.ALL, targetEntity = LedgerHeaderEntity.class, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.ALL, targetEntity = LedgerHeaderEntity.class, fetch = FetchType.LAZY)
 	@JoinColumn(name="LDGR_ID",referencedColumnName="LDGR_ID")
 	private LedgerHeaderEntity ledgerHeader;
 	

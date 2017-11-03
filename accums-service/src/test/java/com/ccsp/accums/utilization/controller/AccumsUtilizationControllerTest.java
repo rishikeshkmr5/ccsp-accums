@@ -15,11 +15,14 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ccsp.accums.ledger.summary.dto.LedgerSummaryDTO;
 import com.ccsp.accums.ledger.summary.service.LedgerSummaryService;
-import com.ccsp.accums.utilization.dto.AccumsUtilizationDTO;
+import com.ccsp.accums.utilization.dto.SpendingSummaryDTO;
 import com.ccsp.accums.utilization.service.AccumsUtilizationService;
-
 import javassist.NotFoundException;
 
+/**
+ * @author nnarayanaperumaln
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 public class AccumsUtilizationControllerTest {
 
@@ -36,12 +39,12 @@ public class AccumsUtilizationControllerTest {
 	public void testFetchAccumsUtilizationByMemberIdAndSubscriberId() throws ParseException, NotFoundException {
 		String memberId = "A0001";
 		String subscriberId = "S0001";
-		List<AccumsUtilizationDTO> utilizationHistory = new ArrayList<>();
-		AccumsUtilizationDTO utilizationDTO = new AccumsUtilizationDTO();
+		List<SpendingSummaryDTO> utilizationHistory = new ArrayList<>();
+		SpendingSummaryDTO utilizationDTO = new SpendingSummaryDTO();
 		utilizationHistory.add(utilizationDTO);
-		when(utilizationService.getAccumsUtilization(memberId, subscriberId)).thenReturn(utilizationHistory);
-		List<AccumsUtilizationDTO> resultList = controller.fetchAccumsUtilizationByMemberIdAndSubscriberId(memberId, subscriberId);
-		for(AccumsUtilizationDTO result : resultList) {
+		when(utilizationService.getSpendingSummary(memberId, subscriberId)).thenReturn(utilizationHistory);
+		List<SpendingSummaryDTO> resultList = controller.getSpendingSummary(memberId, subscriberId);
+		for(SpendingSummaryDTO result : resultList) {
 			Assert.assertEquals(result,utilizationDTO);
 		}
 	}
@@ -50,9 +53,9 @@ public class AccumsUtilizationControllerTest {
 	public void testFetchAccumsUtilizationException() throws ParseException, NotFoundException {
 		String memberId = "A0001";
 		String subscriberId = "S0001";
-		List<AccumsUtilizationDTO> utilizationHistory = new ArrayList<>();
-		when(utilizationService.getAccumsUtilization(memberId, subscriberId)).thenReturn(utilizationHistory);
-		List<AccumsUtilizationDTO> resultList = controller.fetchAccumsUtilizationByMemberIdAndSubscriberId(memberId, subscriberId);
+		List<SpendingSummaryDTO> utilizationHistory = new ArrayList<>();
+		when(utilizationService.getSpendingSummary(memberId, subscriberId)).thenReturn(utilizationHistory);
+		List<SpendingSummaryDTO> resultList = controller.getSpendingSummary(memberId, subscriberId);
 	}
 	
 	/**
@@ -86,7 +89,7 @@ public class AccumsUtilizationControllerTest {
 		String memberId = "A0001";
 		String subscriberId = "S0001";
 		when(accumulationSummaryService.getBenefitBalance(subscriberId, memberId)).thenReturn(accumulationSummaryDTOs);
-		List<LedgerSummaryDTO> actual = controller.getLedgerSummaryBalance(subscriberId, memberId);
+		controller.getLedgerSummaryBalance(subscriberId, memberId);
 	}
 
 

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ccsp.accums.ledger.summary.dto.LedgerSummaryDTO;
 import com.ccsp.accums.ledger.summary.service.LedgerSummaryService;
-import com.ccsp.accums.utilization.dto.AccumsUtilizationDTO;
+import com.ccsp.accums.utilization.dto.SpendingSummaryDTO;
 import com.ccsp.accums.utilization.service.AccumsUtilizationService;
 import com.ccsp.common.utils.UIConstants;
 
@@ -24,57 +24,69 @@ import javassist.NotFoundException;
 
 /**
  * @author nnarayanaperumaln
- *
+ * Gets the utilization summary for the given member id and subscriber id
+ * Fetches benefit balance details based on subscriber or member id
  */
 @RequestMapping(path = UIConstants.ACCUMS_INQUIRY)
 @RestController
 public class AccumsUtilizationController {
-	
+
 	@Autowired
 	private AccumsUtilizationService utilizationService;
-	
+
 	@Autowired
 	private LedgerSummaryService accumulationSummaryService;
-	
+
 	/**
+	 * Gets the utilization summary for the given member id and subscriber id
 	 * @param memberId
 	 * @param subscriberId
 	 * @return
 	 * @throws ParseException
 	 * @throws NotFoundException
-	 * Gets the utilization summary for the given member id and subscriber id
 	 */
-	@RequestMapping(path = UIConstants.ACCUMS_UTILIZATION, method = RequestMethod.GET, produces = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
+	@RequestMapping(path = UIConstants.ACCUMS_UTILIZATION, method = RequestMethod.GET, produces = {
+			"application/json; charset=utf-8", "application/xml; charset=utf-8" })
 	@ResponseBody
-	public List<AccumsUtilizationDTO> fetchAccumsUtilizationByMemberIdAndSubscriberId(@RequestParam(value="memberId", required=false) String memberId, @RequestParam(value="subscriberId", required=false) String subscriberId) throws ParseException, NotFoundException{
-		//get the utilization summary for the given member and subscriber
-		List<AccumsUtilizationDTO> utilizationHistory = utilizationService.getAccumsUtilization(memberId, subscriberId);
-		//return the summary if it is not empty else return status 404
-		if(CollectionUtils.isNotEmpty(utilizationHistory))
+	public List<SpendingSummaryDTO> getSpendingSummary(
+			@RequestParam(value = "memberId", required = false) String memberId,
+			@RequestParam(value = "subscriberId", required = false) String subscriberId)
+			throws ParseException, NotFoundException {
+		// check for input validation if both parameters are empty return status 400 for Bad request
+		if (StringUtils.isEmpty(memberId) && StringUtils.isEmpty(subscriberId))
+			throw new ValidationException("Atleast one member or subscriber id is required");
+		// get the utilization summary for the given member and subscriber
+		List<SpendingSummaryDTO> utilizationHistory = utilizationService.getSpendingSummary(memberId, subscriberId);
+		// return the summary if it is not empty else return status 404
+		if (CollectionUtils.isNotEmpty(utilizationHistory))
 			return utilizationHistory;
 		else
 			throw new NotFoundException("Requested resource not found");
 	}
-	
+
 	/**
 	 * Fetches benefit balance details based on subscriber or member id
+	 * 
 	 * @param subscriberID
 	 * @param memberID
 	 * @return
 	 * @throws NotFoundException
 	 */
-	@RequestMapping(path = UIConstants.BENEFIT_BALANCE, method = RequestMethod.GET, produces = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
+	@RequestMapping(path = UIConstants.BENEFIT_BALANCE, method = RequestMethod.GET, produces = {
+			"application/json; charset=utf-8", "application/xml; charset=utf-8" })
 	public @ResponseBody List<LedgerSummaryDTO> getLedgerSummaryBalance(
-			@RequestParam(value="subscriberId", required=false) String subscriberID, @RequestParam(value="memberId", required=false) String memberID)
-			throws NotFoundException {
-		//check for input validation if both parameters are empty return status 400 for Bad request
-		if(StringUtils.isEmpty(subscriberID) && StringUtils.isEmpty(memberID))
+			@RequestParam(value = "subscriberId", required = false) String subscriberID,
+			@RequestParam(value = "memberId", required = false) String memberID) throws NotFoundException {
+		// check for input validation if both parameters are empty return status 400 for
+		// Bad request
+		if (StringUtils.isEmpty(subscriberID) && StringUtils.isEmpty(memberID))
 			throw new ValidationException("Atleast one member or subscriber id is required");
-		
-		//get benefit balance based by member or subscriber id 
-		List<LedgerSummaryDTO> utilizationHistory = accumulationSummaryService.getBenefitBalance(subscriberID, memberID);
-		//return the summary if it is not empty else return status 404
-		if(CollectionUtils.isNotEmpty(utilizationHistory))
+
+		// get benefit balance based by member or subscriber id
+		List<LedgerSummaryDTO> utilizationHistory = accumulationSummaryService.getBenefitBalance(subscriberID,
+				memberID);
+		// return the summary if it is not empty else return status 404
+		if (CollectionUtils.isNotEmpty(utilizationHistory))
 			return utilizationHistory;
 		else
 			throw new NotFoundException("Requested resource not found");
