@@ -23,7 +23,7 @@ public abstract class LedgerHeaderMapper implements IBaseMapper<LedgerHeaderDTO,
 	 */
 	public static final LedgerHeaderMapper INSTANCE = Mappers.getMapper(LedgerHeaderMapper.class);
 	
-	public abstract SpendingSummaryDTO convertEntityToAccumTypeSummaryDTO(LedgerHeaderEntity entity);
+	public abstract SpendingSummaryDTO convertEntityToSpendingSummaryDTO(LedgerHeaderEntity entity);
 	
-	public abstract List<SpendingSummaryDTO> convertEntitiesToAccumTypeSummaryDTOs(List<LedgerHeaderEntity> entities);
+	public abstract List<SpendingSummaryDTO> convertEntitiesToSpendingSummaryDTOs(List<LedgerHeaderEntity> entities);
 }

@@ -142,7 +142,7 @@ public class LedgerHeaderService extends CommonServiceImpl<LedgerHeaderDTO, Ledg
 		}
 		//if the ledgerHeader entity list is not empty convert them to DTOs
 		if(CollectionUtils.isNotEmpty(ledgerHeaderEntityList)) {
-			spendingSummaryDTOList = mapper.convertEntitiesToAccumTypeSummaryDTOs(ledgerHeaderEntityList);
+			spendingSummaryDTOList = mapper.convertEntitiesToSpendingSummaryDTOs(ledgerHeaderEntityList);
 		}
 		return spendingSummaryDTOList;
 	}
