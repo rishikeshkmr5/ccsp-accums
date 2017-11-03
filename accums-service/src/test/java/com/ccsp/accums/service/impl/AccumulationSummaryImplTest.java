@@ -176,18 +176,6 @@ public class AccumulationSummaryImplTest {
 	}
 	
 	/**
-	 * @throws NotFoundException
-	 */
-	@Test(expected = NotFoundException.class)
-	public void getBenefitBalanceThrowsException() throws NotFoundException {
-		String member = "M0001234";
-		String subscriber = "S0001234";
-		List<LedgerSummaryEntity> accumulationSummaries = new ArrayList<>();
-		when(ledgerSummaryRepository.findByMemberIdAndSubscriberId(member, subscriber)).thenReturn(accumulationSummaries);
-		serviceImpl.getBenefitBalance(subscriber, member);
-	}
-	
-	/**
 	 * Get benefit balance by member and subscriber id
 	 * @throws NoSuchFieldException
 	 * @throws SecurityException
@@ -210,12 +198,12 @@ public class AccumulationSummaryImplTest {
 	
 	/**
 	 * Get benefit balance by member id
-	 * @throws NoSuchFieldException
-	 * @throws SecurityException
-	 * @throws Exception
+	 * @throws Exception 
+	 * @throws SecurityException 
+	 * @throws NoSuchFieldException 
 	 */
 	@Test
-	public void getBenefitBalanceByMemberId() throws NoSuchFieldException, SecurityException, Exception {
+	public void getBenefitBalanceByMemberId() throws NoSuchFieldException, SecurityException, Exception{
 		String member = "M0001234";
 		String subscriber = null;
 		List<LedgerSummaryEntity> accumulationSummaries = new ArrayList<>();
@@ -231,9 +219,9 @@ public class AccumulationSummaryImplTest {
 	
 	/**
 	 * Get benefit balance by subscriber id
-	 * @throws NoSuchFieldException
-	 * @throws SecurityException
-	 * @throws Exception
+	 * @throws Exception 
+	 * @throws SecurityException 
+	 * @throws NoSuchFieldException 
 	 */
 	@Test
 	public void getBenefitBalanceBySubscriberId() throws NoSuchFieldException, SecurityException, Exception {

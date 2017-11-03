@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
@@ -209,27 +210,18 @@ public class LedgerSummaryService extends CommonServiceImpl<LedgerSummaryDTO, Le
 	 * @param subscriberID
 	 * @param memberID
 	 * @return
-	 * @throws NotFoundException 
 	 */
-	public List<LedgerSummaryDTO> getBenefitBalance(String subscriberID, String memberID) throws NotFoundException {
+	public List<LedgerSummaryDTO> getBenefitBalance(String subscriberID, String memberID){
 		List<LedgerSummaryEntity> ledgerSummaryEntities = null;
-		if (subscriberID != null && subscriberID.length() > 0) {
-			//If both member and subscriber id are present then response is combination of both
-			if (memberID != null && memberID.length() > 0)
-				ledgerSummaryEntities = ledgerSummaryRepository.findByMemberIdAndSubscriberId(memberID, subscriberID);
-			else
-				ledgerSummaryEntities = ledgerSummaryRepository.findBySubscriberId(subscriberID);
-			if (ledgerSummaryEntities.isEmpty())
-				throw new NotFoundException(
-						"There are no Summaries Balance Benefit available for subscriberid : " + subscriberID);
-		} else if (memberID != null && memberID.length() > 0) {
+		if (!StringUtils.isEmpty(memberID) && !StringUtils.isEmpty(subscriberID)) {
+			ledgerSummaryEntities = ledgerSummaryRepository.findByMemberIdAndSubscriberId(memberID, subscriberID);
+		} else if (!StringUtils.isEmpty(memberID)) {
 			ledgerSummaryEntities = ledgerSummaryRepository.findByMemberId(memberID);
-			if (ledgerSummaryEntities.isEmpty())
-				throw new NotFoundException(
-						"There are no Summaries Balance Benefit available for memberid : " + memberID);
 		} else {
-			throw new NotFoundException("There are no Summaries Balance Benefit available");
+			ledgerSummaryEntities = ledgerSummaryRepository.findBySubscriberId(subscriberID);
 		}
+		// if the ledger summary entity list is not empty then convert entity to dto and
+		// return dto list
 		return getMapper().convertToDTOList(ledgerSummaryEntities);
 	}
 }

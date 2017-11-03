@@ -64,14 +64,29 @@ public class AccumsUtilizationControllerTest {
 	 * @throws NotFoundException
 	 */
 	@Test
-	public void getLedgerSummaryBalanceBySubscriberOrMemberId() throws NotFoundException {
+	public void getLedgerSummaryBalance() throws NotFoundException {
 		List<LedgerSummaryDTO> accumulationSummaryDTOs = new ArrayList<>();
-		String member = "M0001234";
-		String subscriber = "S0001234";
-		when(accumulationSummaryService.getBenefitBalance(subscriber, member)).thenReturn(accumulationSummaryDTOs);
-		List<LedgerSummaryDTO> actual = controller.getLedgerSummaryBalanceBySubscriberOrMemberId(subscriber, member);
+		accumulationSummaryDTOs.add(new LedgerSummaryDTO());
+		String memberId = "M0001234";
+		String subscriberId = "S0001234";
+		when(accumulationSummaryService.getBenefitBalance(subscriberId, memberId)).thenReturn(accumulationSummaryDTOs);
+		List<LedgerSummaryDTO> actual = controller.getLedgerSummaryBalance(subscriberId, memberId);
 		Assert.assertEquals(actual, accumulationSummaryDTOs);
 
+	}
+	
+	/**
+	 * 
+	 * @throws ParseException
+	 * @throws NotFoundException
+	 */
+	@Test(expected = NotFoundException.class)
+	public void getLedgerSummaryBalanceException() throws ParseException, NotFoundException {
+		List<LedgerSummaryDTO> accumulationSummaryDTOs = new ArrayList<>();
+		String memberId = "A0001";
+		String subscriberId = "S0001";
+		when(accumulationSummaryService.getBenefitBalance(subscriberId, memberId)).thenReturn(accumulationSummaryDTOs);
+		List<LedgerSummaryDTO> actual = controller.getLedgerSummaryBalance(subscriberId, memberId);
 	}
 
 
