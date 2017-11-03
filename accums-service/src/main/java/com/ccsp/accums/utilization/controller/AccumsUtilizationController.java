@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ccsp.accums.ledger.summary.dto.LedgerSummaryDTO;
 import com.ccsp.accums.ledger.summary.service.LedgerSummaryService;
+import com.ccsp.accums.utilization.dto.AccumsConsumptionDTO;
 import com.ccsp.accums.utilization.dto.SpendingSummaryDTO;
 import com.ccsp.accums.utilization.service.AccumsUtilizationService;
 import com.ccsp.common.message.ResponseMessageConst;
@@ -99,6 +100,15 @@ public class AccumsUtilizationController {
 			return utilizationHistory;
 		else
 			throw new NotFoundException(ResponseMessageConst.NO_DATA_FOUND);
+	}
+	
+	@RequestMapping(path = UIConstants.ACCUMS_CONSUMPTION, method = RequestMethod.GET, produces = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
+	public @ResponseBody List<AccumsConsumptionDTO> getClaimDeatilsByMemberIdAndAccumType(@RequestParam(value="accumType", required=true) String accumType,
+																						  @RequestParam(value="memberId", required=true) String memberID, 
+																						  @RequestParam(value="subscriberId", required=false) String subscriberID)
+			throws NotFoundException {
+		return utilizationService.getAccumsConsumption(accumType, memberID, subscriberID);
+
 	}
 
 }

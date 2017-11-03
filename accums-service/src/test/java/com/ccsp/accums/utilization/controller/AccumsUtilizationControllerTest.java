@@ -15,6 +15,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ccsp.accums.ledger.summary.dto.LedgerSummaryDTO;
 import com.ccsp.accums.ledger.summary.service.LedgerSummaryService;
+import com.ccsp.accums.utilization.dto.AccumsConsumptionDTO;
 import com.ccsp.accums.utilization.dto.SpendingSummaryDTO;
 import com.ccsp.accums.utilization.service.AccumsUtilizationService;
 import javassist.NotFoundException;
@@ -91,6 +92,19 @@ public class AccumsUtilizationControllerTest {
 		when(accumulationSummaryService.getBenefitBalance(subscriberId, memberId)).thenReturn(accumulationSummaryDTOs);
 		controller.getBenefitBalance(subscriberId, memberId);
 	}
+	
+	@Test
+	public void getClaimDeatilsByMemberIdAndAccumType() throws NotFoundException {
+		List<AccumsConsumptionDTO> accumulationConsumptionDTOs = new ArrayList<>();
+		String member = "M0001234";
+		String subscriber = "S0001234";
+		String accumType = "Individual Ded";
+		when(utilizationService.getAccumsConsumption(accumType, member, subscriber)).thenReturn(accumulationConsumptionDTOs);
+		List<AccumsConsumptionDTO> actual = controller.getClaimDeatilsByMemberIdAndAccumType(accumType, member, subscriber);
+		Assert.assertEquals(actual, accumulationConsumptionDTOs);
+
+	}
+
 
 
 }

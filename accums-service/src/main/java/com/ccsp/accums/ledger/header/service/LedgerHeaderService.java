@@ -146,4 +146,30 @@ public class LedgerHeaderService extends CommonServiceImpl<LedgerHeaderDTO, Ledg
 		}
 		return spendingSummaryDTOList;
 	}
+	
+	public List<LedgerHeaderDTO> fetchByMemberIdAndSubscriberId(String memberId, String subscriberId){
+		List<LedgerHeaderDTO> ledgerHeaderDTOList = new ArrayList<>();
+		List<LedgerHeaderEntity> ledgerHeaderEntityList = new ArrayList<>();		
+		if(memberId!= null && subscriberId!=null) {
+			//retrieve the summary based on memberId and subscriberId
+			ledgerHeaderEntityList = ledgerHeaderRepository.findByMemberIdAndSubscriberId(memberId, subscriberId);
+		}else if(memberId != null) {
+			//retrieve the summary based on the memberId
+			ledgerHeaderEntityList = ledgerHeaderRepository.findByMemberId(memberId);
+		}else if(subscriberId != null) {
+			//retrieve the summary based on the summaryId
+			ledgerHeaderEntityList = ledgerHeaderRepository.findBySubscriberId(subscriberId);
+		}
+		//if the ledgerHeader entity list is not empty convert them to DTOs
+		if(CollectionUtils.isNotEmpty(ledgerHeaderEntityList)) {
+			ledgerHeaderDTOList = getMapper().convertToDTOList(ledgerHeaderEntityList);
+		}
+		return ledgerHeaderDTOList;
+	}
+	
+	public List<LedgerHeaderDTO> findByMemberId(String memberId){
+		List<LedgerHeaderEntity> ledgerHeaderEntities = ledgerHeaderRepository.findByMemberId(memberId);
+		List<LedgerHeaderDTO> ledgerHeaderDTOs = getMapper().convertToDTOList(ledgerHeaderEntities);
+		return ledgerHeaderDTOs;
+	}
 }

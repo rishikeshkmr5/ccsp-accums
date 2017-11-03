@@ -147,4 +147,10 @@ public class LedgerEntryService extends CommonServiceImpl<LedgerEntryDTO, Ledger
 		return dto;
 
 	}
+	
+	public List<LedgerEntryDTO> findByLedgerId(Long ledgerID){
+		List<LedgerEntryEntity> ledgerEntryEntities = ledgerEntryRepository.findByledgerHeaderID(ledgerID);
+		List<LedgerEntryDTO> ledgerEntryDTOs = getMapper().convertToDTOList(ledgerEntryEntities);
+		return ledgerEntryDTOs;
+	}
 }

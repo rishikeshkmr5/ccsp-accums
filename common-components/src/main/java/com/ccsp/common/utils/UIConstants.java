@@ -37,4 +37,5 @@ public class UIConstants {
 	public static final String CLAIIMS_ASSOCIATED_TO_ACCUMS = "/claimsRelatedToAccums/{accumType}";
 	public static final String BENEFIT_SPENDING = "/benefitspending";
 	public static final String ACCUMS_UTILIZATION = "/accums-utilization";
+	public static final String ACCUMS_CONSUMPTION = "/accumsconsumption";
 }
