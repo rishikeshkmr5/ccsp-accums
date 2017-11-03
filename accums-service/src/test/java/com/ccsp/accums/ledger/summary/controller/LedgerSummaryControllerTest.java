@@ -91,24 +91,4 @@ public class LedgerSummaryControllerTest {
 		ledgerSummaryController.createLedgerSummary(claimSummaryDTO);
 		verify(accumulationSummaryService, times(1)).create(claimSummaryDTO.getAccumulationSummaryList());
 	}
-
-	/**
-	 * Fetches benefit balance details based on subscriber or member id
-	 * 
-	 * @param subscriberID
-	 * @param memberID
-	 * @return
-	 * @throws NotFoundException
-	 */
-	@Test
-	public void getLedgerSummaryBalanceBySubscriberOrMemberId() throws NotFoundException {
-		List<LedgerSummaryDTO> accumulationSummaryDTOs = new ArrayList<>();
-		String member = "M0001234";
-		String subscriber = "S0001234";
-		when(accumulationSummaryService.getBenefitBalance(subscriber, member)).thenReturn(accumulationSummaryDTOs);
-		List<LedgerSummaryDTO> actual = ledgerSummaryController.getLedgerSummaryBalanceBySubscriberOrMemberId(subscriber, member);
-		Assert.assertEquals(actual, accumulationSummaryDTOs);
-
-	}
-
 }

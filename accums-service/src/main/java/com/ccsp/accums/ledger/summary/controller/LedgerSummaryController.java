@@ -73,20 +73,4 @@ public class LedgerSummaryController {
 		log.info("Update LedgerSummary details");
 		accumulationSummaryService.updateLedgerSummary(memberId);
 	}
-	
-	/**
-	 * Fetches benefit balance details based on subscriber or member id
-	 * @param subscriberID
-	 * @param memberID
-	 * @return
-	 * @throws NotFoundException
-	 */
-	@RequestMapping(path = UIConstants.BENEFIT_BALANCE, method = RequestMethod.GET, produces = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
-	public @ResponseBody List<LedgerSummaryDTO> getLedgerSummaryBalanceBySubscriberOrMemberId(
-			@RequestParam(value="subscriber", required=false) String subscriberID, @RequestParam(value="member", required=false) String memberID)
-			throws NotFoundException {
-		log.info("Benefit balance details based on subscriber or member id");
-		return accumulationSummaryService.getBenefitBalance(subscriberID, memberID);
-
-	}
 }

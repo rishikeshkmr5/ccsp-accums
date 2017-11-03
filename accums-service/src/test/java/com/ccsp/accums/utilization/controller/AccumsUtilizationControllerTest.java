@@ -13,6 +13,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.ccsp.accums.ledger.summary.dto.LedgerSummaryDTO;
+import com.ccsp.accums.ledger.summary.service.LedgerSummaryService;
 import com.ccsp.accums.utilization.dto.AccumsUtilizationDTO;
 import com.ccsp.accums.utilization.service.AccumsUtilizationService;
 
@@ -26,6 +28,9 @@ public class AccumsUtilizationControllerTest {
 	
 	@Mock
 	private AccumsUtilizationService utilizationService;
+	
+	@Mock
+	private LedgerSummaryService accumulationSummaryService;
 	
 	@Test
 	public void testFetchAccumsUtilizationByMemberIdAndSubscriberId() throws ParseException, NotFoundException {
@@ -49,4 +54,25 @@ public class AccumsUtilizationControllerTest {
 		when(utilizationService.getAccumsUtilization(memberId, subscriberId)).thenReturn(utilizationHistory);
 		List<AccumsUtilizationDTO> resultList = controller.fetchAccumsUtilizationByMemberIdAndSubscriberId(memberId, subscriberId);
 	}
+	
+	/**
+	 * Fetches benefit balance details based on subscriber or member id
+	 * 
+	 * @param subscriberID
+	 * @param memberID
+	 * @return
+	 * @throws NotFoundException
+	 */
+	@Test
+	public void getLedgerSummaryBalanceBySubscriberOrMemberId() throws NotFoundException {
+		List<LedgerSummaryDTO> accumulationSummaryDTOs = new ArrayList<>();
+		String member = "M0001234";
+		String subscriber = "S0001234";
+		when(accumulationSummaryService.getBenefitBalance(subscriber, member)).thenReturn(accumulationSummaryDTOs);
+		List<LedgerSummaryDTO> actual = controller.getLedgerSummaryBalanceBySubscriberOrMemberId(subscriber, member);
+		Assert.assertEquals(actual, accumulationSummaryDTOs);
+
+	}
+
+
 }
