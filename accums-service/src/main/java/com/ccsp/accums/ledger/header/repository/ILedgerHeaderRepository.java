@@ -12,13 +12,7 @@ import com.ccsp.accums.ledger.header.entity.LedgerHeaderEntity;
  *
  */
 public interface ILedgerHeaderRepository extends JpaRepository<LedgerHeaderEntity, Long>{
-	
-	/**
-	 * @param accumType
-	 * @return
-	 */
-	List<LedgerHeaderEntity> findByAccumType(String accumType);
-	
+		
 	/**
 	 * @param subscriberId
 	 * @return

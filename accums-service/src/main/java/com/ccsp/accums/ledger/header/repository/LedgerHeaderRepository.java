@@ -23,12 +23,12 @@ public abstract class LedgerHeaderRepository implements ILedgerHeaderRepository 
 	/* (non-Javadoc)
 	 * @see com.ccsp.accums.ledger.header.repository.ILedgerHeaderRepository#findByAccumType(java.lang.String)
 	 */
-	@Override
+	/*@Override
 	@SuppressWarnings("unchecked")
 	public List<LedgerHeaderEntity> findByAccumType(String accumType){
 		Query query = entityManager.createNamedQuery("findMappings",LedgerHeaderEntity.class);
 		query.setParameter("accumType", accumType);		
 		List<LedgerHeaderEntity> result = query.getResultList();
 		return result;
-	}	
+	}	*/
 }

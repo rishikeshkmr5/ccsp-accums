@@ -39,8 +39,8 @@ public class ClaimDetailServiceImpl extends CommonServiceImpl<ClaimDetailsForAcc
 		ClaimDetailsForAccumTypeDTO claimDetailForAccumTypeDTO = new ClaimDetailsForAccumTypeDTO();
 		List<ClaimDetailsForAccumTypeDTO> claimDetailsForAccumTypeDTO = new ArrayList<ClaimDetailsForAccumTypeDTO>();
 		//Retrieve the LedgerHeader details based on the accumType
-		List<LedgerHeaderEntity> accumHeaderList =  ledgerHeaderRepository.findByAccumType(accumType);
-		if(accumHeaderList.isEmpty()) {
+		//List<LedgerHeaderEntity> accumHeaderList =  ledgerHeaderRepository.findByAccumType(accumType);
+		/*if(accumHeaderList.isEmpty()) {
 			throw new NotFoundException(
 					"There are no Claims available for accumType : " + accumType);
 		}
@@ -49,7 +49,7 @@ public class ClaimDetailServiceImpl extends CommonServiceImpl<ClaimDetailsForAcc
 			claimDetailForAccumTypeDTO =getMapper().convertToDTO(ledgerHeaderEntity); 
 			claimDetailForAccumTypeDTO.setRunningBalance(0.0);
 			claimDetailsForAccumTypeDTO.add(claimDetailForAccumTypeDTO);
-		}
+		}*/
 		
 		
 		return  claimDetailsForAccumTypeDTO;
