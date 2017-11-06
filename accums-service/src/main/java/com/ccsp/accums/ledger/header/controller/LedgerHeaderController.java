@@ -147,7 +147,6 @@ public class LedgerHeaderController {
 				header.setMemberId(column[11]);
 				header.setSubscriberId(column[12]);
 				header.setUnitOfMeasure(column[13]);
-				header.setAccumType(column[14]);
 				header.setTransactionCode(column[15]);
 				header.setMaxAmount(Double.parseDouble(column[16]));
 				header.setMaxVisit(Integer.parseInt(column[17]));

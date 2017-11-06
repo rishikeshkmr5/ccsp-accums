@@ -75,9 +75,6 @@ public class LedgerHeaderEntity  implements java.io.Serializable {
 	@Column(name = "UOM_NM", nullable = true)
 	private String unitOfMeasure;
 	
-	@Column(name = "ACCUM_TYP_NM", nullable = true)
-	private String accumType;
-
 	/**
 	 * Default constructor.
 	 */
@@ -276,20 +273,6 @@ public class LedgerHeaderEntity  implements java.io.Serializable {
 	 */
 	public void setUnitOfMeasure(String unitOfMeasure) {
 		this.unitOfMeasure = unitOfMeasure;
-	}
-
-	/**
-	 * @return the accumType
-	 */
-	public String getAccumType() {
-		return accumType;
-	}
-
-	/**
-	 * @param accumType the accumType to set
-	 */
-	public void setAccumType(String accumType) {
-		this.accumType = accumType;
 	}
 
 	/**

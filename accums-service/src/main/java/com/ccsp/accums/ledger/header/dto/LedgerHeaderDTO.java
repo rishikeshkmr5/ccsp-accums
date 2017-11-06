@@ -79,9 +79,6 @@ public class LedgerHeaderDTO  implements ICommonDTO {
 	@XmlElement(name="unitOfMeasure")  
 	private String unitOfMeasure;	
 	
-	@XmlElement(name="accumType")  
-	private String accumType;
-	
 	@XmlElement(name="endDate")
 	@JsonFormat(pattern = "MM/dd/yyyy")
 	private Date endDate;
@@ -284,20 +281,6 @@ public class LedgerHeaderDTO  implements ICommonDTO {
 	 */
 	public void setUnitOfMeasure(String unitOfMeasure) {
 		this.unitOfMeasure = unitOfMeasure;
-	}
-
-	/**
-	 * @return the accumType
-	 */
-	public String getAccumType() {
-		return accumType;
-	}
-
-	/**
-	 * @param accumType the accumType to set
-	 */
-	public void setAccumType(String accumType) {
-		this.accumType = accumType;
 	}
 
 	/**
