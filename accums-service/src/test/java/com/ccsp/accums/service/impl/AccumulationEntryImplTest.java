@@ -23,6 +23,7 @@ import com.ccsp.accums.ledger.entry.repository.LedgerEntryRepository;
 import com.ccsp.accums.ledger.entry.service.LedgerEntryService;
 import com.ccsp.accums.ledger.header.entity.LedgerHeaderEntity;
 import com.ccsp.accums.ledger.header.repository.ILedgerHeaderRepository;
+import com.ccsp.accums.utilization.dto.AccumsConsumptionDTO;
 
 import javassist.NotFoundException;
 
@@ -136,6 +137,43 @@ public class AccumulationEntryImplTest {
 		serviceImpl.readAll();
 	}
 
+	@Test
+	public void testGetAccumConsumption() throws NoSuchFieldException, SecurityException, Exception {
+		setFinalStatic(LedgerEntryMapper.class.getField("INSTANCE"), ledgerEntryMapper);
+		String memberId = "A123";
+		String subscriberId = "S123";
+		String accumType = "Family Ded";
+		List<LedgerEntryEntity> ledgerEntryEntities = new ArrayList<>();
+		List<AccumsConsumptionDTO>  accumsConsumptionList = new ArrayList<>();
+		AccumsConsumptionDTO dto = new AccumsConsumptionDTO();
+		accumsConsumptionList.add(dto);
+		when(ledgerEntryRepository.findLedgerEntryBySubscriberIdAndMemberIdAndAccumType(memberId, accumType, subscriberId)).thenReturn(ledgerEntryEntities);
+		when(ledgerEntryMapper.toAccumsConsumptionDTOList(ledgerEntryEntities)).thenReturn(accumsConsumptionList);
+		List<AccumsConsumptionDTO>  resultList = serviceImpl.getAccumConsumption(memberId, subscriberId, accumType);
+		Assert.assertEquals(resultList.get(0), dto);
+	}
+	
+	/**
+	 * @throws NoSuchFieldException
+	 * @throws SecurityException
+	 * @throws Exception
+	 */
+	@Test
+	public void testGetAccumConsumptionForNullSubscriberId() throws NoSuchFieldException, SecurityException, Exception {
+		setFinalStatic(LedgerEntryMapper.class.getField("INSTANCE"), ledgerEntryMapper);
+		String memberId = "A123";
+		String subscriberId = null;
+		String accumType = "Family Ded";
+		List<LedgerEntryEntity> ledgerEntryEntities = new ArrayList<>();
+		List<AccumsConsumptionDTO>  accumsConsumptionList = new ArrayList<>();
+		AccumsConsumptionDTO dto = new AccumsConsumptionDTO();
+		accumsConsumptionList.add(dto);
+		when(ledgerEntryRepository.findLedgerEntryByMemberIdAndAccumType(memberId, accumType)).thenReturn(ledgerEntryEntities);
+		when(ledgerEntryMapper.toAccumsConsumptionDTOList(ledgerEntryEntities)).thenReturn(accumsConsumptionList);
+		List<AccumsConsumptionDTO>  resultList = serviceImpl.getAccumConsumption(memberId, subscriberId, accumType);
+		Assert.assertEquals(resultList.get(0), dto);
+	}
+	
 	/**
 	 * @param field
 	 * @param newValue

@@ -14,6 +14,7 @@ import com.ccsp.accums.ledger.entry.mapper.LedgerEntryMapper;
 import com.ccsp.accums.ledger.entry.repository.LedgerEntryRepository;
 import com.ccsp.accums.ledger.header.entity.LedgerHeaderEntity;
 import com.ccsp.accums.ledger.header.repository.ILedgerHeaderRepository;
+import com.ccsp.accums.utilization.dto.AccumsConsumptionDTO;
 import com.ccsp.common.mapper.IBaseMapper;
 import com.ccsp.common.service.impl.CommonServiceImpl;
 
@@ -24,6 +25,7 @@ public class LedgerEntryService extends CommonServiceImpl<LedgerEntryDTO, Ledger
 	 */
 	@Resource
 	private LedgerEntryRepository ledgerEntryRepository;
+	
 	@Resource
 	private ILedgerHeaderRepository ledgerHeaderRepository;
 
@@ -148,9 +150,34 @@ public class LedgerEntryService extends CommonServiceImpl<LedgerEntryDTO, Ledger
 
 	}
 	
+	/**
+	 * @param ledgerID
+	 * @return
+	 */
 	public List<LedgerEntryDTO> findByLedgerId(Long ledgerID){
 		List<LedgerEntryEntity> ledgerEntryEntities = ledgerEntryRepository.findByledgerHeaderID(ledgerID);
 		List<LedgerEntryDTO> ledgerEntryDTOs = getMapper().convertToDTOList(ledgerEntryEntities);
 		return ledgerEntryDTOs;
+	}
+	
+	/**
+	 * Gets the claims which has driven the accums consumption
+	 * @param memberId
+	 * @param subscriberId
+	 * @param accumType
+	 * @return
+	 */
+	public List<AccumsConsumptionDTO> getAccumConsumption(String memberId, String subscriberId, String accumType){
+		List<LedgerEntryEntity> ledgerEntryEntities = null;
+		List<AccumsConsumptionDTO>  accumsConsumptionList = null;
+		//If subscriber id is not null then exclude it from the where clause to get the claim details associated with the member id and the accum type
+		if(subscriberId != null)
+			ledgerEntryEntities = ledgerEntryRepository.findLedgerEntryBySubscriberIdAndMemberIdAndAccumType(memberId, accumType, subscriberId);
+		else
+			ledgerEntryEntities = ledgerEntryRepository.findLedgerEntryByMemberIdAndAccumType(memberId, accumType);	
+		
+		//Custom mapper to convert the LedgerEntry entity list into the AccumsConsumption dto
+		accumsConsumptionList = ((LedgerEntryMapper)getMapper()).toAccumsConsumptionDTOList(ledgerEntryEntities);		
+		return accumsConsumptionList;		
 	}
 }

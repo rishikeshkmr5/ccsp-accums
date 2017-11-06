@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.boot.autoconfigure.ldap.embedded.EmbeddedLdapProperties.Validation;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ccsp.accums.ledger.summary.dto.LedgerSummaryDTO;
@@ -19,7 +20,7 @@ import com.ccsp.accums.utilization.dto.AccumsConsumptionDTO;
 import com.ccsp.accums.utilization.dto.SpendingSummaryDTO;
 import com.ccsp.accums.utilization.service.AccumsUtilizationService;
 import javassist.NotFoundException;
-
+import javax.validation.ValidationException;
 /**
  * @author nnarayanaperumaln
  *
@@ -93,18 +94,42 @@ public class AccumsUtilizationControllerTest {
 		controller.getBenefitBalance(subscriberId, memberId);
 	}
 	
+	/**
+	 * @throws NotFoundException
+	 */
 	@Test
-	public void getClaimDeatilsByMemberIdAndAccumType() throws NotFoundException {
+	public void testGetClaimDetailsByMemberIdAndAccumType() throws NotFoundException {
 		List<AccumsConsumptionDTO> accumulationConsumptionDTOs = new ArrayList<>();
+		AccumsConsumptionDTO dto = new AccumsConsumptionDTO();
+		accumulationConsumptionDTOs.add(dto);
 		String member = "M0001234";
-		String subscriber = "S0001234";
+		String subscriber = null;
 		String accumType = "Individual Ded";
 		when(utilizationService.getAccumsConsumption(accumType, member, subscriber)).thenReturn(accumulationConsumptionDTOs);
-		List<AccumsConsumptionDTO> actual = controller.getClaimDeatilsByMemberIdAndAccumType(accumType, member, subscriber);
-		Assert.assertEquals(actual, accumulationConsumptionDTOs);
+		List<AccumsConsumptionDTO> actual = controller.getClaimDetailsByMemberIdAndAccumType(accumType, member, subscriber);
+		Assert.assertEquals(actual.get(0), accumulationConsumptionDTOs.get(0));
 
 	}
-
-
-
+	
+	/**
+	 * @throws NotFoundException
+	 */
+	@Test(expected = ValidationException.class)
+	public void testGetClaimDetailsValidationException() throws NotFoundException {
+		String member = null;
+		String subscriber = null;
+		String accumType = "Individual Ded";
+		controller.getClaimDetailsByMemberIdAndAccumType(accumType, member, subscriber);
+	}
+	
+	/**
+	 * @throws NotFoundException
+	 */
+	@Test(expected = NotFoundException.class)
+	public void testGetClaimDetailsNotFoundException() throws NotFoundException {
+		String member = "A12345";
+		String subscriber = null;
+		String accumType = "Individual Ded";
+		controller.getClaimDetailsByMemberIdAndAccumType(accumType, member, subscriber);
+	}
 }

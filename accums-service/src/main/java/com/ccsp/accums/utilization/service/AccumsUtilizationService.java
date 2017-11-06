@@ -52,36 +52,15 @@ public class AccumsUtilizationService{
 		return spendingSummaryDTOList;		
 	}
 	
-	public List<AccumsConsumptionDTO> getAccumsConsumption(String accumType, String memberID, String subscriberID) {
-		List<AccumsConsumptionDTO> accumsConsumptionDTOList = new ArrayList<>();
-		List<LedgerHeaderDTO> ledgerHeaderDTOList = null;
-		if(subscriberID != null)
-			ledgerHeaderDTOList	= ledgerHeaderService.fetchByMemberIdAndSubscriberId(memberID, subscriberID);
-		else
-			ledgerHeaderDTOList = ledgerHeaderService.findByMemberId(memberID);
-		if(ledgerHeaderDTOList != null) {
-				for(LedgerHeaderDTO ledgerHeaderDTO:ledgerHeaderDTOList) {
-					
-					List<LedgerEntryDTO> ledgerEntryList = ledgerEntryService.findByLedgerId(ledgerHeaderDTO.getId());
-						for(LedgerEntryDTO LedgerEntryDTO:ledgerEntryList) {
-							if(LedgerEntryDTO.getAccumType().equals(accumType)){
-								AccumsConsumptionDTO accumsConsumptionDTO = new AccumsConsumptionDTO();
-								accumsConsumptionDTO.setAmount(ledgerHeaderDTO.getAllowedAmount());
-								accumsConsumptionDTO.setDcn(ledgerHeaderDTO.getDcn());
-								accumsConsumptionDTO.setNetworkCode(ledgerHeaderDTO.getNetworkCode());
-								accumsConsumptionDTO.setProcessedDate(ledgerHeaderDTO.getProcessedDate());
-								accumsConsumptionDTO.setRunningTotal(LedgerEntryDTO.getAmount());
-								accumsConsumptionDTO.setServiceDate(ledgerHeaderDTO.getServiceDate());
-								accumsConsumptionDTOList.add(accumsConsumptionDTO);
-							}
-						}
-					
-						
-					}
-			    }
-		
-		
-		return accumsConsumptionDTOList;
-	}
-	
+	/**
+	 * Method to get claim details for the member id and the accum type
+	 * @param accumType
+	 * @param memberId
+	 * @param subscriberId
+	 * @return
+	 */
+	public List<AccumsConsumptionDTO> getAccumsConsumption(String accumType, String memberId, String subscriberId) {
+		//Orchestrate the request to the LedgerEntry service
+		return ledgerEntryService.getAccumConsumption(memberId, subscriberId, accumType);		
+	}	
 }

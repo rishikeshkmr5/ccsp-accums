@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.xml.bind.annotation.XmlElement;
 
 import com.ccsp.common.dto.ICommonDTO;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
  * @author nnarayanaperumaln
@@ -22,17 +23,28 @@ public class AccumsConsumptionDTO implements ICommonDTO{
 	@XmlElement(name="network")
 	private String networkCode;
 	
+	@JsonFormat(pattern = "MM/dd/yyyy")
 	@XmlElement(name="serviceDate")
 	private Date serviceDate;
 	
+	@JsonFormat(pattern = "MM/dd/yyyy")
 	@XmlElement(name="processedDate")
 	private Date processedDate;
 	
 	@XmlElement(name="amount")
-	private Double amount;
+	private Double allowedAmount;
 	
 	@XmlElement(name="runningTotal")
-	private Double runningTotal;
+	private Double amount;
+	
+	@XmlElement(name="member")
+	private String memberId;
+	
+	@XmlElement(name="subscriber")
+	private String subscriberId;
+	
+	@XmlElement(name="detail")
+	private String accumType;
 	
 	/**
 	 * @return
@@ -73,18 +85,6 @@ public class AccumsConsumptionDTO implements ICommonDTO{
 	/**
 	 * @return
 	 */
-	public Double getRunningTotal() {
-		return runningTotal;
-	}
-	/**
-	 * @param runningTotal
-	 */
-	public void setRunningTotal(Double runningTotal) {
-		this.runningTotal = runningTotal;
-	}
-	/**
-	 * @return
-	 */
 	public String getNetworkCode() {
 		return networkCode;
 	}
@@ -105,5 +105,53 @@ public class AccumsConsumptionDTO implements ICommonDTO{
 	 */
 	public void setDcn(String dcn) {
 		this.dcn = dcn;
+	}
+	/**
+	 * @return
+	 */
+	public String getMemberId() {
+		return memberId;
+	}
+	/**
+	 * @param memberId
+	 */
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+	/**
+	 * @return
+	 */
+	public String getSubscriberId() {
+		return subscriberId;
+	}
+	/**
+	 * @param subscriberId
+	 */
+	public void setSubscriberId(String subscriberId) {
+		this.subscriberId = subscriberId;
+	}
+	/**
+	 * @return
+	 */
+	public String getAccumType() {
+		return accumType;
+	}
+	/**
+	 * @param accumType
+	 */
+	public void setAccumType(String accumType) {
+		this.accumType = accumType;
+	}
+	/**
+	 * @return
+	 */
+	public Double getAllowedAmount() {
+		return allowedAmount;
+	}
+	/**
+	 * @param allowedAmount
+	 */
+	public void setAllowedAmount(Double allowedAmount) {
+		this.allowedAmount = allowedAmount;
 	}	
 }

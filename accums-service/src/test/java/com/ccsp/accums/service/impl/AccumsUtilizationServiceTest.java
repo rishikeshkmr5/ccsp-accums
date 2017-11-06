@@ -12,7 +12,10 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.ccsp.accums.ledger.entry.service.LedgerEntryService;
 import com.ccsp.accums.ledger.header.service.LedgerHeaderService;
+import com.ccsp.accums.utilization.dto.AccumsConsumptionDTO;
 import com.ccsp.accums.utilization.dto.SpendingSummaryDTO;
 import com.ccsp.accums.utilization.service.AccumsUtilizationService;
 
@@ -24,6 +27,9 @@ public class AccumsUtilizationServiceTest {
 	
 	@Mock
 	private LedgerHeaderService ledgerHeaderService;
+	
+	@Mock
+	private LedgerEntryService ledgerEntryService;
 	
 	@Test
 	public void testGetAccumsUtilization() throws ParseException {
@@ -45,5 +51,18 @@ public class AccumsUtilizationServiceTest {
 			Assert.assertEquals(ledgerHeaderDTO.getNetworkCode(), result.getNetworkCode());
 			Assert.assertEquals(ledgerHeaderDTO.getServiceName(), result.getServiceName());
 		}
+	}
+	
+	@Test
+	public void testGetAccumsConsumptionTest(){
+		String memberId = "1233";
+		String subscriberId = "A1233";
+		String accumType = "FamilyDed";
+		List<AccumsConsumptionDTO> accumsConsumptionDTOList = new ArrayList<>();
+		AccumsConsumptionDTO dto = new AccumsConsumptionDTO();
+		accumsConsumptionDTOList.add(dto);
+		when(ledgerEntryService.getAccumConsumption(memberId, subscriberId, accumType)).thenReturn(accumsConsumptionDTOList);
+		List<AccumsConsumptionDTO> resultList = accumsUtilizationService.getAccumsConsumption(accumType, memberId, subscriberId);
+		Assert.assertEquals(dto, resultList.get(0));
 	}
 }
