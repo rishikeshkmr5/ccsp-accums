@@ -18,7 +18,9 @@ import com.ccsp.accums.ledger.header.entity.LedgerHeaderEntity;
 import com.ccsp.accums.ledger.header.mapper.LedgerHeaderMapper;
 import com.ccsp.accums.ledger.header.repository.ILedgerHeaderRepository;
 import com.ccsp.accums.ledger.summary.service.LedgerSummaryService;
+import com.ccsp.accums.utilization.dto.ClaimDetailDTO;
 import com.ccsp.accums.utilization.dto.SpendingSummaryDTO;
+import com.ccsp.accums.utilization.mapper.ClaimMapper;
 import com.ccsp.common.mapper.IBaseMapper;
 import com.ccsp.common.service.impl.CommonServiceImpl;
 
@@ -171,5 +173,20 @@ public class LedgerHeaderService extends CommonServiceImpl<LedgerHeaderDTO, Ledg
 		List<LedgerHeaderEntity> ledgerHeaderEntities = ledgerHeaderRepository.findByMemberId(memberId);
 		List<LedgerHeaderDTO> ledgerHeaderDTOs = getMapper().convertToDTOList(ledgerHeaderEntities);
 		return ledgerHeaderDTOs;
+	}
+	
+	/**
+	 * Fetches the claim based on claim Id
+	 * @param claimID
+	 * @return
+	 */
+	public ClaimDetailDTO getClaim(String claimID) {
+		LedgerHeaderDTO ledgerHeaderDTO = null;		
+		ClaimDetailDTO claimDetailDTO = null;
+		//retreives claim details based on claim id
+		LedgerHeaderEntity ledgerHeaderEntity =	ledgerHeaderRepository.findBydcn(claimID);
+		ledgerHeaderDTO = getMapper().convertToDTO(ledgerHeaderEntity);
+		claimDetailDTO = ClaimMapper.INSTANCE.convertToDTO(ledgerHeaderDTO);
+		return claimDetailDTO;
 	}
 }

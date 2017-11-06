@@ -13,6 +13,7 @@ import com.ccsp.accums.ledger.entry.service.LedgerEntryService;
 import com.ccsp.accums.ledger.header.dto.LedgerHeaderDTO;
 import com.ccsp.accums.ledger.header.service.LedgerHeaderService;
 import com.ccsp.accums.utilization.dto.AccumsConsumptionDTO;
+import com.ccsp.accums.utilization.dto.ClaimDetailDTO;
 import com.ccsp.accums.utilization.dto.SpendingSummaryDTO;
 import com.ccsp.common.utils.DateUtils;
 
@@ -63,4 +64,17 @@ public class AccumsUtilizationService{
 		//Orchestrate the request to the LedgerEntry service
 		return ledgerEntryService.getAccumConsumption(memberId, subscriberId, accumType);		
 	}	
+	
+	/**
+	 * Method to get claim details based on claim Id
+	 * @param claimID
+	 * @return
+	 */
+	public ClaimDetailDTO getClaimDetail(String claimID) {
+		ClaimDetailDTO claimDetailDTO = new ClaimDetailDTO();
+		// fetches claim details based on claim id
+		claimDetailDTO  = ledgerHeaderService.getClaim(claimID);
+	    claimDetailDTO.setProvider("Dr. Phill");
+	return claimDetailDTO;	
+	}
 }

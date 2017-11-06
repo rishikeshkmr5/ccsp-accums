@@ -57,6 +57,6 @@ public class UIConstants {
 	public static final String API_ACCUMS_UTILIZATION_SPENDING_SUM="Inquire Accums Spending Summary";
 	public static final String API_ACCUMS_UTILIZATION_BENEFIT_BAL="Inquire Accums Benefit Balance";
 	public static final String API_ACCUMS_UTILIZATION_CONSUMPTION="Inquire Accums Consumption";
-	
+	public static final String CLAIM_DETAIL = "/claimDetail";	
 	
 }

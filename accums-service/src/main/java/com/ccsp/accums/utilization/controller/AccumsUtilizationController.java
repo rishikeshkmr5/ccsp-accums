@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ccsp.accums.ledger.summary.dto.LedgerSummaryDTO;
 import com.ccsp.accums.ledger.summary.service.LedgerSummaryService;
 import com.ccsp.accums.utilization.dto.AccumsConsumptionDTO;
+import com.ccsp.accums.utilization.dto.ClaimDetailDTO;
 import com.ccsp.accums.utilization.dto.SpendingSummaryDTO;
 import com.ccsp.accums.utilization.service.AccumsUtilizationService;
 import com.ccsp.common.message.ResponseMessageConst;
@@ -134,5 +135,35 @@ public class AccumsUtilizationController {
 			throw new NotFoundException(ResponseMessageConst.NO_DATA_FOUND);
 
 	}
+	
+	
+	/**
+	 * Fetches claim details based on claim id
+	 * 
+	 * @param claim id
+	 * @return
+	 * @throws NotFoundException
+	 */
+	
+	
+	@RequestMapping(path = UIConstants.CLAIM_DETAIL, method = RequestMethod.GET, produces = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
+	public @ResponseBody ClaimDetailDTO getClaimDeatilsByClaimId(@RequestParam(value="claimID", required=true) String claimID)
+			throws NotFoundException {
+		
+		// check for input validation if  parameter is empty return status 400 for
+		// Bad request
+		if (StringUtils.isEmpty(claimID))
+			throw new ValidationException(ResponseMessageConst.NO_SEARCH_CRITERIA);
+
+		//  gets claim details based on claim id
+		ClaimDetailDTO claimDetailDTO = utilizationService.getClaimDetail(claimID);
+		
+		if(claimDetailDTO != null)
+			return claimDetailDTO;
+		else
+			throw new NotFoundException(ResponseMessageConst.NO_DATA_FOUND);		
+
+	}
+	
 
 }
