@@ -35,6 +35,8 @@ import com.ccsp.common.utils.UIConstants;
 import com.ccsp.common.validator.Validator;
 import com.sun.xml.xsom.impl.scd.ParseException;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import javassist.NotFoundException;
 
 /**
@@ -44,6 +46,7 @@ import javassist.NotFoundException;
  *
  */
 @RestController
+@Api(description = UIConstants.API_LEDGER_HEADER_DES, produces = "application/json", tags = {UIConstants.API_LEDGER_HEADER_TAG})
 public class LedgerHeaderController {
 	/**
 	 * Logger for LedgerHeaderController
@@ -64,6 +67,7 @@ public class LedgerHeaderController {
 	 * @return LedgerHeaders
 	 * @throws NotFoundException
 	 */
+	@ApiOperation(value="Ledger Header Get", tags = { UIConstants.API_LEDGER_HEADER_TAG }, hidden=true)
 	@RequestMapping(path = UIConstants.LEDGER_HEADER, method = RequestMethod.GET, produces = {
 			"application/json; charset=utf-8", "application/xml; charset=utf-8" })
 	@ResponseBody
@@ -74,10 +78,10 @@ public class LedgerHeaderController {
 
 	/**
 	 * Checks for the mandatory data and passes accum utilization details to service for persisting in database.
-	 * 
 	 * @param accumUtilization {@link AccumUtilization}
 	 * @return {@link LedgerHeaderDTO}
 	 */
+	@ApiOperation(value="Load Accums", tags = { UIConstants.API_LEDGER_HEADER_TAG })
 	@RequestMapping(path = UIConstants.LEDGER_HEADER, method = RequestMethod.POST, consumes = {
 			"application/json; charset=utf-8", "application/xml; charset=utf-8" })
 	@ResponseBody
@@ -97,6 +101,7 @@ public class LedgerHeaderController {
 	 * @throws java.text.ParseException
 	 * @throws IOException 
 	 */
+	@ApiOperation(value=UIConstants.API_LEDGER_HEADER_CREATE_CSV, tags = { UIConstants.API_LEDGER_HEADER_TAG })
 	@RequestMapping(value = UIConstants.LEDGER_HEADER_CSV, headers = ("content-type=multipart/*"), method = RequestMethod.POST)
 	public @ResponseBody void createLedgerHeader(@RequestParam("file") MultipartFile multipart)
 			throws ParseException, java.text.ParseException, IOException {
@@ -182,6 +187,7 @@ public class LedgerHeaderController {
 		}
 	}
 
+	@ApiOperation(value="Ledger Header file upload", tags = { UIConstants.API_LEDGER_HEADER_TAG } , hidden=true)
 	@RequestMapping(value = "/fileupload", headers = ("content-type=multipart/*"), method = RequestMethod.POST)
 	public @ResponseBody void upload(@RequestParam("file") MultipartFile inputFile) {
 		LedgerHeaderDTO header = new LedgerHeaderDTO();
@@ -204,6 +210,7 @@ public class LedgerHeaderController {
 		accumulationHeaderService.create(header);
 	}
 
+	@ApiOperation(value="Ledger Header Update", tags = { UIConstants.API_LEDGER_HEADER_TAG } , hidden=true)
 	@RequestMapping(path = UIConstants.LEDGER_HEADER, method = RequestMethod.PUT, consumes = {
 			"application/json; charset=utf-8", "application/xml; charset=utf-8" })
 	@ResponseBody

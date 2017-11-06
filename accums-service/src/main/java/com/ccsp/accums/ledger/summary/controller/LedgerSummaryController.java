@@ -21,8 +21,11 @@ import com.ccsp.accums.ledger.summary.service.LedgerSummaryService;
 import com.ccsp.common.utils.UIConstants;
 import com.ccsp.common.validator.Validator;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import javassist.NotFoundException;
 
+@Api(description = "Ledger Summary Controller", produces = "application/json", tags = {"LedgerSummaryController"}, hidden=true)
 @RestController
 public class LedgerSummaryController {
 
@@ -42,6 +45,7 @@ public class LedgerSummaryController {
 	 * @return
 	 * @throws NotFoundException
 	 */
+	@ApiOperation(value="getAccumulationSummary", tags = { "LedgerSummaryController" }, hidden=true)
 	@RequestMapping(path = UIConstants.LEDGER_SUMMARY, method = RequestMethod.GET, produces = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
 	@ResponseBody
 	public List<LedgerSummaryDTO> getAccumulationSummary() throws NotFoundException {
@@ -54,6 +58,7 @@ public class LedgerSummaryController {
 	 * 
 	 * @param ledgerSummaryClaimDTO
 	 */
+	@ApiOperation(value="createLedgerSummary", tags = { "LedgerSummaryController" }, hidden=true)
 	@RequestMapping(path = UIConstants.LEDGER_SUMMARY, method = RequestMethod.POST, consumes = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
 	@ResponseBody
 	public List<LedgerSummaryDTO> createLedgerSummary(@RequestBody LedgerSummaryClaimDTO ledgerSummaryClaimDTO) throws ValidationException{
@@ -67,10 +72,28 @@ public class LedgerSummaryController {
 	/**
 	 * @param subscriberId
 	 */
+	@ApiOperation(value="updateLedgerSummary", tags = { "LedgerSummaryController" }, hidden=true)
 	@RequestMapping(path = UIConstants.LEDGER_SUMMARY_UPDATE, method = RequestMethod.PUT, produces = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
 	@ResponseBody
 	public void updateLedgerSummary(@PathVariable("memberId")String memberId) {
 		log.info("Update LedgerSummary details");
 		accumulationSummaryService.updateLedgerSummary(memberId);
+	}
+	
+	/**
+	 * Fetches benefit balance details based on subscriber or member id
+	 * @param subscriberID
+	 * @param memberID
+	 * @return
+	 * @throws NotFoundException
+	 */
+	@ApiOperation(value="getLedgerSummaryBalanceBySubscriberOrMemberId", tags = { "LedgerSummaryController" }, hidden=true)
+	@RequestMapping(path = UIConstants.BENEFIT_BALANCE, method = RequestMethod.GET, produces = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
+	public @ResponseBody List<LedgerSummaryDTO> getLedgerSummaryBalanceBySubscriberOrMemberId(
+			@RequestParam(value="subscriber", required=false) String subscriberID, @RequestParam(value="member", required=false) String memberID)
+			throws NotFoundException {
+		log.info("Benefit balance details based on subscriber or member id");
+		return accumulationSummaryService.getBenefitBalance(subscriberID, memberID);
+
 	}
 }

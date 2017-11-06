@@ -19,8 +19,11 @@ import com.ccsp.accums.ledger.entry.service.LedgerEntryService;
 import com.ccsp.common.utils.UIConstants;
 import com.ccsp.common.validator.Validator;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import javassist.NotFoundException;
 
+@Api(description = "Ledger Entry Controller", produces = "application/json", tags = {"LedgerEntryController"}, hidden=true)
 @RestController
 public class LedgerEntryController {
 
@@ -39,6 +42,7 @@ public class LedgerEntryController {
 	 * 
 	 * @param ledgerEntryDTO
 	 */
+	@ApiOperation(value="createLedgerEntry", tags = { "LedgerEntryController" }, hidden=true)
 	@RequestMapping(path = UIConstants.LEDGER_ENTRY, method = RequestMethod.POST, consumes = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
 	@ResponseBody
 	public List<LedgerEntryDTO> createLedgerEntry(@RequestBody LedgerEntryClaimDTO claimAccumEntry) throws ValidationException{
@@ -56,6 +60,7 @@ public class LedgerEntryController {
 	 * @return LedgerEntries
 	 * @throws NotFoundException
 	 */
+	@ApiOperation(value="getLedgerEntry", tags = { "LedgerEntryController" }, hidden=true)
 	@RequestMapping(path = UIConstants.LEDGER_ENTRY, method = RequestMethod.GET, produces = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
 	@ResponseBody
 	public List<LedgerEntryDTO> getLedgerEntry() throws NotFoundException {

@@ -22,6 +22,8 @@ import com.ccsp.accums.utilization.service.AccumsUtilizationService;
 import com.ccsp.common.message.ResponseMessageConst;
 import com.ccsp.common.utils.UIConstants;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import javassist.NotFoundException;
 
 /**
@@ -33,6 +35,7 @@ import javassist.NotFoundException;
  * 	3. To fetch claim details of a member associated to specific accum-type
  * 	4. To fetch claim details of a member 
  */
+@Api(description = UIConstants.API_ACCUMS_UTILIZATION_DES, produces = "application/json", tags = {UIConstants.API_ACCUMS_UTILIZATION_TAG})
 @RequestMapping(path = UIConstants.ACCUMS_INQUIRY)
 @RestController
 public class AccumsUtilizationController {
@@ -52,6 +55,7 @@ public class AccumsUtilizationController {
 	 * @throws ParseException
 	 * @throws NotFoundException when no matching data found
 	 */
+	@ApiOperation(value=UIConstants.API_ACCUMS_UTILIZATION_SPENDING_SUM, tags = { UIConstants.API_ACCUMS_UTILIZATION_TAG })
 	@RequestMapping(path = UIConstants.ACCUMS_UTILIZATION, method = RequestMethod.GET, produces = {
 			"application/json; charset=utf-8", "application/xml; charset=utf-8" })
 	@ResponseBody
@@ -82,6 +86,7 @@ public class AccumsUtilizationController {
 	 * @return
 	 * @throws NotFoundException
 	 */
+	@ApiOperation(value=UIConstants.API_ACCUMS_UTILIZATION_BENEFIT_BAL, tags = { UIConstants.API_ACCUMS_UTILIZATION_TAG })
 	@RequestMapping(path = UIConstants.BENEFIT_BALANCE, method = RequestMethod.GET, produces = {
 			"application/json; charset=utf-8", "application/xml; charset=utf-8" })
 	public @ResponseBody List<LedgerSummaryDTO> getBenefitBalance(
@@ -102,6 +107,7 @@ public class AccumsUtilizationController {
 			throw new NotFoundException(ResponseMessageConst.NO_DATA_FOUND);
 	}
 	
+	@ApiOperation(value=UIConstants.API_ACCUMS_UTILIZATION_CONSUMPTION, tags = { UIConstants.API_ACCUMS_UTILIZATION_TAG })
 	@RequestMapping(path = UIConstants.ACCUMS_CONSUMPTION, method = RequestMethod.GET, produces = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
 	public @ResponseBody List<AccumsConsumptionDTO> getClaimDeatilsByMemberIdAndAccumType(@RequestParam(value="accumType", required=true) String accumType,
 																						  @RequestParam(value="memberId", required=true) String memberID, 

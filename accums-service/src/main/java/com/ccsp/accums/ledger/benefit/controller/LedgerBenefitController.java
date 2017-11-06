@@ -19,6 +19,8 @@ import com.ccsp.accums.ledger.benefit.service.BenefitSpendingServiceImpl;
 import com.ccsp.accums.ledger.benefit.service.ClaimDetailServiceImpl;
 import com.ccsp.common.utils.UIConstants;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import javassist.NotFoundException;
 
 /**
@@ -28,6 +30,7 @@ import javassist.NotFoundException;
  * @author rtalapaneni
  *
  */
+@Api(description = "Accums Benefit", produces = "application/json", tags = {"Accums Benefit"}, hidden=true)
 @RestController
 public class LedgerBenefitController {
 	/**
@@ -60,6 +63,7 @@ public class LedgerBenefitController {
 
 	}*/
 	
+	@ApiOperation(value="getClaimsAssociatedToAccums", tags = { "Accums Benefit" }, hidden=true)
 	@RequestMapping(path = UIConstants.CLAIIMS_ASSOCIATED_TO_ACCUMS, method = RequestMethod.GET, produces = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
 	@ResponseBody
 	public List<ClaimDetailsForAccumTypeDTO> getClaimsAssociatedToAccums(@PathVariable("accumType") String accumType) throws NotFoundException {
@@ -75,6 +79,7 @@ public class LedgerBenefitController {
 	 * @return
 	 * @throws NotFoundException
 	 */
+	@ApiOperation(value="getBenefitSpendingByMemberId", tags = { "Accums Benefit" }, hidden=true)
 	@RequestMapping(path = UIConstants.BENEFIT_SPENDING, method = RequestMethod.GET, produces = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
 	public @ResponseBody List<BenefitSpendingDTO> getBenefitSpendingByMemberId(
 			@RequestParam("memberid") String memberID)
