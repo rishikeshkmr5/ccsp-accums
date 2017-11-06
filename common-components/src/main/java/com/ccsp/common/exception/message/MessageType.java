@@ -8,5 +8,5 @@ package com.ccsp.common.exception.message;
  *
  */
 public enum MessageType {
-	  SUCCESS, INFO, WARNING, ERROR
+	  SUCCESS, INFO, WARNING, ERROR,EXCEPTION
 	}
