@@ -26,870 +26,6 @@
         <stringProp name="ThreadGroup.delay"></stringProp>
       </ThreadGroup>
       <hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="BASPIKES 10 with member and subscriber ID" enabled="false">
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-            <collectionProp name="Arguments.arguments">
-              <elementProp name="memberId" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">M110011</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                <stringProp name="Argument.name">memberId</stringProp>
-              </elementProp>
-              <elementProp name="subscriberId" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">A110011</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                <stringProp name="Argument.name">subscriberId</stringProp>
-              </elementProp>
-            </collectionProp>
-          </elementProp>
-          <stringProp name="HTTPSampler.domain">localhost</stringProp>
-          <stringProp name="HTTPSampler.port">8585</stringProp>
-          <stringProp name="HTTPSampler.protocol">http</stringProp>
-          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">accums-service/inquiry/benefitbalance</stringProp>
-          <stringProp name="HTTPSampler.method">GET</stringProp>
-          <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
-          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-          <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
-          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-          <stringProp name="HTTPSampler.response_timeout"></stringProp>
-        </HTTPSamplerProxy>
-        <hashTree>
-          <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
-            <boolProp name="ResultCollector.error_logging">false</boolProp>
-            <objProp>
-              <name>saveConfig</name>
-              <value class="SampleSaveConfiguration">
-                <time>true</time>
-                <latency>true</latency>
-                <timestamp>true</timestamp>
-                <success>true</success>
-                <label>true</label>
-                <code>true</code>
-                <message>true</message>
-                <threadName>true</threadName>
-                <dataType>true</dataType>
-                <encoding>false</encoding>
-                <assertions>true</assertions>
-                <subresults>true</subresults>
-                <responseData>false</responseData>
-                <samplerData>false</samplerData>
-                <xml>false</xml>
-                <fieldNames>true</fieldNames>
-                <responseHeaders>false</responseHeaders>
-                <requestHeaders>false</requestHeaders>
-                <responseDataOnError>false</responseDataOnError>
-                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
-                <assertionsResultsToSave>0</assertionsResultsToSave>
-                <bytes>true</bytes>
-                <sentBytes>true</sentBytes>
-                <threadCounts>true</threadCounts>
-                <idleTime>true</idleTime>
-                <connectTime>true</connectTime>
-              </value>
-            </objProp>
-            <stringProp name="filename"></stringProp>
-          </ResultCollector>
-          <hashTree/>
-          <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
-            <boolProp name="ResultCollector.error_logging">false</boolProp>
-            <objProp>
-              <name>saveConfig</name>
-              <value class="SampleSaveConfiguration">
-                <time>true</time>
-                <latency>true</latency>
-                <timestamp>true</timestamp>
-                <success>true</success>
-                <label>true</label>
-                <code>true</code>
-                <message>true</message>
-                <threadName>true</threadName>
-                <dataType>true</dataType>
-                <encoding>false</encoding>
-                <assertions>true</assertions>
-                <subresults>true</subresults>
-                <responseData>false</responseData>
-                <samplerData>false</samplerData>
-                <xml>false</xml>
-                <fieldNames>true</fieldNames>
-                <responseHeaders>false</responseHeaders>
-                <requestHeaders>false</requestHeaders>
-                <responseDataOnError>false</responseDataOnError>
-                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
-                <assertionsResultsToSave>0</assertionsResultsToSave>
-                <bytes>true</bytes>
-                <sentBytes>true</sentBytes>
-                <threadCounts>true</threadCounts>
-                <idleTime>true</idleTime>
-                <connectTime>true</connectTime>
-              </value>
-            </objProp>
-            <stringProp name="filename"></stringProp>
-            <boolProp name="saveHeaders">false</boolProp>
-          </ResultCollector>
-          <hashTree/>
-          <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
-            <boolProp name="ResultCollector.error_logging">false</boolProp>
-            <objProp>
-              <name>saveConfig</name>
-              <value class="SampleSaveConfiguration">
-                <time>true</time>
-                <latency>true</latency>
-                <timestamp>true</timestamp>
-                <success>true</success>
-                <label>true</label>
-                <code>true</code>
-                <message>true</message>
-                <threadName>true</threadName>
-                <dataType>true</dataType>
-                <encoding>false</encoding>
-                <assertions>true</assertions>
-                <subresults>true</subresults>
-                <responseData>false</responseData>
-                <samplerData>false</samplerData>
-                <xml>false</xml>
-                <fieldNames>true</fieldNames>
-                <responseHeaders>false</responseHeaders>
-                <requestHeaders>false</requestHeaders>
-                <responseDataOnError>false</responseDataOnError>
-                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
-                <assertionsResultsToSave>0</assertionsResultsToSave>
-                <bytes>true</bytes>
-                <sentBytes>true</sentBytes>
-                <threadCounts>true</threadCounts>
-                <idleTime>true</idleTime>
-                <connectTime>true</connectTime>
-              </value>
-            </objProp>
-            <stringProp name="filename"></stringProp>
-          </ResultCollector>
-          <hashTree/>
-          <ResultCollector guiclass="RespTimeGraphVisualizer" testclass="ResultCollector" testname="Response Time Graph" enabled="true">
-            <boolProp name="ResultCollector.error_logging">false</boolProp>
-            <objProp>
-              <name>saveConfig</name>
-              <value class="SampleSaveConfiguration">
-                <time>true</time>
-                <latency>true</latency>
-                <timestamp>true</timestamp>
-                <success>true</success>
-                <label>true</label>
-                <code>true</code>
-                <message>true</message>
-                <threadName>true</threadName>
-                <dataType>true</dataType>
-                <encoding>false</encoding>
-                <assertions>true</assertions>
-                <subresults>true</subresults>
-                <responseData>false</responseData>
-                <samplerData>false</samplerData>
-                <xml>false</xml>
-                <fieldNames>true</fieldNames>
-                <responseHeaders>false</responseHeaders>
-                <requestHeaders>false</requestHeaders>
-                <responseDataOnError>false</responseDataOnError>
-                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
-                <assertionsResultsToSave>0</assertionsResultsToSave>
-                <bytes>true</bytes>
-                <sentBytes>true</sentBytes>
-                <threadCounts>true</threadCounts>
-                <idleTime>true</idleTime>
-                <connectTime>true</connectTime>
-              </value>
-            </objProp>
-            <stringProp name="filename"></stringProp>
-          </ResultCollector>
-          <hashTree/>
-        </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="BASPIKES 10 with subscriber ID" enabled="false">
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-            <collectionProp name="Arguments.arguments">
-              <elementProp name="subscriberId" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">A110011</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                <stringProp name="Argument.name">subscriberId</stringProp>
-              </elementProp>
-            </collectionProp>
-          </elementProp>
-          <stringProp name="HTTPSampler.domain">localhost</stringProp>
-          <stringProp name="HTTPSampler.port">8585</stringProp>
-          <stringProp name="HTTPSampler.protocol">http</stringProp>
-          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">accums-service/inquiry/benefitbalance</stringProp>
-          <stringProp name="HTTPSampler.method">GET</stringProp>
-          <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
-          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-          <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
-          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-          <stringProp name="HTTPSampler.response_timeout"></stringProp>
-        </HTTPSamplerProxy>
-        <hashTree>
-          <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
-            <boolProp name="ResultCollector.error_logging">false</boolProp>
-            <objProp>
-              <name>saveConfig</name>
-              <value class="SampleSaveConfiguration">
-                <time>true</time>
-                <latency>true</latency>
-                <timestamp>true</timestamp>
-                <success>true</success>
-                <label>true</label>
-                <code>true</code>
-                <message>true</message>
-                <threadName>true</threadName>
-                <dataType>true</dataType>
-                <encoding>false</encoding>
-                <assertions>true</assertions>
-                <subresults>true</subresults>
-                <responseData>false</responseData>
-                <samplerData>false</samplerData>
-                <xml>false</xml>
-                <fieldNames>true</fieldNames>
-                <responseHeaders>false</responseHeaders>
-                <requestHeaders>false</requestHeaders>
-                <responseDataOnError>false</responseDataOnError>
-                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
-                <assertionsResultsToSave>0</assertionsResultsToSave>
-                <bytes>true</bytes>
-                <sentBytes>true</sentBytes>
-                <threadCounts>true</threadCounts>
-                <idleTime>true</idleTime>
-                <connectTime>true</connectTime>
-              </value>
-            </objProp>
-            <stringProp name="filename"></stringProp>
-          </ResultCollector>
-          <hashTree/>
-          <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
-            <boolProp name="ResultCollector.error_logging">false</boolProp>
-            <objProp>
-              <name>saveConfig</name>
-              <value class="SampleSaveConfiguration">
-                <time>true</time>
-                <latency>true</latency>
-                <timestamp>true</timestamp>
-                <success>true</success>
-                <label>true</label>
-                <code>true</code>
-                <message>true</message>
-                <threadName>true</threadName>
-                <dataType>true</dataType>
-                <encoding>false</encoding>
-                <assertions>true</assertions>
-                <subresults>true</subresults>
-                <responseData>false</responseData>
-                <samplerData>false</samplerData>
-                <xml>false</xml>
-                <fieldNames>true</fieldNames>
-                <responseHeaders>false</responseHeaders>
-                <requestHeaders>false</requestHeaders>
-                <responseDataOnError>false</responseDataOnError>
-                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
-                <assertionsResultsToSave>0</assertionsResultsToSave>
-                <bytes>true</bytes>
-                <sentBytes>true</sentBytes>
-                <threadCounts>true</threadCounts>
-                <idleTime>true</idleTime>
-                <connectTime>true</connectTime>
-              </value>
-            </objProp>
-            <stringProp name="filename"></stringProp>
-            <boolProp name="saveHeaders">false</boolProp>
-          </ResultCollector>
-          <hashTree/>
-          <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
-            <boolProp name="ResultCollector.error_logging">false</boolProp>
-            <objProp>
-              <name>saveConfig</name>
-              <value class="SampleSaveConfiguration">
-                <time>true</time>
-                <latency>true</latency>
-                <timestamp>true</timestamp>
-                <success>true</success>
-                <label>true</label>
-                <code>true</code>
-                <message>true</message>
-                <threadName>true</threadName>
-                <dataType>true</dataType>
-                <encoding>false</encoding>
-                <assertions>true</assertions>
-                <subresults>true</subresults>
-                <responseData>false</responseData>
-                <samplerData>false</samplerData>
-                <xml>false</xml>
-                <fieldNames>true</fieldNames>
-                <responseHeaders>false</responseHeaders>
-                <requestHeaders>false</requestHeaders>
-                <responseDataOnError>false</responseDataOnError>
-                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
-                <assertionsResultsToSave>0</assertionsResultsToSave>
-                <bytes>true</bytes>
-                <sentBytes>true</sentBytes>
-                <threadCounts>true</threadCounts>
-                <idleTime>true</idleTime>
-                <connectTime>true</connectTime>
-              </value>
-            </objProp>
-            <stringProp name="filename"></stringProp>
-          </ResultCollector>
-          <hashTree/>
-          <ResultCollector guiclass="RespTimeGraphVisualizer" testclass="ResultCollector" testname="Response Time Graph" enabled="true">
-            <boolProp name="ResultCollector.error_logging">false</boolProp>
-            <objProp>
-              <name>saveConfig</name>
-              <value class="SampleSaveConfiguration">
-                <time>true</time>
-                <latency>true</latency>
-                <timestamp>true</timestamp>
-                <success>true</success>
-                <label>true</label>
-                <code>true</code>
-                <message>true</message>
-                <threadName>true</threadName>
-                <dataType>true</dataType>
-                <encoding>false</encoding>
-                <assertions>true</assertions>
-                <subresults>true</subresults>
-                <responseData>false</responseData>
-                <samplerData>false</samplerData>
-                <xml>false</xml>
-                <fieldNames>true</fieldNames>
-                <responseHeaders>false</responseHeaders>
-                <requestHeaders>false</requestHeaders>
-                <responseDataOnError>false</responseDataOnError>
-                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
-                <assertionsResultsToSave>0</assertionsResultsToSave>
-                <bytes>true</bytes>
-                <sentBytes>true</sentBytes>
-                <threadCounts>true</threadCounts>
-                <idleTime>true</idleTime>
-                <connectTime>true</connectTime>
-              </value>
-            </objProp>
-            <stringProp name="filename"></stringProp>
-          </ResultCollector>
-          <hashTree/>
-        </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="BASPIKES 10 with member ID" enabled="true">
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-            <collectionProp name="Arguments.arguments">
-              <elementProp name="memberId" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">M110011</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                <stringProp name="Argument.name">memberId</stringProp>
-              </elementProp>
-            </collectionProp>
-          </elementProp>
-          <stringProp name="HTTPSampler.domain">localhost</stringProp>
-          <stringProp name="HTTPSampler.port">8585</stringProp>
-          <stringProp name="HTTPSampler.protocol">http</stringProp>
-          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">accums-service/inquiry/benefitbalance</stringProp>
-          <stringProp name="HTTPSampler.method">GET</stringProp>
-          <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
-          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-          <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
-          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-          <stringProp name="HTTPSampler.response_timeout"></stringProp>
-        </HTTPSamplerProxy>
-        <hashTree>
-          <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
-            <boolProp name="ResultCollector.error_logging">false</boolProp>
-            <objProp>
-              <name>saveConfig</name>
-              <value class="SampleSaveConfiguration">
-                <time>true</time>
-                <latency>true</latency>
-                <timestamp>true</timestamp>
-                <success>true</success>
-                <label>true</label>
-                <code>true</code>
-                <message>true</message>
-                <threadName>true</threadName>
-                <dataType>true</dataType>
-                <encoding>false</encoding>
-                <assertions>true</assertions>
-                <subresults>true</subresults>
-                <responseData>false</responseData>
-                <samplerData>false</samplerData>
-                <xml>false</xml>
-                <fieldNames>true</fieldNames>
-                <responseHeaders>false</responseHeaders>
-                <requestHeaders>false</requestHeaders>
-                <responseDataOnError>false</responseDataOnError>
-                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
-                <assertionsResultsToSave>0</assertionsResultsToSave>
-                <bytes>true</bytes>
-                <sentBytes>true</sentBytes>
-                <threadCounts>true</threadCounts>
-                <idleTime>true</idleTime>
-                <connectTime>true</connectTime>
-              </value>
-            </objProp>
-            <stringProp name="filename"></stringProp>
-          </ResultCollector>
-          <hashTree/>
-          <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
-            <boolProp name="ResultCollector.error_logging">false</boolProp>
-            <objProp>
-              <name>saveConfig</name>
-              <value class="SampleSaveConfiguration">
-                <time>true</time>
-                <latency>true</latency>
-                <timestamp>true</timestamp>
-                <success>true</success>
-                <label>true</label>
-                <code>true</code>
-                <message>true</message>
-                <threadName>true</threadName>
-                <dataType>true</dataType>
-                <encoding>false</encoding>
-                <assertions>true</assertions>
-                <subresults>true</subresults>
-                <responseData>false</responseData>
-                <samplerData>false</samplerData>
-                <xml>false</xml>
-                <fieldNames>true</fieldNames>
-                <responseHeaders>false</responseHeaders>
-                <requestHeaders>false</requestHeaders>
-                <responseDataOnError>false</responseDataOnError>
-                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
-                <assertionsResultsToSave>0</assertionsResultsToSave>
-                <bytes>true</bytes>
-                <sentBytes>true</sentBytes>
-                <threadCounts>true</threadCounts>
-                <idleTime>true</idleTime>
-                <connectTime>true</connectTime>
-              </value>
-            </objProp>
-            <stringProp name="filename"></stringProp>
-            <boolProp name="saveHeaders">false</boolProp>
-          </ResultCollector>
-          <hashTree/>
-          <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
-            <boolProp name="ResultCollector.error_logging">false</boolProp>
-            <objProp>
-              <name>saveConfig</name>
-              <value class="SampleSaveConfiguration">
-                <time>true</time>
-                <latency>true</latency>
-                <timestamp>true</timestamp>
-                <success>true</success>
-                <label>true</label>
-                <code>true</code>
-                <message>true</message>
-                <threadName>true</threadName>
-                <dataType>true</dataType>
-                <encoding>false</encoding>
-                <assertions>true</assertions>
-                <subresults>true</subresults>
-                <responseData>false</responseData>
-                <samplerData>false</samplerData>
-                <xml>false</xml>
-                <fieldNames>true</fieldNames>
-                <responseHeaders>false</responseHeaders>
-                <requestHeaders>false</requestHeaders>
-                <responseDataOnError>false</responseDataOnError>
-                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
-                <assertionsResultsToSave>0</assertionsResultsToSave>
-                <bytes>true</bytes>
-                <sentBytes>true</sentBytes>
-                <threadCounts>true</threadCounts>
-                <idleTime>true</idleTime>
-                <connectTime>true</connectTime>
-              </value>
-            </objProp>
-            <stringProp name="filename"></stringProp>
-          </ResultCollector>
-          <hashTree/>
-          <ResultCollector guiclass="RespTimeGraphVisualizer" testclass="ResultCollector" testname="Response Time Graph" enabled="true">
-            <boolProp name="ResultCollector.error_logging">false</boolProp>
-            <objProp>
-              <name>saveConfig</name>
-              <value class="SampleSaveConfiguration">
-                <time>true</time>
-                <latency>true</latency>
-                <timestamp>true</timestamp>
-                <success>true</success>
-                <label>true</label>
-                <code>true</code>
-                <message>true</message>
-                <threadName>true</threadName>
-                <dataType>true</dataType>
-                <encoding>false</encoding>
-                <assertions>true</assertions>
-                <subresults>true</subresults>
-                <responseData>false</responseData>
-                <samplerData>false</samplerData>
-                <xml>false</xml>
-                <fieldNames>true</fieldNames>
-                <responseHeaders>false</responseHeaders>
-                <requestHeaders>false</requestHeaders>
-                <responseDataOnError>false</responseDataOnError>
-                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
-                <assertionsResultsToSave>0</assertionsResultsToSave>
-                <bytes>true</bytes>
-                <sentBytes>true</sentBytes>
-                <threadCounts>true</threadCounts>
-                <idleTime>true</idleTime>
-                <connectTime>true</connectTime>
-              </value>
-            </objProp>
-            <stringProp name="filename"></stringProp>
-          </ResultCollector>
-          <hashTree/>
-        </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="BASPIKES 10 with no member found 404" enabled="false">
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-            <collectionProp name="Arguments.arguments">
-              <elementProp name="memberId" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">M01</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                <stringProp name="Argument.name">memberId</stringProp>
-              </elementProp>
-            </collectionProp>
-          </elementProp>
-          <stringProp name="HTTPSampler.domain">localhost</stringProp>
-          <stringProp name="HTTPSampler.port">8585</stringProp>
-          <stringProp name="HTTPSampler.protocol">http</stringProp>
-          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">accums-service/inquiry/benefitbalance</stringProp>
-          <stringProp name="HTTPSampler.method">GET</stringProp>
-          <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
-          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-          <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
-          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-          <stringProp name="HTTPSampler.response_timeout"></stringProp>
-        </HTTPSamplerProxy>
-        <hashTree>
-          <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
-            <boolProp name="ResultCollector.error_logging">false</boolProp>
-            <objProp>
-              <name>saveConfig</name>
-              <value class="SampleSaveConfiguration">
-                <time>true</time>
-                <latency>true</latency>
-                <timestamp>true</timestamp>
-                <success>true</success>
-                <label>true</label>
-                <code>true</code>
-                <message>true</message>
-                <threadName>true</threadName>
-                <dataType>true</dataType>
-                <encoding>false</encoding>
-                <assertions>true</assertions>
-                <subresults>true</subresults>
-                <responseData>false</responseData>
-                <samplerData>false</samplerData>
-                <xml>false</xml>
-                <fieldNames>true</fieldNames>
-                <responseHeaders>false</responseHeaders>
-                <requestHeaders>false</requestHeaders>
-                <responseDataOnError>false</responseDataOnError>
-                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
-                <assertionsResultsToSave>0</assertionsResultsToSave>
-                <bytes>true</bytes>
-                <sentBytes>true</sentBytes>
-                <threadCounts>true</threadCounts>
-                <idleTime>true</idleTime>
-                <connectTime>true</connectTime>
-              </value>
-            </objProp>
-            <stringProp name="filename"></stringProp>
-          </ResultCollector>
-          <hashTree/>
-          <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
-            <boolProp name="ResultCollector.error_logging">false</boolProp>
-            <objProp>
-              <name>saveConfig</name>
-              <value class="SampleSaveConfiguration">
-                <time>true</time>
-                <latency>true</latency>
-                <timestamp>true</timestamp>
-                <success>true</success>
-                <label>true</label>
-                <code>true</code>
-                <message>true</message>
-                <threadName>true</threadName>
-                <dataType>true</dataType>
-                <encoding>false</encoding>
-                <assertions>true</assertions>
-                <subresults>true</subresults>
-                <responseData>false</responseData>
-                <samplerData>false</samplerData>
-                <xml>false</xml>
-                <fieldNames>true</fieldNames>
-                <responseHeaders>false</responseHeaders>
-                <requestHeaders>false</requestHeaders>
-                <responseDataOnError>false</responseDataOnError>
-                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
-                <assertionsResultsToSave>0</assertionsResultsToSave>
-                <bytes>true</bytes>
-                <sentBytes>true</sentBytes>
-                <threadCounts>true</threadCounts>
-                <idleTime>true</idleTime>
-                <connectTime>true</connectTime>
-              </value>
-            </objProp>
-            <stringProp name="filename"></stringProp>
-            <boolProp name="saveHeaders">false</boolProp>
-          </ResultCollector>
-          <hashTree/>
-          <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
-            <boolProp name="ResultCollector.error_logging">false</boolProp>
-            <objProp>
-              <name>saveConfig</name>
-              <value class="SampleSaveConfiguration">
-                <time>true</time>
-                <latency>true</latency>
-                <timestamp>true</timestamp>
-                <success>true</success>
-                <label>true</label>
-                <code>true</code>
-                <message>true</message>
-                <threadName>true</threadName>
-                <dataType>true</dataType>
-                <encoding>false</encoding>
-                <assertions>true</assertions>
-                <subresults>true</subresults>
-                <responseData>false</responseData>
-                <samplerData>false</samplerData>
-                <xml>false</xml>
-                <fieldNames>true</fieldNames>
-                <responseHeaders>false</responseHeaders>
-                <requestHeaders>false</requestHeaders>
-                <responseDataOnError>false</responseDataOnError>
-                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
-                <assertionsResultsToSave>0</assertionsResultsToSave>
-                <bytes>true</bytes>
-                <sentBytes>true</sentBytes>
-                <threadCounts>true</threadCounts>
-                <idleTime>true</idleTime>
-                <connectTime>true</connectTime>
-              </value>
-            </objProp>
-            <stringProp name="filename"></stringProp>
-          </ResultCollector>
-          <hashTree/>
-          <ResultCollector guiclass="RespTimeGraphVisualizer" testclass="ResultCollector" testname="Response Time Graph" enabled="true">
-            <boolProp name="ResultCollector.error_logging">false</boolProp>
-            <objProp>
-              <name>saveConfig</name>
-              <value class="SampleSaveConfiguration">
-                <time>true</time>
-                <latency>true</latency>
-                <timestamp>true</timestamp>
-                <success>true</success>
-                <label>true</label>
-                <code>true</code>
-                <message>true</message>
-                <threadName>true</threadName>
-                <dataType>true</dataType>
-                <encoding>false</encoding>
-                <assertions>true</assertions>
-                <subresults>true</subresults>
-                <responseData>false</responseData>
-                <samplerData>false</samplerData>
-                <xml>false</xml>
-                <fieldNames>true</fieldNames>
-                <responseHeaders>false</responseHeaders>
-                <requestHeaders>false</requestHeaders>
-                <responseDataOnError>false</responseDataOnError>
-                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
-                <assertionsResultsToSave>0</assertionsResultsToSave>
-                <bytes>true</bytes>
-                <sentBytes>true</sentBytes>
-                <threadCounts>true</threadCounts>
-                <idleTime>true</idleTime>
-                <connectTime>true</connectTime>
-              </value>
-            </objProp>
-            <stringProp name="filename"></stringProp>
-          </ResultCollector>
-          <hashTree/>
-        </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="BASPIKES 10 with no inputs 400" enabled="false">
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-            <collectionProp name="Arguments.arguments"/>
-          </elementProp>
-          <stringProp name="HTTPSampler.domain">localhost</stringProp>
-          <stringProp name="HTTPSampler.port">8585</stringProp>
-          <stringProp name="HTTPSampler.protocol">http</stringProp>
-          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">accums-service/inquiry/benefitbalance</stringProp>
-          <stringProp name="HTTPSampler.method">GET</stringProp>
-          <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
-          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-          <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
-          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-          <stringProp name="HTTPSampler.response_timeout"></stringProp>
-        </HTTPSamplerProxy>
-        <hashTree>
-          <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
-            <boolProp name="ResultCollector.error_logging">false</boolProp>
-            <objProp>
-              <name>saveConfig</name>
-              <value class="SampleSaveConfiguration">
-                <time>true</time>
-                <latency>true</latency>
-                <timestamp>true</timestamp>
-                <success>true</success>
-                <label>true</label>
-                <code>true</code>
-                <message>true</message>
-                <threadName>true</threadName>
-                <dataType>true</dataType>
-                <encoding>false</encoding>
-                <assertions>true</assertions>
-                <subresults>true</subresults>
-                <responseData>false</responseData>
-                <samplerData>false</samplerData>
-                <xml>false</xml>
-                <fieldNames>true</fieldNames>
-                <responseHeaders>false</responseHeaders>
-                <requestHeaders>false</requestHeaders>
-                <responseDataOnError>false</responseDataOnError>
-                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
-                <assertionsResultsToSave>0</assertionsResultsToSave>
-                <bytes>true</bytes>
-                <sentBytes>true</sentBytes>
-                <threadCounts>true</threadCounts>
-                <idleTime>true</idleTime>
-                <connectTime>true</connectTime>
-              </value>
-            </objProp>
-            <stringProp name="filename"></stringProp>
-          </ResultCollector>
-          <hashTree/>
-          <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
-            <boolProp name="ResultCollector.error_logging">false</boolProp>
-            <objProp>
-              <name>saveConfig</name>
-              <value class="SampleSaveConfiguration">
-                <time>true</time>
-                <latency>true</latency>
-                <timestamp>true</timestamp>
-                <success>true</success>
-                <label>true</label>
-                <code>true</code>
-                <message>true</message>
-                <threadName>true</threadName>
-                <dataType>true</dataType>
-                <encoding>false</encoding>
-                <assertions>true</assertions>
-                <subresults>true</subresults>
-                <responseData>false</responseData>
-                <samplerData>false</samplerData>
-                <xml>false</xml>
-                <fieldNames>true</fieldNames>
-                <responseHeaders>false</responseHeaders>
-                <requestHeaders>false</requestHeaders>
-                <responseDataOnError>false</responseDataOnError>
-                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
-                <assertionsResultsToSave>0</assertionsResultsToSave>
-                <bytes>true</bytes>
-                <sentBytes>true</sentBytes>
-                <threadCounts>true</threadCounts>
-                <idleTime>true</idleTime>
-                <connectTime>true</connectTime>
-              </value>
-            </objProp>
-            <stringProp name="filename"></stringProp>
-            <boolProp name="saveHeaders">false</boolProp>
-          </ResultCollector>
-          <hashTree/>
-          <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
-            <boolProp name="ResultCollector.error_logging">false</boolProp>
-            <objProp>
-              <name>saveConfig</name>
-              <value class="SampleSaveConfiguration">
-                <time>true</time>
-                <latency>true</latency>
-                <timestamp>true</timestamp>
-                <success>true</success>
-                <label>true</label>
-                <code>true</code>
-                <message>true</message>
-                <threadName>true</threadName>
-                <dataType>true</dataType>
-                <encoding>false</encoding>
-                <assertions>true</assertions>
-                <subresults>true</subresults>
-                <responseData>false</responseData>
-                <samplerData>false</samplerData>
-                <xml>false</xml>
-                <fieldNames>true</fieldNames>
-                <responseHeaders>false</responseHeaders>
-                <requestHeaders>false</requestHeaders>
-                <responseDataOnError>false</responseDataOnError>
-                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
-                <assertionsResultsToSave>0</assertionsResultsToSave>
-                <bytes>true</bytes>
-                <sentBytes>true</sentBytes>
-                <threadCounts>true</threadCounts>
-                <idleTime>true</idleTime>
-                <connectTime>true</connectTime>
-              </value>
-            </objProp>
-            <stringProp name="filename"></stringProp>
-          </ResultCollector>
-          <hashTree/>
-          <ResultCollector guiclass="RespTimeGraphVisualizer" testclass="ResultCollector" testname="Response Time Graph" enabled="true">
-            <boolProp name="ResultCollector.error_logging">false</boolProp>
-            <objProp>
-              <name>saveConfig</name>
-              <value class="SampleSaveConfiguration">
-                <time>true</time>
-                <latency>true</latency>
-                <timestamp>true</timestamp>
-                <success>true</success>
-                <label>true</label>
-                <code>true</code>
-                <message>true</message>
-                <threadName>true</threadName>
-                <dataType>true</dataType>
-                <encoding>false</encoding>
-                <assertions>true</assertions>
-                <subresults>true</subresults>
-                <responseData>false</responseData>
-                <samplerData>false</samplerData>
-                <xml>false</xml>
-                <fieldNames>true</fieldNames>
-                <responseHeaders>false</responseHeaders>
-                <requestHeaders>false</requestHeaders>
-                <responseDataOnError>false</responseDataOnError>
-                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
-                <assertionsResultsToSave>0</assertionsResultsToSave>
-                <bytes>true</bytes>
-                <sentBytes>true</sentBytes>
-                <threadCounts>true</threadCounts>
-                <idleTime>true</idleTime>
-                <connectTime>true</connectTime>
-              </value>
-            </objProp>
-            <stringProp name="filename"></stringProp>
-          </ResultCollector>
-          <hashTree/>
-        </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="BASPIKES 11 with member and subscriber ID" enabled="false">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
@@ -913,7 +49,7 @@
           <stringProp name="HTTPSampler.port">8585</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">accums-service/inquiry/accums-utilization</stringProp>
+          <stringProp name="HTTPSampler.path">accums-service/inquiry/accums-inquiry-benefit-balance</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -1086,7 +222,7 @@
           <stringProp name="HTTPSampler.port">8585</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">accums-service/inquiry/accums-utilization</stringProp>
+          <stringProp name="HTTPSampler.path">accums-service/inquiry/accums-inquiry-benefit-balance</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -1243,7 +379,7 @@
           </ResultCollector>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="BASPIKES 11 with member  ID" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="BASPIKES 11 with member ID" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
               <elementProp name="memberId" elementType="HTTPArgument">
@@ -1259,7 +395,7 @@
           <stringProp name="HTTPSampler.port">8585</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">accums-service/inquiry/accums-utilization</stringProp>
+          <stringProp name="HTTPSampler.path">accums-service/inquiry/accums-inquiry-benefit-balance</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -1270,79 +406,6 @@
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
         </HTTPSamplerProxy>
         <hashTree>
-          <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
-            <boolProp name="ResultCollector.error_logging">false</boolProp>
-            <objProp>
-              <name>saveConfig</name>
-              <value class="SampleSaveConfiguration">
-                <time>true</time>
-                <latency>true</latency>
-                <timestamp>true</timestamp>
-                <success>true</success>
-                <label>true</label>
-                <code>true</code>
-                <message>true</message>
-                <threadName>true</threadName>
-                <dataType>true</dataType>
-                <encoding>false</encoding>
-                <assertions>true</assertions>
-                <subresults>true</subresults>
-                <responseData>false</responseData>
-                <samplerData>false</samplerData>
-                <xml>false</xml>
-                <fieldNames>true</fieldNames>
-                <responseHeaders>false</responseHeaders>
-                <requestHeaders>false</requestHeaders>
-                <responseDataOnError>false</responseDataOnError>
-                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
-                <assertionsResultsToSave>0</assertionsResultsToSave>
-                <bytes>true</bytes>
-                <sentBytes>true</sentBytes>
-                <threadCounts>true</threadCounts>
-                <idleTime>true</idleTime>
-                <connectTime>true</connectTime>
-              </value>
-            </objProp>
-            <stringProp name="filename"></stringProp>
-          </ResultCollector>
-          <hashTree/>
-          <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
-            <boolProp name="ResultCollector.error_logging">false</boolProp>
-            <objProp>
-              <name>saveConfig</name>
-              <value class="SampleSaveConfiguration">
-                <time>true</time>
-                <latency>true</latency>
-                <timestamp>true</timestamp>
-                <success>true</success>
-                <label>true</label>
-                <code>true</code>
-                <message>true</message>
-                <threadName>true</threadName>
-                <dataType>true</dataType>
-                <encoding>false</encoding>
-                <assertions>true</assertions>
-                <subresults>true</subresults>
-                <responseData>false</responseData>
-                <samplerData>false</samplerData>
-                <xml>false</xml>
-                <fieldNames>true</fieldNames>
-                <responseHeaders>false</responseHeaders>
-                <requestHeaders>false</requestHeaders>
-                <responseDataOnError>false</responseDataOnError>
-                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
-                <assertionsResultsToSave>0</assertionsResultsToSave>
-                <bytes>true</bytes>
-                <sentBytes>true</sentBytes>
-                <threadCounts>true</threadCounts>
-                <idleTime>true</idleTime>
-                <connectTime>true</connectTime>
-              </value>
-            </objProp>
-            <stringProp name="filename"></stringProp>
-            <boolProp name="saveHeaders">false</boolProp>
-          </ResultCollector>
-          <hashTree/>
           <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
             <boolProp name="ResultCollector.error_logging">false</boolProp>
             <objProp>
@@ -1379,7 +442,81 @@
             <stringProp name="filename"></stringProp>
           </ResultCollector>
           <hashTree/>
-          <ResultCollector guiclass="RespTimeGraphVisualizer" testclass="ResultCollector" testname="Response Time Graph" enabled="true">
+          <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+            <boolProp name="useGroupName">true</boolProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+            <boolProp name="useGroupName">true</boolProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="RespTimeGraphVisualizer" testclass="ResultCollector" testname="Response Time Graph" enabled="false">
             <boolProp name="ResultCollector.error_logging">false</boolProp>
             <objProp>
               <name>saveConfig</name>
@@ -1432,7 +569,7 @@
           <stringProp name="HTTPSampler.port">8585</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">accums-service/inquiry/accums-utilization</stringProp>
+          <stringProp name="HTTPSampler.path">accums-service/inquiry/accums-inquiry-benefit-balance</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -1597,7 +734,1585 @@
           <stringProp name="HTTPSampler.port">8585</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">accums-service/inquiry/accums-utilization</stringProp>
+          <stringProp name="HTTPSampler.path">accums-service/inquiry/accums-inquiry-benefit-balance</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+            <boolProp name="saveHeaders">false</boolProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="RespTimeGraphVisualizer" testclass="ResultCollector" testname="Response Time Graph" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="BASPIKES 10 with member and subscriber ID" enabled="false">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="memberId" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">M110011</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">memberId</stringProp>
+              </elementProp>
+              <elementProp name="subscriberId" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">A110011</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">subscriberId</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.port">8585</stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">accums-service/inquiry/accums-inquiry-spending-summary</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+            <boolProp name="saveHeaders">false</boolProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="RespTimeGraphVisualizer" testclass="ResultCollector" testname="Response Time Graph" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="BASPIKES 10 with subscriber ID" enabled="false">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="subscriberId" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">A110011</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">subscriberId</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.port">8585</stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">accums-service/inquiry/accums-inquiry-spending-summary</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+            <boolProp name="saveHeaders">false</boolProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="RespTimeGraphVisualizer" testclass="ResultCollector" testname="Response Time Graph" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="BASPIKES 10 with member  ID" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="memberId" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">M110011</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">memberId</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.port">8585</stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">accums-service/inquiry/accums-inquiry-spending-summary</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+            <boolProp name="useGroupName">true</boolProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+            <boolProp name="useGroupName">true</boolProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="RespTimeGraphVisualizer" testclass="ResultCollector" testname="Response Time Graph" enabled="false">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="BASPIKES 10 with no member found 404" enabled="false">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="memberId" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">M01</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">memberId</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.port">8585</stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">accums-service/inquiry/accums-inquiry-spending-summary</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+            <boolProp name="saveHeaders">false</boolProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="RespTimeGraphVisualizer" testclass="ResultCollector" testname="Response Time Graph" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="BASPIKES 10 with no inputs 400" enabled="false">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.port">8585</stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">accums-service/inquiry/accums-inquiry-spending-summary</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+            <boolProp name="saveHeaders">false</boolProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="RespTimeGraphVisualizer" testclass="ResultCollector" testname="Response Time Graph" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="BASPIKES 12 with member and accumType" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="memberId" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">M110011</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">memberId</stringProp>
+              </elementProp>
+              <elementProp name="accumType" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">Family%20OPX</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">accumType</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.port">8585</stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">accums-service/inquiry/accums-inquiry-consumption</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+            <boolProp name="useGroupName">true</boolProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+            <boolProp name="useGroupName">true</boolProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="RespTimeGraphVisualizer" testclass="ResultCollector" testname="Response Time Graph" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="BASPIKES 12 with member, subscriber and accumType" enabled="false">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="memberId" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">M110011</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">memberId</stringProp>
+              </elementProp>
+              <elementProp name="accumType" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">Family%20OPX</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">accumType</stringProp>
+              </elementProp>
+              <elementProp name="subscriberId" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">A110011</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">subscriberId</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.port">8585</stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">accums-service/inquiry/accums-inquiry-consumption</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+            <boolProp name="saveHeaders">false</boolProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="RespTimeGraphVisualizer" testclass="ResultCollector" testname="Response Time Graph" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="BASPIKES 12 with no member found 404" enabled="false">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="memberId" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">M01</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">memberId</stringProp>
+              </elementProp>
+              <elementProp name="accumType" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">Family%20OPX</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">accumType</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.port">8585</stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">accums-service/inquiry/accums-inquiry-consumption</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+            <boolProp name="saveHeaders">false</boolProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="RespTimeGraphVisualizer" testclass="ResultCollector" testname="Response Time Graph" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="BASPIKES 12 with no inputs 400" enabled="false">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.port">8585</stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">accums-service/inquiry/accums-inquiry-consumption</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
