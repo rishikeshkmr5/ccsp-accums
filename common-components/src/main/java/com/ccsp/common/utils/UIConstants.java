@@ -4,6 +4,10 @@ package com.ccsp.common.utils;
  * @author nnarayanaperumaln
  *
  */
+/**
+ * @author vamehta
+ *
+ */
 public class UIConstants {
 
 
@@ -59,6 +63,14 @@ public class UIConstants {
 	public static final String API_ACCUMS_UTILIZATION_BENEFIT_BAL="Inquire accum-type summary specific to member";
 	public static final String API_ACCUMS_UTILIZATION_CONSUMPTION="Inquire claims specific to member and accum-type";
 	public static final String API_MEMBER_CLAIMS ="Inquire claims summary specific to member";
+	
+	/**
+	 * Category API constants
+	 */
+	public static final String API_CATEGORY_TYPE_DES="Load/Inquire Category";
+	public static final String API_CATEGORY_TYPE_TAG="Category Type";
+	public static final String API_CATEGORY_TYPE_CREATE_CSV="Load Categories with CSV";
+	public static final String CATEGORY_TYPE_CSV = "/category-type-csv";
 	
 	
 }
