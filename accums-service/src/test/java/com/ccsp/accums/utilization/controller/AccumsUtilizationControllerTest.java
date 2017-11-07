@@ -45,8 +45,8 @@ public class AccumsUtilizationControllerTest {
 		List<SpendingSummaryDTO> utilizationHistory = new ArrayList<>();
 		SpendingSummaryDTO utilizationDTO = new SpendingSummaryDTO();
 		utilizationHistory.add(utilizationDTO);
-		when(utilizationService.getSpendingSummary(memberId, subscriberId)).thenReturn(utilizationHistory);
-		List<SpendingSummaryDTO> resultList = controller.getSpendingSummary(memberId, subscriberId);
+		when(utilizationService.getSpendingSummary(memberId, null)).thenReturn(utilizationHistory);
+		List<SpendingSummaryDTO> resultList = controller.getSpendingSummary(memberId);
 		for(SpendingSummaryDTO result : resultList) {
 			Assert.assertEquals(result,utilizationDTO);
 		}
@@ -58,7 +58,7 @@ public class AccumsUtilizationControllerTest {
 		String subscriberId = "S0001";
 		List<SpendingSummaryDTO> utilizationHistory = new ArrayList<>();
 		when(utilizationService.getSpendingSummary(memberId, subscriberId)).thenReturn(utilizationHistory);
-		List<SpendingSummaryDTO> resultList = controller.getSpendingSummary(memberId, subscriberId);
+		List<SpendingSummaryDTO> resultList = controller.getSpendingSummary(memberId);
 	}
 	
 	/**
@@ -75,8 +75,8 @@ public class AccumsUtilizationControllerTest {
 		accumulationSummaryDTOs.add(new LedgerSummaryDTO());
 		String memberId = "M0001234";
 		String subscriberId = "S0001234";
-		when(accumulationSummaryService.getBenefitBalance(subscriberId, memberId)).thenReturn(accumulationSummaryDTOs);
-		List<LedgerSummaryDTO> actual = controller.getBenefitBalance(subscriberId, memberId);
+		when(accumulationSummaryService.getBenefitBalance(null, memberId)).thenReturn(accumulationSummaryDTOs);
+		List<LedgerSummaryDTO> actual = controller.getBenefitBalance(memberId);
 		Assert.assertEquals(actual, accumulationSummaryDTOs);
 
 	}
@@ -92,7 +92,7 @@ public class AccumsUtilizationControllerTest {
 		String memberId = "A0001";
 		String subscriberId = "S0001";
 		when(accumulationSummaryService.getBenefitBalance(subscriberId, memberId)).thenReturn(accumulationSummaryDTOs);
-		controller.getBenefitBalance(subscriberId, memberId);
+		controller.getBenefitBalance(subscriberId);
 	}
 	
 	/**
@@ -106,8 +106,8 @@ public class AccumsUtilizationControllerTest {
 		String member = "M0001234";
 		String subscriber = null;
 		String accumType = "Individual Ded";
-		when(utilizationService.getAccumsConsumption(accumType, member, subscriber)).thenReturn(accumulationConsumptionDTOs);
-		List<AccumsConsumptionDTO> actual = controller.getClaimDetailsByMemberIdAndAccumType(accumType, member, subscriber);
+		when(utilizationService.getAccumsConsumption(accumType, member, null)).thenReturn(accumulationConsumptionDTOs);
+		List<AccumsConsumptionDTO> actual = controller.getClaimDetailsByMemberIdAndAccumType(accumType, member);
 		Assert.assertEquals(actual.get(0), accumulationConsumptionDTOs.get(0));
 
 	}
@@ -120,7 +120,7 @@ public class AccumsUtilizationControllerTest {
 		String member = null;
 		String subscriber = null;
 		String accumType = "Individual Ded";
-		controller.getClaimDetailsByMemberIdAndAccumType(accumType, member, subscriber);
+		controller.getClaimDetailsByMemberIdAndAccumType(accumType, member);
 	}
 	
 	/**
@@ -131,7 +131,7 @@ public class AccumsUtilizationControllerTest {
 		String member = "A12345";
 		String subscriber = null;
 		String accumType = "Individual Ded";
-		controller.getClaimDetailsByMemberIdAndAccumType(accumType, member, subscriber);
+		controller.getClaimDetailsByMemberIdAndAccumType(accumType, member);
 	}
 	
 	/**

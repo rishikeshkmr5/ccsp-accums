@@ -33,11 +33,12 @@ public class UIConstants {
 	 * Accums Inquiry API
 	 */
 	public static final String ACCUMS_INQUIRY = "/inquiry";
-	public static final String BENEFIT_BALANCE = "/accums-inquiry-benefit-balance";
+	public static final String BENEFIT_BALANCE = "/member-accumtype-summary";
 	public static final String CLAIIMS_ASSOCIATED_TO_ACCUMS = "/claimsRelatedToAccums/{accumType}";
 	public static final String BENEFIT_SPENDING = "/benefitspending";
-	public static final String ACCUMS_UTILIZATION = "/accums-inquiry-spending-summary";
-	public static final String ACCUMS_CONSUMPTION = "/accums-inquiry-consumption";
+	public static final String ACCUMS_UTILIZATION = "/member-spending-summary";
+	public static final String ACCUMS_CONSUMPTION = "/member-accumtype-specific-claims";
+	public static final String CLAIM_DETAIL = "/member-claim-detail";	
 	
 	/**
 	 * Claim Rules
@@ -54,9 +55,10 @@ public class UIConstants {
 	
 	public static final String API_ACCUMS_UTILIZATION_DES="Inquire Accums";
 	public static final String API_ACCUMS_UTILIZATION_TAG="Inquiry Utilization";
-	public static final String API_ACCUMS_UTILIZATION_SPENDING_SUM="Inquire Accums Spending Summary";
-	public static final String API_ACCUMS_UTILIZATION_BENEFIT_BAL="Inquire Accums Benefit Balance";
-	public static final String API_ACCUMS_UTILIZATION_CONSUMPTION="Inquire Accums Consumption";
-	public static final String CLAIM_DETAIL = "/claimDetail";	
+	public static final String API_ACCUMS_UTILIZATION_SPENDING_SUM="Inquire services summary specific to member";
+	public static final String API_ACCUMS_UTILIZATION_BENEFIT_BAL="Inquire accum-type summary specific to member";
+	public static final String API_ACCUMS_UTILIZATION_CONSUMPTION="Inquire claims specific to member and accum-type";
+	public static final String API_MEMBER_CLAIMS ="Inquire claims summary specific to member";
+	
 	
 }

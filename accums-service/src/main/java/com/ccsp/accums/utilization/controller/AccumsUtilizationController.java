@@ -63,17 +63,16 @@ public class AccumsUtilizationController {
 			"application/json; charset=utf-8", "application/xml; charset=utf-8" })
 	@ResponseBody
 	public List<SpendingSummaryDTO> getSpendingSummary(
-			@RequestParam(value = "memberId", required = false) String memberId,
-			@RequestParam(value = "subscriberId", required = false) String subscriberId)
+			@RequestParam(value = "memberId", required = false) String memberId)
 			throws ParseException, NotFoundException {
 
 		// check for input validation if both parameters are empty return status 400 for
 		// Bad request
-		if (StringUtils.isEmpty(memberId) && StringUtils.isEmpty(subscriberId))
+		if (StringUtils.isEmpty(memberId))
 			throw new ValidationException(ResponseMessageConst.NO_SEARCH_CRITERIA);
 
 		// get the utilization summary for the given member and subscriber
-		List<SpendingSummaryDTO> utilizationHistory = utilizationService.getSpendingSummary(memberId, subscriberId);
+		List<SpendingSummaryDTO> utilizationHistory = utilizationService.getSpendingSummary(memberId, null);
 
 		// return the summary if it is not empty else return status 404
 		if (CollectionUtils.isNotEmpty(utilizationHistory))
@@ -95,15 +94,14 @@ public class AccumsUtilizationController {
 	@RequestMapping(path = UIConstants.BENEFIT_BALANCE, method = RequestMethod.GET, produces = {
 			"application/json; charset=utf-8", "application/xml; charset=utf-8" })
 	public @ResponseBody List<LedgerSummaryDTO> getBenefitBalance(
-			@RequestParam(value = "subscriberId", required = false) String subscriberID,
 			@RequestParam(value = "memberId", required = false) String memberID) throws NotFoundException {
 		// check for input validation if both parameters are empty return status 400 for
 		// Bad request
-		if (StringUtils.isEmpty(subscriberID) && StringUtils.isEmpty(memberID))
+		if (StringUtils.isEmpty(memberID))
 			throw new ValidationException(ResponseMessageConst.NO_SEARCH_CRITERIA);
 
 		// get benefit balance based by member or subscriber id
-		List<LedgerSummaryDTO> utilizationHistory = accumulationSummaryService.getBenefitBalance(subscriberID,
+		List<LedgerSummaryDTO> utilizationHistory = accumulationSummaryService.getBenefitBalance(null,
 				memberID);
 
 		if (CollectionUtils.isNotEmpty(utilizationHistory))
@@ -118,8 +116,7 @@ public class AccumsUtilizationController {
 			"application/json; charset=utf-8", "application/xml; charset=utf-8" })
 	public @ResponseBody List<AccumsConsumptionDTO> getClaimDetailsByMemberIdAndAccumType(
 			@RequestParam(value = "accumType", required = true) String accumType,
-			@RequestParam(value = "memberId", required = true) String memberID,
-			@RequestParam(value = "subscriberId", required = false) String subscriberID) throws NotFoundException {
+			@RequestParam(value = "memberId", required = true) String memberID) throws NotFoundException {
 		// Check if memberId or accumType is null if so throw Validation exception
 		if (StringUtils.isEmpty(memberID) || StringUtils.isEmpty(accumType))
 			throw new ValidationException(ResponseMessageConst.NO_SEARCH_CRITERIA);
@@ -127,7 +124,7 @@ public class AccumsUtilizationController {
 		// Orchestrate the request to the service layer for fetching the claim details
 		// associated with the memberid and accumType
 		List<AccumsConsumptionDTO> accumsConsumptionDTO = utilizationService.getAccumsConsumption(accumType, memberID,
-				subscriberID);
+				null);
 		// Check if the accumsConsumption DTO is empty if so throw NotFoundException
 		if (CollectionUtils.isNotEmpty(accumsConsumptionDTO))
 			return accumsConsumptionDTO;
@@ -145,7 +142,8 @@ public class AccumsUtilizationController {
 	 * @throws NotFoundException
 	 */
 	
-	
+	@ApiOperation(value = UIConstants.API_MEMBER_CLAIMS, tags = {
+			UIConstants.API_ACCUMS_UTILIZATION_TAG })
 	@RequestMapping(path = UIConstants.CLAIM_DETAIL, method = RequestMethod.GET, produces = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
 	public @ResponseBody ClaimDetailDTO getClaimDeatilsByClaimId(@RequestParam(value="claimID", required=true) String claimID)
 			throws NotFoundException {
