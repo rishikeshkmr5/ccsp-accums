@@ -44,8 +44,8 @@ public class AccumsUtilizationService{
 		//Iterate the LedgerHeader DTOs to create corresponding utilization DTOs
 		for(SpendingSummaryDTO spendingSummaryDTO : spendingSummaryDTOList) {
 			//Set the start date and end date to static values
-			spendingSummaryDTO.setStartDate(DateUtils.format("01/01/2017"));
-			spendingSummaryDTO.setEndDate(DateUtils.format("12/31/2017"));
+			spendingSummaryDTO.setStartDate(DateUtils.getYearStart());
+			spendingSummaryDTO.setEndDate(DateUtils.getYearEnd());
 			//set the limit to static value
 			spendingSummaryDTO.setLimit(10l);
 			spendingSummaryDTO.setUnit(spendingSummaryDTO.getAllowedAmount()>0? 1.0 : 0.0);

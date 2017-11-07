@@ -1,0 +1,78 @@
+{
+  "transactionCode": "VTX-1",
+  "dcn": "CLM0000001",
+  "claimLineId": 1,
+  "serviceId": 10000,
+  "serviceName": "Specialist Office Visit",
+  "serviceDate": "05/04/2017",
+  "processedDate": "05/25/2017",
+  "networkCode": "INB",
+  "networkTier": "PPO",
+  "planId": 10,
+  "allowedAmount": 50,
+  "memberId": "A0001",
+  "subscriberId": "A0001",
+  
+  "effectiveDate": "01/01/2017",
+  "endDate": "12/31/2017",
+  "maxAmount": 1000,
+  "maxVisit": 10,
+  "unitOfMeasure": "Dollars",
+  "serviceLines": [
+    {
+      "accumType": "SPC Copay",
+      "role": "PTNT",
+      "costShareTier": "PPO",      
+      "amount": 50,      
+      "network": "INB",
+      "snapshotSummmary": 50,
+      "unitOfMeasure": "Dollars",
+      
+      "serviceDate": "05/04/2017"
+    },
+    {
+      "accumType": "Individual OPX",
+      "role": "PTNT",
+      "costShareTier": "PPO",      
+      "amount": 50,      
+      "network": "INB",
+      "snapshotSummmary": 50,
+      "unitOfMeasure": "Dollars",
+      
+      "serviceDate": "05/04/2017"
+    },
+    {
+      "accumType": "Individual Ded",
+      "role": "PTNT",
+      "costShareTier": "PPO",      
+      "amount": 50,      
+      "network": "INB",
+      "snapshotSummmary": 50,
+      "unitOfMeasure": "Dollars",
+      
+      "serviceDate": "05/04/2017"
+    },
+    {
+      "accumType": "Family Ded",
+      "role": "PTNT",
+      "costShareTier": "PPO",      
+      "amount": 50,      
+      "network": "INB",
+      "snapshotSummmary": 50,
+      "unitOfMeasure": "Dollars",
+      
+      "serviceDate": "05/04/2017"
+    },
+    {
+      "accumType": "Family OPX",
+      "role": "PTNT",
+      "costShareTier": "PPO",      
+      "amount": 50,      
+      "network": "INB",
+      "snapshotSummmary": 50,
+      "unitOfMeasure": "Dollars",
+      
+      "serviceDate": "05/04/2017"
+    }
+  ]
+}
