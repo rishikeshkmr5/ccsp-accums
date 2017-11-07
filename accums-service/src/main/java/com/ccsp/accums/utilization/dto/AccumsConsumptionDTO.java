@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlElement;
 
 import com.ccsp.common.dto.ICommonDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author nnarayanaperumaln
@@ -18,9 +19,11 @@ public class AccumsConsumptionDTO implements ICommonDTO{
 	private static final long serialVersionUID = 1L;
 	
 	@XmlElement(name="claim")
+	@JsonProperty("claim")
 	private String dcn;
 	
 	@XmlElement(name="network")
+	@JsonProperty("network")
 	private String networkCode;
 	
 	@JsonFormat(pattern = "MM/dd/yyyy")
@@ -32,9 +35,11 @@ public class AccumsConsumptionDTO implements ICommonDTO{
 	private Date processedDate;
 	
 	@XmlElement(name="amount")
+	@JsonProperty("amount")
 	private Double allowedAmount;
 	
 	@XmlElement(name="runningTotal")
+	@JsonProperty("runningTotal")
 	private Double amount;
 	
 	@XmlElement(name="member")

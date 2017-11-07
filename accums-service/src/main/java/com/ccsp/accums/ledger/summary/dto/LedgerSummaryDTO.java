@@ -5,11 +5,13 @@ import java.util.Date;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.ccsp.common.dto.ICommonDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author Vaibhav
@@ -22,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-@JsonIgnoreProperties({"id", "planId", "networkCode", "networkTier", "unitOfMeasure", "maxVisit"})
+@JsonIgnoreProperties({"id", "planId", "networkTier", "unitOfMeasure", "maxVisit"})
 public class LedgerSummaryDTO  implements ICommonDTO {
 
 	/**
@@ -41,14 +43,20 @@ public class LedgerSummaryDTO  implements ICommonDTO {
 	@NotNull(message = "AccumTypeName cannot be empty")
 	private String accumType;
 	
+	@XmlElement(name="accumulation")
+	@JsonProperty("accumulation")
 	private Double amount;
 	
+	@XmlElement(name="network")
+	@JsonProperty("network")
 	private String networkCode;
 	
 	private String networkTier;
 	
 	private String unitOfMeasure;
 	
+	@XmlElement(name="limit")
+	@JsonProperty("limit")
 	private Double maxAmount;
 	
 	private Integer maxVisit;
