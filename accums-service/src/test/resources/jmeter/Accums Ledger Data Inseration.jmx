@@ -26,20 +26,6 @@
         <stringProp name="ThreadGroup.delay"></stringProp>
       </ThreadGroup>
       <hashTree>
-        <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="Ledger Header HTTP Request Defaults" enabled="true">
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-            <collectionProp name="Arguments.arguments"/>
-          </elementProp>
-          <stringProp name="HTTPSampler.domain">localhost</stringProp>
-          <stringProp name="HTTPSampler.port">8585</stringProp>
-          <stringProp name="HTTPSampler.protocol">http</stringProp>
-          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/accums-service/ledger-header</stringProp>
-          <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
-          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-          <stringProp name="HTTPSampler.response_timeout"></stringProp>
-        </ConfigTestElement>
-        <hashTree/>
         <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
           <collectionProp name="Arguments.arguments">
             <elementProp name="time" elementType="Argument">
@@ -79,7 +65,6 @@
                 <elementProp name="" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.value">{&#xd;
-  &quot;accumType&quot;: &quot;SPC COPAY&quot;,&#xd;
   &quot;allowedAmount&quot;: ${amount},&#xd;
   &quot;claimLineId&quot;: ${counter_value},&#xd;
   &quot;dcn&quot;: &quot;CLM${clm}&quot;,&#xd;
@@ -160,7 +145,7 @@
             <stringProp name="HTTPSampler.port">8585</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
             <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-            <stringProp name="HTTPSampler.path">accums-service/ledger-header</stringProp>
+            <stringProp name="HTTPSampler.path">accums-service/accums-utilization</stringProp>
             <stringProp name="HTTPSampler.method">POST</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -244,6 +229,7 @@
                 </value>
               </objProp>
               <stringProp name="filename"></stringProp>
+              <boolProp name="useGroupName">true</boolProp>
             </ResultCollector>
             <hashTree/>
             <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
@@ -280,7 +266,7 @@
                 </value>
               </objProp>
               <stringProp name="filename"></stringProp>
-              <boolProp name="saveHeaders">false</boolProp>
+              <boolProp name="useGroupName">true</boolProp>
             </ResultCollector>
             <hashTree/>
             <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">

@@ -147,9 +147,9 @@ public class LedgerHeaderController {
 				header.setMemberId(column[11]);
 				header.setSubscriberId(column[12]);
 				header.setUnitOfMeasure(column[13]);
-				header.setTransactionCode(column[15]);
-				header.setMaxAmount(Double.parseDouble(column[16]));
-				header.setMaxVisit(Integer.parseInt(column[17]));
+				header.setTransactionCode(column[14]);
+				header.setMaxAmount(Double.parseDouble(column[15]));
+				header.setMaxVisit(Integer.parseInt(column[16]));
 				header.setEndDate(endDate);
 				header.setEffectiveDate(startDate);
 
@@ -166,8 +166,8 @@ public class LedgerHeaderController {
 			header.setMaxVisit(Integer.parseInt(column[17]));
 			*
 			*/
-			entryDTO.setAccumType(column[18]);
-			entryDTO.setRole(column[19]);
+			entryDTO.setAccumType(column[17]);
+			entryDTO.setRole(column[18]);
 			entryDTO.setAmount(header.getAllowedAmount());
 			entryDTO.setCostShareTier(header.getNetworkTier());
 			entryDTO.setNetwork(header.getNetworkCode());
