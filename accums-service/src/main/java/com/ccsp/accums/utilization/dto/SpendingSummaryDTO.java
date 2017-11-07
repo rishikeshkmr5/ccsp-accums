@@ -4,9 +4,11 @@ import java.util.Date;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import com.ccsp.common.dto.ICommonDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author nnarayanaperumaln
@@ -29,8 +31,12 @@ public class SpendingSummaryDTO implements ICommonDTO{
 
 	private String subscriberId;
 
+	@XmlElement(name="network")
+	@JsonProperty("network")
 	private String networkCode;
 
+	@XmlElement(name="benefit")
+	@JsonProperty("benefit")
 	private String serviceName;
 
 	@JsonFormat(pattern = "MM/dd/yyyy")
@@ -39,8 +45,12 @@ public class SpendingSummaryDTO implements ICommonDTO{
 	@JsonFormat(pattern = "MM/dd/yyyy")
 	private Date endDate;
 
+	@XmlElement(name="accumulation")
+	@JsonProperty("accumulation")
 	private Double allowedAmount;
 
+	@XmlElement(name="units")
+	@JsonProperty("units")
 	private Double unit;
 
 	private Long limit;
