@@ -8,6 +8,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.ccsp.common.dto.ICommonDTO;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * @author Vaibhav
@@ -20,6 +22,7 @@ import com.ccsp.common.dto.ICommonDTO;
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
+@JsonIgnoreProperties({"id", "planId", "networkCode", "networkTier", "unitOfMeasure", "maxVisit"})
 public class LedgerSummaryDTO  implements ICommonDTO {
 
 	/**
@@ -50,8 +53,10 @@ public class LedgerSummaryDTO  implements ICommonDTO {
 	
 	private Integer maxVisit;
 	
+	@JsonFormat(pattern = "MM/dd/yyyy")
 	private Date effectiveDate;
 	
+	@JsonFormat(pattern = "MM/dd/yyyy")
 	private Date endDate;
 
 	/**
