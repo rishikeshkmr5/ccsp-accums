@@ -7,7 +7,10 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Service;
 
 import com.ccsp.common.dto.ICommonDTO;
 import com.ccsp.common.mapper.IBaseMapper;
@@ -19,6 +22,8 @@ import javassist.NotFoundException;
  * @author nnarayanaperumaln
  *
  */
+@Service
+@Transactional
 public abstract class CommonServiceImpl <T extends ICommonDTO, S extends Serializable> implements ICommonService<T> {
 
 	/* (non-Javadoc)

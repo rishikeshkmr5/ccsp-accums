@@ -6,6 +6,10 @@ package com.ccsp.common.service;
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Service;
+
 import com.ccsp.common.dto.ICommonDTO;
 
 import javassist.NotFoundException;
@@ -14,6 +18,8 @@ import javassist.NotFoundException;
  * @author nnarayanaperumaln
  *
  */
+@Service
+@Transactional
 public interface ICommonService <T extends ICommonDTO>{
 
 	/**
