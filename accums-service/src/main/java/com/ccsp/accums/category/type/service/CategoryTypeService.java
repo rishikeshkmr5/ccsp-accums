@@ -11,11 +11,8 @@ import com.ccsp.accums.category.type.dto.CategoryTypeDTO;
 import com.ccsp.accums.category.type.entity.CategoryTypeEntity;
 import com.ccsp.accums.category.type.mapper.CategoryTypeMapper;
 import com.ccsp.accums.category.type.repository.ICategoryTypeRepository;
-import com.ccsp.accums.ledger.benefit.dto.ClaimDetailsForAccumTypeDTO;
 import com.ccsp.common.mapper.IBaseMapper;
 import com.ccsp.common.service.impl.CommonServiceImpl;
-
-import javassist.NotFoundException;
 
 /**
  * @author vamehta

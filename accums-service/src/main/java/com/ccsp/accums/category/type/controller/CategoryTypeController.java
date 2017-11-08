@@ -19,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ccsp.accums.category.type.dto.CategoryTypeDTO;
 import com.ccsp.accums.category.type.service.CategoryTypeService;
-import com.ccsp.accums.ledger.benefit.dto.ClaimDetailsForAccumTypeDTO;
 import com.ccsp.common.utils.UIConstants;
 import com.sun.xml.xsom.impl.scd.ParseException;
 
@@ -27,21 +26,20 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import javassist.NotFoundException;
 
-
 /**
  * @author vamehta
  *
  */
 @RestController
 @Api(description = UIConstants.API_CATEGORY_TYPE_DES, produces = "application/json", tags = {
-		UIConstants.API_CATEGORY_TYPE_TAG }, hidden=true)
+		UIConstants.API_CATEGORY_TYPE_TAG }, hidden = true)
 public class CategoryTypeController {
 
 	@Autowired
 	private CategoryTypeService categoryTypeService;
 
 	/**
-	 * Persist the received LedgerHeader Details from CSV file
+	 * Persist the received Category Details from CSV file
 	 * 
 	 * @param multipart
 	 * @throws ParseException
@@ -49,8 +47,8 @@ public class CategoryTypeController {
 	 * @throws IOException
 	 */
 	@ApiOperation(value = UIConstants.API_CATEGORY_TYPE_CREATE_CSV, tags = { UIConstants.API_CATEGORY_TYPE_TAG })
-	@RequestMapping(value = UIConstants.API_CATEGORY_TYPE_CREATE_CSV, headers = ("content-type=multipart/*"), method = RequestMethod.POST)
-	public @ResponseBody void createCategoryType(@RequestParam("file") MultipartFile multipart)
+	@RequestMapping(value = UIConstants.CATEGORY_TYPE_CSV, headers = ("content-type=multipart/*"), method = RequestMethod.POST)
+	public @ResponseBody String createCategoryType(@RequestParam("file") MultipartFile multipart)
 			throws ParseException, java.text.ParseException, IOException {
 
 		BufferedReader br;
@@ -74,21 +72,27 @@ public class CategoryTypeController {
 			categoryTypeDTO.setActive(column[4].charAt(0));
 			categoryTypeDTOs.add(categoryTypeDTO);
 		}
-		if(CollectionUtils.isNotEmpty(categoryTypeDTOs))
-		categoryTypeService.create(categoryTypeDTOs);
+		// create categories in category table
+		if (CollectionUtils.isNotEmpty(categoryTypeDTOs))
+			categoryTypeDTOs = categoryTypeService.create(categoryTypeDTOs);
+
+		return "Categories created : " + categoryTypeDTOs.size();
 	}
-	
+
 	/**
 	 * fetch all the list of values based on category type
 	 * 
 	 * @param category
 	 * @throws NotFoundException
 	 */
-	@RequestMapping(path = UIConstants.CATEGORY, method = RequestMethod.GET, produces = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
+	@ApiOperation(value = UIConstants.API_CATEGORY_TYPE_INQUIRE, tags = { UIConstants.API_CATEGORY_TYPE_TAG })
+	@RequestMapping(path = UIConstants.CATEGORY, method = RequestMethod.GET, produces = {
+			"application/json; charset=utf-8", "application/xml; charset=utf-8" })
 	@ResponseBody
-	public List<CategoryTypeDTO> getValuesByCategory(@PathVariable("category-Type") String category) throws NotFoundException {
-			return categoryTypeService.getListOfValues(category);
-		
+	public List<CategoryTypeDTO> getValuesByCategory(@PathVariable("category-Type") String category)
+			throws NotFoundException {
+		return categoryTypeService.getListOfValues(category);
+
 	}
 
 }
