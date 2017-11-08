@@ -1,5 +1,7 @@
 package com.ccsp.accums.category.type.entity;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,12 +9,17 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DiscriminatorOptions;
+
 /**
  * @author vamehta
  *
  */
 @Entity
 @Table(name = "CATEGORY_TYPE")
+@DiscriminatorColumn(name="ACTIVE")
+@DiscriminatorValue("Y")
+@DiscriminatorOptions(force = true)
 public class CategoryTypeEntity  implements java.io.Serializable {
 	
 	/**
@@ -35,7 +42,7 @@ public class CategoryTypeEntity  implements java.io.Serializable {
 	@Column(name = "DISPLAY_NAME", nullable = true)
 	private String displayName;
 	
-	@Column(name = "ACTIVE", nullable = true, length=1)
+	@Column(name = "ACTIVE", nullable = true, length=1, insertable=false, updatable=false)
 	private char active;
 	
 	/**

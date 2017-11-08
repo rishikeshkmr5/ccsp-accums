@@ -69,7 +69,6 @@ public class CategoryTypeController {
 			categoryTypeDTO.setCategory(column[1]);
 			categoryTypeDTO.setCode(column[2]);
 			categoryTypeDTO.setDisplayName(column[3]);
-			categoryTypeDTO.setActive(column[4].charAt(0));
 			categoryTypeDTOs.add(categoryTypeDTO);
 		}
 		// create categories in category table
