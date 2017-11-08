@@ -29,7 +29,7 @@
 		<docker-maven-plugin.version>0.4.13</docker-maven-plugin.version>
 		<sonar.host.url>http://localhost:9000</sonar.host.url>
 		<org.mapstruct.version>1.1.0.Final</org.mapstruct.version>
-		<start-class>com.ccsp.accums.configuration.AccumsApplication</start-class>
+		<start-class>com.ccsp.AccumsApplication</start-class>
 	</properties>
 	
 	<repositories>
