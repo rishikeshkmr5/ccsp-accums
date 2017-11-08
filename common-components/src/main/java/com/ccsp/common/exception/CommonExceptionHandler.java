@@ -31,7 +31,7 @@ public class CommonExceptionHandler {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	
-	/**This method handles exception of type 'NotFoundException'
+	/**This method handles custom exception of type 'NotFoundException'
      * @param ex
      * @return A dto containing 'errorCode', 'message' and 'type'
      */
@@ -68,21 +68,6 @@ public class CommonExceptionHandler {
     	logger.error(""+ error);
     	return new ResponseEntity<ValidationErrorMessageDTO>(error, HttpStatus.NOT_FOUND);
     } 
-    
-	//Commenting out this code as per the suggestion in review call. We don't want to use Map. We can write this code without using Map which will help to improve the performance.
-   
-    /*protected ErrorMessage buildErrors(ErrorCodes errorCode, String msg) {
-		return buildErrors(errorCode, msg, "error");
-	}
-
-	protected ErrorMessage buildErrorMap(ErrorCodes errorCode, String msg, String fieldName) {
-		Map<String, IMessageDTO> errors = new HashMap<String, IMessageDTO>();
-		IMessageDTO message = new ValidationErrorMessageDTO(errorCode, MessageType.ERROR, msg);
-		errors.put(fieldName, message);
-		ErrorMessage errorMessage = new ErrorMessage(errors);
-		return errorMessage;
-	}*/
-	
     
 	/** 
 	 * @param errorCode
