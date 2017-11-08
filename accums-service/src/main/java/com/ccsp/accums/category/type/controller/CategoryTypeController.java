@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,11 +19,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ccsp.accums.category.type.dto.CategoryTypeDTO;
 import com.ccsp.accums.category.type.service.CategoryTypeService;
+import com.ccsp.accums.ledger.benefit.dto.ClaimDetailsForAccumTypeDTO;
 import com.ccsp.common.utils.UIConstants;
 import com.sun.xml.xsom.impl.scd.ParseException;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import javassist.NotFoundException;
 
 
 /**
@@ -45,7 +48,7 @@ public class CategoryTypeController {
 	 * @throws java.text.ParseException
 	 * @throws IOException
 	 */
-	@ApiOperation(value = UIConstants.API_CATEGORY_TYPE_CREATE_CSV, tags = { UIConstants.API_CATEGORY_TYPE_TAG }, hidden=true)
+	@ApiOperation(value = UIConstants.API_CATEGORY_TYPE_CREATE_CSV, tags = { UIConstants.API_CATEGORY_TYPE_TAG })
 	@RequestMapping(value = UIConstants.API_CATEGORY_TYPE_CREATE_CSV, headers = ("content-type=multipart/*"), method = RequestMethod.POST)
 	public @ResponseBody void createCategoryType(@RequestParam("file") MultipartFile multipart)
 			throws ParseException, java.text.ParseException, IOException {
@@ -73,6 +76,19 @@ public class CategoryTypeController {
 		}
 		if(CollectionUtils.isNotEmpty(categoryTypeDTOs))
 		categoryTypeService.create(categoryTypeDTOs);
+	}
+	
+	/**
+	 * fetch all the list of values based on category type
+	 * 
+	 * @param category
+	 * @throws NotFoundException
+	 */
+	@RequestMapping(path = UIConstants.CATEGORY, method = RequestMethod.GET, produces = {"application/json; charset=utf-8","application/xml; charset=utf-8"})
+	@ResponseBody
+	public List<CategoryTypeDTO> getValuesByCategory(@PathVariable("category-Type") String category) throws NotFoundException {
+			return categoryTypeService.getListOfValues(category);
+		
 	}
 
 }

@@ -71,6 +71,7 @@ public class UIConstants {
 	public static final String API_CATEGORY_TYPE_TAG="Category Type";
 	public static final String API_CATEGORY_TYPE_CREATE_CSV="Load Categories with CSV";
 	public static final String CATEGORY_TYPE_CSV = "/category-type-csv";
+	public static final String CATEGORY = "/category/{category-Type}";
 	
 	
 }

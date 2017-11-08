@@ -1,5 +1,7 @@
 package com.ccsp.accums.category.type.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,8 +11,11 @@ import com.ccsp.accums.category.type.dto.CategoryTypeDTO;
 import com.ccsp.accums.category.type.entity.CategoryTypeEntity;
 import com.ccsp.accums.category.type.mapper.CategoryTypeMapper;
 import com.ccsp.accums.category.type.repository.ICategoryTypeRepository;
+import com.ccsp.accums.ledger.benefit.dto.ClaimDetailsForAccumTypeDTO;
 import com.ccsp.common.mapper.IBaseMapper;
 import com.ccsp.common.service.impl.CommonServiceImpl;
+
+import javassist.NotFoundException;
 
 /**
  * @author vamehta
@@ -40,6 +45,16 @@ public class CategoryTypeService extends CommonServiceImpl<CategoryTypeDTO, Cate
 	@Override
 	public IBaseMapper<CategoryTypeDTO, CategoryTypeEntity> getMapper() {
 		return CategoryTypeMapper.INSTANCE;
+	}
+	/**
+	 * fetch all the list of values based on category type
+	 * @param category
+	 */
+
+	public List<CategoryTypeDTO> getListOfValues(String category) {		
+		List<CategoryTypeEntity> categoryTypeEntityList = categoryTypeRepository.findBycategory(category);
+		List<CategoryTypeDTO> categoryTypeDTOs=  getMapper().convertToDTOList(categoryTypeEntityList);
+		return categoryTypeDTOs;
 	}
 
 }
