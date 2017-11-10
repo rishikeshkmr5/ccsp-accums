@@ -2,7 +2,7 @@
   "transactionCode": "VTX-1",
   "dcn": "CLM0000002",
   "claimLineId": 1,
-  "serviceId": 10000,
+  "serviceId": 20000,
   "serviceName": "Surgery",
   "serviceDate": "05/10/2017",
   "processedDate": "06/01/2017",
