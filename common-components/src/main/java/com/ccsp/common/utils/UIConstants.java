@@ -76,7 +76,8 @@ public class UIConstants {
 	public static final String CATEGORY_TYPE_CSV = "/category-type-csv";
 	public static final String CATEGORY = "/category/{category-Type}";
 	public static final String UI_INQUIRY = "/inquiry/{subscriberID}";
-	public static final String UI_INQUIRY_INDIVIDUAL_UTILIZATION = "/inquiry/{memberID}";
+	public static final String UI_INQUIRY_INDIVIDUAL_UTILIZATION = "/individualcategorydetail-inquiry/{memberID}";
+	public static final String UI_INQUIRY_FAMILY_UTILIZATION = "/familycategorydetail-inquiry/{subscriberID}";
 	
 	
 	

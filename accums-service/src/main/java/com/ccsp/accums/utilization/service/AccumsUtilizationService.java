@@ -17,6 +17,9 @@ import com.ccsp.accums.ledger.header.service.LedgerHeaderService;
 import com.ccsp.accums.utilization.dto.AccumUtilizationDetailDTO;
 import com.ccsp.accums.utilization.dto.AccumsConsumptionDTO;
 import com.ccsp.accums.utilization.dto.ClaimDetailDTO;
+import com.ccsp.accums.utilization.dto.FamilyUtilizationDTO;
+import com.ccsp.accums.utilization.dto.IndividualUtilizationDTO;
+import com.ccsp.accums.utilization.dto.UtilizationPeriodDetailDTO;
 import com.ccsp.accums.utilization.dto.SpendingSummaryDTO;
 import com.ccsp.common.utils.DateUtils;
 
@@ -130,5 +133,75 @@ public class AccumsUtilizationService{
 			 accumUtilizationDetailDTOList.add(accumUtilizationDetailDTO);
 		 }
 		return accumUtilizationDetailDTOList;
+	}
+
+	public List<IndividualUtilizationDTO> getAccumsIndividualUtilization(String memberID) {
+		List<IndividualUtilizationDTO> individualUtilizationDTOList = new ArrayList(); 
+		List<LedgerHeaderDTO> ledgerHeaderDTOList=ledgerHeaderService.findByMemberId(memberID);
+		for(LedgerHeaderDTO ledgerHeaderDTO:ledgerHeaderDTOList) {
+			List<LedgerEntryDTO> ledgerentries = ledgerEntryService.findByLedgerId(ledgerHeaderDTO.getId());
+				for(LedgerEntryDTO ledgerEntryDTO:ledgerentries) {
+					IndividualUtilizationDTO individualUtilizationDTO= new IndividualUtilizationDTO();
+					List<UtilizationPeriodDetailDTO> individualUtilizationPeriodDetailDTOList = new ArrayList();
+					UtilizationPeriodDetailDTO individualUtilizationPeriodDetailDTO = new UtilizationPeriodDetailDTO();
+					UtilizationPeriodDetailDTO individualUtilizationPeriodDetailDTO1 = new UtilizationPeriodDetailDTO();
+					individualUtilizationPeriodDetailDTO.setAccumsRemaining(600l);
+					individualUtilizationPeriodDetailDTO.setPeriod("12/01/2019");
+					individualUtilizationPeriodDetailDTO.setPlanPeriodLimit(129l);
+					individualUtilizationPeriodDetailDTO.setPlanPeriodUtilization(450l);
+					
+					individualUtilizationPeriodDetailDTO1.setAccumsRemaining(400l);
+					individualUtilizationPeriodDetailDTO1.setPeriod("12/01/2019");
+					individualUtilizationPeriodDetailDTO1.setPlanPeriodLimit(1266l);
+					individualUtilizationPeriodDetailDTO1.setPlanPeriodUtilization(2450l);
+					individualUtilizationPeriodDetailDTOList.add(individualUtilizationPeriodDetailDTO);
+					individualUtilizationPeriodDetailDTOList.add(individualUtilizationPeriodDetailDTO1);
+					
+					
+					individualUtilizationDTO.setAccumType(ledgerEntryDTO.getAccumType());
+					individualUtilizationDTO.setMemberID(memberID);
+					individualUtilizationDTO.setIndividualUtilizationPeriodDetailDTOList(individualUtilizationPeriodDetailDTOList);
+					individualUtilizationDTOList.add(individualUtilizationDTO);
+			  	}
+				
+		}
+		return individualUtilizationDTOList;
+	}
+
+	public List<FamilyUtilizationDTO> getAccumsFamilyUtilization(String subscriberID) {
+		List<FamilyUtilizationDTO> familyUtilizationDTOList = new ArrayList();
+		List<LedgerHeaderDTO> ledgerHeaderDTOList = ledgerHeaderService.findBySubscriberId(subscriberID);
+		for(LedgerHeaderDTO ledgerHeaderSubscriberDTO:ledgerHeaderDTOList) {
+			List<LedgerHeaderDTO> ledgerHeaderMembersForSubscriberDTOList=ledgerHeaderService.fetchByMemberIdAndSubscriberId(ledgerHeaderSubscriberDTO.getMemberId(), subscriberID);
+			for(LedgerHeaderDTO ledgerHeaderDTO:ledgerHeaderMembersForSubscriberDTOList) {
+				List<LedgerEntryDTO> ledgerentries = ledgerEntryService.findByLedgerId(ledgerHeaderDTO.getId());
+					for(LedgerEntryDTO ledgerEntryDTO:ledgerentries) {
+						FamilyUtilizationDTO familyUtilizationDTO= new FamilyUtilizationDTO();
+						List<UtilizationPeriodDetailDTO> utilizationPeriodDetailDTOList = new ArrayList();
+						UtilizationPeriodDetailDTO familyUtilizationPeriodDetailDTO = new UtilizationPeriodDetailDTO();
+						UtilizationPeriodDetailDTO familyUtilizationPeriodDetailDTO1 = new UtilizationPeriodDetailDTO();
+						familyUtilizationPeriodDetailDTO.setAccumsRemaining(600l);
+						familyUtilizationPeriodDetailDTO.setPeriod("12/01/2019");
+						familyUtilizationPeriodDetailDTO.setPlanPeriodLimit(129l);
+						familyUtilizationPeriodDetailDTO.setPlanPeriodUtilization(450l);
+						
+						familyUtilizationPeriodDetailDTO1.setAccumsRemaining(400l);
+						familyUtilizationPeriodDetailDTO1.setPeriod("12/01/2019");
+						familyUtilizationPeriodDetailDTO1.setPlanPeriodLimit(1266l);
+						familyUtilizationPeriodDetailDTO1.setPlanPeriodUtilization(2450l);
+						utilizationPeriodDetailDTOList.add(familyUtilizationPeriodDetailDTO);
+						utilizationPeriodDetailDTOList.add(familyUtilizationPeriodDetailDTO1);
+						
+						
+						familyUtilizationDTO.setAccumType(ledgerEntryDTO.getAccumType());
+						familyUtilizationDTO.setUtilizationPeriodDetailDTOList(utilizationPeriodDetailDTOList);
+						familyUtilizationDTO.setSubscriberId(subscriberID);
+						familyUtilizationDTOList.add(familyUtilizationDTO);
+				  	}
+					
+			}
+			
+		}
+		return familyUtilizationDTOList;
 	}
 }
