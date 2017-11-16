@@ -95,6 +95,11 @@ public class LedgerHeaderService extends CommonServiceImpl<LedgerHeaderDTO, Ledg
 				
 				//Calculates and persists the accums summary based on header and service lines.
 				ledgerSummaryService.create(ledgerHeaderDTO);
+				
+				/**
+				 * Uncomment if calculation are required to be carried at db level 
+				 */
+				//ledgerSummaryService.createNew(ledgerHeaderDTO);
 			}
 		}
 		return ledgerHeaderDTO;

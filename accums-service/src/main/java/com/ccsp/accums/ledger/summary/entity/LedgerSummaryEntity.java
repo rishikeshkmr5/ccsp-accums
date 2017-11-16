@@ -72,6 +72,21 @@ public class LedgerSummaryEntity  implements java.io.Serializable {
 	public LedgerSummaryEntity() { }
 
 	/**
+	 * Created to convert results of fetchAccumulation from Ledger header repository 
+	 */
+	public LedgerSummaryEntity(String accumType,String memberId,String networkCode, String networkTier,int planId,String subscriberId,Double amount,String unitOfMeasure) {
+		this.accumType=accumType;
+		this.memberId=memberId;
+		this.networkCode=networkCode;
+		this.networkTier=networkTier;
+		this.planId=(long) planId;
+		this.subscriberId=subscriberId;
+		this.amount=amount;
+		this.unitOfMeasure=unitOfMeasure;
+		
+	}
+	
+	/**
 	 * @return the id
 	 */
 	public Long getId() {

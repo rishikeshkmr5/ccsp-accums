@@ -224,5 +224,25 @@ public class LedgerSummaryService extends CommonServiceImpl<LedgerSummaryDTO, Le
 		// return dto list
 		return getMapper().convertToDTOList(ledgerSummaryEntities);
 	}
+	
+	/**
+	 * This method fetches cumulative amount from ledger entry based on member id from ledger header. 
+	 * Any previous summary records are deleted and new records are created based on above member id. 
+	 * @param ledgerHeaderDTO
+	 */
+	public void createNew(LedgerHeaderDTO ledgerHeaderDTO) {
+		
+		//fetch the ledgerSummary entries from ledgerHeader and ledgerEntry by the given member id with accumulation
+		List<LedgerSummaryEntity> ledgerSummaryEntities =  ledgerHeaderRepository.fetchAccumulation(ledgerHeaderDTO.getMemberId());
+		
+		//delete existing records in ledgerSummary
+		for (LedgerEntryDTO ledgerEntryDTO : ledgerHeaderDTO.getServiceLines()) {
+			ledgerSummaryRepository.deleteLedgerSummary(ledgerHeaderDTO.getMemberId(), ledgerEntryDTO.getAccumType(), ledgerHeaderDTO.getNetworkCode(), ledgerHeaderDTO.getNetworkTier());
+		}
+		
+		//save ledgerSummary entries
+		ledgerSummaryRepository.save(ledgerSummaryEntities);
+	}
+
 }
 
