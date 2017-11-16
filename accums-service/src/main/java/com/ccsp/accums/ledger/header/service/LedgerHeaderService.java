@@ -189,4 +189,10 @@ public class LedgerHeaderService extends CommonServiceImpl<LedgerHeaderDTO, Ledg
 		claimDetailDTO = ClaimMapper.INSTANCE.convertToDTO(ledgerHeaderDTO);
 		return claimDetailDTO;
 	}
+	
+	public List<LedgerHeaderDTO> findBySubscriberId(String subscriberId){
+		List<LedgerHeaderEntity> ledgerHeaderEntities = ledgerHeaderRepository.findBySubscriberId(subscriberId);
+		List<LedgerHeaderDTO> ledgerHeaderDTOs = getMapper().convertToDTOList(ledgerHeaderEntities);
+		return ledgerHeaderDTOs;
+	}
 }

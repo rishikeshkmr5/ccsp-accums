@@ -3,15 +3,18 @@ package com.ccsp.accums.utilization.service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ccsp.accums.category.type.service.CategoryTypeService;
 import com.ccsp.accums.ledger.entry.dto.LedgerEntryDTO;
 import com.ccsp.accums.ledger.entry.service.LedgerEntryService;
 import com.ccsp.accums.ledger.header.dto.LedgerHeaderDTO;
 import com.ccsp.accums.ledger.header.service.LedgerHeaderService;
+import com.ccsp.accums.utilization.dto.AccumUtilizationDetailDTO;
 import com.ccsp.accums.utilization.dto.AccumsConsumptionDTO;
 import com.ccsp.accums.utilization.dto.ClaimDetailDTO;
 import com.ccsp.accums.utilization.dto.SpendingSummaryDTO;
@@ -31,6 +34,8 @@ public class AccumsUtilizationService{
 	@Autowired
 	private LedgerEntryService ledgerEntryService;
 	
+	@Autowired
+	private CategoryTypeService categoryTypeService;
 	/**
 	 * Fetch the spending summary for the member id and subscriber id
 	 * @param memberId
@@ -76,5 +81,54 @@ public class AccumsUtilizationService{
 		claimDetailDTO  = ledgerHeaderService.getClaim(claimID);
 	    claimDetailDTO.setProvider("Dr. Phill");
 	return claimDetailDTO;	
+	}
+	public List<AccumUtilizationDetailDTO> getAccumsUtilizationDetail(String subscriberID) throws ParseException {
+		String accumType = null;
+		SimpleDateFormat dateformat3 = new SimpleDateFormat("dd/MM/yyyy");
+		Date date1 = dateformat3.parse("17/07/1989");
+	    
+		List<AccumUtilizationDetailDTO> accumUtilizationDetailDTOList = new ArrayList<>();
+		 List<LedgerHeaderDTO> LedgerHeaderDTOlist = ledgerHeaderService.findBySubscriberId(subscriberID);
+		
+		 	 for(LedgerHeaderDTO ledgerHeaderDTO : LedgerHeaderDTOlist) {
+		 	List<LedgerHeaderDTO> ledgerHeaderDTOList = ledgerHeaderService.fetchByMemberIdAndSubscriberId(ledgerHeaderDTO.getMemberId(), subscriberID);
+			 AccumUtilizationDetailDTO accumUtilizationDetailDTO  = new AccumUtilizationDetailDTO();
+			 accumUtilizationDetailDTO.setSubscriberID(ledgerHeaderDTO.getSubscriberId());
+			 accumUtilizationDetailDTO.setMemberPartyID(ledgerHeaderDTO.getMemberId());
+			 accumUtilizationDetailDTO.setMemberName("Johny Doe");
+			 accumUtilizationDetailDTO.setGroupNumber(100);
+			 accumUtilizationDetailDTO.setDOB(date1);
+			 accumUtilizationDetailDTO.setSectionNumer(1);
+			 accumUtilizationDetailDTO.setAccountNumber(10101000);
+			 accumUtilizationDetailDTO.setSSN("XXX--XX--XXX");
+			 accumUtilizationDetailDTO.setRelationship("Subscriber");
+			 accumUtilizationDetailDTO.setGender("M");
+			 List<Long> networkTypes  = new ArrayList<>();
+			 for(LedgerHeaderDTO ledgerDTO:ledgerHeaderDTOList) {
+				 Long networkTypeId = categoryTypeService.getListOfValues(("network-type"),ledgerDTO.getNetworkCode()); 
+				 if(networkTypeId!=null)
+				 networkTypes.add(networkTypeId);
+			 }
+			 			 
+			 accumUtilizationDetailDTO.setNetworkType(networkTypes);
+			 List<Long> accumTypes = new ArrayList<>();
+			 List<LedgerEntryDTO> ledgerentries = ledgerEntryService.findByLedgerId(ledgerHeaderDTO.getId());
+			 for(LedgerEntryDTO ledgerEntryDTO:ledgerentries) {
+				 accumType = ledgerEntryDTO.getAccumType();
+				 Long accumTypesId = categoryTypeService.getListOfValues(("accum-type"),accumType);
+				 if(accumTypesId != null)
+				 accumTypes.add(accumTypesId);
+			  	}
+			 accumUtilizationDetailDTO.setAccumType(accumTypes);
+			 
+			 List<Long> benefitPeriod = categoryTypeService.getListOfPeriod("benefit-period");
+			 accumUtilizationDetailDTO.setBenefitPeriod(benefitPeriod);
+			 
+			 List<Long> planPeriod = categoryTypeService.getListOfPeriod("plan-period");
+			 accumUtilizationDetailDTO.setPlanPeriod(planPeriod);
+			  
+			 accumUtilizationDetailDTOList.add(accumUtilizationDetailDTO);
+		 }
+		return accumUtilizationDetailDTOList;
 	}
 }

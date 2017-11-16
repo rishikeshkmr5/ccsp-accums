@@ -68,11 +68,16 @@ public class UIConstants {
 	 * Category API constants
 	 */
 	public static final String API_CATEGORY_TYPE_DES="Load/Inquire Category";
+	public static final String API_ACCUMS_UTILIZATION_DETAIL="Retreive/Inquire Category";
 	public static final String API_CATEGORY_TYPE_TAG="Category Type";
+	public static final String API_ACCUMS_UTILIZATION_DETAIL_TAG="Accums Utilization Detail";
 	public static final String API_CATEGORY_TYPE_CREATE_CSV="Load Categories with CSV";
 	public static final String API_CATEGORY_TYPE_INQUIRE="Inquiry Categories";
 	public static final String CATEGORY_TYPE_CSV = "/category-type-csv";
 	public static final String CATEGORY = "/category/{category-Type}";
+	public static final String UI_INQUIRY = "/inquiry/{subscriberID}";
+	public static final String UI_INQUIRY_INDIVIDUAL_UTILIZATION = "/inquiry/{memberID}";
+	
 	
 	
 }

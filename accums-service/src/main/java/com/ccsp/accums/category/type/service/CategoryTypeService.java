@@ -53,5 +53,19 @@ public class CategoryTypeService extends CommonServiceImpl<CategoryTypeDTO, Cate
 		List<CategoryTypeDTO> categoryTypeDTOs=  getMapper().convertToDTOList(categoryTypeEntityList);
 		return categoryTypeDTOs;
 	}
+	
+	public List<Long> getListOfPeriod(String string) {		
+		List<Long> categoryTypeEntityIdList = categoryTypeRepository.findByPeriod("benefit-period");		
+		return categoryTypeEntityIdList;
+	}
+
+	public Long getListOfValues(String categoryType, String networkCode) {
+	Long categoryTypeEntityIdList = categoryTypeRepository.findBycategoryTypeAndNetworkCode(categoryType,networkCode);
+	
+	return categoryTypeEntityIdList;
+	}
+	
+	
+	
 
 }
