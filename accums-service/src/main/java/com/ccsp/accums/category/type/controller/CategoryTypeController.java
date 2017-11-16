@@ -32,7 +32,7 @@ import javassist.NotFoundException;
  */
 @RestController
 @Api(description = UIConstants.API_CATEGORY_TYPE_DES, produces = "application/json", tags = {
-		UIConstants.API_CATEGORY_TYPE_TAG }, hidden = true)
+		UIConstants.API_CATEGORY_TYPE_TAG }, hidden = false)
 public class CategoryTypeController {
 
 	@Autowired
