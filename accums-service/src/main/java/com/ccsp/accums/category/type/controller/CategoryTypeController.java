@@ -46,7 +46,7 @@ public class CategoryTypeController {
 	 * @throws java.text.ParseException
 	 * @throws IOException
 	 */
-	@ApiOperation(value = UIConstants.API_CATEGORY_TYPE_CREATE_CSV, tags = { UIConstants.API_CATEGORY_TYPE_TAG }, hidden = true)
+	@ApiOperation(value = UIConstants.API_CATEGORY_TYPE_CREATE_CSV, tags = { UIConstants.API_CATEGORY_TYPE_TAG }, hidden = false)
 	@RequestMapping(value = UIConstants.CATEGORY_TYPE_CSV, headers = ("content-type=multipart/*"), method = RequestMethod.POST)
 	public @ResponseBody String createCategoryType(@RequestParam("file") MultipartFile multipart)
 			throws ParseException, java.text.ParseException, IOException {
@@ -84,7 +84,7 @@ public class CategoryTypeController {
 	 * @param category
 	 * @throws NotFoundException
 	 */
-	@ApiOperation(value = UIConstants.API_CATEGORY_TYPE_INQUIRE, tags = { UIConstants.API_CATEGORY_TYPE_TAG }, hidden = true)
+	@ApiOperation(value = UIConstants.API_CATEGORY_TYPE_INQUIRE, tags = { UIConstants.API_CATEGORY_TYPE_TAG }, hidden = false)
 	@RequestMapping(path = UIConstants.CATEGORY, method = RequestMethod.GET, produces = {
 			"application/json; charset=utf-8", "application/xml; charset=utf-8" })
 	@ResponseBody
