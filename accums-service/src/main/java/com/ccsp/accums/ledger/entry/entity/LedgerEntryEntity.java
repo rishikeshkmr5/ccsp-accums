@@ -1,5 +1,5 @@
 package com.ccsp.accums.ledger.entry.entity;
-import java.util.Date;
+import java.sql.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;

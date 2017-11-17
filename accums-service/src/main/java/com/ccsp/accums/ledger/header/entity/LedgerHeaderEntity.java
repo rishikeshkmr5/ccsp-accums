@@ -1,6 +1,7 @@
 package com.ccsp.accums.ledger.header.entity;
 
-import java.util.Date;
+import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -49,7 +50,7 @@ public class LedgerHeaderEntity  implements java.io.Serializable {
 	private Date serviceDate;
 	
 	@Column(name = "PROC_DT", nullable = true)
-	private Date processedDate;
+	private Timestamp processedDate;
 	
 	@Column(name = "NTWK_CD", nullable = true)
 	private String networkCode;
@@ -167,14 +168,14 @@ public class LedgerHeaderEntity  implements java.io.Serializable {
 	/**
 	 * @return
 	 */
-	public Date getProcessedDate() {
+	public Timestamp getProcessedDate() {
 		return processedDate;
 	}
 
 	/**
 	 * @param dateTimeProcessed
 	 */
-	public void setProcessedDate(Date dateTimeProcessed) {
+	public void setProcessedDate(Timestamp dateTimeProcessed) {
 		this.processedDate = dateTimeProcessed;
 	}
 
