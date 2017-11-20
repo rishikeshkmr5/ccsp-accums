@@ -8,6 +8,8 @@ public class FamilyUtilizationDTO {
 	
 	private String accumType;
 	
+	private String networkCode;
+	
 	List<UtilizationPeriodDetailDTO> utilizationPeriodDetailDTOList;
 	
 	public String getSubscriberId() {
@@ -16,6 +18,16 @@ public class FamilyUtilizationDTO {
 
 	public void setSubscriberId(String subscriberId) {
 		this.subscriberId = subscriberId;
+	}
+
+	
+	
+	public String getNetworkCode() {
+		return networkCode;
+	}
+
+	public void setNetworkCode(String networkCode) {
+		this.networkCode = networkCode;
 	}
 
 	public String getAccumType() {

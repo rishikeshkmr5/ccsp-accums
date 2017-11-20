@@ -139,9 +139,12 @@ public class AccumsUtilizationService{
 		List<IndividualUtilizationDTO> individualUtilizationDTOList = new ArrayList(); 
 		List<LedgerHeaderDTO> ledgerHeaderDTOList=ledgerHeaderService.findByMemberId(memberID);
 		for(LedgerHeaderDTO ledgerHeaderDTO:ledgerHeaderDTOList) {
+			IndividualUtilizationDTO individualUtilizationDTO= new IndividualUtilizationDTO();
+			individualUtilizationDTO.setNetworkCode(ledgerHeaderDTO.getNetworkCode());
 			List<LedgerEntryDTO> ledgerentries = ledgerEntryService.findByLedgerId(ledgerHeaderDTO.getId());
+			 
 				for(LedgerEntryDTO ledgerEntryDTO:ledgerentries) {
-					IndividualUtilizationDTO individualUtilizationDTO= new IndividualUtilizationDTO();
+					
 					List<UtilizationPeriodDetailDTO> individualUtilizationPeriodDetailDTOList = new ArrayList();
 					UtilizationPeriodDetailDTO individualUtilizationPeriodDetailDTO = new UtilizationPeriodDetailDTO();
 					UtilizationPeriodDetailDTO individualUtilizationPeriodDetailDTO1 = new UtilizationPeriodDetailDTO();
@@ -172,11 +175,13 @@ public class AccumsUtilizationService{
 		List<FamilyUtilizationDTO> familyUtilizationDTOList = new ArrayList();
 		List<LedgerHeaderDTO> ledgerHeaderDTOList = ledgerHeaderService.findBySubscriberId(subscriberID);
 		for(LedgerHeaderDTO ledgerHeaderSubscriberDTO:ledgerHeaderDTOList) {
+			FamilyUtilizationDTO familyUtilizationDTO= new FamilyUtilizationDTO();
+			familyUtilizationDTO.setNetworkCode(ledgerHeaderSubscriberDTO.getNetworkCode());
 			List<LedgerHeaderDTO> ledgerHeaderMembersForSubscriberDTOList=ledgerHeaderService.fetchByMemberIdAndSubscriberId(ledgerHeaderSubscriberDTO.getMemberId(), subscriberID);
 			for(LedgerHeaderDTO ledgerHeaderDTO:ledgerHeaderMembersForSubscriberDTOList) {
 				List<LedgerEntryDTO> ledgerentries = ledgerEntryService.findByLedgerId(ledgerHeaderDTO.getId());
 					for(LedgerEntryDTO ledgerEntryDTO:ledgerentries) {
-						FamilyUtilizationDTO familyUtilizationDTO= new FamilyUtilizationDTO();
+						
 						List<UtilizationPeriodDetailDTO> utilizationPeriodDetailDTOList = new ArrayList();
 						UtilizationPeriodDetailDTO familyUtilizationPeriodDetailDTO = new UtilizationPeriodDetailDTO();
 						UtilizationPeriodDetailDTO familyUtilizationPeriodDetailDTO1 = new UtilizationPeriodDetailDTO();

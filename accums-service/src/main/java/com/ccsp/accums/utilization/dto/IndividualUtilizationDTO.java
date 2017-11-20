@@ -7,11 +7,19 @@ public class IndividualUtilizationDTO {
 	
 	private String accumType;
 	
+	private String networkCode;
+	
 	List<UtilizationPeriodDetailDTO> individualUtilizationPeriodDetailDTOList;
 	
-	
+		
+	public String getNetworkCode() {
+		return networkCode;
+	}
 
-	
+	public void setNetworkCode(String networkCode) {
+		this.networkCode = networkCode;
+	}
+
 	public String getMemberID() {
 		return memberID;
 	}
