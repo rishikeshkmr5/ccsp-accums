@@ -76,6 +76,9 @@ public class LedgerHeaderEntity  implements java.io.Serializable {
 	@Column(name = "UOM_NM", nullable = true)
 	private String unitOfMeasure;
 	
+	@Column(name="CORP_ENT_CD")
+	private String corporateEntityCode;
+	
 	/**
 	 * Default constructor.
 	 */
@@ -290,6 +293,14 @@ public class LedgerHeaderEntity  implements java.io.Serializable {
 	 */
 	public void setServiceName(String serviceName) {
 		this.serviceName = serviceName;
+	}
+
+	public String getCorporateEntityCode() {
+		return corporateEntityCode;
+	}
+
+	public void setCorporateEntityCode(String corporateEntityCode) {
+		this.corporateEntityCode = corporateEntityCode;
 	}
 	
 	
