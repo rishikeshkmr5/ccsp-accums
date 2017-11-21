@@ -26,8 +26,8 @@ public class LedgerHeaderEntity  implements java.io.Serializable {
 	private static final long serialVersionUID = 8510561406430816669L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_LDGR_HDR")
-	@SequenceGenerator(name = "SEQ_LDGR_HDR", sequenceName = "SEQ_LDGR_HDR", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "LDGR_ID_SEQ")
+	@SequenceGenerator(name = "LDGR_ID_SEQ", sequenceName = "LDGR_ID_SEQ", allocationSize = 1)
 	@Column(name = "LDGR_ID", unique = true, nullable = false)
 	private Long id;
 		

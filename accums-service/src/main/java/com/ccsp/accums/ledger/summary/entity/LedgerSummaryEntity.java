@@ -25,8 +25,8 @@ public class LedgerSummaryEntity  implements java.io.Serializable {
 	private static final long serialVersionUID = 4325638042231113322L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_LDGR_SUM")
-	@SequenceGenerator(name = "SEQ_LDGR_SUM", sequenceName = "SEQ_LDGR_SUM", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "LDGR_SUM_ID_SEQ")
+	@SequenceGenerator(name = "LDGR_SUM_ID_SEQ", sequenceName = "LDGR_SUM_ID_SEQ", allocationSize = 1)
 	@Column(name = "LDGR_SUM_ID", unique = true, nullable = false)
 	private Long id;
 	
