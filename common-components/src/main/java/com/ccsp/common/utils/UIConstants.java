@@ -25,6 +25,7 @@ public class UIConstants {
 	public static final String LEDGER_ENTRY = "/ledger-entry";
 	public static final String ACCUMS_ENTRY_PERIOD = "/accumsentryperiod";
 	public static final String LEDGER_HEADER_CSV = "/accums-utilization-csv";
+	public static final String DB_ROW_COUNT = "/db-row-count";
 	
 	/**
 	 * Accumulation Summary URI

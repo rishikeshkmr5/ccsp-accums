@@ -17,6 +17,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import org.apache.catalina.connector.Response;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -217,5 +218,18 @@ public class LedgerHeaderController {
 		log.info("Create LedgerHeader details");
 		LedgerHeaderDTO accumulationHeaderDTO = claimsForAccumulationHeaderDTO;
 		return accumulationHeaderService.update(accumulationHeaderDTO);
+	}
+	
+	/**
+	 * Get DB row count from LDGR_HDR, LDGR_ENTRY and LDGR_SUM tables
+	 * 
+	 * @return LedgerHeaders
+	 * @throws NotFoundException
+	 */
+	@ApiOperation(value = "Fetch DB row Count", tags = { UIConstants.API_LEDGER_HEADER_TAG }, hidden = false)
+	@RequestMapping(path = UIConstants.DB_ROW_COUNT, method = RequestMethod.GET)
+	@ResponseBody
+	public String getDBCount() throws NotFoundException {
+		return accumulationHeaderService.getRowCount();
 	}
 }

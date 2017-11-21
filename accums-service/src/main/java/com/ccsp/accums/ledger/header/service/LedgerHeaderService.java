@@ -12,11 +12,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
 import com.ccsp.accums.ledger.entry.dto.LedgerEntryDTO;
+import com.ccsp.accums.ledger.entry.repository.LedgerEntryRepository;
 import com.ccsp.accums.ledger.entry.service.LedgerEntryService;
 import com.ccsp.accums.ledger.header.dto.LedgerHeaderDTO;
 import com.ccsp.accums.ledger.header.entity.LedgerHeaderEntity;
 import com.ccsp.accums.ledger.header.mapper.LedgerHeaderMapper;
 import com.ccsp.accums.ledger.header.repository.ILedgerHeaderRepository;
+import com.ccsp.accums.ledger.summary.repository.ILedgerSummaryRepository;
 import com.ccsp.accums.ledger.summary.service.LedgerSummaryService;
 import com.ccsp.accums.utilization.dto.ClaimDetailDTO;
 import com.ccsp.accums.utilization.dto.SpendingSummaryDTO;
@@ -36,6 +38,14 @@ public class LedgerHeaderService extends CommonServiceImpl<LedgerHeaderDTO, Ledg
 	@Resource
 	private ILedgerHeaderRepository ledgerHeaderRepository;
 
+	@Resource
+	private LedgerEntryRepository ledgerEntryRepository;
+	
+	@Resource
+	private ILedgerSummaryRepository ledgerSummaryRepository;
+
+
+	
 	@Autowired
 	private LedgerEntryService ledgerEntryService;
 
@@ -199,5 +209,17 @@ public class LedgerHeaderService extends CommonServiceImpl<LedgerHeaderDTO, Ledg
 		List<LedgerHeaderEntity> ledgerHeaderEntities = ledgerHeaderRepository.findBySubscriberId(subscriberId);
 		List<LedgerHeaderDTO> ledgerHeaderDTOs = getMapper().convertToDTOList(ledgerHeaderEntities);
 		return ledgerHeaderDTOs;
+	}
+
+	/**
+	 * Fetches row count from each table
+	 * @return
+	 */
+	public String getRowCount() {
+		long ledgerHeader = ledgerHeaderRepository.count();
+		long ledgerEntry = ledgerEntryRepository.count();
+		long ledgerSummary = ledgerSummaryRepository.count();
+		return "Ledger Header : " + ledgerHeader + "\nLedger Entry : " + ledgerEntry + "\nLedger Summary : "
+				+ ledgerSummary;
 	}
 }
