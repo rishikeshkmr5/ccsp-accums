@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ccsp.accums.category.type.repository.BenefitPeriod;
 import com.ccsp.accums.category.type.service.CategoryTypeService;
 import com.ccsp.accums.ledger.entry.dto.LedgerEntryDTO;
 import com.ccsp.accums.ledger.entry.service.LedgerEntryService;
@@ -19,6 +20,7 @@ import com.ccsp.accums.utilization.dto.AccumsConsumptionDTO;
 import com.ccsp.accums.utilization.dto.ClaimDetailDTO;
 import com.ccsp.accums.utilization.dto.FamilyUtilizationDTO;
 import com.ccsp.accums.utilization.dto.IndividualUtilizationDTO;
+import com.ccsp.accums.utilization.dto.PlanPeriod;
 import com.ccsp.accums.utilization.dto.UtilizationPeriodDetailDTO;
 import com.ccsp.accums.utilization.dto.SpendingSummaryDTO;
 import com.ccsp.common.utils.DateUtils;
@@ -124,10 +126,10 @@ public class AccumsUtilizationService{
 			  	}
 			 accumUtilizationDetailDTO.setAccumType(accumTypes);
 			 
-			 List<Long> benefitPeriod = categoryTypeService.getListOfPeriod("benefit-period");
+			 List<BenefitPeriod> benefitPeriod = categoryTypeService.getListOfBenefitPeriod("benefit-period");
 			 accumUtilizationDetailDTO.setBenefitPeriod(benefitPeriod);
 			 
-			 List<Long> planPeriod = categoryTypeService.getListOfPeriod("plan-period");
+			 List<PlanPeriod> planPeriod = categoryTypeService.getListOfPlanPeriod("plan-period");
 			 accumUtilizationDetailDTO.setPlanPeriod(planPeriod);
 			  
 			 accumUtilizationDetailDTOList.add(accumUtilizationDetailDTO);

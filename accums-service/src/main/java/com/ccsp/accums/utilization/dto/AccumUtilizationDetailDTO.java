@@ -2,6 +2,8 @@ package com.ccsp.accums.utilization.dto;
 
 import java.util.Date;
 import java.util.List;
+
+import com.ccsp.accums.category.type.repository.BenefitPeriod;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class AccumUtilizationDetailDTO {
@@ -28,9 +30,9 @@ public class AccumUtilizationDetailDTO {
 	@JsonFormat(pattern = "MM/dd/yyyy")
 	private Date DOB;
 	
-	private List<Long> planPeriod ;
+	private List<PlanPeriod> planPeriod ;
 	
-	private List<Long> benefitPeriod ;
+	private List<BenefitPeriod> benefitPeriod ;
 	
 	private List<Long>  networkType;
 	
@@ -108,19 +110,11 @@ public class AccumUtilizationDetailDTO {
 		DOB = dOB;
 	}
 
-	public List<Long> getPlanPeriod() {
-		return planPeriod;
-	}
-
-	public void setPlanPeriod(List<Long> planPeriod) {
-		this.planPeriod = planPeriod;
-	}
-
-	public List<Long> getBenefitPeriod() {
+	public List<BenefitPeriod> getBenefitPeriod() {
 		return benefitPeriod;
 	}
 
-	public void setBenefitPeriod(List<Long> benefitPeriod) {
+	public void setBenefitPeriod(List<BenefitPeriod> benefitPeriod) {
 		this.benefitPeriod = benefitPeriod;
 	}
 
@@ -142,6 +136,14 @@ public class AccumUtilizationDetailDTO {
 
 	public void setSubscriberID(String subscriberID) {
 		this.subscriberID = subscriberID;
+	}
+
+	public List<PlanPeriod> getPlanPeriod() {
+		return planPeriod;
+	}
+
+	public void setPlanPeriod(List<PlanPeriod> planPeriod) {
+		this.planPeriod = planPeriod;
 	}
 
 	

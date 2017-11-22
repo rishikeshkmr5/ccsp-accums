@@ -1,6 +1,9 @@
 package com.ccsp.accums.category.type.service;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -10,7 +13,9 @@ import org.springframework.stereotype.Component;
 import com.ccsp.accums.category.type.dto.CategoryTypeDTO;
 import com.ccsp.accums.category.type.entity.CategoryTypeEntity;
 import com.ccsp.accums.category.type.mapper.CategoryTypeMapper;
+import com.ccsp.accums.category.type.repository.BenefitPeriod;
 import com.ccsp.accums.category.type.repository.ICategoryTypeRepository;
+import com.ccsp.accums.utilization.dto.PlanPeriod;
 import com.ccsp.common.mapper.IBaseMapper;
 import com.ccsp.common.service.impl.CommonServiceImpl;
 
@@ -54,11 +59,36 @@ public class CategoryTypeService extends CommonServiceImpl<CategoryTypeDTO, Cate
 		return categoryTypeDTOs;
 	}
 	
-	public List<Long> getListOfPeriod(String string) {		
-		List<Long> categoryTypeEntityIdList = categoryTypeRepository.findByPeriod("benefit-period");		
-		return categoryTypeEntityIdList;
+	public List<PlanPeriod> getListOfPlanPeriod(String period) {		
+		List<PlanPeriod> planPeriodList = new ArrayList<>();
+		List<CategoryTypeEntity> categoryTypeEntityIdList = categoryTypeRepository.findByCategory(period);
+		List<CategoryTypeDTO> categoryTypeDTOList = getMapper().convertToDTOList(categoryTypeEntityIdList);
+		PlanPeriod planPeriod=new PlanPeriod();
+		for (CategoryTypeDTO categoryTypeDTO:categoryTypeDTOList) {
+			planPeriod.setCode(categoryTypeDTO.getCode());
+			planPeriod.setId(categoryTypeDTO.getId());
+			if(!planPeriodList.contains(planPeriod))
+			planPeriodList.add(planPeriod);
+		}
+		
+		return planPeriodList;
 	}
-
+	
+	public List<BenefitPeriod> getListOfBenefitPeriod(String period) {		
+		List<BenefitPeriod> benefitPeriodList = new ArrayList<>();
+		List<CategoryTypeEntity> categoryTypeEntityIdList = categoryTypeRepository.findByCategory(period);
+		List<CategoryTypeDTO> categoryTypeDTOList = getMapper().convertToDTOList(categoryTypeEntityIdList);
+		BenefitPeriod benefitPeriod=new BenefitPeriod();
+		for (CategoryTypeDTO categoryTypeDTO:categoryTypeDTOList) {
+			benefitPeriod.setCode(categoryTypeDTO.getCode());
+			benefitPeriod.setId(categoryTypeDTO.getId());
+			if(!benefitPeriodList.contains(benefitPeriod))
+			benefitPeriodList.add(benefitPeriod);
+		}
+		
+		return benefitPeriodList;
+	}
+	
 	public Long getListOfValues(String categoryType, String networkCode) {
 	Long categoryTypeEntityIdList = categoryTypeRepository.findBycategoryTypeAndNetworkCode(categoryType,networkCode);
 	

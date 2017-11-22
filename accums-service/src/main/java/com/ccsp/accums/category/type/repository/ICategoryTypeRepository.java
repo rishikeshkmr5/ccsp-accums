@@ -28,8 +28,7 @@ public interface ICategoryTypeRepository extends JpaRepository<CategoryTypeEntit
 	@Query("SELECT DISTINCT a.code FROM CategoryTypeEntity a")
 	  List<String> findNetworkCode();
 
-	@Query("SELECT a.id FROM CategoryTypeEntity a where a.category = :period")
-	List<Long> findByPeriod(@Param("period")String period);
+	List<CategoryTypeEntity> findByCategory(@Param("period")String period);
 
 	@Query("SELECT  a.id FROM CategoryTypeEntity a where a.category = :categoryType and a.code = :networkCode ")
 	Long findBycategoryTypeAndNetworkCode(@Param("categoryType") String categoryType,@Param("networkCode")  String networkCode);
