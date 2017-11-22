@@ -3,3 +3,5 @@ ID,Category,Code,Display Name
 2,accum-type,OPX,OPX
 3,accum-type,Maximum,Maximum
 4,network-type,IN,IN
+5,benefit-period,2017,2017
+6,plan-period,12/1/2014,12/1/2014

@@ -63,8 +63,8 @@ public class CategoryTypeService extends CommonServiceImpl<CategoryTypeDTO, Cate
 		List<PlanPeriod> planPeriodList = new ArrayList<>();
 		List<CategoryTypeEntity> categoryTypeEntityIdList = categoryTypeRepository.findByCategory(period);
 		List<CategoryTypeDTO> categoryTypeDTOList = getMapper().convertToDTOList(categoryTypeEntityIdList);
-		PlanPeriod planPeriod=new PlanPeriod();
 		for (CategoryTypeDTO categoryTypeDTO:categoryTypeDTOList) {
+			PlanPeriod planPeriod=new PlanPeriod();
 			planPeriod.setCode(categoryTypeDTO.getCode());
 			planPeriod.setId(categoryTypeDTO.getId());
 			if(!planPeriodList.contains(planPeriod))
@@ -76,10 +76,10 @@ public class CategoryTypeService extends CommonServiceImpl<CategoryTypeDTO, Cate
 	
 	public List<BenefitPeriod> getListOfBenefitPeriod(String period) {		
 		List<BenefitPeriod> benefitPeriodList = new ArrayList<>();
-		List<CategoryTypeEntity> categoryTypeEntityIdList = categoryTypeRepository.findByCategory(period);
+		List<CategoryTypeEntity> categoryTypeEntityIdList= categoryTypeRepository.findByCategory(period);
 		List<CategoryTypeDTO> categoryTypeDTOList = getMapper().convertToDTOList(categoryTypeEntityIdList);
-		BenefitPeriod benefitPeriod=new BenefitPeriod();
 		for (CategoryTypeDTO categoryTypeDTO:categoryTypeDTOList) {
+			BenefitPeriod benefitPeriod=new BenefitPeriod();
 			benefitPeriod.setCode(categoryTypeDTO.getCode());
 			benefitPeriod.setId(categoryTypeDTO.getId());
 			if(!benefitPeriodList.contains(benefitPeriod))
