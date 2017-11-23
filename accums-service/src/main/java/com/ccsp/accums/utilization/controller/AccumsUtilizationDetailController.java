@@ -3,6 +3,7 @@ package com.ccsp.accums.utilization.controller;
 import java.text.ParseException;
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,8 @@ import com.ccsp.common.utils.UIConstants;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import javassist.NotFoundException;
+
+
 
 
 @Api(description = UIConstants.API_ACCUMS_UTILIZATION_DETAIL, produces = "application/json", tags = {
@@ -51,6 +54,16 @@ public class AccumsUtilizationDetailController {
 		}
 	
 	@ApiOperation(value = UIConstants.API_CATEGORY_TYPE_INQUIRE, tags = { UIConstants.API_ACCUMS_UTILIZATION_DETAIL_TAG }, hidden = false)
+	@RequestMapping(path = UIConstants.UI_INQUIRY_INDIVIDUAL_UTILIZATION_LIST, method = RequestMethod.GET, produces = {
+	"application/json; charset=utf-8", "application/xml; charset=utf-8" })
+
+		@ResponseBody
+		public List<List<IndividualUtilizationDTO>>  getAccumsIndividualUtilizationList(@PathVariable("memberID") List<String> memberID) throws NotFoundException{
+		return accumsUtilizationService.getAccumsIndividualUtilizationList(memberID);
+			
+		}
+	
+	@ApiOperation(value = UIConstants.API_CATEGORY_TYPE_INQUIRE, tags = { UIConstants.API_ACCUMS_UTILIZATION_DETAIL_TAG }, hidden = false)
 	@RequestMapping(path = UIConstants.UI_INQUIRY_FAMILY_UTILIZATION, method = RequestMethod.GET, produces = {
 	"application/json; charset=utf-8", "application/xml; charset=utf-8" })
 
@@ -59,5 +72,11 @@ public class AccumsUtilizationDetailController {
 		return accumsUtilizationService.getAccumsFamilyUtilization(subscriberID);
 			
 		}
+	
+	
+	
+	
+	
+
 	
 }

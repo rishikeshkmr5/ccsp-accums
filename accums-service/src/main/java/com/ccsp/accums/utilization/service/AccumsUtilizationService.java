@@ -126,10 +126,10 @@ public class AccumsUtilizationService{
 			  	}
 			 accumUtilizationDetailDTO.setAccumType(accumTypes);
 			 
-			 List<BenefitPeriod> benefitPeriod = categoryTypeService.getListOfBenefitPeriod("benefit-period");
+			 List<BenefitPeriod> benefitPeriod = getListOfBenefitPeriod("benefit-period");
 			 accumUtilizationDetailDTO.setBenefitPeriod(benefitPeriod);
 			 
-			 List<PlanPeriod> planPeriod = categoryTypeService.getListOfPlanPeriod("plan-period");
+			 List<PlanPeriod> planPeriod = getListOfPlanPeriod("plan-period");
 			 accumUtilizationDetailDTO.setPlanPeriod(planPeriod);
 			  
 			 accumUtilizationDetailDTOList.add(accumUtilizationDetailDTO);
@@ -141,13 +141,12 @@ public class AccumsUtilizationService{
 		List<IndividualUtilizationDTO> individualUtilizationDTOList = new ArrayList(); 
 		List<LedgerHeaderDTO> ledgerHeaderDTOList=ledgerHeaderService.findByMemberId(memberID);
 		for(LedgerHeaderDTO ledgerHeaderDTO:ledgerHeaderDTOList) {
-			IndividualUtilizationDTO individualUtilizationDTO= new IndividualUtilizationDTO();
-			individualUtilizationDTO.setNetworkCode(ledgerHeaderDTO.getNetworkCode());
 			List<LedgerEntryDTO> ledgerentries = ledgerEntryService.findByLedgerId(ledgerHeaderDTO.getId());
 			 
 				for(LedgerEntryDTO ledgerEntryDTO:ledgerentries) {
-					
-					List<UtilizationPeriodDetailDTO> individualUtilizationPeriodDetailDTOList = new ArrayList();
+					IndividualUtilizationDTO individualUtilizationDTO= new IndividualUtilizationDTO();
+					individualUtilizationDTO.setNetworkCode(ledgerHeaderDTO.getNetworkCode());
+					List<UtilizationPeriodDetailDTO> individualUtilizationPeriodDetailDTOList = new ArrayList<>();
 					UtilizationPeriodDetailDTO individualUtilizationPeriodDetailDTO = new UtilizationPeriodDetailDTO();
 					UtilizationPeriodDetailDTO individualUtilizationPeriodDetailDTO1 = new UtilizationPeriodDetailDTO();
 					individualUtilizationPeriodDetailDTO.setAccumsRemaining(600l);
@@ -166,6 +165,8 @@ public class AccumsUtilizationService{
 					individualUtilizationDTO.setAccumType(ledgerEntryDTO.getAccumType());
 					individualUtilizationDTO.setMemberID(memberID);
 					individualUtilizationDTO.setIndividualUtilizationPeriodDetailDTOList(individualUtilizationPeriodDetailDTOList);
+					
+					if(!individualUtilizationDTOList.contains(individualUtilizationDTO))
 					individualUtilizationDTOList.add(individualUtilizationDTO);
 			  	}
 				
@@ -174,7 +175,7 @@ public class AccumsUtilizationService{
 	}
 
 	public List<FamilyUtilizationDTO> getAccumsFamilyUtilization(String subscriberID) {
-		List<FamilyUtilizationDTO> familyUtilizationDTOList = new ArrayList();
+		List<FamilyUtilizationDTO> familyUtilizationDTOList = new ArrayList<>();
 		List<LedgerHeaderDTO> ledgerHeaderDTOList = ledgerHeaderService.findBySubscriberId(subscriberID);
 		for(LedgerHeaderDTO ledgerHeaderSubscriberDTO:ledgerHeaderDTOList) {
 			FamilyUtilizationDTO familyUtilizationDTO= new FamilyUtilizationDTO();
@@ -184,7 +185,7 @@ public class AccumsUtilizationService{
 				List<LedgerEntryDTO> ledgerentries = ledgerEntryService.findByLedgerId(ledgerHeaderDTO.getId());
 					for(LedgerEntryDTO ledgerEntryDTO:ledgerentries) {
 						
-						List<UtilizationPeriodDetailDTO> utilizationPeriodDetailDTOList = new ArrayList();
+						List<UtilizationPeriodDetailDTO> utilizationPeriodDetailDTOList = new ArrayList<>();
 						UtilizationPeriodDetailDTO familyUtilizationPeriodDetailDTO = new UtilizationPeriodDetailDTO();
 						UtilizationPeriodDetailDTO familyUtilizationPeriodDetailDTO1 = new UtilizationPeriodDetailDTO();
 						familyUtilizationPeriodDetailDTO.setAccumsRemaining(600l);
@@ -210,5 +211,39 @@ public class AccumsUtilizationService{
 			
 		}
 		return familyUtilizationDTOList;
+	}
+
+	public List<List<IndividualUtilizationDTO>> getAccumsIndividualUtilizationList(List<String> memberID) {
+		List<List<IndividualUtilizationDTO>> individualUtilizationDTOList = new ArrayList<>();
+		for (String memberId:memberID) {
+			
+			List<IndividualUtilizationDTO> individualUtilizationDTO = getAccumsIndividualUtilization(memberId);
+			if(!individualUtilizationDTOList.contains(individualUtilizationDTO))
+			individualUtilizationDTOList.add(individualUtilizationDTO);
+		}
+		return individualUtilizationDTOList;
+	}
+	
+	public List<PlanPeriod> getListOfPlanPeriod(String period) {		
+		List<PlanPeriod> planPeriodList = new ArrayList<>();
+			PlanPeriod planPeriod=new PlanPeriod();
+			PlanPeriod planPeriod1=new PlanPeriod();
+			planPeriod.setId(1l);
+			planPeriod.setCode("01/01/2017-03/31/2017");
+			planPeriod1.setId(2l);
+			planPeriod1.setCode("04/01/2017-12/31/2017");
+			planPeriodList.add(planPeriod);
+			planPeriodList.add(planPeriod1);
+		return planPeriodList;
+	}
+	
+	public List<BenefitPeriod> getListOfBenefitPeriod(String period) {		
+		List<BenefitPeriod> benefitPeriodList = new ArrayList<>();
+		    BenefitPeriod benefitPeriod=new BenefitPeriod();
+			benefitPeriod.setId(1l);
+			benefitPeriod.setCode("2017");
+			benefitPeriodList.add(benefitPeriod);
+			
+		return benefitPeriodList;
 	}
 }
