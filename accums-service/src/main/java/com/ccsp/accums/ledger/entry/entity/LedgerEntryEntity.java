@@ -30,9 +30,9 @@ public class LedgerEntryEntity  implements java.io.Serializable {
 	@Column(name = "LDGR_ENTRY_ID", unique = true, nullable = false)
 	private Long id;
 	
-	@ManyToOne(cascade={CascadeType.ALL})
+/*	@ManyToOne(cascade={CascadeType.ALL})
 	@JoinColumn(name="PRIMY_LDGR_ENTRY_ID")
-	private LedgerEntryEntity primaryLedgerEntry;
+	private LedgerEntryEntity primaryLedgerEntry;*/
 	
 	@Column(name = "PRIMY_LDGR_ENTRY_ID", insertable = false, updatable = false)
 	private Long primaryLedgerEntryID;
@@ -234,15 +234,15 @@ public class LedgerEntryEntity  implements java.io.Serializable {
 	/**
 	 * @return the primaryLedgerEntry
 	 */
-	public LedgerEntryEntity getPrimaryLedgerEntry() {
+	/*public LedgerEntryEntity getPrimaryLedgerEntry() {
 		return primaryLedgerEntry;
-	}
+	}*/
 	/**
 	 * @param primaryLedgerEntry the primaryLedgerEntry to set
 	 */
-	public void setPrimaryLedgerEntry(LedgerEntryEntity primaryLedgerEntry) {
+	/*public void setPrimaryLedgerEntry(LedgerEntryEntity primaryLedgerEntry) {
 		this.primaryLedgerEntry = primaryLedgerEntry;
-	}
+	}*/
 
 	/**
 	 * @return the primaryLedgerEntryID

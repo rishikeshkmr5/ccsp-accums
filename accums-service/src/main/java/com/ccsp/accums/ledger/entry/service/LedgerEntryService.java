@@ -66,7 +66,7 @@ public class LedgerEntryService extends CommonServiceImpl<LedgerEntryDTO, Ledger
 		// set linkToPrimary in the ledger entry
 		if (dto.getLinkToPrimary() != null) {
 			LedgerEntryEntity primaryLedgerEntry = getJPARepository().findOne(dto.getLinkToPrimary());
-			ledgerEntry.setPrimaryLedgerEntry(primaryLedgerEntry);
+			ledgerEntry.setPrimaryLedgerEntryID(primaryLedgerEntry.getId());
 		}
 
 		// persist the ledger entry
@@ -108,7 +108,7 @@ public class LedgerEntryService extends CommonServiceImpl<LedgerEntryDTO, Ledger
 				ledgerHeader = ledgerHeaderRepository.findOne(ledgerEntry.getLedgerHeaderID());
 				isFirst = false;
 			} else {
-				ledgerEntry.setPrimaryLedgerEntry(primaryLedgerEntry);
+				ledgerEntry.setPrimaryLedgerEntryID(primaryLedgerEntry.getId());
 			}
 			ledgerEntry.setLedgerHeader(ledgerHeader);
 		}
@@ -121,8 +121,8 @@ public class LedgerEntryService extends CommonServiceImpl<LedgerEntryDTO, Ledger
 		// iterate the ledger entry entities to update the dtos and return it back to the caller
 		for (LedgerEntryEntity entryEntity : entities) {
 			LedgerEntryDTO dto = getMapper().convertToDTO(entryEntity);
-			if (entryEntity.getPrimaryLedgerEntry() != null) {
-				dto.setLinkToPrimary(entryEntity.getPrimaryLedgerEntry().getId());
+			if (entryEntity.getPrimaryLedgerEntryID() != null) {
+				dto.setLinkToPrimary(entryEntity.getPrimaryLedgerEntryID());
 			}
 			if (entryEntity.getLedgerHeader() != null) {
 				dto.setLedgerHeaderID(entryEntity.getLedgerHeader().getId());
