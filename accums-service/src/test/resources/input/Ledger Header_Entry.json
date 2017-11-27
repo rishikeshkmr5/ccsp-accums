@@ -1,0 +1,67 @@
+{
+    "accumType": "SPC COPAY",
+    "allowedAmount": 50,
+    "claimLineId": 1,
+    "processedDate": "10/24/2017",
+    "dcn": "CLM0000010",
+    "memberId": "2147483647",
+    "networkCode": "IN",
+    "networkTier": "PPO",
+    "planId": 1,
+    "serviceDate": "10/24/2017",
+    "serviceId": 10000,
+    "serviceName": "Specialist Office Visit",
+    "subscriberId": "A1234567",
+    "unitOfMeasure": "Dollars",
+    "transactionCode": "xxx",
+	"effectiveDate": "01/01/2017",
+	"endDate": "12/31/2017",
+	"maxAmount": 1000,
+	"maxVisit": 100,
+	"serviceLines": [
+      {
+        "accumType": "Individual OPX",
+        "amount": 50,
+        "costShareTier": "PPO",
+        "network": "IN",
+        "linkToPrimary": 1,
+        "role": "PTNT",
+        "serviceDate": "10/24/2017",
+        "snapshotSummmary": 50,
+        "unitOfMeasure": "Dollars"
+      },
+	  {
+        "accumType": "Individual Deductible",
+        "amount": 50,
+        "costShareTier": "PPO",
+        "network": "IN",
+        "linkToPrimary": 1,
+        "role": "PTNT",
+        "serviceDate": "10/24/2017",
+        "snapshotSummmary": 50,
+        "unitOfMeasure": "Dollars"
+      },
+	  {
+        "accumType": "Family Deductible",
+        "amount": 50,
+        "costShareTier": "PPO",
+        "network": "IN",
+        "linkToPrimary": 1,
+        "role": "PTNT",
+        "serviceDate": "10/24/2017",
+        "snapshotSummmary": 50,
+        "unitOfMeasure": "Dollars"
+      },
+	  {
+        "accumType": "Family OPX",
+        "amount": 50,
+        "costShareTier": "PPO",
+        "network": "IN",
+        "linkToPrimary": 1,
+        "role": "PTNT",
+        "serviceDate": "10/24/2017",
+        "snapshotSummmary": 50,
+        "unitOfMeasure": "Dollars"
+      }
+    ]
+}
