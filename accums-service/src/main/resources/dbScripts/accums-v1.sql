@@ -170,3 +170,17 @@ ALTER TABLE LDGR_SUM
 call sysproc.admin_cmd('REORG TABLE LDGR_HDR');
 call sysproc.admin_cmd('REORG TABLE LDGR_ENTRY');
 call sysproc.admin_cmd('REORG TABLE LDGR_SUM');
+
+--Nithish: Nov 27, 2017 : Sequence name change
+
+--Get the max values from the current sequences as below.
+ VALUES NEXTVAL FOR SEQ_LDGR_HDR;
+ VALUES NEXTVAL FOR SEQ_LDGR_ENTRY;
+ VALUES NEXTVAL FOR SEQ_LDGR_SUM;
+ 
+-- => pass the max values got from the above to the below as start values 
+CREATE SEQUENCE LDGR_ID_SEQ AS INT START WITH 5293 INCREMENT BY 1;
+
+CREATE SEQUENCE LDGR_ENTRY_ID_SEQ AS INT START WITH 26418 INCREMENT BY 1;
+
+CREATE SEQUENCE LDGR_SUM_ID_SEQ AS INT START WITH 26344 INCREMENT BY 1;
