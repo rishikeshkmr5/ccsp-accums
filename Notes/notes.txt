@@ -1,0 +1,21 @@
+Setup Eclipse
+-------------
+Java Application
+	RunAs ==> Java Application ==> Run Configurations ==> Arguments   ==> VM arguments ==> -Dspring.profiles.active=dev
+Spring Boot
+	RunAs ==> Spring Boot App  ==> Run Configurations ==> Spring Boot ==> Profile 	   ==> dev
+
+
+Command Line
+------------
+Git Bash ==>  mvn spring-boot:run -Dspring.profiles.active=dev
+
+
+Creating jar
+------------
+mvn clean install -DskipTests     			    ==> No need to set profile if skipping tests
+mvn clean install -Dspring.profiles.active=dev  ==> Set profile for tests
+
+	Testing jar
+	-----------
+	java -jar -Dspring.profiles.active=dev target/accums-0.0.1-SNAPSHOT.jar
