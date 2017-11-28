@@ -1,9 +1,0 @@
-ID,Category,Code,Display Name
-1,accum-type,SPC Copay,SPC Copay
-2,accum-type,Individual OPX,Individual OPX
-3,accum-type,Individual Ded,Individual Ded
-4,accum-type,Family Ded,Family Ded
-5,accum-type,Family OPX,Family OPX
-6,network-type,IN,IN
-7,network-type,OUT,OUT
-,,,
