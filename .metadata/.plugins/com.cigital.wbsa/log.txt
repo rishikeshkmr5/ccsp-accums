@@ -1,7 +1,0 @@
-19 Oct 2017 14:19:26,947  INFO - SecureAssist plug-in starts...
-19 Oct 2017 14:19:26,949  INFO - OS: Windows 7 amd64 6.1
-19 Oct 2017 14:19:26,950  INFO - IDE version: Eclipse 4.7.0.20170620-1800
-19 Oct 2017 14:19:26,950  INFO - Java version: 1.8.0_144
-19 Oct 2017 14:19:26,951  INFO - Java vendor: Oracle Corporation
-19 Oct 2017 14:19:26,951  INFO - User name: i311748
-19 Oct 2017 14:19:55,210  INFO - SecureAssist plug-in stops...
