@@ -25,7 +25,7 @@ public abstract class CommonServiceImpl <T extends ICommonDTO, S extends Seriali
 	 * @see com.ccsp.common.service.ICommonService#create(com.ccsp.common.dto.ICommonDTO)
 	 */
 	@Override
-	public T create(T dto) {
+	public T create(T dto) throws Exception {
 		S entity = getMapper().convertToEntity(dto);
 		if(entity != null){
 			entity = getJPARepository().saveAndFlush(entity);
@@ -34,7 +34,7 @@ public abstract class CommonServiceImpl <T extends ICommonDTO, S extends Seriali
 	}
 	
 	@Override
-	public List<T> create(List<T> dtoList) {
+	public List<T> create(List<T> dtoList) throws Exception {
 		List<S> entities = getMapper().convertToEntityList(dtoList);
 		if(entities != null){
 			entities = getJPARepository().save(entities);

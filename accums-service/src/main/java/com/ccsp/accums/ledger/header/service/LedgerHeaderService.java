@@ -10,6 +10,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ccsp.accums.ledger.entry.dto.LedgerEntryDTO;
 import com.ccsp.accums.ledger.entry.repository.LedgerEntryRepository;
@@ -81,8 +82,9 @@ public class LedgerHeaderService extends CommonServiceImpl<LedgerHeaderDTO, Ledg
 	 * @param ledgerHeaderDTO
 	 * @return {@link LedgerHeaderDTO}
 	 */
+	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public LedgerHeaderDTO create(LedgerHeaderDTO ledgerHeaderDTO) {
+	public LedgerHeaderDTO create(LedgerHeaderDTO ledgerHeaderDTO) throws Exception {
 		if (ledgerHeaderDTO != null) {
 			//Convert DTO to entity.
 			LedgerHeaderEntity ledgerHeaderEntity = getMapper().convertToEntity(ledgerHeaderDTO);
@@ -110,6 +112,8 @@ public class LedgerHeaderService extends CommonServiceImpl<LedgerHeaderDTO, Ledg
 				 * Uncomment if calculation are required to be carried at db level 
 				 */
 				//ledgerSummaryService.createNew(ledgerHeaderDTO);
+				
+				//throw new Exception("Verifying commit");
 			}
 		}
 		return ledgerHeaderDTO;

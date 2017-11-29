@@ -86,7 +86,7 @@ public class LedgerHeaderController {
 	@RequestMapping(path = UIConstants.LEDGER_HEADER, method = RequestMethod.POST, consumes = {
 			"application/json; charset=utf-8", "application/xml; charset=utf-8" })
 	@ResponseBody
-	public LedgerHeaderDTO createLedgerHeader(@RequestBody AccumUtilization accumUtilization) {
+	public LedgerHeaderDTO createLedgerHeader(@RequestBody AccumUtilization accumUtilization) throws Exception {
 		log.info("Create LedgerHeader details");
 		
 		// validate the DTO - basic Java validation
@@ -105,7 +105,7 @@ public class LedgerHeaderController {
 	@ApiOperation(value=UIConstants.API_LEDGER_HEADER_CREATE_CSV, tags = { UIConstants.API_LEDGER_HEADER_TAG })
 	@RequestMapping(value = UIConstants.LEDGER_HEADER_CSV, headers = ("content-type=multipart/*"), method = RequestMethod.POST)
 	public @ResponseBody void createLedgerHeader(@RequestParam("file") MultipartFile multipart)
-			throws ParseException, java.text.ParseException, IOException {
+			throws ParseException, java.text.ParseException, IOException, Exception {
 
 		BufferedReader br;
 
@@ -189,7 +189,7 @@ public class LedgerHeaderController {
 
 	@ApiOperation(value="Ledger Header file upload", tags = { UIConstants.API_LEDGER_HEADER_TAG } , hidden=true)
 	@RequestMapping(value = "/fileupload", headers = ("content-type=multipart/*"), method = RequestMethod.POST)
-	public @ResponseBody void upload(@RequestParam("file") MultipartFile inputFile) {
+	public @ResponseBody void upload(@RequestParam("file") MultipartFile inputFile) throws Exception {
 		LedgerHeaderDTO header = new LedgerHeaderDTO();
 		if (!inputFile.isEmpty()) {
 			ByteArrayInputStream stream = null;

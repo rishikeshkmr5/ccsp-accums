@@ -64,7 +64,7 @@ public class LedgerHeaderControllerTest {
 	 * @throws NoSuchFieldException 
 	 */
 	@Test
-	public void testSetLedgerHeader() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+	public void testSetLedgerHeader() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException, Exception {
 		Validator validator = mock(Validator.class);
 		AccumUtilization claimHeadetDTO = new AccumUtilization();
 		LedgerHeaderDTO ledgerHeaderDTO = claimHeadetDTO;	

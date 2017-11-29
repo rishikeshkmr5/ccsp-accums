@@ -49,7 +49,7 @@ public class CategoryTypeController {
 	@ApiOperation(value = UIConstants.API_CATEGORY_TYPE_CREATE_CSV, tags = { UIConstants.API_CATEGORY_TYPE_TAG }, hidden = true)
 	@RequestMapping(value = UIConstants.CATEGORY_TYPE_CSV, headers = ("content-type=multipart/*"), method = RequestMethod.POST)
 	public @ResponseBody String createCategoryType(@RequestParam("file") MultipartFile multipart)
-			throws ParseException, java.text.ParseException, IOException {
+			throws ParseException, java.text.ParseException, IOException, Exception {
 
 		BufferedReader br;
 

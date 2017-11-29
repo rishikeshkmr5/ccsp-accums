@@ -20,13 +20,13 @@ public interface ICommonService <T extends ICommonDTO>{
 	 * @param dto
 	 * @return
 	 */
-	T create(T dto);	
+	T create(T dto) throws Exception;	
 	
 	/**
 	 * @param dtoList
 	 * @return
 	 */
-	List<T> create(List<T> dtoList);	
+	List<T> create(List<T> dtoList) throws Exception;	
 	
 	/**
 	 * @param dto
