@@ -82,7 +82,7 @@ public class LedgerHeaderService extends CommonServiceImpl<LedgerHeaderDTO, Ledg
 	 * @param ledgerHeaderDTO
 	 * @return {@link LedgerHeaderDTO}
 	 */
-	@Transactional(rollbackFor = Exception.class)
+	//@Transactional(rollbackFor = Exception.class)
 	@Override
 	public LedgerHeaderDTO create(LedgerHeaderDTO ledgerHeaderDTO) throws Exception {
 		if (ledgerHeaderDTO != null) {
@@ -90,7 +90,7 @@ public class LedgerHeaderService extends CommonServiceImpl<LedgerHeaderDTO, Ledg
 			LedgerHeaderEntity ledgerHeaderEntity = getMapper().convertToEntity(ledgerHeaderDTO);
 			
 			//Persist records in database.
-			getJPARepository().saveAndFlush(ledgerHeaderEntity);
+			getJPARepository().save(ledgerHeaderEntity);
 			
 			//Set the header id which was auto generated during persistence.
 			ledgerHeaderDTO.setId(ledgerHeaderEntity.getId());
@@ -113,7 +113,7 @@ public class LedgerHeaderService extends CommonServiceImpl<LedgerHeaderDTO, Ledg
 				 */
 				//ledgerSummaryService.createNew(ledgerHeaderDTO);
 				
-				//throw new Exception("Verifying commit");
+				//throw new RuntimeException("Verifying commit");
 			}
 		}
 		return ledgerHeaderDTO;

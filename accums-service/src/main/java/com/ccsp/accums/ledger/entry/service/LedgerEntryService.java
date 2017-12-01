@@ -70,7 +70,7 @@ public class LedgerEntryService extends CommonServiceImpl<LedgerEntryDTO, Ledger
 		}
 
 		// persist the ledger entry
-		ledgerEntry = getJPARepository().saveAndFlush(ledgerEntry);
+		ledgerEntry = getJPARepository().save(ledgerEntry);
 		// set the auto generated id to the dto and return it back to the caller
 		dto.setId(ledgerEntry.getId());
 		return getMapper().convertToDTO(ledgerEntry);
