@@ -68,7 +68,7 @@ public class AccumulationEntryImplTest {
 		LedgerEntryDTO accumulationEntryDTO = new LedgerEntryDTO();
 		when(ledgerHeaderRepository.findOne(accumulationEntryDTO.getLedgerHeaderID())).thenReturn(headerEntity);
 		when(ledgerEntryMapper.convertToEntity(accumulationEntryDTO)).thenReturn(accumulationEntry);
-		when(ledgerEntryRepository.saveAndFlush(accumulationEntry)).thenReturn(accumulationEntry);
+		when(ledgerEntryRepository.save(accumulationEntry)).thenReturn(accumulationEntry);
 		accumulationEntry.setId(10l);
 		serviceImpl.create(accumulationEntryDTO);
 		verify(ledgerEntryMapper, times(1)).convertToDTO(accumulationEntry);
