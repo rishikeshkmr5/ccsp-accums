@@ -19,7 +19,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.ccsp.accums.ledger.entry.dto.LedgerEntryDTO;
 import com.ccsp.accums.ledger.entry.entity.LedgerEntryEntity;
 import com.ccsp.accums.ledger.entry.mapper.LedgerEntryMapper;
-import com.ccsp.accums.ledger.entry.repository.LedgerEntryRepository;
+import com.ccsp.accums.ledger.entry.repository.ILedgerEntryRepository;
 import com.ccsp.accums.ledger.entry.service.LedgerEntryService;
 import com.ccsp.accums.ledger.header.entity.LedgerHeaderEntity;
 import com.ccsp.accums.ledger.header.repository.ILedgerHeaderRepository;
@@ -41,7 +41,7 @@ public class AccumulationEntryImplTest {
 	 * Mock the repository
 	 */
 	@Mock
-	private LedgerEntryRepository ledgerEntryRepository;
+	private ILedgerEntryRepository iLedgerEntryRepository;
 
 	/**
 	 * Mock the repository
@@ -68,7 +68,7 @@ public class AccumulationEntryImplTest {
 		LedgerEntryDTO accumulationEntryDTO = new LedgerEntryDTO();
 		when(ledgerHeaderRepository.findOne(accumulationEntryDTO.getLedgerHeaderID())).thenReturn(headerEntity);
 		when(ledgerEntryMapper.convertToEntity(accumulationEntryDTO)).thenReturn(accumulationEntry);
-		when(ledgerEntryRepository.save(accumulationEntry)).thenReturn(accumulationEntry);
+		when(iLedgerEntryRepository.save(accumulationEntry)).thenReturn(accumulationEntry);
 		accumulationEntry.setId(10l);
 		serviceImpl.create(accumulationEntryDTO);
 		verify(ledgerEntryMapper, times(1)).convertToDTO(accumulationEntry);
@@ -102,7 +102,7 @@ public class AccumulationEntryImplTest {
 			accumulationEntryDTOsAfterInseration.add(ledgerEntryDTO);
 		}
 		
-		when(ledgerEntryRepository.save(accumulationEntryEntities)).thenReturn(accumulationEntryEntities);
+		when(iLedgerEntryRepository.save(accumulationEntryEntities)).thenReturn(accumulationEntryEntities);
 		
 		List<LedgerEntryDTO> actual = serviceImpl.create(accumulationEntryDTOs);
 		Assert.assertEquals(accumulationEntryDTOsAfterInseration, actual);
@@ -120,7 +120,7 @@ public class AccumulationEntryImplTest {
 		List<LedgerEntryEntity> ledgerEntries = new ArrayList<>();
 		ledgerEntries.add(new LedgerEntryEntity());
 		List<LedgerEntryDTO> accumulationEntryDTOList = new ArrayList<>();
-		when(ledgerEntryRepository.findAll()).thenReturn(ledgerEntries);
+		when(iLedgerEntryRepository.findAll()).thenReturn(ledgerEntries);
 		when(ledgerEntryMapper.convertToDTOList(ledgerEntries)).thenReturn(accumulationEntryDTOList);
 		setFinalStatic(LedgerEntryMapper.class.getField("INSTANCE"), ledgerEntryMapper);
 		List<LedgerEntryDTO> actual = serviceImpl.readAll();
@@ -133,7 +133,7 @@ public class AccumulationEntryImplTest {
 	@Test(expected = NotFoundException.class)
 	public void testGetAllLedgerEntriesThrowsException() throws NotFoundException {
 		List<LedgerEntryEntity> accumulationEntries = new ArrayList<>();
-		when(ledgerEntryRepository.findAll()).thenReturn(accumulationEntries);
+		when(iLedgerEntryRepository.findAll()).thenReturn(accumulationEntries);
 		serviceImpl.readAll();
 	}
 
@@ -147,7 +147,7 @@ public class AccumulationEntryImplTest {
 		List<AccumsConsumptionDTO>  accumsConsumptionList = new ArrayList<>();
 		AccumsConsumptionDTO dto = new AccumsConsumptionDTO();
 		accumsConsumptionList.add(dto);
-		when(ledgerEntryRepository.findLedgerEntryBySubscriberIdAndMemberIdAndAccumType(memberId, accumType, subscriberId)).thenReturn(ledgerEntryEntities);
+		when(iLedgerEntryRepository.findLedgerEntryBySubscriberIdAndMemberIdAndAccumType(memberId, accumType, subscriberId)).thenReturn(ledgerEntryEntities);
 		when(ledgerEntryMapper.toAccumsConsumptionDTOList(ledgerEntryEntities)).thenReturn(accumsConsumptionList);
 		List<AccumsConsumptionDTO>  resultList = serviceImpl.getAccumConsumption(memberId, subscriberId, accumType);
 		Assert.assertEquals(resultList.get(0), dto);
@@ -168,7 +168,7 @@ public class AccumulationEntryImplTest {
 		List<AccumsConsumptionDTO>  accumsConsumptionList = new ArrayList<>();
 		AccumsConsumptionDTO dto = new AccumsConsumptionDTO();
 		accumsConsumptionList.add(dto);
-		when(ledgerEntryRepository.findLedgerEntryByMemberIdAndAccumType(memberId, accumType)).thenReturn(ledgerEntryEntities);
+		when(iLedgerEntryRepository.findLedgerEntryByMemberIdAndAccumType(memberId, accumType)).thenReturn(ledgerEntryEntities);
 		when(ledgerEntryMapper.toAccumsConsumptionDTOList(ledgerEntryEntities)).thenReturn(accumsConsumptionList);
 		List<AccumsConsumptionDTO>  resultList = serviceImpl.getAccumConsumption(memberId, subscriberId, accumType);
 		Assert.assertEquals(resultList.get(0), dto);

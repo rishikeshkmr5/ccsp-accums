@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ccsp.accums.ledger.entry.dto.LedgerEntryDTO;
-import com.ccsp.accums.ledger.entry.repository.LedgerEntryRepository;
+import com.ccsp.accums.ledger.entry.repository.ILedgerEntryRepository;
 import com.ccsp.accums.ledger.entry.service.LedgerEntryService;
 import com.ccsp.accums.ledger.header.dto.LedgerHeaderDTO;
 import com.ccsp.accums.ledger.header.entity.LedgerHeaderEntity;
@@ -40,7 +40,7 @@ public class LedgerHeaderService extends CommonServiceImpl<LedgerHeaderDTO, Ledg
 	private ILedgerHeaderRepository ledgerHeaderRepository;
 
 	@Resource
-	private LedgerEntryRepository ledgerEntryRepository;
+	private ILedgerEntryRepository iLedgerEntryRepository;
 	
 	@Resource
 	private ILedgerSummaryRepository ledgerSummaryRepository;
@@ -221,7 +221,7 @@ public class LedgerHeaderService extends CommonServiceImpl<LedgerHeaderDTO, Ledg
 	 */
 	public String getRowCount() {
 		long ledgerHeader = ledgerHeaderRepository.count();
-		long ledgerEntry = ledgerEntryRepository.count();
+		long ledgerEntry = iLedgerEntryRepository.count();
 		long ledgerSummary = ledgerSummaryRepository.count();
 		return "Ledger Header : " + ledgerHeader + "\nLedger Entry : " + ledgerEntry + "\nLedger Summary : "
 				+ ledgerSummary;

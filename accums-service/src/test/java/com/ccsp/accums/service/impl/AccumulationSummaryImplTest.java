@@ -19,7 +19,7 @@ import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ccsp.accums.ledger.entry.entity.LedgerEntryEntity;
-import com.ccsp.accums.ledger.entry.repository.LedgerEntryRepository;
+import com.ccsp.accums.ledger.entry.repository.ILedgerEntryRepository;
 import com.ccsp.accums.ledger.header.dto.LedgerHeaderDTO;
 import com.ccsp.accums.ledger.header.entity.LedgerHeaderEntity;
 import com.ccsp.accums.ledger.header.mapper.LedgerHeaderMapper;
@@ -54,7 +54,7 @@ public class AccumulationSummaryImplTest {
 	private LedgerSummaryMapper ledgerSummaryMapper;
 	
 	@Mock
-	private LedgerEntryRepository ledgerEntryRepository;
+	private ILedgerEntryRepository iLedgerEntryRepository;
 
 	/**
 	 * @throws NoSuchFieldException
@@ -151,7 +151,7 @@ public class AccumulationSummaryImplTest {
 		ledgerEntryEntity.setAccumType("Accum01");
 		ledgerEntryEntity.setAmount(100d);
 		ledgerEntryList.add(ledgerEntryEntity);
-		when(ledgerEntryRepository.findByledgerHeaderID(mockId)).thenReturn(ledgerEntryList);
+		when(iLedgerEntryRepository.findByledgerHeaderID(mockId)).thenReturn(ledgerEntryList);
 		LedgerSummaryMapper summaryMapper = mock(LedgerSummaryMapper.class);
 		setFinalStatic(LedgerSummaryMapper.class.getField("INSTANCE"), summaryMapper);
 		when(summaryMapper.convertHeaderDTOtoEntity(ledgerHeaderDTO)).thenReturn(entity);

@@ -13,7 +13,7 @@ import com.ccsp.accums.ledger.entry.entity.LedgerEntryEntity;
  * @author nnarayanaperumaln
  *
  */
-public interface LedgerEntryRepository extends JpaRepository<LedgerEntryEntity, Long> {
+public interface ILedgerEntryRepository extends JpaRepository<LedgerEntryEntity, Long> {
 	/**
 	 * @param ledgerHeaderID
 	 * @return

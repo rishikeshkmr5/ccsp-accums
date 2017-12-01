@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 import com.ccsp.accums.ledger.entry.dto.LedgerEntryDTO;
 import com.ccsp.accums.ledger.entry.entity.LedgerEntryEntity;
-import com.ccsp.accums.ledger.entry.repository.LedgerEntryRepository;
+import com.ccsp.accums.ledger.entry.repository.ILedgerEntryRepository;
 import com.ccsp.accums.ledger.header.dto.LedgerHeaderDTO;
 import com.ccsp.accums.ledger.header.entity.LedgerHeaderEntity;
 import com.ccsp.accums.ledger.header.mapper.LedgerHeaderMapper;
@@ -45,7 +45,7 @@ public class LedgerSummaryService extends CommonServiceImpl<LedgerSummaryDTO, Le
 	private ILedgerHeaderRepository ledgerHeaderRepository;
 	
 	@Resource
-	private LedgerEntryRepository ledgerEntryRepository;
+	private ILedgerEntryRepository iLedgerEntryRepository;
 	
 	private final SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -170,7 +170,7 @@ public class LedgerSummaryService extends CommonServiceImpl<LedgerSummaryDTO, Le
 		for(LedgerHeaderEntity ledgerHeaderEntity : ledgerHeaderEntityList) {
 			LedgerHeaderMapper headerMapper = LedgerHeaderMapper.INSTANCE;
 			LedgerHeaderDTO ledgerHeaderDTO = headerMapper.convertToDTO(ledgerHeaderEntity);
-			List<LedgerEntryEntity> ledgerEntryList = ledgerEntryRepository.findByledgerHeaderID(ledgerHeaderEntity.getId());
+			List<LedgerEntryEntity> ledgerEntryList = iLedgerEntryRepository.findByledgerHeaderID(ledgerHeaderEntity.getId());
 			//iterate the ledger entries to find the cummulative amount for each accumator type for the subscriber id
 			for(LedgerEntryEntity ledgerEntryEntity:ledgerEntryList) {
 				LedgerSummaryMapper mapper = (LedgerSummaryMapper) getMapper();

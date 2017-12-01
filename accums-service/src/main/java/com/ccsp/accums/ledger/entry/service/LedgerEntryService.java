@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import com.ccsp.accums.ledger.entry.dto.LedgerEntryDTO;
 import com.ccsp.accums.ledger.entry.entity.LedgerEntryEntity;
 import com.ccsp.accums.ledger.entry.mapper.LedgerEntryMapper;
-import com.ccsp.accums.ledger.entry.repository.LedgerEntryRepository;
+import com.ccsp.accums.ledger.entry.repository.ILedgerEntryRepository;
 import com.ccsp.accums.ledger.header.entity.LedgerHeaderEntity;
 import com.ccsp.accums.ledger.header.repository.ILedgerHeaderRepository;
 import com.ccsp.accums.utilization.dto.AccumsConsumptionDTO;
@@ -24,7 +24,7 @@ public class LedgerEntryService extends CommonServiceImpl<LedgerEntryDTO, Ledger
 	 * Autowiring repository layer
 	 */
 	@Resource
-	private LedgerEntryRepository ledgerEntryRepository;
+	private ILedgerEntryRepository iLedgerEntryRepository;
 	
 	@Resource
 	private ILedgerHeaderRepository ledgerHeaderRepository;
@@ -34,7 +34,7 @@ public class LedgerEntryService extends CommonServiceImpl<LedgerEntryDTO, Ledger
 	 */
 	@Override
 	public JpaRepository<LedgerEntryEntity, Long> getJPARepository() {
-		return ledgerEntryRepository;
+		return iLedgerEntryRepository;
 	}
 
 	/*
@@ -155,7 +155,7 @@ public class LedgerEntryService extends CommonServiceImpl<LedgerEntryDTO, Ledger
 	 * @return
 	 */
 	public List<LedgerEntryDTO> findByLedgerId(Long ledgerID){
-		List<LedgerEntryEntity> ledgerEntryEntities = ledgerEntryRepository.findByledgerHeaderID(ledgerID);
+		List<LedgerEntryEntity> ledgerEntryEntities = iLedgerEntryRepository.findByledgerHeaderID(ledgerID);
 		List<LedgerEntryDTO> ledgerEntryDTOs = getMapper().convertToDTOList(ledgerEntryEntities);
 		return ledgerEntryDTOs;
 	}
@@ -172,9 +172,9 @@ public class LedgerEntryService extends CommonServiceImpl<LedgerEntryDTO, Ledger
 		List<AccumsConsumptionDTO>  accumsConsumptionList = null;
 		//If subscriber id is not null then exclude it from the where clause to get the claim details associated with the member id and the accum type
 		if(subscriberId != null)
-			ledgerEntryEntities = ledgerEntryRepository.findLedgerEntryBySubscriberIdAndMemberIdAndAccumType(memberId, accumType, subscriberId);
+			ledgerEntryEntities = iLedgerEntryRepository.findLedgerEntryBySubscriberIdAndMemberIdAndAccumType(memberId, accumType, subscriberId);
 		else
-			ledgerEntryEntities = ledgerEntryRepository.findLedgerEntryByMemberIdAndAccumType(memberId, accumType);	
+			ledgerEntryEntities = iLedgerEntryRepository.findLedgerEntryByMemberIdAndAccumType(memberId, accumType);	
 		
 		//Custom mapper to convert the LedgerEntry entity list into the AccumsConsumption dto
 		accumsConsumptionList = ((LedgerEntryMapper)getMapper()).toAccumsConsumptionDTOList(ledgerEntryEntities);		
